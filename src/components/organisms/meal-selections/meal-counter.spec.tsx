@@ -32,7 +32,7 @@ describe('The <MealCounter> component', () => {
   });
 
   it('passes the value, max, min and onChange through to the quantity-stepper', () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     const wrapper = shallow(
       <MealCounter
         title="foo"

@@ -5,10 +5,10 @@ import { when } from 'jest-when';
 import { LoginState } from './login-box';
 import { useLoginBox } from './use-login-box';
 
-afterEach(() => jest.resetAllMocks());
+afterEach(() => vi.resetAllMocks());
 
 test('use login hook Sets an error message if an error is thrown by login', async () => {
-  const login = jest.fn();
+  const login = vi.fn();
   mockDependencies({ login });
 
   login.mockRejectedValue(new Error('AN ERROR!'));
@@ -21,7 +21,7 @@ test('use login hook Sets an error message if an error is thrown by login', asyn
 });
 
 test('use login hook Sets the state to MfaChallenge if an MfaChallenge is returned from the login', async () => {
-  const login = jest.fn();
+  const login = vi.fn();
   mockDependencies({ login });
 
   when(login).calledWith('foo@bar.com', 'foo').mockResolvedValue({
@@ -38,7 +38,7 @@ test('use login hook Sets the state to MfaChallenge if an MfaChallenge is return
 });
 
 test('use login hook Sets the state to changePasswordChallenge if a changePasswordChallenge is returned from login', async () => {
-  const login = jest.fn();
+  const login = vi.fn();
   mockDependencies({ login });
 
   when(login).calledWith('foo@bar.com', 'foo').mockResolvedValue({
@@ -55,8 +55,8 @@ test('use login hook Sets the state to changePasswordChallenge if a changePasswo
 });
 
 test('Redirects to the account page if login is succesful after login state', async () => {
-  const login = jest.fn();
-  const navigate = jest.fn();
+  const login = vi.fn();
+  const navigate = vi.fn();
   mockDependencies({ login, navigate });
 
   when(login).calledWith('foo@bar.com', 'foo').mockResolvedValue({
@@ -73,9 +73,9 @@ test('Redirects to the account page if login is succesful after login state', as
 });
 
 test('Redirects to the account page if login is succesful after changing password', async () => {
-  const login = jest.fn();
-  const navigate = jest.fn();
-  const newPasswordChallengeResponse = jest.fn();
+  const login = vi.fn();
+  const navigate = vi.fn();
+  const newPasswordChallengeResponse = vi.fn();
   mockDependencies({ login, navigate, newPasswordChallengeResponse });
 
   const loginResponse = {

@@ -50,7 +50,7 @@ describe('The <TabButton> component', () => {
   });
 
   it('passes the onClick prop', () => {
-    const onClick = jest.fn();
+    const onClick = vi.fn();
     const wrapper = shallow(
       <TabButton tabListLength={1} onClick={onClick}>
         Some Text

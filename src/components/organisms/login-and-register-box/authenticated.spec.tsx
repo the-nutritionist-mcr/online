@@ -4,7 +4,7 @@ import { render, waitFor } from '@testing-library/react';
 
 describe('The <Authenticated> component', () => {
   it('Redirects to /login/ when there is no user', async () => {
-    const navigate = jest.fn();
+    const navigate = vi.fn();
     mockDependencies({ navigate });
 
     render(

@@ -3,16 +3,16 @@ import RegisterBox from './register-box';
 import { mocked } from 'jest-mock';
 import { RegisterState, useRegisterBox } from './use-register-box';
 
-jest.mock('./use-register-box');
+vi.mock('./use-register-box');
 
 describe('The register box', () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   it('renders without errors', () => {
     mocked(useRegisterBox).mockReturnValue({
-      onSubmit: jest.fn(),
+      onSubmit: vi.fn(),
       registerState: RegisterState.DoRegister,
       errorMessage: undefined,
     });
@@ -22,7 +22,7 @@ describe('The register box', () => {
 
   it('renders the mobile challenge form if the state is confirm mobile', () => {
     mocked(useRegisterBox).mockReturnValue({
-      onSubmit: jest.fn(),
+      onSubmit: vi.fn(),
       registerState: RegisterState.ConfirmMobile,
       errorMessage: undefined,
     });

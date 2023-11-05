@@ -3,7 +3,7 @@ test('The <Basket> component renders without errors', () => {
   //   <Basket
   //     itemWord="foo"
   //     itemWordPlural="foos"
-  //     setSelected={jest.fn()}
+  //     setSelected={vi.fn()}
   //     max={0}
   //   />
   // );
@@ -16,7 +16,7 @@ test('The <Basket> component renders nothing when there is no items selected', (
   //     itemWord="foo"
   //     itemWordPlural="foos"
   //     selectedMeals={{}}
-  //     setSelected={jest.fn()}
+  //     setSelected={vi.fn()}
   //     max={0}
   //   />
   // );

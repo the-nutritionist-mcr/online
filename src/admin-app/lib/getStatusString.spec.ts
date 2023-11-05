@@ -5,20 +5,20 @@ import { mock } from 'jest-mock-extended';
 import { mocked } from 'jest-mock';
 import { Customer, Snack } from '@tnmo/types';
 
-jest.mock('./isActive');
-jest.mock('moment');
+vi.mock('./isActive');
+vi.mock('moment');
 
 describe('Get status string', () => {
   const oldDateNow = Date.now.bind(global.Date);
 
   beforeEach(() => {
     // 17th November 2020
-    const dateNowStub = jest.fn(() => 1_605_635_814_000);
+    const dateNowStub = vi.fn(() => 1_605_635_814_000);
     global.Date.now = dateNowStub;
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     global.Date.now = oldDateNow;
   });
 

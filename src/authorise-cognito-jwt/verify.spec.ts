@@ -5,7 +5,7 @@ import { mocked } from 'jest-mock';
 import { PublicKeyMeta } from './public-key-meta';
 import { verify } from './verify';
 
-jest.mock('jsonwebtoken');
+vi.mock('jsonwebtoken');
 
 type VerifyFunc = (
   token: string,

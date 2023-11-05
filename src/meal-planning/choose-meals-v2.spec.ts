@@ -8,11 +8,11 @@ import { chooseMealSelections, Cook } from './choose-meals-v2';
 import { getCookStatus } from './get-cook-status';
 import { when } from 'jest-when';
 
-jest.mock('./get-cook-status');
+vi.mock('./get-cook-status');
 
 beforeEach(() => {
-  jest.useRealTimers();
-  jest.mocked(getCookStatus).mockReturnValue({ status: 'active' });
+  vi.useRealTimers();
+  vi.mocked(getCookStatus).mockReturnValue({ status: 'active' });
 });
 
 const date = (day: number, month: number, year: number) => {
@@ -308,8 +308,8 @@ describe('Choose Meals', () => {
   it('adds the correct date to the plan', () => {
     const theDate = date(14, 11, 22);
 
-    jest.useFakeTimers();
-    jest.setSystemTime(theDate);
+    vi.useFakeTimers();
+    vi.setSystemTime(theDate);
 
     const customers: BackendCustomer[] = [
       customerOne,
@@ -406,7 +406,7 @@ describe('Choose Meals', () => {
   });
 
   it('Inserts the status based on the cook date and the plan details', () => {
-    when(jest.mocked(getCookStatus))
+    when(vi.mocked(getCookStatus))
       .calledWith(dummyPlannedCooks[0].date, customerTwo.plans[1])
       .mockReturnValue({ status: 'paused' });
 

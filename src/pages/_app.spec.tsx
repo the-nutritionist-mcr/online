@@ -6,12 +6,12 @@ import { screen } from '@testing-library/react';
 import { getAppConfig } from '@tnmo/utils';
 
 // eslint-disable-next-line unicorn/prefer-module
-jest.mock('next/router', () => require('next-router-mock'));
-jest.mock('@tnmo/utils');
-jest.mock('../aws/authenticate');
+vi.mock('next/router', () => require('next-router-mock'));
+vi.mock('@tnmo/utils');
+vi.mock('../aws/authenticate');
 
 beforeEach(() => {
-  jest.mocked(getAppConfig).mockResolvedValue({
+  vi.mocked(getAppConfig).mockResolvedValue({
     DomainName: 'foo',
     UserPoolId: 'pool-id',
     AwsRegion: 'eu-west-2',

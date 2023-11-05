@@ -9,13 +9,13 @@ import { APIGatewayProxyEventV2, EventBridgeEvent } from 'aws-lambda';
 import { HTTP } from '../../../infrastructure/constants';
 import { HttpError } from './http-error';
 
-jest.mock('uuid');
-jest.mock('./authorise');
+vi.mock('uuid');
+vi.mock('./authorise');
 
 const dynamodbMock = mockClient(DynamoDBDocumentClient);
 
 beforeEach(() => {
-  jest.resetAllMocks();
+  vi.resetAllMocks();
   dynamodbMock.reset();
   delete process.env['DYNAMODB_TABLE'];
 });
@@ -32,7 +32,7 @@ describe('the get handler', () => {
       foo: 'baz',
     };
 
-    jest.mocked(v4).mockReturnValue('my-uuid');
+    vi.mocked(v4).mockReturnValue('my-uuid');
 
     const mockInput = mock<
       APIGatewayProxyEventV2 & EventBridgeEvent<string, unknown>
@@ -54,7 +54,7 @@ describe('the get handler', () => {
       foo: 'baz',
     };
 
-    jest.mocked(v4).mockReturnValue('my-uuid');
+    vi.mocked(v4).mockReturnValue('my-uuid');
 
     const mockInput = mock<
       APIGatewayProxyEventV2 & EventBridgeEvent<string, unknown>

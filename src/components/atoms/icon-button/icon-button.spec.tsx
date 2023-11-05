@@ -19,7 +19,7 @@ test('Button element should have the a11y name that is passed in as a11yLabel', 
 });
 
 test('Should fire onClick when the button is clicked', () => {
-  const onClick = jest.fn();
+  const onClick = vi.fn();
   render(<IconButton icon="icon" a11yLabel="foo" onClick={onClick} />);
   const button = screen.getByRole('button');
 

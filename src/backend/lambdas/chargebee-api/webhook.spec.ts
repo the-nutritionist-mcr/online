@@ -22,14 +22,14 @@ import { userExists } from './user-exists';
 // @ts-ignore
 const cognitoMock = mockClient(CognitoIdentityProviderClient);
 
-jest.mock('./get-plans');
-jest.mock('./user-exists');
-jest.mock('../get-secrets');
+vi.mock('./get-plans');
+vi.mock('./user-exists');
+vi.mock('../get-secrets');
 
 describe('the webhook handler', () => {
   beforeEach(() => {
-    jest.mocked(userExists).mockResolvedValue(true);
-    jest.mocked(getPlans).mockResolvedValue([]);
+    vi.mocked(userExists).mockResolvedValue(true);
+    vi.mocked(getPlans).mockResolvedValue([]);
     jest
       .mocked(getSecrets)
       .mockReturnValue([
@@ -40,8 +40,8 @@ describe('the webhook handler', () => {
   });
 
   afterEach(() => {
-    jest.resetAllMocks();
-    jest.useRealTimers();
+    vi.resetAllMocks();
+    vi.useRealTimers();
     cognitoMock.reset();
     delete process.env[ENV.varNames.CognitoPoolId];
     delete process.env[ENV.varNames.ChargeBeeWebhookUsername];
@@ -252,7 +252,7 @@ describe('the webhook handler', () => {
 
   it.skip('updates the plan when a subscription is changed', async () => {
     const mockItemPriceId = 'mock-item-price-id';
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     process.env[ENV.varNames.CognitoPoolId] = 'test-pool-id';
     process.env[ENV.varNames.ChargeBeeToken] = 'foo';
     const mockPlans: StandardPlan[] = [
@@ -267,7 +267,7 @@ describe('the webhook handler', () => {
       },
     ];
     const testCustomerId = 'test-customer-id';
-    when(jest.mocked(getPlans))
+    when(vi.mocked(getPlans))
       .calledWith(expect.anything(), testCustomerId)
       .mockResolvedValue(mockPlans);
 
@@ -536,7 +536,7 @@ describe('the webhook handler', () => {
 
     const now = new Date('2020-01-01').getTime();
 
-    jest.useFakeTimers();
+    vi.useFakeTimers();
 
     const input: AdminUpdateUserAttributesCommandInput = {
       UserPoolId: 'test-pool-id',
@@ -598,7 +598,7 @@ describe('the webhook handler', () => {
 
   it.skip('updates the plan when a subscription is created', async () => {
     const mockItemPriceId = 'mock-item-price-id';
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     process.env[ENV.varNames.CognitoPoolId] = 'test-pool-id';
     process.env[ENV.varNames.ChargeBeeToken] = 'foo';
     const mockPlans: StandardPlan[] = [
@@ -613,7 +613,7 @@ describe('the webhook handler', () => {
       },
     ];
     const testCustomerId = 'test-customer-id';
-    when(jest.mocked(getPlans))
+    when(vi.mocked(getPlans))
       .calledWith(expect.anything(), testCustomerId)
       .mockResolvedValue(mockPlans);
 
@@ -820,7 +820,7 @@ describe('the webhook handler', () => {
 
     const now = new Date('2020-01-01').getTime();
 
-    jest.useFakeTimers();
+    vi.useFakeTimers();
 
     const input: AdminUpdateUserAttributesCommandInput = {
       UserPoolId: 'test-pool-id',
@@ -995,7 +995,7 @@ describe('the webhook handler', () => {
     };
     /* eslint-enable/numeric-separators-style */
 
-    jest.useFakeTimers();
+    vi.useFakeTimers();
 
     const mockEvent = mock<APIGatewayProxyEventV2>();
 
@@ -1109,7 +1109,7 @@ describe('the webhook handler', () => {
 
     const now = new Date('2020-01-01').getTime();
 
-    jest.useFakeTimers();
+    vi.useFakeTimers();
 
     const mockEvent = mock<APIGatewayProxyEventV2>();
 
@@ -1316,7 +1316,7 @@ describe('the webhook handler', () => {
 
     const now = new Date('2020-01-01').getTime();
 
-    jest.useFakeTimers();
+    vi.useFakeTimers();
 
     const response = await handler(mockEvent, mock(), mock());
 

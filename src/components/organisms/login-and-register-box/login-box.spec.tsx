@@ -3,16 +3,16 @@ import LoginBox from './login-box';
 import { mocked } from 'jest-mock';
 import { LoginState, useLoginBox } from './use-login-box';
 
-jest.mock('./use-login-box');
+vi.mock('./use-login-box');
 
 describe('The login box', () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   it('renders without errors', () => {
     mocked(useLoginBox).mockReturnValue({
-      onSubmit: jest.fn(),
+      onSubmit: vi.fn(),
       loginState: LoginState.DoLogin,
       errorMessage: undefined,
     });
@@ -22,7 +22,7 @@ describe('The login box', () => {
 
   it("renders the change password challenge form when the state is 'ChangePasswordChallenge'", () => {
     mocked(useLoginBox).mockReturnValue({
-      onSubmit: jest.fn(),
+      onSubmit: vi.fn(),
       loginState: LoginState.ChangePasswordChallenge,
       errorMessage: undefined,
     });
@@ -37,7 +37,7 @@ describe('The login box', () => {
 
   it("renders the MFA challenge form when the state is 'MFAChallenge'", () => {
     mocked(useLoginBox).mockReturnValue({
-      onSubmit: jest.fn(),
+      onSubmit: vi.fn(),
       loginState: LoginState.MfaChallenge,
       errorMessage: undefined,
     });

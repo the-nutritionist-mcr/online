@@ -29,17 +29,17 @@ const theme: Theme = {
 };
 
 const mockAuthServices = {
-  register: jest.fn(),
-  login: jest.fn(),
-  newPasswordChallengeResponse: jest.fn(),
-  confirmSignup: jest.fn(),
+  register: vi.fn(),
+  login: vi.fn(),
+  newPasswordChallengeResponse: vi.fn(),
+  confirmSignup: vi.fn(),
 };
 
 describe('The login and register box', () => {
   it('renders without error', () => {
     render(
       <ThemeProvider theme={theme}>
-        <NavigationContext.Provider value={{ navigate: jest.fn() }}>
+        <NavigationContext.Provider value={{ navigate: vi.fn() }}>
           <AuthenticationServiceContext.Provider value={mockAuthServices}>
             <LoginAndRegisterBox defaultTab="Login" />
           </AuthenticationServiceContext.Provider>
@@ -49,10 +49,10 @@ describe('The login and register box', () => {
   });
 
   it('Changes the history bar if you click on a tab', () => {
-    const replaceStateSpy = jest.spyOn(window.history, 'replaceState');
+    const replaceStateSpy = vi.spyOn(window.history, 'replaceState');
     render(
       <ThemeProvider theme={theme}>
-        <NavigationContext.Provider value={{ navigate: jest.fn() }}>
+        <NavigationContext.Provider value={{ navigate: vi.fn() }}>
           <AuthenticationServiceContext.Provider value={mockAuthServices}>
             <LoginAndRegisterBox defaultTab="Login" />
           </AuthenticationServiceContext.Provider>

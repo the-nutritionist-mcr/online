@@ -3,13 +3,13 @@ import { renderHook } from "@testing-library/react";
 import { mocked } from "jest-mock";
 import { useAxe } from "./use-axe";
 
-jest.mock("react-dom");
-jest.mock("@axe-core/react");
+vi.mock("react-dom");
+vi.mock("@axe-core/react");
 
 describe("use axe", () => {
   afterEach(() => {
     delete (process.env as Record<string, string>)["NODE_ENV"];
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   // it('should pass react and reactdom into the axe function', async () => {

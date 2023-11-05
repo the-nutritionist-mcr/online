@@ -7,7 +7,7 @@ import { when } from 'jest-when';
 import { mocked } from 'jest-mock';
 import { RegisterState, useRegisterBox } from './use-register-box';
 
-afterEach(() => jest.clearAllMocks());
+afterEach(() => vi.clearAllMocks());
 
 test('Has a default registerState of DoRegister', () => {
   mockDependencies();
@@ -19,7 +19,7 @@ test('Has a default registerState of DoRegister', () => {
 test('Sets the registerState to confirmMobile when the response indicates the need to confirm', async () => {
   const signupResult = mock<RegisterResponse>();
   signupResult.userConfirmed = false;
-  const register = jest.fn();
+  const register = vi.fn();
   register.mockResolvedValue(signupResult);
 
   mockDependencies({ register });
@@ -33,7 +33,7 @@ test('Sets the registerState to confirmMobile when the response indicates the ne
 });
 
 test('Sets an error message if an error is thrown by register', async () => {
-  const register = jest.fn();
+  const register = vi.fn();
 
   register.mockRejectedValue(new Error('AN ERROR!'));
 
@@ -50,7 +50,7 @@ test('Sets an error message if an error is thrown by register', async () => {
 test('Sets an error message if an error is thrown by confirmSignup', async () => {
   const signupResult = mock<RegisterResponse>();
   signupResult.userConfirmed = false;
-  const register = jest.fn();
+  const register = vi.fn();
   register.mockResolvedValue(signupResult);
 
   mocked(register).mockResolvedValue(signupResult);
@@ -58,7 +58,7 @@ test('Sets an error message if an error is thrown by confirmSignup', async () =>
   mockRegisterData.username = 'foo-user';
   mockRegisterData.password = 'foo-password';
 
-  const confirmSignup = jest.fn();
+  const confirmSignup = vi.fn();
 
   confirmSignup.mockRejectedValue(new Error('ANOTHER ERROR!'));
 
@@ -75,16 +75,16 @@ test('Sets an error message if an error is thrown by confirmSignup', async () =>
 test('If confirmMobile is successful, perform a login then redirects to homepage', async () => {
   const signupResult = mock<RegisterResponse>();
   signupResult.userConfirmed = false;
-  const register = jest.fn();
+  const register = vi.fn();
   register.mockResolvedValue(signupResult);
 
-  const login = jest.fn();
-  const confirmSignup = jest.fn();
+  const login = vi.fn();
+  const confirmSignup = vi.fn();
 
   register.mockResolvedValue(signupResult);
   login.mockReturnValue(Promise.resolve());
 
-  const navigate = jest.fn();
+  const navigate = vi.fn();
 
   mockDependencies({ register, login, confirmSignup, navigate });
 

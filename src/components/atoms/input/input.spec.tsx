@@ -23,7 +23,7 @@ describe('The input component', () => {
   });
 
   it('passes the value prop through to the value prop of the component', () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
 
     render(
       <ThemeProvider theme={theme}>
@@ -87,7 +87,7 @@ describe('The input component', () => {
   });
 
   it('triggers the component onChange handler if there is a change in the element', () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     render(
       <ThemeProvider theme={theme}>
         <Input label="A label" name="input-name" onChange={onChange} />

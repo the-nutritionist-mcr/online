@@ -21,12 +21,12 @@ test('Quantity renders the label if there is one', () => {
 });
 
 test('Quanity stepper fires the onChange event with the incremented value if the plus button is clicked', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
   render(<QuantityStepper label="foobar" onChange={onChange} />);
 });
 
 test('Quantity steppers fires the onChange event with the incremented value if the plus button is clicked', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   render(<QuantityStepper value={3} onChange={onChange} />);
 
@@ -39,7 +39,7 @@ test('Quantity steppers fires the onChange event with the incremented value if t
 });
 
 test('Quantity stepper fires the onChange event with the decremented value if the decrease button is clicked', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   render(<QuantityStepper value={3} onChange={onChange} />);
 
@@ -52,7 +52,7 @@ test('Quantity stepper fires the onChange event with the decremented value if th
 });
 
 test('Quantity stepper disables the Increase button if the max value is reached', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
   render(<QuantityStepper value={6} max={6} onChange={onChange} />);
 
   const increaseButton = screen.getByRole('button', { name: 'Increase' });
@@ -61,7 +61,7 @@ test('Quantity stepper disables the Increase button if the max value is reached'
 });
 
 test('Quantity enables the plus button if the max value is not reached', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
   render(<QuantityStepper value={5} max={6} onChange={onChange} />);
 
   const increaseButton = screen.getByRole('button', { name: 'Increase' });
@@ -70,7 +70,7 @@ test('Quantity enables the plus button if the max value is not reached', () => {
 });
 
 test('Quantity stepper disables the decrease button if the min value is reached', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
   render(<QuantityStepper value={3} min={3} onChange={onChange} />);
 
   const increaseButton = screen.getByRole('button', { name: 'Decrease' });
@@ -79,7 +79,7 @@ test('Quantity stepper disables the decrease button if the min value is reached'
 });
 
 test('Quantity enables the decrease button if the min value is not reached', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
   render(<QuantityStepper value={5} min={3} onChange={onChange} />);
 
   const increaseButton = screen.getByRole('button', { name: 'Increase' });
@@ -88,7 +88,7 @@ test('Quantity enables the decrease button if the min value is not reached', () 
 });
 
 test('Provides the label as the a11y name for the stepper if there is one', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
   render(
     <QuantityStepper value={5} min={3} onChange={onChange} label="foo-label" />
   );

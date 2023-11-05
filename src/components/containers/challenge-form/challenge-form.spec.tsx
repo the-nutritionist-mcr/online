@@ -50,7 +50,7 @@ describe('the challenge form', () => {
   });
 
   it('fires the submit handler when you press the button with all the data from the forms', () => {
-    const mockOnSubmit = jest.fn();
+    const mockOnSubmit = vi.fn();
 
     render(
       <ThemeProvider theme={theme}>
@@ -84,7 +84,7 @@ describe('the challenge form', () => {
   });
 
   it('Can handle nested children', () => {
-    const mockOnSubmit = jest.fn();
+    const mockOnSubmit = vi.fn();
 
     render(
       <ThemeProvider theme={theme}>

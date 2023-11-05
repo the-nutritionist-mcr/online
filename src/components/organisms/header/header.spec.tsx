@@ -5,7 +5,7 @@ import { useBreakpoints } from '../../hooks';
 import { mocked } from 'jest-mock';
 import { shallow } from 'enzyme';
 
-jest.mock('../../hooks');
+vi.mock('../../hooks');
 
 describe('The <Header> component', () => {
   it('renders the mobile header if useBreakpoint returns small', () => {

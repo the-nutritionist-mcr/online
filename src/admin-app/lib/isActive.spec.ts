@@ -5,7 +5,7 @@ describe('isActive', () => {
   const oldDateNow = Date.now.bind(global.Date);
   beforeEach(() => {
     // 17th November 2020
-    const dateNowStub = jest.fn(() => 1_605_635_814_000);
+    const dateNowStub = vi.fn(() => 1_605_635_814_000);
     global.Date.now = dateNowStub;
   });
 

@@ -3,11 +3,11 @@ import { GetServerSidePropsContext } from 'next';
 import { verifyJwtToken } from '@tnmo/authorise-cognito-jwt';
 import { loggedOutOnlyRoute } from './logged-out-only-route';
 
-jest.mock('@tnmo/authorise-cognito-jwt');
+vi.mock('@tnmo/authorise-cognito-jwt');
 
 describe('logged out only route', () => {
   it('redirects to the supplied route if there is an accessToken and verification is successful', async () => {
-    jest.mocked(verifyJwtToken).mockResolvedValue({
+    vi.mocked(verifyJwtToken).mockResolvedValue({
       firstName: 'Ben',
       surname: 'W',
       userName: 'user',
@@ -28,7 +28,7 @@ describe('logged out only route', () => {
   });
 
   it('does not redirect if there is no token', async () => {
-    jest.mocked(verifyJwtToken).mockResolvedValue({
+    vi.mocked(verifyJwtToken).mockResolvedValue({
       firstName: 'Ben',
       surname: 'W',
       userName: 'user',
@@ -49,7 +49,7 @@ describe('logged out only route', () => {
   });
 
   it('does not redirect if verification fails', async () => {
-    jest.mocked(verifyJwtToken).mockResolvedValue({
+    vi.mocked(verifyJwtToken).mockResolvedValue({
       firstName: 'Ben',
       surname: 'W',
       userName: '',
@@ -70,7 +70,7 @@ describe('logged out only route', () => {
   });
 
   it('calls the supplied serverSideProps callback and returns the result if supplied', async () => {
-    jest.mocked(verifyJwtToken).mockResolvedValue({
+    vi.mocked(verifyJwtToken).mockResolvedValue({
       firstName: 'Ben',
       surname: 'W',
       userName: '',
@@ -83,7 +83,7 @@ describe('logged out only route', () => {
     mockContext.req.cookies = { 'foo.accessToken': 'thing' };
 
     const mockProps = { props: {} };
-    const getServerSideProps = jest.fn(() => Promise.resolve(mockProps));
+    const getServerSideProps = vi.fn(() => Promise.resolve(mockProps));
 
     const serversidePropsCallback = loggedOutOnlyRoute(
       'home',

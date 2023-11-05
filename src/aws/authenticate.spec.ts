@@ -5,14 +5,14 @@ import { mock } from 'jest-mock-extended';
 import { ISignUpResult } from 'amazon-cognito-identity-js';
 import { getAppConfig } from '@tnmo/utils';
 
-jest.mock('@aws-amplify/auth');
-jest.mock('aws-sdk');
-jest.mock('@tnmo/utils');
+vi.mock('@aws-amplify/auth');
+vi.mock('aws-sdk');
+vi.mock('@tnmo/utils');
 
 describe('The authenticate module', () => {
   describe('register()', () => {
     it('returns the promise from Auth.signUp', async () => {
-      jest.mocked(getAppConfig).mockResolvedValue({
+      vi.mocked(getAppConfig).mockResolvedValue({
         DomainName: 'foo',
         UserPoolId: 'pool-id',
         ClientId: 'client-id',
@@ -24,7 +24,7 @@ describe('The authenticate module', () => {
 
       const mockResult = mock<ISignUpResult>();
 
-      when(jest.mocked(Auth.signUp))
+      when(vi.mocked(Auth.signUp))
         .calledWith({
           username: 'foo-username',
           password: 'foo-password',
@@ -55,7 +55,7 @@ describe('The authenticate module', () => {
 
   describe('login()', () => {
     it('returns the appropriate response on failure', async () => {
-      jest.mocked(getAppConfig).mockResolvedValue({
+      vi.mocked(getAppConfig).mockResolvedValue({
         DomainName: 'foo',
         UserPoolId: 'pool-id',
         ApiDomainName: 'locahost',
@@ -70,7 +70,7 @@ describe('The authenticate module', () => {
         challengeName: 'foo',
       };
 
-      when(jest.mocked(Auth.signIn))
+      when(vi.mocked(Auth.signIn))
         .calledWith('foo', 'bar')
         .mockResolvedValue(response);
 
@@ -81,7 +81,7 @@ describe('The authenticate module', () => {
     });
 
     it('returns the appropriate response if the login is successful', async () => {
-      jest.mocked(getAppConfig).mockResolvedValue({
+      vi.mocked(getAppConfig).mockResolvedValue({
         DomainName: 'foo',
         ApiDomainName: 'locahost',
         UserPoolId: 'pool-id',
@@ -104,7 +104,7 @@ describe('The authenticate module', () => {
         },
       };
 
-      when(jest.mocked(Auth.signIn))
+      when(vi.mocked(Auth.signIn))
         .calledWith('foo', 'bar')
         .mockResolvedValue(response);
 
@@ -114,7 +114,7 @@ describe('The authenticate module', () => {
     });
 
     it('doesnt change the type of the object returned from the login method', async () => {
-      jest.mocked(getAppConfig).mockResolvedValue({
+      vi.mocked(getAppConfig).mockResolvedValue({
         DomainName: 'foo',
         ApiDomainName: 'locahost',
         UserPoolId: 'pool-id',
@@ -137,7 +137,7 @@ describe('The authenticate module', () => {
         };
       }
 
-      when(jest.mocked(Auth.signIn))
+      when(vi.mocked(Auth.signIn))
         .calledWith('foo', 'bar')
         .mockResolvedValue(new FakeCognitoResponse());
 
@@ -149,7 +149,7 @@ describe('The authenticate module', () => {
 
   describe('signOut()', () => {
     it('returns the promise from Auth.logout', async () => {
-      jest.mocked(getAppConfig).mockResolvedValue({
+      vi.mocked(getAppConfig).mockResolvedValue({
         DomainName: 'foo',
         ApiDomainName: 'locahost',
         UserPoolId: 'pool-id',
@@ -159,7 +159,7 @@ describe('The authenticate module', () => {
         ChargebeeUrl: 'localhost',
       });
 
-      jest.mocked(Auth.signOut).mockResolvedValue('logoutResponse');
+      vi.mocked(Auth.signOut).mockResolvedValue('logoutResponse');
 
       const result = await authenticate.signOut();
 
@@ -169,7 +169,7 @@ describe('The authenticate module', () => {
 
   describe('newPasswordChallengeResponse', () => {
     it('returns the appropriate response on failure', async () => {
-      jest.mocked(getAppConfig).mockResolvedValue({
+      vi.mocked(getAppConfig).mockResolvedValue({
         DomainName: 'foo',
         ApiDomainName: 'locahost',
         UserPoolId: 'pool-id',
@@ -187,7 +187,7 @@ describe('The authenticate module', () => {
         challengeName: 'foo',
       };
 
-      jest.mocked(Auth.completeNewPassword).mockResolvedValue(response);
+      vi.mocked(Auth.completeNewPassword).mockResolvedValue(response);
 
       const result = await authenticate.newPasswordChallengeResponse(
         usernameValue,
@@ -199,7 +199,7 @@ describe('The authenticate module', () => {
     });
 
     it('returns the appropriate response on success', async () => {
-      jest.mocked(getAppConfig).mockResolvedValue({
+      vi.mocked(getAppConfig).mockResolvedValue({
         DomainName: 'foo',
         ApiDomainName: 'locahost',
         UserPoolId: 'pool-id',
@@ -218,7 +218,7 @@ describe('The authenticate module', () => {
         },
       };
 
-      jest.mocked(Auth.completeNewPassword).mockResolvedValue(response);
+      vi.mocked(Auth.completeNewPassword).mockResolvedValue(response);
 
       const result = await authenticate.newPasswordChallengeResponse(
         usernameValue,
@@ -231,7 +231,7 @@ describe('The authenticate module', () => {
 
   describe('Confirmsignup', () => {
     it('Returns the promise from Auth.confirmSignup', async () => {
-      jest.mocked(getAppConfig).mockResolvedValue({
+      vi.mocked(getAppConfig).mockResolvedValue({
         DomainName: 'foo',
         ApiDomainName: 'locahost',
         UserPoolId: 'pool-id',
@@ -241,7 +241,7 @@ describe('The authenticate module', () => {
         ChargebeeUrl: 'localhost',
       });
 
-      when(jest.mocked(Auth.confirmSignUp))
+      when(vi.mocked(Auth.confirmSignUp))
         .calledWith('foo', 'bar')
         .mockResolvedValue('confirmResponse');
 
@@ -253,7 +253,7 @@ describe('The authenticate module', () => {
 
   describe('currentUser()', () => {
     it('returns the promise from Auth.currentAuthenticatedUser', async () => {
-      jest.mocked(getAppConfig).mockResolvedValue({
+      vi.mocked(getAppConfig).mockResolvedValue({
         DomainName: 'foo',
         ApiDomainName: 'locahost',
         UserPoolId: 'pool-id',
@@ -273,7 +273,7 @@ describe('The authenticate module', () => {
     });
 
     it('returns undefined if currentAuthenticatedUser throws', async () => {
-      jest.mocked(getAppConfig).mockResolvedValue({
+      vi.mocked(getAppConfig).mockResolvedValue({
         DomainName: 'foo',
         ApiDomainName: 'locahost',
         UserPoolId: 'pool-id',

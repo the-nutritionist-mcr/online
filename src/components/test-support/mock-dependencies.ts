@@ -11,13 +11,13 @@ export const mockDependencies = (
   dependencies?: AuthenticationContextType & NavigationContextType
 ) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const useContext = jest.spyOn(React, 'useContext') as any;
+  const useContext = vi.spyOn(React, 'useContext') as any;
   const deps = {
-    register: jest.fn(),
-    login: jest.fn(),
-    newPasswordChallengeResponse: jest.fn(),
-    confirmSignup: jest.fn(),
-    navigate: jest.fn(),
+    register: vi.fn(),
+    login: vi.fn(),
+    newPasswordChallengeResponse: vi.fn(),
+    confirmSignup: vi.fn(),
+    navigate: vi.fn(),
     ...(dependencies ?? []),
   };
 

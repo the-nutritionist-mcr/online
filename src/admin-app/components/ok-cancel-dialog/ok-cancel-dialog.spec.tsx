@@ -4,7 +4,7 @@ import { OkCancelDialog } from ".";
 import React from "react";
 import { act } from "react-dom/test-utils";
 
-jest.mock("react-redux");
+vi.mock("react-redux");
 
 describe("The OkCancelDialog", () => {
   it("Is visible if show is true", () => {
@@ -12,8 +12,8 @@ describe("The OkCancelDialog", () => {
       <OkCancelDialog
         show={true}
         header="Foo"
-        onOk={jest.fn()}
-        onCancel={jest.fn()}
+        onOk={vi.fn()}
+        onCancel={vi.fn()}
       />
     );
 
@@ -25,8 +25,8 @@ describe("The OkCancelDialog", () => {
       <OkCancelDialog
         show={false}
         header="Foo"
-        onOk={jest.fn()}
-        onCancel={jest.fn()}
+        onOk={vi.fn()}
+        onCancel={vi.fn()}
       />
     );
 
@@ -39,8 +39,8 @@ describe("The OkCancelDialog", () => {
         thing={{}}
         show={true}
         header="Foo"
-        onOk={jest.fn()}
-        onCancel={jest.fn()}
+        onOk={vi.fn()}
+        onCancel={vi.fn()}
       />
     );
 
@@ -52,8 +52,8 @@ describe("The OkCancelDialog", () => {
       <OkCancelDialog
         show={true}
         header="Foo"
-        onOk={jest.fn()}
-        onCancel={jest.fn()}
+        onOk={vi.fn()}
+        onCancel={vi.fn()}
       />
     );
 
@@ -65,8 +65,8 @@ describe("The OkCancelDialog", () => {
       <OkCancelDialog
         show={true}
         header="Foo"
-        onOk={jest.fn()}
-        onCancel={jest.fn()}
+        onOk={vi.fn()}
+        onCancel={vi.fn()}
       >
         <div className="childDiv" />
       </OkCancelDialog>
@@ -81,8 +81,8 @@ describe("The OkCancelDialog", () => {
         show={true}
         thing={{ fooField: "fooValue" }}
         header="Foo"
-        onOk={jest.fn()}
-        onCancel={jest.fn()}
+        onOk={vi.fn()}
+        onCancel={vi.fn()}
       >
         <FormField name="fooField">
           <TextInput name="fooField" />
@@ -98,8 +98,8 @@ describe("The OkCancelDialog", () => {
       <OkCancelDialog
         show={true}
         header="Foo"
-        onOk={jest.fn()}
-        onCancel={jest.fn()}
+        onOk={vi.fn()}
+        onCancel={vi.fn()}
       />
     );
 
@@ -112,14 +112,14 @@ describe("The OkCancelDialog", () => {
   });
 
   it("Clicking the cancel button fires the onCancel handler", () => {
-    const onCancel = jest.fn();
+    const onCancel = vi.fn();
 
     const wrapper = mount(
       <OkCancelDialog
         show={true}
         thing={{}}
         header="Foo"
-        onOk={jest.fn()}
+        onOk={vi.fn()}
         onCancel={onCancel}
       />
     );
@@ -135,14 +135,14 @@ describe("The OkCancelDialog", () => {
   });
 
   it("Clicking the ok button does not submit the onOk handler if there is a thing and there is form validation errors", () => {
-    const onOk = jest.fn();
+    const onOk = vi.fn();
 
     const wrapper = mount(
       <OkCancelDialog
         show={true}
         header="Foo"
         onOk={onOk}
-        onCancel={jest.fn()}
+        onCancel={vi.fn()}
         thing={{ fooField: "value" }}
       >
         <FormField name="fooField">
@@ -173,8 +173,8 @@ describe("The OkCancelDialog", () => {
         show={true}
         thing={{ fooField: "fooValue" }}
         header="Foo"
-        onOk={jest.fn()}
-        onCancel={jest.fn()}
+        onOk={vi.fn()}
+        onCancel={vi.fn()}
       >
         <FormField name="fooField">
           <TextInput name="fooField" />
@@ -201,8 +201,8 @@ describe("The OkCancelDialog", () => {
         show={true}
         thing={{ fooField: "fooValue" }}
         header="Foo"
-        onOk={jest.fn()}
-        onCancel={jest.fn()}
+        onOk={vi.fn()}
+        onCancel={vi.fn()}
       >
         <FormField name="fooField">
           <TextInput name="fooField" />

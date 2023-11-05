@@ -10,10 +10,10 @@ import { HTTP } from '../../../infrastructure/constants';
 
 const dynamodbMock = mockClient(DynamoDBDocumentClient);
 
-jest.mock('./authorise');
+vi.mock('./authorise');
 
 beforeEach(() => {
-  jest.resetAllMocks();
+  vi.resetAllMocks();
   dynamodbMock.reset();
   delete process.env['DYNAMODB_TABLE'];
 });

@@ -6,7 +6,7 @@ import { ReactNode } from 'react';
 import nock from 'nock';
 import { mock } from 'jest-mock-extended';
 
-jest.mock('../aws/authenticate');
+vi.mock('../aws/authenticate');
 
 const SwrConfigComponent = (props: { children: ReactNode }) => (
   <SWRConfig value={{ dedupingInterval: 0, provider: () => new Map() }}>
@@ -33,7 +33,7 @@ process.env.FETCH_BASE_URL = 'http://localhost';
 const mockToken = 'mock-token';
 
 beforeEach(() => {
-  jest.resetAllMocks();
+  vi.resetAllMocks();
   nock.disableNetConnect();
   process.env.FETCH_BASE_URL = 'http://localhost';
   const root = nock('http://localhost');
@@ -44,7 +44,7 @@ beforeEach(() => {
 
   root.persist();
 
-  jest.mocked(currentUser).mockResolvedValue(
+  vi.mocked(currentUser).mockResolvedValue(
     mock<CognitoUser>({
       signInUserSession: {
         accessToken: {
