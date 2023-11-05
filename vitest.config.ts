@@ -12,6 +12,10 @@ export default defineConfig({
       include: ["src/**/*.ts"],
       provider: "istanbul",
       thresholdAutoUpdate: true,
+      functions: 31.11,
+      lines: 27.17,
+      statements: 27.36,
+      branches: 28.24,
     },
   },
 });

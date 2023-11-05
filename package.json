@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "NODE_ENV=test vitest --silent",
+    "test": "NODE_ENV=test vitest --silent --coverage",
     "test:watch": "NODE_ENV=test vitest --watch --silent",
     "types": "tsc --noEmit",
     "types:watch": "tsc --noEmit --watch"
@@ -74,6 +74,7 @@
     "@vanilla-extract/babel-plugin": "1.2.0",
     "@vanilla-extract/css": "1.11.0",
     "@vanilla-extract/next-plugin": "2.1.2",
+    "@vitest/coverage-istanbul": "^0.34.6",
     "amazon-cognito-identity-js": "5.2.14",
     "aws-amplify": "4.3.46",
     "aws-cdk": "2.77.0",
