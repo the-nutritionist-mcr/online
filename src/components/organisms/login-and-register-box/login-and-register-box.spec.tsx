@@ -1,17 +1,17 @@
-import React from 'react';
-import { AuthenticationServiceContext } from './authentication-service-context';
+import React from "react";
+import { AuthenticationServiceContext } from "./authentication-service-context";
 
-import { render, act, screen } from '@testing-library/react';
-import { ThemeProvider, Theme } from '@emotion/react';
+import { render, act, screen } from "@testing-library/react";
+import { ThemeProvider, Theme } from "@emotion/react";
 
-import userEvent from '@testing-library/user-event';
-import LoginAndRegisterBox from './login-and-register-box';
-import { NavigationContext } from '@tnmo/utils';
+import userEvent from "@testing-library/user-event";
+import LoginAndRegisterBox from "./login-and-register-box";
+import { NavigationContext } from "@tnmo/utils";
 
 const theme: Theme = {
   colors: {
-    buttonBlack: 'black',
-    labelText: 'black',
+    buttonBlack: "black",
+    labelText: "black",
   },
   menubarHeight: 100,
   breakpoints: {
@@ -33,10 +33,11 @@ const mockAuthServices = {
   login: vi.fn(),
   newPasswordChallengeResponse: vi.fn(),
   confirmSignup: vi.fn(),
+  forgotPassword: vi.fn(),
 };
 
-describe('The login and register box', () => {
-  it('renders without error', () => {
+describe("The login and register box", () => {
+  it("renders without error", () => {
     render(
       <ThemeProvider theme={theme}>
         <NavigationContext.Provider value={{ navigate: vi.fn() }}>
@@ -48,8 +49,8 @@ describe('The login and register box', () => {
     );
   });
 
-  it('Changes the history bar if you click on a tab', () => {
-    const replaceStateSpy = vi.spyOn(window.history, 'replaceState');
+  it("Changes the history bar if you click on a tab", () => {
+    const replaceStateSpy = vi.spyOn(window.history, "replaceState");
     render(
       <ThemeProvider theme={theme}>
         <NavigationContext.Provider value={{ navigate: vi.fn() }}>
@@ -60,11 +61,11 @@ describe('The login and register box', () => {
       </ThemeProvider>
     );
 
-    const registerTab = screen.getByRole('tab', { name: 'Register' });
+    const registerTab = screen.getByRole("tab", { name: "Register" });
 
     act(() => userEvent.click(registerTab));
 
     // eslint-disable-next-line unicorn/no-null
-    expect(replaceStateSpy).toBeCalledWith(null, '', '/register/');
+    expect(replaceStateSpy).toBeCalledWith(null, "", "/register/");
   });
 });

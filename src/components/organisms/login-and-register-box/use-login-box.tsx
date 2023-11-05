@@ -1,41 +1,41 @@
-import { ErrorResponse } from './types/error-response';
+import { ErrorResponse } from "./types/error-response";
 import {
   ChangePasswordAgainData,
   ChangePasswordFormData,
   LoginFormData,
   SrpData,
-} from './types/srp-data';
-import { useContext, useState } from 'react';
-import { AuthenticationServiceContext } from './authentication-service-context';
-import { LoginResponse } from './types/login';
-import { NavigationContext } from '@tnmo/utils';
+} from "./types/srp-data";
+import { useContext, useState } from "react";
+import { AuthenticationServiceContext } from "./authentication-service-context";
+import { LoginResponse } from "./types/login";
+import { NavigationContext } from "@tnmo/utils";
 
 export enum LoginState {
-  DoLogin = 'DoLogin',
-  ChangePasswordChallenge = 'ChangePasswordChallenge',
-  MfaChallenge = 'MfaChallenge',
-  PasswordresetRequired = 'PasswordResetRequired',
+  DoLogin = "DoLogin",
+  ChangePasswordChallenge = "ChangePasswordChallenge",
+  MfaChallenge = "MfaChallenge",
+  PasswordresetRequired = "PasswordResetRequired",
 }
 
 const isChangePasswordAgainData = (
   formData: SrpData,
   loginState: LoginState
 ): formData is ChangePasswordAgainData =>
-  Object.prototype.hasOwnProperty.call(formData, 'password') &&
+  Object.prototype.hasOwnProperty.call(formData, "password") &&
   loginState === LoginState.PasswordresetRequired;
 
 const isChangePasswordData = (
   formData: SrpData,
   loginState: LoginState
 ): formData is ChangePasswordFormData =>
-  Object.prototype.hasOwnProperty.call(formData, 'password') &&
+  Object.prototype.hasOwnProperty.call(formData, "password") &&
   loginState === LoginState.ChangePasswordChallenge;
 
 const isLoginData = (
   formData: SrpData,
   loginState: LoginState
 ): formData is LoginFormData =>
-  Object.prototype.hasOwnProperty.call(formData, 'email') &&
+  Object.prototype.hasOwnProperty.call(formData, "email") &&
   loginState === LoginState.DoLogin;
 
 export const useLoginBox = () => {
@@ -43,8 +43,9 @@ export const useLoginBox = () => {
     AuthenticationServiceContext
   );
   const { navigate } = useContext(NavigationContext);
+  console.log({ login, newPasswordChallengeResponse, forgotPassword });
   if (!login || !newPasswordChallengeResponse || !navigate || !forgotPassword) {
-    throw new Error('Dependencies not configured!');
+    throw new Error("Dependencies not configured!");
   }
 
   const [errorMessage, setErrorMessage] = useState<ErrorResponse | undefined>();
@@ -60,17 +61,17 @@ export const useLoginBox = () => {
         setEmail(data.email);
         const loginResponse = await login(data.email, data.password);
         setResponse(loginResponse);
-        if (loginResponse.challengeName === 'SMS_MFA') {
+        if (loginResponse.challengeName === "SMS_MFA") {
           setLoginState(LoginState.MfaChallenge);
           return;
         }
-        if (loginResponse.challengeName === 'NEW_PASSWORD_REQUIRED') {
+        if (loginResponse.challengeName === "NEW_PASSWORD_REQUIRED") {
           setLoginState(LoginState.ChangePasswordChallenge);
           return;
         }
 
         if (loginResponse.success) {
-          await navigate('/account/', false);
+          await navigate("/account/", false);
         }
       }
 
@@ -82,22 +83,22 @@ export const useLoginBox = () => {
 
         if (newPasswordResponse.success) {
           // await waitForAuthEvent('signIn');
-          await navigate('/account/', false);
+          await navigate("/account/", false);
         }
       }
 
       if (isChangePasswordAgainData(data, loginState)) {
-        await forgotPassword(email ?? '', password ?? '', data.password);
-        const loginResponse = await login(email ?? '', data.password);
+        await forgotPassword(email ?? "", password ?? "", data.password);
+        const loginResponse = await login(email ?? "", data.password);
 
         if (loginResponse.success) {
           // await waitForAuthEvent('signIn');
-          await navigate('/account/', false);
+          await navigate("/account/", false);
         }
       }
     } catch (error) {
       if (error instanceof Error) {
-        if (error.name === 'PasswordResetRequiredException') {
+        if (error.name === "PasswordResetRequiredException") {
           console.log(JSON.stringify(error, null, 2));
           setLoginState(LoginState.PasswordresetRequired);
         } else {

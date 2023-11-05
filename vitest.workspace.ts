@@ -3,6 +3,7 @@ import { join } from "path";
 import tsconfigPaths from "vite-tsconfig-paths";
 import react from "@vitejs/plugin-react";
 import { UserWorkspaceConfig, defineWorkspace } from "vitest/config";
+import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
 
 const SRC = join(__dirname, "src");
 
@@ -27,20 +28,41 @@ const defaultConfig = (name: string, path: string): UserWorkspaceConfig => {
 };
 
 const projects: Record<string, UserWorkspaceConfig> = {
+  hooks: {
+    plugins: [
+      react(),
+      vanillaExtractPlugin({
+        esbuildOptions: { loader: { ".svg": "text" } },
+      }),
+    ],
+    test: {
+      environment: "jsdom",
+    },
+  },
   components: {
-    plugins: [tsconfigPaths(), react()],
+    plugins: [
+      react(),
+      vanillaExtractPlugin({
+        esbuildOptions: { loader: { ".svg": "text" } },
+      }),
+    ],
     test: {
       environment: "jsdom",
     },
   },
   "admin-app": {
-    plugins: [tsconfigPaths(), react()],
+    plugins: [react()],
     test: {
       environment: "jsdom",
     },
   },
   pages: {
-    plugins: [tsconfigPaths(), react()],
+    plugins: [
+      react(),
+      vanillaExtractPlugin({
+        esbuildOptions: { loader: { ".svg": "text" } },
+      }),
+    ],
     test: {
       environment: "jsdom",
     },
