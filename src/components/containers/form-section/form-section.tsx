@@ -1,14 +1,14 @@
-import { IconButton } from '../../atoms';
-import QuestionMarkIcon from './question-mark-icon.png';
+import { IconButton } from "../../atoms";
+import QuestionMarkIcon from "./question-mark-icon.png";
 import {
   gridContainer,
   header,
   iconContainer,
   sectionContents,
   withIcon,
-} from './form-section.css';
-import { ToolTip } from '../../molecules';
-import { CONTACT_EMAIL } from '@tnmw/constants';
+} from "./form-section.css";
+import { ToolTip } from "../../molecules";
+import { CONTACT_EMAIL } from "@tnmw/constants";
 
 interface FormSectionProps {
   children: React.ReactNode;
@@ -19,7 +19,7 @@ interface FormSectionProps {
 const FormSection = (props: FormSectionProps) => {
   const gridContainerClasses = (
     props.showQuestionMarkIcon ? [gridContainer, withIcon] : [gridContainer]
-  ).join(' ');
+  ).join(" ");
 
   return (
     <div>
@@ -32,7 +32,7 @@ const FormSection = (props: FormSectionProps) => {
             text={`This section cannot be edited - please email ${CONTACT_EMAIL} if you need to make any changes`}
           >
             <div className={iconContainer}>
-              <IconButton icon={QuestionMarkIcon} a11yLabel="Information" />
+              <IconButton icon={QuestionMarkIcon.src} a11yLabel="Information" />
             </div>
           </ToolTip>
         )}

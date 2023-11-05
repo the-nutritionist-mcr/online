@@ -6,22 +6,22 @@ import {
   divider,
   imgTags,
   summaryHeader,
-} from './confirm-selections-container.css';
-import { defaultDeliveryDays } from '@tnmw/config';
-import platesImage from './plates.png';
+} from "./confirm-selections-container.css";
+import { defaultDeliveryDays } from "@tnmw/config";
+import platesImage from "./plates.png";
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import platesImageWebp from './plates.png?webp';
-import { ConfirmDelivery } from './confirm-delivery';
-import { countMeals } from './count-meals';
+import platesImageWebp from "./plates.png?webp";
+import { ConfirmDelivery } from "./confirm-delivery";
+import { countMeals } from "./count-meals";
 import {
   BackendCustomer,
   MealPlanGeneratedForIndividualCustomer,
   PlanWithMeals,
   Recipe,
   StandardPlan,
-} from '@tnmw/types';
+} from "@tnmw/types";
 
 interface ConfirmSelectionsProps {
   selectedMeals: MealPlanGeneratedForIndividualCustomer;
@@ -32,7 +32,7 @@ interface ConfirmSelectionsProps {
 
 const getActivePlan = (plans: PlanWithMeals[], customerPlan: StandardPlan) => {
   return plans.find(
-    (plan) => plan.status === 'active' && plan.planId === customerPlan.id
+    (plan) => plan.status === "active" && plan.planId === customerPlan.id
   );
 };
 
@@ -57,7 +57,7 @@ export const ConfirmSelections = (props: ConfirmSelectionsProps) => {
             }
             const chosenSelection = getActivePlan(delivery.plans, category);
 
-            if (chosenSelection?.status !== 'active') {
+            if (chosenSelection?.status !== "active") {
               return [];
             }
             return {
@@ -84,8 +84,16 @@ export const ConfirmSelections = (props: ConfirmSelectionsProps) => {
             type="image/webp"
             className={imgTags}
           />
-          <source srcSet={platesImage} type="image/jpeg" className={imgTags} />
-          <img src={platesImage} alt="Plates of TNM food" className={imgTags} />
+          <source
+            srcSet={platesImage.src}
+            type="image/jpeg"
+            className={imgTags}
+          />
+          <img
+            src={platesImage.src}
+            alt="Plates of TNM food"
+            className={imgTags}
+          />
         </picture>
       </div>
     </div>

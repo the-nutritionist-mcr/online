@@ -1,9 +1,9 @@
-import AddIcon from './tnm-add.png';
-import MinusIcon from './tnm-subtract.png';
-import { IconButton } from '../../atoms';
-import styled from '@emotion/styled';
-import { uniqueId } from 'lodash';
-import { FC, Fragment } from 'react';
+import AddIcon from "./tnm-add.png";
+import MinusIcon from "./tnm-subtract.png";
+import { IconButton } from "../../atoms";
+import styled from "@emotion/styled";
+import { uniqueId } from "lodash";
+import { FC, Fragment } from "react";
 
 export interface QuantityStepperProps {
   value?: number;
@@ -13,7 +13,7 @@ export interface QuantityStepperProps {
   min?: number;
 }
 
-const StyledDiv = styled('div')`
+const StyledDiv = styled("div")`
   display: flex;
   gap: 0.1rem;
   flex-direction: row;
@@ -35,11 +35,11 @@ const LabelText = styled.label`
 `;
 
 const QuantityStepper: FC<QuantityStepperProps> = (props) => {
-  const CountLabel = styled('div')`
+  const CountLabel = styled("div")`
     font-family: acumin-pro-semi-condensed, Arial, sans-serif;
     font-weight: bold;
-    flex-grow: ${props.label ? '0' : '999'};
-    padding-left: ${props.label ? '0.5rem' : '0'};
+    flex-grow: ${props.label ? "0" : "999"};
+    padding-left: ${props.label ? "0.5rem" : "0"};
     text-align: center;
   `;
   const minusDisabled =
@@ -59,7 +59,7 @@ const QuantityStepper: FC<QuantityStepperProps> = (props) => {
           props.onChange?.((props.value ?? 0) - 1);
         }
       }}
-      icon={MinusIcon}
+      icon={MinusIcon.src}
       a11yLabel="Decrease"
       disabled={minusDisabled}
     />
@@ -72,7 +72,7 @@ const QuantityStepper: FC<QuantityStepperProps> = (props) => {
           props.onChange?.((props.value ?? 0) + 1);
         }
       }}
-      icon={AddIcon}
+      icon={AddIcon.src}
       a11yLabel="Increase"
       disabled={plusDisabled}
     />

@@ -1,10 +1,10 @@
-import styled from '@emotion/styled';
-import { FC } from 'react';
+import styled from "@emotion/styled";
+import { FC } from "react";
 
-import tnmFullWhite from './TNM-Full-white.svg';
-import SeasonalPattern from './Seasonal-pattern-spring-tnm.png';
-import nStamp from './tnm-sticker-dark-grey-mint.svg';
-import { TNM_SITE } from '../header/tnm-site';
+import tnmFullWhite from "./TNM-Full-white.svg";
+import SeasonalPattern from "./Seasonal-pattern-spring-tnm.png";
+import nStamp from "./tnm-sticker-dark-grey-mint.svg";
+import { TNM_SITE } from "../header/tnm-site";
 
 const StyledFooter = styled.footer`
   width: 100%;
@@ -18,7 +18,7 @@ const StyledFooter = styled.footer`
 `;
 
 const FooterStrip = styled.div`
-  background: url(${SeasonalPattern});
+  background: url(${SeasonalPattern.src});
   background-size: cover;
   background-position: 50%;
   height: 125px;
