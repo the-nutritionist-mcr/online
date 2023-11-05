@@ -1,46 +1,50 @@
-import { mock } from 'vitest-mock-extended';
-import { GetServerSidePropsContext } from 'next';
-import { verifyJwtToken } from '@tnmo/authorise-cognito-jwt';
-import { loggedOutOnlyRoute } from './logged-out-only-route';
+import { mock } from "vitest-mock-extended";
+import { GetServerSidePropsContext } from "next";
+import { verifyJwtToken } from "@tnmo/authorise-cognito-jwt";
+import { loggedOutOnlyRoute } from "./logged-out-only-route";
 
-vi.mock('@tnmo/authorise-cognito-jwt');
+vi.mock("@tnmo/authorise-cognito-jwt");
 
-describe('logged out only route', () => {
-  it('redirects to the supplied route if there is an accessToken and verification is successful', async () => {
+beforeEach(() => {
+  process.env["LOG_LEVEL"] = "fatal";
+});
+
+describe("logged out only route", () => {
+  it("redirects to the supplied route if there is an accessToken and verification is successful", async () => {
     vi.mocked(verifyJwtToken).mockResolvedValue({
-      firstName: 'Ben',
-      surname: 'W',
-      userName: 'user',
+      firstName: "Ben",
+      surname: "W",
+      userName: "user",
       isValid: true,
       groups: [],
     });
 
     const mockContext = mock<GetServerSidePropsContext>();
-    mockContext.req = mock<GetServerSidePropsContext['req']>();
-    mockContext.req.cookies = { 'foo.accessToken': 'invalidtoken' };
+    mockContext.req = mock<GetServerSidePropsContext["req"]>();
+    mockContext.req.cookies = { "foo.accessToken": "invalidtoken" };
 
-    const serversidePropsCallback = loggedOutOnlyRoute('home');
+    const serversidePropsCallback = loggedOutOnlyRoute("home");
     const response = await serversidePropsCallback(mockContext);
 
     expect(response).toEqual({
-      redirect: { destination: '/home', permanent: false },
+      redirect: { destination: "/home", permanent: false },
     });
   });
 
-  it('does not redirect if there is no token', async () => {
+  it("does not redirect if there is no token", async () => {
     vi.mocked(verifyJwtToken).mockResolvedValue({
-      firstName: 'Ben',
-      surname: 'W',
-      userName: 'user',
+      firstName: "Ben",
+      surname: "W",
+      userName: "user",
       isValid: true,
       groups: [],
     });
 
     const mockContext = mock<GetServerSidePropsContext>();
-    mockContext.req = mock<GetServerSidePropsContext['req']>();
-    mockContext.req.cookies = { 'not-a-token': 'thing' };
+    mockContext.req = mock<GetServerSidePropsContext["req"]>();
+    mockContext.req.cookies = { "not-a-token": "thing" };
 
-    const serversidePropsCallback = loggedOutOnlyRoute('home');
+    const serversidePropsCallback = loggedOutOnlyRoute("home");
     const response = await serversidePropsCallback(mockContext);
 
     expect(response).toEqual({
@@ -48,20 +52,20 @@ describe('logged out only route', () => {
     });
   });
 
-  it('does not redirect if verification fails', async () => {
+  it("does not redirect if verification fails", async () => {
     vi.mocked(verifyJwtToken).mockResolvedValue({
-      firstName: 'Ben',
-      surname: 'W',
-      userName: '',
+      firstName: "Ben",
+      surname: "W",
+      userName: "",
       isValid: false,
       groups: [],
     });
 
     const mockContext = mock<GetServerSidePropsContext>();
-    mockContext.req = mock<GetServerSidePropsContext['req']>();
-    mockContext.req.cookies = { 'foo.accessToken': 'thing' };
+    mockContext.req = mock<GetServerSidePropsContext["req"]>();
+    mockContext.req.cookies = { "foo.accessToken": "thing" };
 
-    const serversidePropsCallback = loggedOutOnlyRoute('home');
+    const serversidePropsCallback = loggedOutOnlyRoute("home");
     const response = await serversidePropsCallback(mockContext);
 
     expect(response).toEqual({
@@ -69,24 +73,24 @@ describe('logged out only route', () => {
     });
   });
 
-  it('calls the supplied serverSideProps callback and returns the result if supplied', async () => {
+  it("calls the supplied serverSideProps callback and returns the result if supplied", async () => {
     vi.mocked(verifyJwtToken).mockResolvedValue({
-      firstName: 'Ben',
-      surname: 'W',
-      userName: '',
+      firstName: "Ben",
+      surname: "W",
+      userName: "",
       isValid: false,
       groups: [],
     });
 
     const mockContext = mock<GetServerSidePropsContext>();
-    mockContext.req = mock<GetServerSidePropsContext['req']>();
-    mockContext.req.cookies = { 'foo.accessToken': 'thing' };
+    mockContext.req = mock<GetServerSidePropsContext["req"]>();
+    mockContext.req.cookies = { "foo.accessToken": "thing" };
 
     const mockProps = { props: {} };
     const getServerSideProps = vi.fn(() => Promise.resolve(mockProps));
 
     const serversidePropsCallback = loggedOutOnlyRoute(
-      'home',
+      "home",
       getServerSideProps
     );
     const response = await serversidePropsCallback(mockContext);

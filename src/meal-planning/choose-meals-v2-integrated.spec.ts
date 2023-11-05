@@ -1,104 +1,104 @@
-import { BackendCustomer, Cook, HotOrCold, Recipe } from '@tnmo/types';
-import { chooseMealSelections } from './choose-meals-v2';
+import { BackendCustomer, Cook, HotOrCold, Recipe } from "@tnmo/types";
+import { chooseMealSelections } from "./choose-meals-v2";
 
 const recipeOne: Recipe = {
-  id: '0',
+  id: "0",
   hotOrCold: HotOrCold.Hot,
-  shortName: 'foo',
-  name: 'foo-recipe',
+  shortName: "foo",
+  name: "foo-recipe",
   potentialExclusions: [],
 };
 
 const recipeTwo: Recipe = {
-  id: '1',
+  id: "1",
   hotOrCold: HotOrCold.Hot,
-  shortName: 'bar',
-  name: 'bar-recipe',
+  shortName: "bar",
+  name: "bar-recipe",
   potentialExclusions: [],
 };
 
 const recipeThree: Recipe = {
-  id: '2',
+  id: "2",
   hotOrCold: HotOrCold.Hot,
-  shortName: 'baz',
-  name: 'baz-recipe',
+  shortName: "baz",
+  name: "baz-recipe",
   potentialExclusions: [],
 };
 
 const recipeFour: Recipe = {
-  id: '5',
+  id: "5",
   hotOrCold: HotOrCold.Hot,
-  shortName: 'bap',
-  name: 'bap-recipe',
+  shortName: "bap",
+  name: "bap-recipe",
   potentialExclusions: [],
 };
 
 const recipeFive: Recipe = {
-  id: '8',
+  id: "8",
   hotOrCold: HotOrCold.Hot,
-  shortName: 'balls',
-  name: 'balls-recipe',
+  shortName: "balls",
+  name: "balls-recipe",
   potentialExclusions: [],
 };
 
 const recipeSix: Recipe = {
-  id: '8',
+  id: "8",
   hotOrCold: HotOrCold.Hot,
-  shortName: 'balls',
-  name: 'balls-recipe',
+  shortName: "balls",
+  name: "balls-recipe",
   potentialExclusions: [],
 };
 
 const recipeSeven: Recipe = {
-  id: '11',
+  id: "11",
   hotOrCold: HotOrCold.Hot,
-  shortName: 'foo-two',
-  name: 'foo-two-recipe',
+  shortName: "foo-two",
+  name: "foo-two-recipe",
   potentialExclusions: [],
 };
 
 const recipeEight: Recipe = {
-  id: '15',
+  id: "15",
   hotOrCold: HotOrCold.Hot,
-  shortName: 'bar-two',
-  name: 'bar-recipe-two',
+  shortName: "bar-two",
+  name: "bar-recipe-two",
   potentialExclusions: [],
 };
 
 const recipeNine: Recipe = {
-  id: '2',
+  id: "2",
   hotOrCold: HotOrCold.Hot,
-  shortName: 'baz-two',
-  name: 'baz-recipe-two',
+  shortName: "baz-two",
+  name: "baz-recipe-two",
   potentialExclusions: [],
 };
 
 const recipeTen: Recipe = {
-  id: '5',
+  id: "5",
   hotOrCold: HotOrCold.Hot,
-  shortName: 'bap-two',
-  name: 'bap-recipe-two',
+  shortName: "bap-two",
+  name: "bap-recipe-two",
   potentialExclusions: [],
 };
 
 const recipeEleven: Recipe = {
-  id: '8',
+  id: "8",
   hotOrCold: HotOrCold.Hot,
-  shortName: 'balls-two',
-  name: 'balls-recipe-two',
+  shortName: "balls-two",
+  name: "balls-recipe-two",
   potentialExclusions: [],
 };
 
 const recipeTwelve: Recipe = {
-  id: '8',
+  id: "8",
   hotOrCold: HotOrCold.Hot,
-  shortName: 'balls-two',
-  name: 'balls-recipe-two',
+  shortName: "balls-two",
+  name: "balls-recipe-two",
   potentialExclusions: [],
 };
 
-describe('choose meals v2', () => {
-  it.only('correctly generates pause dates', () => {
+describe("choose meals v2", () => {
+  it("correctly generates pause dates", () => {
     const dummyOtherPlannedCooks: Cook[] = [
       {
         date: new Date(1_681_599_600_000),
@@ -125,35 +125,35 @@ describe('choose meals v2', () => {
       },
     ];
     const pausedCustomer: BackendCustomer = {
-      salutation: 'mr',
-      addressLine1: 'somewhere',
+      salutation: "mr",
+      addressLine1: "somewhere",
       numberOfBags: 1,
-      addressLine2: 'somehow',
-      addressLine3: 'someplace',
+      addressLine2: "somehow",
+      addressLine3: "someplace",
       groups: [],
-      phoneNumber: '023',
-      firstName: 'bar-customer-paused',
-      surname: 'baz',
-      email: 'bar-email',
+      phoneNumber: "023",
+      firstName: "bar-customer-paused",
+      surname: "baz",
+      email: "bar-email",
 
-      country: 'GB',
-      username: 'person',
-      deliveryDay1: 'Monday',
-      deliveryDay2: 'Tuesday',
-      customerUpdateTime: '1234567810',
-      subscriptionUpdateTime: '1233456',
-      city: 'Manchester',
-      postcode: 'M4 7AL',
-      deliveryDay3: 'Wednesday',
+      country: "GB",
+      username: "person",
+      deliveryDay1: "Monday",
+      deliveryDay2: "Tuesday",
+      customerUpdateTime: "1234567810",
+      subscriptionUpdateTime: "1233456",
+      city: "Manchester",
+      postcode: "M4 7AL",
+      deliveryDay3: "Wednesday",
       plans: [
         {
           isExtra: false,
           itemsPerDay: 1,
-          name: 'Mass',
-          subscriptionStatus: 'active',
+          name: "Mass",
+          subscriptionStatus: "active",
           pauseStart: 1_679_871_600_000,
           termEnd: 1_679_957_999_000,
-          id: '199FSyTKXnFkMkGa',
+          id: "199FSyTKXnFkMkGa",
           totalMeals: 6,
           daysPerWeek: 6,
           pauseEnd: 1_682_031_600_000,
@@ -163,42 +163,42 @@ describe('choose meals v2', () => {
         {
           items: [
             {
-              name: 'Equilibrium',
+              name: "Equilibrium",
               isExtra: false,
               quantity: 0,
             },
             {
-              name: 'Mass',
+              name: "Mass",
               isExtra: false,
               quantity: 3,
             },
             {
-              name: 'Micro',
+              name: "Micro",
               isExtra: false,
               quantity: 0,
             },
             {
-              name: 'Ultra Micro',
+              name: "Ultra Micro",
               isExtra: false,
               quantity: 0,
             },
             {
-              name: 'Low-CHO',
+              name: "Low-CHO",
               isExtra: false,
               quantity: 0,
             },
             {
-              name: 'Seasonal Soup',
+              name: "Seasonal Soup",
               isExtra: true,
               quantity: 0,
             },
             {
-              name: 'Breakfast',
+              name: "Breakfast",
               isExtra: true,
               quantity: 0,
             },
             {
-              name: 'Snacks',
+              name: "Snacks",
               isExtra: true,
               quantity: 0,
             },
@@ -208,42 +208,42 @@ describe('choose meals v2', () => {
         {
           items: [
             {
-              name: 'Equilibrium',
+              name: "Equilibrium",
               isExtra: false,
               quantity: 0,
             },
             {
-              name: 'Mass',
+              name: "Mass",
               isExtra: false,
               quantity: 3,
             },
             {
-              name: 'Micro',
+              name: "Micro",
               isExtra: false,
               quantity: 0,
             },
             {
-              name: 'Ultra Micro',
+              name: "Ultra Micro",
               isExtra: false,
               quantity: 0,
             },
             {
-              name: 'Low-CHO',
+              name: "Low-CHO",
               isExtra: false,
               quantity: 0,
             },
             {
-              name: 'Seasonal Soup',
+              name: "Seasonal Soup",
               isExtra: true,
               quantity: 0,
             },
             {
-              name: 'Breakfast',
+              name: "Breakfast",
               isExtra: true,
               quantity: 0,
             },
             {
-              name: 'Snacks',
+              name: "Snacks",
               isExtra: true,
               quantity: 0,
             },
@@ -259,7 +259,7 @@ describe('choose meals v2', () => {
     const result = chooseMealSelections(
       dummyOtherPlannedCooks,
       customers,
-      'me'
+      "me"
     );
     expect(result).toBeDefined();
     expect(result.customerPlans[0].deliveries[0].paused).toBeTruthy();

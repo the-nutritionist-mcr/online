@@ -59,7 +59,7 @@ describe("verify JWT", () => {
 
   it("throws an error if the issuer doesn't match", async () => {
     vi.doMock("./verify");
-    vi.unmock("./get-public-keys");
+    vi.doUnmock("./get-public-keys");
 
     const { verify } = await import("./verify");
 
@@ -86,7 +86,7 @@ describe("verify JWT", () => {
 
   it("Returns groups as an empty array when the groups are not present in the claim", async () => {
     vi.doMock("./verify");
-    vi.unmock("./get-public-keys");
+    vi.doUnmock("./get-public-keys");
 
     const { verify } = await import("./verify");
 
@@ -169,7 +169,7 @@ describe("verify JWT", () => {
   it("passes verification when passed a valid token that hasn't expired", async () => {
     vi.setSystemTime(new Date("2021-09-14T12:20:00"));
     const result = await verifyJwtToken({ token: validToken });
-    expect(result.isValid).toBeTrue();
+    expect(result.isValid).toBeTruthy();
   });
 
   it("fails verification when passed a valid token that hasn't expired but the passed in group isn't included in the claim", async () => {
@@ -187,7 +187,7 @@ describe("verify JWT", () => {
       token: validToken,
       authorisedGroups: ["admin"],
     });
-    expect(result.isValid).toBeTrue();
+    expect(result.isValid).toBeTruthy();
   });
 
   it("fails verification when passed a valid token that has expired", async () => {

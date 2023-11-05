@@ -1,11 +1,10 @@
-import { mock } from 'vitest-mock-extended';
-import * as jsonwebtoken from 'jsonwebtoken';
-import { Secret } from 'jsonwebtoken';
-import { mocked } from 'jest-mock';
-import { PublicKeyMeta } from './public-key-meta';
-import { verify } from './verify';
+import { mock } from "vitest-mock-extended";
+import jsonwebtoken from "jsonwebtoken";
+import { Secret } from "jsonwebtoken";
+import { PublicKeyMeta } from "./public-key-meta";
+import { verify } from "./verify";
 
-vi.mock('jsonwebtoken');
+vi.mock("jsonwebtoken");
 
 type VerifyFunc = (
   token: string,
@@ -13,14 +12,14 @@ type VerifyFunc = (
   callback?: jsonwebtoken.VerifyCallback
 ) => void;
 
-describe('verify', () => {
-  it('rejects the promise if the callback returns an error', async () => {
+describe("verify", () => {
+  it("rejects the promise if the callback returns an error", async () => {
     const error = new jsonwebtoken.TokenExpiredError(
-      'expired',
+      "expired",
       new Date(Date.now())
     );
 
-    mocked<VerifyFunc>(jsonwebtoken.verify).mockImplementation(
+    vi.mocked<VerifyFunc>(jsonwebtoken.verify).mockImplementation(
       (_token, _key, callback) => {
         callback?.(error, undefined);
       }
@@ -28,8 +27,6 @@ describe('verify', () => {
 
     const keyMeta = mock<PublicKeyMeta>();
 
-    await expect(verify('foo', keyMeta)).rejects.toBeInstanceOf(
-      jsonwebtoken.TokenExpiredError
-    );
+    await expect(verify("foo", keyMeta)).rejects.toBe(error);
   });
 });

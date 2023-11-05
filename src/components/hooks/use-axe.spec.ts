@@ -1,3 +1,4 @@
+// @vitest-environment jsdom
 import axe from "@axe-core/react";
 import { renderHook } from "@testing-library/react";
 import { mocked } from "jest-mock";

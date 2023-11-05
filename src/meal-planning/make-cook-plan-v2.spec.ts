@@ -4,9 +4,9 @@ import {
   Exclusion,
   MealPlanGeneratedForIndividualCustomer,
   Recipe,
-} from '@tnmo/types';
-import mock from 'vitest-mock-extended/lib/Mock';
-import { makeCookPlan } from './make-cook-plan-v2';
+} from "@tnmo/types";
+import { mock } from "vitest-mock-extended";
+import { makeCookPlan } from "./make-cook-plan-v2";
 
 const generateCustomers = (count: number) =>
   Array.from({ length: count }).map(() =>
@@ -27,12 +27,12 @@ const generateDeliveryMeals = (
     };
   });
 
-describe('make cook plan', () => {
+describe("make cook plan", () => {
   it(`correctly counts duplicates`, () => {
     const [customerOne, customerThree] = generateCustomers(3);
 
     const noBroccoli = mock<Exclusion>({
-      id: 'no-broccoli',
+      id: "no-broccoli",
     });
 
     const customerTwo = mock<BackendCustomer>({
@@ -79,12 +79,12 @@ describe('make cook plan', () => {
             dateCooked: new Date(),
             plans: [
               {
-                status: 'active',
+                status: "active",
                 id: `plan0`,
                 planId: `plan0`,
                 name: `Mass`,
                 meals: [
-                  ...generateDeliveryMeals('Mass', [one, one, three, four]),
+                  ...generateDeliveryMeals("Mass", [one, one, three, four]),
                 ],
                 isExtra: false,
               },
@@ -95,11 +95,11 @@ describe('make cook plan', () => {
             dateCooked: new Date(),
             plans: [
               {
-                status: 'active',
+                status: "active",
                 id: `plan3`,
                 planId: `plan3`,
                 name: `Mass`,
-                meals: [...generateDeliveryMeals('Mass', [five, six, seven])],
+                meals: [...generateDeliveryMeals("Mass", [five, six, seven])],
                 isExtra: false,
               },
             ],
@@ -115,11 +115,11 @@ describe('make cook plan', () => {
             paused: false,
             plans: [
               {
-                status: 'active',
+                status: "active",
                 id: `plan1`,
                 planId: `plan1`,
                 name: `Micro`,
-                meals: [...generateDeliveryMeals('Micro', [one, two])],
+                meals: [...generateDeliveryMeals("Micro", [one, two])],
                 isExtra: false,
               },
             ],
@@ -129,12 +129,12 @@ describe('make cook plan', () => {
             paused: false,
             plans: [
               {
-                status: 'active',
+                status: "active",
                 id: `plan2`,
                 planId: `plan2`,
                 name: `Micro`,
                 meals: [
-                  ...generateDeliveryMeals('Micro', [five, six, seven, eight]),
+                  ...generateDeliveryMeals("Micro", [five, six, seven, eight]),
                 ],
                 isExtra: false,
               },
@@ -151,11 +151,11 @@ describe('make cook plan', () => {
             paused: false,
             plans: [
               {
-                status: 'active',
+                status: "active",
                 id: `plan4`,
                 planId: `plan4`,
                 name: `Mass`,
-                meals: [...generateDeliveryMeals('Mass', [one, two, three])],
+                meals: [...generateDeliveryMeals("Mass", [one, two, three])],
                 isExtra: false,
               },
             ],
@@ -165,11 +165,11 @@ describe('make cook plan', () => {
             paused: false,
             plans: [
               {
-                status: 'active',
+                status: "active",
                 id: `plan7`,
                 planId: `plan7`,
                 name: `Mass`,
-                meals: [...generateDeliveryMeals('Mass', [seven, nine])],
+                meals: [...generateDeliveryMeals("Mass", [seven, nine])],
                 isExtra: false,
               },
             ],
@@ -206,13 +206,13 @@ describe('make cook plan', () => {
           alternates: [],
           primaries: expect.arrayContaining([
             expect.objectContaining({
-              fullName: 'Mass',
-              planName: 'Mass',
+              fullName: "Mass",
+              planName: "Mass",
               count: 3,
             }),
             expect.objectContaining({
-              fullName: 'Micro',
-              planName: 'Micro',
+              fullName: "Micro",
+              planName: "Micro",
               count: 1,
             }),
           ]),
@@ -227,16 +227,16 @@ describe('make cook plan', () => {
           alternates: [
             [
               expect.objectContaining({
-                fullName: 'Micro',
-                planName: 'Micro',
+                fullName: "Micro",
+                planName: "Micro",
                 count: 1,
               }),
             ],
           ],
           primaries: expect.arrayContaining([
             expect.objectContaining({
-              fullName: 'Mass',
-              planName: 'Mass',
+              fullName: "Mass",
+              planName: "Mass",
               count: 1,
             }),
           ]),
@@ -251,8 +251,8 @@ describe('make cook plan', () => {
           alternates: [],
           primaries: expect.arrayContaining([
             expect.objectContaining({
-              fullName: 'Mass',
-              planName: 'Mass',
+              fullName: "Mass",
+              planName: "Mass",
               count: 2,
             }),
           ]),
@@ -267,8 +267,8 @@ describe('make cook plan', () => {
           alternates: [],
           primaries: expect.arrayContaining([
             expect.objectContaining({
-              fullName: 'Mass',
-              planName: 'Mass',
+              fullName: "Mass",
+              planName: "Mass",
               count: 1,
             }),
           ]),
@@ -283,13 +283,13 @@ describe('make cook plan', () => {
           alternates: [],
           primaries: expect.arrayContaining([
             expect.objectContaining({
-              fullName: 'Mass',
-              planName: 'Mass',
+              fullName: "Mass",
+              planName: "Mass",
               count: 1,
             }),
             expect.objectContaining({
-              fullName: 'Micro',
-              planName: 'Micro',
+              fullName: "Micro",
+              planName: "Micro",
               count: 1,
             }),
           ]),
@@ -304,13 +304,13 @@ describe('make cook plan', () => {
           mainRecipe: six,
           primaries: expect.arrayContaining([
             expect.objectContaining({
-              fullName: 'Mass',
-              planName: 'Mass',
+              fullName: "Mass",
+              planName: "Mass",
               count: 1,
             }),
             expect.objectContaining({
-              fullName: 'Micro',
-              planName: 'Micro',
+              fullName: "Micro",
+              planName: "Micro",
               count: 1,
             }),
           ]),
@@ -325,13 +325,13 @@ describe('make cook plan', () => {
           alternates: [],
           primaries: expect.arrayContaining([
             expect.objectContaining({
-              fullName: 'Mass',
-              planName: 'Mass',
+              fullName: "Mass",
+              planName: "Mass",
               count: 2,
             }),
             expect.objectContaining({
-              fullName: 'Micro',
-              planName: 'Micro',
+              fullName: "Micro",
+              planName: "Micro",
               count: 1,
             }),
           ]),
@@ -346,8 +346,8 @@ describe('make cook plan', () => {
           alternates: [],
           primaries: expect.arrayContaining([
             expect.objectContaining({
-              fullName: 'Micro',
-              planName: 'Micro',
+              fullName: "Micro",
+              planName: "Micro",
               count: 1,
             }),
           ]),
@@ -362,8 +362,8 @@ describe('make cook plan', () => {
           alternates: [],
           primaries: expect.arrayContaining([
             expect.objectContaining({
-              fullName: 'Micro',
-              planName: 'Micro',
+              fullName: "Micro",
+              planName: "Micro",
               count: 1,
             }),
           ]),
@@ -378,8 +378,8 @@ describe('make cook plan', () => {
           alternates: [],
           primaries: expect.arrayContaining([
             expect.objectContaining({
-              fullName: 'Mass',
-              planName: 'Mass',
+              fullName: "Mass",
+              planName: "Mass",
               count: 1,
             }),
           ]),
@@ -391,7 +391,7 @@ describe('make cook plan', () => {
     const [customerOne, customerThree] = generateCustomers(3);
 
     const noBroccoli = mock<Exclusion>({
-      id: 'no-broccoli',
+      id: "no-broccoli",
     });
 
     const customerTwo = mock<BackendCustomer>({
@@ -438,12 +438,12 @@ describe('make cook plan', () => {
             dateCooked: new Date(),
             plans: [
               {
-                status: 'active',
+                status: "active",
                 id: `plan0`,
                 planId: `plan0`,
                 name: `Mass`,
                 meals: [
-                  ...generateDeliveryMeals('Mass', [one, two, three, four]),
+                  ...generateDeliveryMeals("Mass", [one, two, three, four]),
                 ],
                 isExtra: false,
               },
@@ -454,11 +454,11 @@ describe('make cook plan', () => {
             dateCooked: new Date(),
             plans: [
               {
-                status: 'active',
+                status: "active",
                 id: `plan3`,
                 planId: `plan3`,
                 name: `Mass`,
-                meals: [...generateDeliveryMeals('Mass', [five, six, seven])],
+                meals: [...generateDeliveryMeals("Mass", [five, six, seven])],
                 isExtra: false,
               },
             ],
@@ -474,11 +474,11 @@ describe('make cook plan', () => {
             paused: false,
             plans: [
               {
-                status: 'active',
+                status: "active",
                 id: `plan1`,
                 planId: `plan1`,
                 name: `Micro`,
-                meals: [...generateDeliveryMeals('Micro', [one, two])],
+                meals: [...generateDeliveryMeals("Micro", [one, two])],
                 isExtra: false,
               },
             ],
@@ -488,12 +488,12 @@ describe('make cook plan', () => {
             paused: false,
             plans: [
               {
-                status: 'active',
+                status: "active",
                 id: `plan2`,
                 planId: `plan2`,
                 name: `Micro`,
                 meals: [
-                  ...generateDeliveryMeals('Micro', [five, six, seven, eight]),
+                  ...generateDeliveryMeals("Micro", [five, six, seven, eight]),
                 ],
                 isExtra: false,
               },
@@ -510,11 +510,11 @@ describe('make cook plan', () => {
             paused: false,
             plans: [
               {
-                status: 'active',
+                status: "active",
                 id: `plan4`,
                 planId: `plan4`,
                 name: `Mass`,
-                meals: [...generateDeliveryMeals('Mass', [one, two, three])],
+                meals: [...generateDeliveryMeals("Mass", [one, two, three])],
                 isExtra: false,
               },
             ],
@@ -524,11 +524,11 @@ describe('make cook plan', () => {
             paused: false,
             plans: [
               {
-                status: 'active',
+                status: "active",
                 id: `plan7`,
                 planId: `plan7`,
                 name: `Mass`,
-                meals: [...generateDeliveryMeals('Mass', [seven, nine])],
+                meals: [...generateDeliveryMeals("Mass", [seven, nine])],
                 isExtra: false,
               },
             ],
@@ -565,13 +565,13 @@ describe('make cook plan', () => {
           alternates: [],
           primaries: expect.arrayContaining([
             expect.objectContaining({
-              fullName: 'Mass',
-              planName: 'Mass',
+              fullName: "Mass",
+              planName: "Mass",
               count: 2,
             }),
             expect.objectContaining({
-              fullName: 'Micro',
-              planName: 'Micro',
+              fullName: "Micro",
+              planName: "Micro",
               count: 1,
             }),
           ]),
@@ -586,16 +586,16 @@ describe('make cook plan', () => {
           alternates: [
             [
               expect.objectContaining({
-                fullName: 'Micro',
-                planName: 'Micro',
+                fullName: "Micro",
+                planName: "Micro",
                 count: 1,
               }),
             ],
           ],
           primaries: expect.arrayContaining([
             expect.objectContaining({
-              fullName: 'Mass',
-              planName: 'Mass',
+              fullName: "Mass",
+              planName: "Mass",
               count: 2,
             }),
           ]),
@@ -610,8 +610,8 @@ describe('make cook plan', () => {
           alternates: [],
           primaries: expect.arrayContaining([
             expect.objectContaining({
-              fullName: 'Mass',
-              planName: 'Mass',
+              fullName: "Mass",
+              planName: "Mass",
               count: 2,
             }),
           ]),
@@ -626,8 +626,8 @@ describe('make cook plan', () => {
           alternates: [],
           primaries: expect.arrayContaining([
             expect.objectContaining({
-              fullName: 'Mass',
-              planName: 'Mass',
+              fullName: "Mass",
+              planName: "Mass",
               count: 1,
             }),
           ]),
@@ -642,13 +642,13 @@ describe('make cook plan', () => {
           alternates: [],
           primaries: expect.arrayContaining([
             expect.objectContaining({
-              fullName: 'Mass',
-              planName: 'Mass',
+              fullName: "Mass",
+              planName: "Mass",
               count: 1,
             }),
             expect.objectContaining({
-              fullName: 'Micro',
-              planName: 'Micro',
+              fullName: "Micro",
+              planName: "Micro",
               count: 1,
             }),
           ]),
@@ -663,13 +663,13 @@ describe('make cook plan', () => {
           mainRecipe: six,
           primaries: expect.arrayContaining([
             expect.objectContaining({
-              fullName: 'Mass',
-              planName: 'Mass',
+              fullName: "Mass",
+              planName: "Mass",
               count: 1,
             }),
             expect.objectContaining({
-              fullName: 'Micro',
-              planName: 'Micro',
+              fullName: "Micro",
+              planName: "Micro",
               count: 1,
             }),
           ]),
@@ -684,13 +684,13 @@ describe('make cook plan', () => {
           alternates: [],
           primaries: expect.arrayContaining([
             expect.objectContaining({
-              fullName: 'Mass',
-              planName: 'Mass',
+              fullName: "Mass",
+              planName: "Mass",
               count: 2,
             }),
             expect.objectContaining({
-              fullName: 'Micro',
-              planName: 'Micro',
+              fullName: "Micro",
+              planName: "Micro",
               count: 1,
             }),
           ]),
@@ -705,8 +705,8 @@ describe('make cook plan', () => {
           alternates: [],
           primaries: expect.arrayContaining([
             expect.objectContaining({
-              fullName: 'Micro',
-              planName: 'Micro',
+              fullName: "Micro",
+              planName: "Micro",
               count: 1,
             }),
           ]),
@@ -721,8 +721,8 @@ describe('make cook plan', () => {
           alternates: [],
           primaries: expect.arrayContaining([
             expect.objectContaining({
-              fullName: 'Micro',
-              planName: 'Micro',
+              fullName: "Micro",
+              planName: "Micro",
               count: 1,
             }),
           ]),
@@ -737,8 +737,8 @@ describe('make cook plan', () => {
           alternates: [],
           primaries: expect.arrayContaining([
             expect.objectContaining({
-              fullName: 'Mass',
-              planName: 'Mass',
+              fullName: "Mass",
+              planName: "Mass",
               count: 1,
             }),
           ]),
@@ -751,14 +751,14 @@ describe('make cook plan', () => {
     const [customerThree] = generateCustomers(3);
 
     const noBroccoli = mock<Exclusion>({
-      id: 'no-broccoli',
-      name: 'no-cheese',
+      id: "no-broccoli",
+      name: "no-cheese",
       allergen: false,
     });
 
     const noCheese = mock<Exclusion>({
-      id: 'no-cheese',
-      name: 'no-cheese',
+      id: "no-cheese",
+      name: "no-cheese",
       allergen: false,
     });
 
@@ -817,12 +817,12 @@ describe('make cook plan', () => {
             paused: false,
             plans: [
               {
-                status: 'active',
+                status: "active",
                 id: `plan0`,
                 planId: `plan0`,
                 name: `Mass`,
                 meals: [
-                  ...generateDeliveryMeals('Mass', [one, two, three, four]),
+                  ...generateDeliveryMeals("Mass", [one, two, three, four]),
                 ],
                 isExtra: false,
               },
@@ -833,11 +833,11 @@ describe('make cook plan', () => {
             paused: false,
             plans: [
               {
-                status: 'active',
+                status: "active",
                 id: `plan3`,
                 planId: `plan3`,
                 name: `Mass`,
-                meals: [...generateDeliveryMeals('Mass', [five, six, seven])],
+                meals: [...generateDeliveryMeals("Mass", [five, six, seven])],
                 isExtra: false,
               },
             ],
@@ -853,11 +853,11 @@ describe('make cook plan', () => {
             paused: false,
             plans: [
               {
-                status: 'active',
+                status: "active",
                 id: `plan1`,
                 planId: `plan1`,
                 name: `Micro`,
-                meals: [...generateDeliveryMeals('Micro', [one, two])],
+                meals: [...generateDeliveryMeals("Micro", [one, two])],
                 isExtra: false,
               },
             ],
@@ -867,12 +867,12 @@ describe('make cook plan', () => {
             paused: false,
             plans: [
               {
-                status: 'active',
+                status: "active",
                 id: `plan2`,
                 planId: `plan2`,
                 name: `Micro`,
                 meals: [
-                  ...generateDeliveryMeals('Micro', [five, six, seven, eight]),
+                  ...generateDeliveryMeals("Micro", [five, six, seven, eight]),
                 ],
                 isExtra: false,
               },
@@ -889,11 +889,11 @@ describe('make cook plan', () => {
             paused: false,
             plans: [
               {
-                status: 'active',
+                status: "active",
                 id: `plan4`,
                 planId: `plan4`,
                 name: `Mass`,
-                meals: [...generateDeliveryMeals('Mass', [one, two, three])],
+                meals: [...generateDeliveryMeals("Mass", [one, two, three])],
                 isExtra: false,
               },
             ],
@@ -903,11 +903,11 @@ describe('make cook plan', () => {
             paused: false,
             plans: [
               {
-                status: 'active',
+                status: "active",
                 id: `plan7`,
                 planId: `plan7`,
                 name: `Mass`,
-                meals: [...generateDeliveryMeals('Mass', [seven, nine])],
+                meals: [...generateDeliveryMeals("Mass", [seven, nine])],
                 isExtra: false,
               },
             ],
@@ -944,13 +944,13 @@ describe('make cook plan', () => {
           alternates: [],
           primaries: expect.arrayContaining([
             expect.objectContaining({
-              fullName: 'Mass',
-              planName: 'Mass',
+              fullName: "Mass",
+              planName: "Mass",
               count: 2,
             }),
             expect.objectContaining({
-              fullName: 'Micro',
-              planName: 'Micro',
+              fullName: "Micro",
+              planName: "Micro",
               count: 1,
             }),
           ]),
@@ -965,16 +965,16 @@ describe('make cook plan', () => {
           alternates: [
             [
               expect.objectContaining({
-                fullName: 'Micro (no-cheese)',
-                planName: 'Micro',
+                fullName: "Micro (no-cheese)",
+                planName: "Micro",
                 count: 1,
               }),
             ],
           ],
           primaries: expect.arrayContaining([
             expect.objectContaining({
-              fullName: 'Mass',
-              planName: 'Mass',
+              fullName: "Mass",
+              planName: "Mass",
               count: 2,
             }),
           ]),
@@ -989,8 +989,8 @@ describe('make cook plan', () => {
           alternates: [],
           primaries: expect.arrayContaining([
             expect.objectContaining({
-              fullName: 'Mass',
-              planName: 'Mass',
+              fullName: "Mass",
+              planName: "Mass",
               count: 1,
             }),
           ]),
@@ -1005,8 +1005,8 @@ describe('make cook plan', () => {
           alternates: [],
           primaries: expect.arrayContaining([
             expect.objectContaining({
-              fullName: 'Mass',
-              planName: 'Mass',
+              fullName: "Mass",
+              planName: "Mass",
               count: 1,
             }),
           ]),
@@ -1021,13 +1021,13 @@ describe('make cook plan', () => {
           alternates: [],
           primaries: expect.arrayContaining([
             expect.objectContaining({
-              fullName: 'Mass',
-              planName: 'Mass',
+              fullName: "Mass",
+              planName: "Mass",
               count: 1,
             }),
             expect.objectContaining({
-              fullName: 'Micro',
-              planName: 'Micro',
+              fullName: "Micro",
+              planName: "Micro",
               count: 1,
             }),
           ]),
@@ -1042,13 +1042,13 @@ describe('make cook plan', () => {
           mainRecipe: six,
           primaries: expect.arrayContaining([
             expect.objectContaining({
-              fullName: 'Mass',
-              planName: 'Mass',
+              fullName: "Mass",
+              planName: "Mass",
               count: 1,
             }),
             expect.objectContaining({
-              fullName: 'Micro',
-              planName: 'Micro',
+              fullName: "Micro",
+              planName: "Micro",
               count: 1,
             }),
           ]),
@@ -1063,13 +1063,13 @@ describe('make cook plan', () => {
           alternates: [],
           primaries: expect.arrayContaining([
             expect.objectContaining({
-              fullName: 'Mass',
-              planName: 'Mass',
+              fullName: "Mass",
+              planName: "Mass",
               count: 2,
             }),
             expect.objectContaining({
-              fullName: 'Micro',
-              planName: 'Micro',
+              fullName: "Micro",
+              planName: "Micro",
               count: 1,
             }),
           ]),
@@ -1084,8 +1084,8 @@ describe('make cook plan', () => {
           alternates: [],
           primaries: expect.arrayContaining([
             expect.objectContaining({
-              fullName: 'Micro',
-              planName: 'Micro',
+              fullName: "Micro",
+              planName: "Micro",
               count: 1,
             }),
           ]),
@@ -1100,8 +1100,8 @@ describe('make cook plan', () => {
           alternates: [],
           primaries: expect.arrayContaining([
             expect.objectContaining({
-              fullName: 'Micro',
-              planName: 'Micro',
+              fullName: "Micro",
+              planName: "Micro",
               count: 1,
             }),
           ]),
@@ -1116,8 +1116,8 @@ describe('make cook plan', () => {
           alternates: [],
           primaries: expect.arrayContaining([
             expect.objectContaining({
-              fullName: 'Mass',
-              planName: 'Mass',
+              fullName: "Mass",
+              planName: "Mass",
               count: 1,
             }),
           ]),
@@ -1126,7 +1126,7 @@ describe('make cook plan', () => {
     );
   });
 
-  it('Correctly counts meals when there is no customisations or alternates at all', () => {
+  it("Correctly counts meals when there is no customisations or alternates at all", () => {
     const [customerOne, customerTwo, customerThree] = generateCustomers(3);
 
     const [one, two, three, four, five, six, seven, eight, nine] = Array.from({
@@ -1150,12 +1150,12 @@ describe('make cook plan', () => {
             paused: false,
             plans: [
               {
-                status: 'active',
+                status: "active",
                 id: `plan0`,
                 planId: `plan0`,
                 name: `Mass`,
                 meals: [
-                  ...generateDeliveryMeals('Mass', [one, two, three, four]),
+                  ...generateDeliveryMeals("Mass", [one, two, three, four]),
                 ],
                 isExtra: false,
               },
@@ -1166,11 +1166,11 @@ describe('make cook plan', () => {
             paused: false,
             plans: [
               {
-                status: 'active',
+                status: "active",
                 id: `plan3`,
                 planId: `plan3`,
                 name: `Mass`,
-                meals: [...generateDeliveryMeals('Mass', [five, six, seven])],
+                meals: [...generateDeliveryMeals("Mass", [five, six, seven])],
                 isExtra: false,
               },
             ],
@@ -1186,11 +1186,11 @@ describe('make cook plan', () => {
             paused: false,
             plans: [
               {
-                status: 'active',
+                status: "active",
                 id: `plan1`,
                 planId: `plan1`,
                 name: `Micro`,
-                meals: [...generateDeliveryMeals('Micro', [one, two])],
+                meals: [...generateDeliveryMeals("Micro", [one, two])],
                 isExtra: false,
               },
             ],
@@ -1200,12 +1200,12 @@ describe('make cook plan', () => {
             paused: false,
             plans: [
               {
-                status: 'active',
+                status: "active",
                 id: `plan2`,
                 planId: `plan2`,
                 name: `Micro`,
                 meals: [
-                  ...generateDeliveryMeals('Micro', [five, six, seven, eight]),
+                  ...generateDeliveryMeals("Micro", [five, six, seven, eight]),
                 ],
                 isExtra: false,
               },
@@ -1222,11 +1222,11 @@ describe('make cook plan', () => {
             dateCooked: new Date(),
             plans: [
               {
-                status: 'active',
+                status: "active",
                 id: `plan4`,
                 planId: `plan4`,
                 name: `Mass`,
-                meals: [...generateDeliveryMeals('Mass', [one, two, three])],
+                meals: [...generateDeliveryMeals("Mass", [one, two, three])],
                 isExtra: false,
               },
             ],
@@ -1236,11 +1236,11 @@ describe('make cook plan', () => {
             paused: false,
             plans: [
               {
-                status: 'active',
+                status: "active",
                 id: `plan7`,
                 planId: `plan7`,
                 name: `Mass`,
-                meals: [...generateDeliveryMeals('Mass', [seven, nine])],
+                meals: [...generateDeliveryMeals("Mass", [seven, nine])],
                 isExtra: false,
               },
             ],
@@ -1298,13 +1298,13 @@ describe('make cook plan', () => {
           mainRecipe: one,
           primaries: expect.arrayContaining([
             expect.objectContaining({
-              fullName: 'Mass',
-              planName: 'Mass',
+              fullName: "Mass",
+              planName: "Mass",
               count: 2,
             }),
             expect.objectContaining({
-              fullName: 'Micro',
-              planName: 'Micro',
+              fullName: "Micro",
+              planName: "Micro",
               count: 1,
             }),
           ]),
@@ -1318,13 +1318,13 @@ describe('make cook plan', () => {
           mainRecipe: two,
           primaries: expect.arrayContaining([
             expect.objectContaining({
-              fullName: 'Mass',
-              planName: 'Mass',
+              fullName: "Mass",
+              planName: "Mass",
               count: 2,
             }),
             expect.objectContaining({
-              fullName: 'Micro',
-              planName: 'Micro',
+              fullName: "Micro",
+              planName: "Micro",
               count: 1,
             }),
           ]),
@@ -1338,8 +1338,8 @@ describe('make cook plan', () => {
           mainRecipe: three,
           primaries: expect.arrayContaining([
             expect.objectContaining({
-              fullName: 'Mass',
-              planName: 'Mass',
+              fullName: "Mass",
+              planName: "Mass",
               count: 2,
             }),
           ]),
@@ -1353,8 +1353,8 @@ describe('make cook plan', () => {
           mainRecipe: four,
           primaries: expect.arrayContaining([
             expect.objectContaining({
-              fullName: 'Mass',
-              planName: 'Mass',
+              fullName: "Mass",
+              planName: "Mass",
               count: 1,
             }),
           ]),
@@ -1368,13 +1368,13 @@ describe('make cook plan', () => {
           mainRecipe: five,
           primaries: expect.arrayContaining([
             expect.objectContaining({
-              fullName: 'Mass',
-              planName: 'Mass',
+              fullName: "Mass",
+              planName: "Mass",
               count: 1,
             }),
             expect.objectContaining({
-              fullName: 'Micro',
-              planName: 'Micro',
+              fullName: "Micro",
+              planName: "Micro",
               count: 1,
             }),
           ]),
@@ -1388,13 +1388,13 @@ describe('make cook plan', () => {
           mainRecipe: six,
           primaries: expect.arrayContaining([
             expect.objectContaining({
-              fullName: 'Mass',
-              planName: 'Mass',
+              fullName: "Mass",
+              planName: "Mass",
               count: 1,
             }),
             expect.objectContaining({
-              fullName: 'Micro',
-              planName: 'Micro',
+              fullName: "Micro",
+              planName: "Micro",
               count: 1,
             }),
           ]),
@@ -1408,13 +1408,13 @@ describe('make cook plan', () => {
           mainRecipe: seven,
           primaries: expect.arrayContaining([
             expect.objectContaining({
-              fullName: 'Mass',
-              planName: 'Mass',
+              fullName: "Mass",
+              planName: "Mass",
               count: 2,
             }),
             expect.objectContaining({
-              fullName: 'Micro',
-              planName: 'Micro',
+              fullName: "Micro",
+              planName: "Micro",
               count: 1,
             }),
           ]),
@@ -1428,8 +1428,8 @@ describe('make cook plan', () => {
           mainRecipe: eight,
           primaries: expect.arrayContaining([
             expect.objectContaining({
-              fullName: 'Micro',
-              planName: 'Micro',
+              fullName: "Micro",
+              planName: "Micro",
               count: 1,
             }),
           ]),
@@ -1443,8 +1443,8 @@ describe('make cook plan', () => {
           mainRecipe: eight,
           primaries: expect.arrayContaining([
             expect.objectContaining({
-              fullName: 'Micro',
-              planName: 'Micro',
+              fullName: "Micro",
+              planName: "Micro",
               count: 1,
             }),
           ]),
@@ -1458,8 +1458,8 @@ describe('make cook plan', () => {
           mainRecipe: nine,
           primaries: expect.arrayContaining([
             expect.objectContaining({
-              fullName: 'Mass',
-              planName: 'Mass',
+              fullName: "Mass",
+              planName: "Mass",
               count: 1,
             }),
           ]),

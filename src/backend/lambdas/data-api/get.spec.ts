@@ -1,56 +1,56 @@
-import { mock } from 'vitest-mock-extended';
-import { handler } from './get';
+import { mock } from "vitest-mock-extended";
+import { handler } from "./get";
 
-import { mockClient } from 'aws-sdk-client-mock';
+import { mockClient } from "aws-sdk-client-mock";
 import {
   BatchGetCommand,
   DynamoDBDocumentClient,
   ScanCommand,
-} from '@aws-sdk/lib-dynamodb';
-import { authoriseJwt } from './authorise';
-import { HttpError } from './http-error';
-import { HTTP } from '../../../infrastructure/constants';
-import { allowHeaders } from '../../allow-headers';
+} from "@aws-sdk/lib-dynamodb";
+import { authoriseJwt } from "./authorise";
+import { HttpError } from "./http-error";
+import { HTTP } from "../../../infrastructure/constants";
+import { allowHeaders } from "../../allow-headers";
 
 const dynamodbMock = mockClient(DynamoDBDocumentClient);
 
-vi.mock('./authorise');
+vi.mock("./authorise");
 
 beforeEach(() => {
   vi.resetAllMocks();
   dynamodbMock.reset();
-  delete process.env['DYNAMODB_TABLE'];
-  delete process.env['DYNAMODB_TABLE_META'];
+  delete process.env["DYNAMODB_TABLE"];
+  delete process.env["DYNAMODB_TABLE_META"];
 });
 
-describe('the get handler', () => {
-  it('returns a response with the statuscode from the error when an httpError is thrown by authorise', async () => {
-    jest
-      .mocked(authoriseJwt)
-      .mockRejectedValue(new HttpError(HTTP.statusCodes.Forbidden, 'oh no!'));
+describe("the get handler", () => {
+  it("returns a response with the statuscode from the error when an httpError is thrown by authorise", async () => {
+    vi.mocked(authoriseJwt).mockRejectedValue(
+      new HttpError(HTTP.statusCodes.Forbidden, "oh no!")
+    );
 
-    process.env['DYNAMODB_TABLE'] = 'foo-table';
-    process.env['DYNAMODB_TABLE_META'] = 'bar-table';
+    process.env["DYNAMODB_TABLE"] = "foo-table";
+    process.env["DYNAMODB_TABLE_META"] = "bar-table";
 
     const expectedItems = [
       {
-        id: 'foo',
-        foo: 'bar',
+        id: "foo",
+        foo: "bar",
       },
       {
-        id: 'another',
-        foo: 'baz',
+        id: "another",
+        foo: "baz",
       },
     ];
 
-    const pages = ['foo'];
+    const pages = ["foo"];
 
-    const metaTable = process.env['DYNAMODB_TABLE_META'];
+    const metaTable = process.env["DYNAMODB_TABLE_META"];
 
     const params = {
       RequestItems: {
         [`${metaTable}`]: {
-          Keys: [{ name: 'count' }, { name: 'pages' }],
+          Keys: [{ name: "count" }, { name: "pages" }],
         },
       },
     };
@@ -59,11 +59,11 @@ describe('the get handler', () => {
       Responses: {
         [`bar-table`]: [
           {
-            name: 'count',
+            name: "count",
             value: 1,
           },
           {
-            name: 'pages',
+            name: "pages",
             value: pages,
           },
         ],
@@ -72,7 +72,7 @@ describe('the get handler', () => {
 
     dynamodbMock
       .on(ScanCommand, {
-        TableName: 'foo-table',
+        TableName: "foo-table",
       })
       .resolves({ Items: expectedItems });
 
@@ -83,28 +83,28 @@ describe('the get handler', () => {
     );
   });
 
-  it('returns the response from a call to the dynmodb scan operation for a given table', async () => {
-    process.env['DYNAMODB_TABLE'] = 'foo-table';
-    process.env['DYNAMODB_TABLE_META'] = 'bar-table';
+  it("returns the response from a call to the dynmodb scan operation for a given table", async () => {
+    process.env["DYNAMODB_TABLE"] = "foo-table";
+    process.env["DYNAMODB_TABLE_META"] = "bar-table";
 
     const expectedItems = [
       {
-        id: 'foo',
-        foo: 'bar',
+        id: "foo",
+        foo: "bar",
       },
       {
-        foo: 'baz',
+        foo: "baz",
       },
     ];
 
-    const pages = ['foo'];
+    const pages = ["foo"];
 
-    const metaTable = process.env['DYNAMODB_TABLE_META'];
+    const metaTable = process.env["DYNAMODB_TABLE_META"];
 
     const params = {
       RequestItems: {
         [`${metaTable}`]: {
-          Keys: [{ name: 'count' }, { name: 'pages' }],
+          Keys: [{ name: "count" }, { name: "pages" }],
         },
       },
     };
@@ -113,11 +113,11 @@ describe('the get handler', () => {
       Responses: {
         [`bar-table`]: [
           {
-            name: 'count',
+            name: "count",
             value: 1,
           },
           {
-            name: 'pages',
+            name: "pages",
             value: pages,
           },
         ],
@@ -126,7 +126,7 @@ describe('the get handler', () => {
 
     dynamodbMock
       .on(ScanCommand, {
-        TableName: 'foo-table',
+        TableName: "foo-table",
       })
       .resolves({ Items: expectedItems });
 
@@ -136,34 +136,34 @@ describe('the get handler', () => {
       statusCode: 200,
       body: JSON.stringify({ count: 1, items: expectedItems }),
       headers: {
-        'access-control-allow-origin': '*',
-        'access-control-allow-headers': allowHeaders.join(', '),
+        "access-control-allow-origin": "*",
+        "access-control-allow-headers": allowHeaders.join(", "),
       },
     });
   });
 
-  it('does not return items marked as deleted', async () => {
-    process.env['DYNAMODB_TABLE'] = 'foo-table';
-    process.env['DYNAMODB_TABLE_META'] = 'bar-table';
+  it("does not return items marked as deleted", async () => {
+    process.env["DYNAMODB_TABLE"] = "foo-table";
+    process.env["DYNAMODB_TABLE_META"] = "bar-table";
 
     const expectedItems = [
       {
-        id: 'foo',
+        id: "foo",
         deleted: true,
       },
       {
-        foo: 'baz',
+        foo: "baz",
       },
     ];
 
-    const pages = ['foo'];
+    const pages = ["foo"];
 
-    const metaTable = process.env['DYNAMODB_TABLE_META'];
+    const metaTable = process.env["DYNAMODB_TABLE_META"];
 
     const params = {
       RequestItems: {
         [`${metaTable}`]: {
-          Keys: [{ name: 'count' }, { name: 'pages' }],
+          Keys: [{ name: "count" }, { name: "pages" }],
         },
       },
     };
@@ -172,11 +172,11 @@ describe('the get handler', () => {
       Responses: {
         [`bar-table`]: [
           {
-            name: 'count',
+            name: "count",
             value: 1,
           },
           {
-            name: 'pages',
+            name: "pages",
             value: pages,
           },
         ],
@@ -185,7 +185,7 @@ describe('the get handler', () => {
 
     dynamodbMock
       .on(ScanCommand, {
-        TableName: 'foo-table',
+        TableName: "foo-table",
       })
       .resolves({ Items: expectedItems });
 
@@ -193,10 +193,10 @@ describe('the get handler', () => {
 
     expect(response).toStrictEqual({
       statusCode: 200,
-      body: JSON.stringify({ count: 1, items: [{ foo: 'baz' }] }),
+      body: JSON.stringify({ count: 1, items: [{ foo: "baz" }] }),
       headers: {
-        'access-control-allow-origin': '*',
-        'access-control-allow-headers': allowHeaders.join(', '),
+        "access-control-allow-origin": "*",
+        "access-control-allow-headers": allowHeaders.join(", "),
       },
     });
   });

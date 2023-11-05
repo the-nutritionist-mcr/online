@@ -1,9 +1,9 @@
-import { BackendCustomer, Delivery, StandardPlan } from '@tnmo/types';
-import { mock } from 'vitest-mock-extended';
-import { validateCustomPlan } from './validate-custom-plan';
+import { BackendCustomer, Delivery, StandardPlan } from "@tnmo/types";
+import { mock } from "vitest-mock-extended";
+import { validateCustomPlan } from "./validate-custom-plan";
 
-describe('validate custom plan', () => {
-  it('returns true if there is no custom plan', () => {
+describe("validate custom plan", () => {
+  it("returns true if there is no custom plan", () => {
     const customer = mock<BackendCustomer>({
       customPlan: undefined,
     });
@@ -13,27 +13,27 @@ describe('validate custom plan', () => {
     expect(result).toEqual(true);
   });
 
-  it.only('returns true if the custom plan matches a single plan', () => {
+  it("returns true if the custom plan matches a single plan", () => {
     const plans: StandardPlan[] = [
       {
-        id: '5',
-        name: 'Mass',
+        id: "5",
+        name: "Mass",
         daysPerWeek: 1,
         itemsPerDay: 5,
         isExtra: false,
         termEnd: 123_123,
         totalMeals: 5,
-        subscriptionStatus: 'active',
+        subscriptionStatus: "active",
       },
       {
-        id: '6',
-        name: 'Equilibrium',
+        id: "6",
+        name: "Equilibrium",
         daysPerWeek: 1,
         itemsPerDay: 5,
         isExtra: false,
         termEnd: 123_123,
         totalMeals: 5,
-        subscriptionStatus: 'active',
+        subscriptionStatus: "active",
       },
     ];
 
@@ -42,11 +42,11 @@ describe('validate custom plan', () => {
         extras: [],
         items: [
           {
-            name: 'Mass',
+            name: "Mass",
             quantity: 3,
           },
           {
-            name: 'Equilibrium',
+            name: "Equilibrium",
             quantity: 4,
           },
         ],
@@ -55,11 +55,11 @@ describe('validate custom plan', () => {
         extras: [],
         items: [
           {
-            name: 'Mass',
+            name: "Mass",
             quantity: 2,
           },
           {
-            name: 'Equilibrium',
+            name: "Equilibrium",
             quantity: 1,
           },
         ],
@@ -76,27 +76,27 @@ describe('validate custom plan', () => {
     expect(result).toEqual(true);
   });
 
-  it('returns false if the numbers do not match', () => {
+  it("returns false if the numbers do not match", () => {
     const plans: StandardPlan[] = [
       {
-        id: '5',
-        name: 'Mass',
+        id: "5",
+        name: "Mass",
         daysPerWeek: 2,
         itemsPerDay: 5,
         isExtra: false,
         termEnd: 123_123,
         totalMeals: 10,
-        subscriptionStatus: 'active',
+        subscriptionStatus: "active",
       },
       {
-        id: '6',
-        name: 'Equilibrium',
+        id: "6",
+        name: "Equilibrium",
         daysPerWeek: 1,
         itemsPerDay: 5,
         isExtra: false,
         termEnd: 123_123,
         totalMeals: 5,
-        subscriptionStatus: 'active',
+        subscriptionStatus: "active",
       },
     ];
 
@@ -105,11 +105,11 @@ describe('validate custom plan', () => {
         extras: [],
         items: [
           {
-            name: 'Mass',
+            name: "Mass",
             quantity: 3,
           },
           {
-            name: 'Equilibrium',
+            name: "Equilibrium",
             quantity: 1,
           },
         ],
@@ -118,11 +118,11 @@ describe('validate custom plan', () => {
         extras: [],
         items: [
           {
-            name: 'Mass',
+            name: "Mass",
             quantity: 3,
           },
           {
-            name: 'Equilibrium',
+            name: "Equilibrium",
             quantity: 4,
           },
         ],
@@ -139,27 +139,27 @@ describe('validate custom plan', () => {
     expect(result).toEqual(false);
   });
 
-  it('returns false if there is an extra actual plan', () => {
+  it("returns false if there is an extra actual plan", () => {
     const plans: StandardPlan[] = [
       {
-        id: '5',
-        name: 'Mass',
+        id: "5",
+        name: "Mass",
         daysPerWeek: 1,
         itemsPerDay: 5,
         isExtra: false,
         termEnd: 123_123,
         totalMeals: 5,
-        subscriptionStatus: 'active',
+        subscriptionStatus: "active",
       },
       {
-        id: '6',
-        name: 'Equilibrium',
+        id: "6",
+        name: "Equilibrium",
         daysPerWeek: 1,
         itemsPerDay: 5,
         isExtra: false,
         termEnd: 123_123,
         totalMeals: 5,
-        subscriptionStatus: 'active',
+        subscriptionStatus: "active",
       },
     ];
 
@@ -168,7 +168,7 @@ describe('validate custom plan', () => {
         extras: [],
         items: [
           {
-            name: 'Mass',
+            name: "Mass",
             quantity: 1,
           },
         ],
@@ -177,7 +177,7 @@ describe('validate custom plan', () => {
         extras: [],
         items: [
           {
-            name: 'Mass',
+            name: "Mass",
             quantity: 4,
           },
         ],
@@ -194,27 +194,27 @@ describe('validate custom plan', () => {
     expect(result).toEqual(false);
   });
 
-  it('returns false if there is an extra custom plan', () => {
+  it("returns false if there is an extra custom plan", () => {
     const plans: StandardPlan[] = [
       {
-        id: '5',
-        name: 'Mass',
+        id: "5",
+        name: "Mass",
         daysPerWeek: 1,
         itemsPerDay: 5,
         isExtra: false,
         termEnd: 123_123,
         totalMeals: 5,
-        subscriptionStatus: 'active',
+        subscriptionStatus: "active",
       },
       {
-        id: '6',
-        name: 'Equilibrium',
+        id: "6",
+        name: "Equilibrium",
         daysPerWeek: 1,
         itemsPerDay: 5,
         isExtra: false,
         termEnd: 123_123,
         totalMeals: 5,
-        subscriptionStatus: 'active',
+        subscriptionStatus: "active",
       },
     ];
 
@@ -223,15 +223,15 @@ describe('validate custom plan', () => {
         extras: [],
         items: [
           {
-            name: 'Mass',
+            name: "Mass",
             quantity: 3,
           },
           {
-            name: 'Equilibrium',
+            name: "Equilibrium",
             quantity: 2,
           },
           {
-            name: 'Micro',
+            name: "Micro",
             quantity: 5,
           },
         ],
@@ -240,15 +240,15 @@ describe('validate custom plan', () => {
         extras: [],
         items: [
           {
-            name: 'Mass',
+            name: "Mass",
             quantity: 2,
           },
           {
-            name: 'Equilibrium',
+            name: "Equilibrium",
             quantity: 3,
           },
           {
-            name: 'Micro',
+            name: "Micro",
             quantity: 3,
           },
         ],

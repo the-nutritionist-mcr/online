@@ -11,9 +11,9 @@ vi.mock("./get-user-from-aws");
 describe("authorised route", () => {
   beforeEach(() => {
     vi.resetAllMocks();
-    jest
-      .mocked(getUserFromAws)
-      .mockResolvedValue({} as Awaited<ReturnType<typeof getUserFromAws>>);
+    vi.mocked(getUserFromAws).mockResolvedValue(
+      {} as Awaited<ReturnType<typeof getUserFromAws>>
+    );
   });
 
   it("always uses the token of the LastAuthUser", async () => {

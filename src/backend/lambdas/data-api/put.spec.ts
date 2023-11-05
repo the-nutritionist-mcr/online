@@ -1,33 +1,33 @@
-import { mock } from 'vitest-mock-extended';
-import { handler } from './put';
+import { mock } from "vitest-mock-extended";
+import { handler } from "./put";
 
-import { mockClient } from 'aws-sdk-client-mock';
-import { DynamoDBDocumentClient, PutCommand } from '@aws-sdk/lib-dynamodb';
-import { APIGatewayProxyEventV2, EventBridgeEvent } from 'aws-lambda';
-import { authoriseJwt } from './authorise';
-import { HttpError } from './http-error';
-import { HTTP } from '../../../infrastructure/constants';
+import { mockClient } from "aws-sdk-client-mock";
+import { DynamoDBDocumentClient, PutCommand } from "@aws-sdk/lib-dynamodb";
+import { APIGatewayProxyEventV2, EventBridgeEvent } from "aws-lambda";
+import { authoriseJwt } from "./authorise";
+import { HttpError } from "./http-error";
+import { HTTP } from "../../../infrastructure/constants";
 
 const dynamodbMock = mockClient(DynamoDBDocumentClient);
 
-vi.mock('./authorise');
+vi.mock("./authorise");
 
 beforeEach(() => {
   vi.resetAllMocks();
   dynamodbMock.reset();
-  delete process.env['DYNAMODB_TABLE'];
+  delete process.env["DYNAMODB_TABLE"];
 });
 
-describe('the get handler', () => {
-  it('returns a response with the statuscode from the error when an httpError is thrown by authorise', async () => {
-    jest
-      .mocked(authoriseJwt)
-      .mockRejectedValue(new HttpError(HTTP.statusCodes.Forbidden, 'oh no!'));
+describe("the get handler", () => {
+  it("returns a response with the statuscode from the error when an httpError is thrown by authorise", async () => {
+    vi.mocked(authoriseJwt).mockRejectedValue(
+      new HttpError(HTTP.statusCodes.Forbidden, "oh no!")
+    );
 
-    process.env['DYNAMODB_TABLE'] = 'foo-table';
+    process.env["DYNAMODB_TABLE"] = "foo-table";
 
     const inputItem = {
-      foo: 'baz',
+      foo: "baz",
     };
 
     const mockInput = mock<
@@ -43,11 +43,11 @@ describe('the get handler', () => {
     );
   });
 
-  it('calls dynamodb putItem with input object and returns success', async () => {
-    process.env['DYNAMODB_TABLE'] = 'foo-table';
+  it("calls dynamodb putItem with input object and returns success", async () => {
+    process.env["DYNAMODB_TABLE"] = "foo-table";
 
     const inputItem = {
-      foo: 'baz',
+      foo: "baz",
     };
 
     const mockInput = mock<
@@ -59,9 +59,9 @@ describe('the get handler', () => {
     const response = await handler(mockInput, mock(), mock());
 
     const calls = dynamodbMock.commandCalls(PutCommand, {
-      TableName: 'foo-table',
+      TableName: "foo-table",
       Item: { ...inputItem },
-      ConditionExpression: 'attribute_exists(id)',
+      ConditionExpression: "attribute_exists(id)",
     });
 
     expect(calls).toHaveLength(1);
@@ -71,8 +71,8 @@ describe('the get handler', () => {
       body: JSON.stringify({}),
 
       headers: {
-        'access-control-allow-origin': '*',
-        'access-control-allow-headers': '*',
+        "access-control-allow-origin": "*",
+        "access-control-allow-headers": "*",
       },
     });
   });
