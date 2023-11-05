@@ -1,0 +1,9 @@
+export { IndexPage } from "./pages/index";
+export { OurStory } from "./pages/our-story";
+export { ThePlans } from "./pages/the-plans";
+export { GetStarted } from "./pages/get-started";
+export { TermsAndConditions } from "./pages/terms-and-conditions";
+export { PrivacyPolicy } from "./pages/privacy-policy";
+export { Faq } from "./pages/faq";
+export { Pricing } from "./pages/pricing";
+export { WhyChooseUs } from "./pages/why-choose-us";
