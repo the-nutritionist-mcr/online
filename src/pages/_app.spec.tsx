@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import TnmApp from './_app.page';
 import { Router } from 'next/router';
-import { mock } from 'jest-mock-extended';
+import { mock } from 'vitest-mock-extended';
 import { screen } from '@testing-library/react';
 import { getAppConfig } from '@tnmo/utils';
 

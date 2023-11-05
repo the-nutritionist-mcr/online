@@ -1,5 +1,5 @@
 import { BackendCustomer, Exclusion, Recipe } from '@tnmo/types';
-import { mock } from 'jest-mock-extended';
+import { mock } from 'vitest-mock-extended';
 import { getRealRecipe } from './get-real-recipe';
 
 describe('get real recipe', () => {

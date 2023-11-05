@@ -4,7 +4,7 @@ import { useResource } from './use-resource';
 import { SWRConfig } from 'swr';
 import { ReactNode } from 'react';
 import nock from 'nock';
-import { mock } from 'jest-mock-extended';
+import { mock } from 'vitest-mock-extended';
 
 vi.mock('../aws/authenticate');
 

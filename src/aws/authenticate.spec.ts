@@ -1,7 +1,7 @@
 import { Auth } from '@aws-amplify/auth';
 import { when } from 'jest-when';
 import * as authenticate from './authenticate';
-import { mock } from 'jest-mock-extended';
+import { mock } from 'vitest-mock-extended';
 import { ISignUpResult } from 'amazon-cognito-identity-js';
 import { getAppConfig } from '@tnmo/utils';
 

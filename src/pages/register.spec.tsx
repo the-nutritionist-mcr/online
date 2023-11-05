@@ -6,7 +6,7 @@ import {
 import { ThemeProvider } from '@emotion/react';
 import Register from './register.page';
 import { theme } from '../theme';
-import { mock } from 'jest-mock-extended';
+import { mock } from 'vitest-mock-extended';
 import { NavigationContext, NavigationContextType } from '@tnmo/utils';
 
 const mockNavigation = mock<NavigationContextType>();

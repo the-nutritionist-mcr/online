@@ -1,5 +1,5 @@
 import { BackendCustomer, PlannedCook, StandardPlan } from '@tnmo/types';
-import { mock } from 'jest-mock-extended';
+import { mock } from 'vitest-mock-extended';
 import { getClosedOrOpenStatus } from './get-closed-or-open-status';
 
 const date = (day: number, month: number, year: number, hour: number) => {

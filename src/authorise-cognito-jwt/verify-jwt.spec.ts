@@ -153,7 +153,7 @@ describe("verify JWT", () => {
     async ({ token }) => {
       const result = await verifyJwtToken(token);
 
-      expect(result.isValid).toBeFalse();
+      expect(result.isValid).toBeFalsy();
       expect(result.error).toBeDefined();
       expect(result.error?.message).toEqual("Token is invalid");
     }
@@ -162,7 +162,7 @@ describe("verify JWT", () => {
   it("fails verification if the user pool is not configured", async () => {
     delete process.env.COGNITO_POOL_ID;
     const result = await verifyJwtToken({ token: validToken });
-    expect(result.isValid).toBeFalse();
+    expect(result.isValid).toBeFalsy();
     expect(result.error?.message).toEqual("COGNITO_POOL_ID not configured");
   });
 
@@ -178,7 +178,7 @@ describe("verify JWT", () => {
       token: validToken,
       authorisedGroups: ["a-random-group"],
     });
-    expect(result.isValid).toBeFalse();
+    expect(result.isValid).toBeFalsy();
   });
 
   it("passes verification when passed a valid token that hasn't expired and the passed in group is included in the claim", async () => {
@@ -193,7 +193,7 @@ describe("verify JWT", () => {
   it("fails verification when passed a valid token that has expired", async () => {
     vi.setSystemTime(new Date("2022-09-19T12:20:00"));
     const result = await verifyJwtToken({ token: validToken });
-    expect(result.isValid).toBeFalse();
+    expect(result.isValid).toBeFalsy();
     expect(result.error?.message).toEqual("jwt expired");
   });
 });

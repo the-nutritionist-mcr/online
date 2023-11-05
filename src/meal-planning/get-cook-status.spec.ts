@@ -1,5 +1,5 @@
 import { getCookStatus } from './get-cook-status';
-import { mock } from 'jest-mock-extended';
+import { mock } from 'vitest-mock-extended';
 import { StandardPlan } from '@tnmo/types';
 
 const date = (day: number, month: number, year: number) => {

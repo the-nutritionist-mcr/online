@@ -1,5 +1,5 @@
 import { BackendCustomer, Delivery, StandardPlan } from '@tnmo/types';
-import { mock } from 'jest-mock-extended';
+import { mock } from 'vitest-mock-extended';
 import { validateCustomPlan } from './validate-custom-plan';
 
 describe('validate custom plan', () => {

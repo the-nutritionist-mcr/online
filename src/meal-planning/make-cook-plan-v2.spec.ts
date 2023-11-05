@@ -5,7 +5,7 @@ import {
   MealPlanGeneratedForIndividualCustomer,
   Recipe,
 } from '@tnmo/types';
-import mock from 'jest-mock-extended/lib/Mock';
+import mock from 'vitest-mock-extended/lib/Mock';
 import { makeCookPlan } from './make-cook-plan-v2';
 
 const generateCustomers = (count: number) =>

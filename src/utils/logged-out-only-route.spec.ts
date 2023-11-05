@@ -1,4 +1,4 @@
-import { mock } from 'jest-mock-extended';
+import { mock } from 'vitest-mock-extended';
 import { GetServerSidePropsContext } from 'next';
 import { verifyJwtToken } from '@tnmo/authorise-cognito-jwt';
 import { loggedOutOnlyRoute } from './logged-out-only-route';

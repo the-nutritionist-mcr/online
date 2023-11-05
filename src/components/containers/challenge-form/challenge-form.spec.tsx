@@ -3,7 +3,7 @@ import { Input } from '../../atoms';
 import ChallengeForm from './challenge-form';
 import { act } from 'react-dom/test-utils';
 import { ThemeProvider } from '@emotion/react';
-import { mock } from 'jest-mock-extended';
+import { mock } from 'vitest-mock-extended';
 import event from '@testing-library/user-event';
 
 const theme = {

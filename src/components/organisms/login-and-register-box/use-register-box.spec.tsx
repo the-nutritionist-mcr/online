@@ -2,7 +2,7 @@ import { act, renderHook } from '@testing-library/react-hooks';
 import { mockDependencies } from '../../test-support';
 import { RegisterFormData } from './types/srp-data';
 import { RegisterResponse } from './types/register';
-import { mock } from 'jest-mock-extended';
+import { mock } from 'vitest-mock-extended';
 import { when } from 'jest-when';
 import { mocked } from 'jest-mock';
 import { RegisterState, useRegisterBox } from './use-register-box';

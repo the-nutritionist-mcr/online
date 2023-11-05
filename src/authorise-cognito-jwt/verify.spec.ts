@@ -1,4 +1,4 @@
-import { mock } from 'jest-mock-extended';
+import { mock } from 'vitest-mock-extended';
 import * as jsonwebtoken from 'jsonwebtoken';
 import { Secret } from 'jsonwebtoken';
 import { mocked } from 'jest-mock';

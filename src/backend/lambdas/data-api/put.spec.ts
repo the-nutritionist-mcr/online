@@ -1,4 +1,4 @@
-import { mock } from 'jest-mock-extended';
+import { mock } from 'vitest-mock-extended';
 import { handler } from './put';
 
 import { mockClient } from 'aws-sdk-client-mock';

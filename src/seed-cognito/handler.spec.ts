@@ -8,7 +8,7 @@ import {
   AdminDeleteUserCommand,
 } from "@aws-sdk/client-cognito-identity-provider";
 
-import { mock } from "jest-mock-extended";
+import { mock } from "vitest-mock-extended";
 import { handler } from "./handler";
 
 import { mockClient } from "aws-sdk-client-mock";

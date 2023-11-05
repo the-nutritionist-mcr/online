@@ -1,7 +1,7 @@
 import moment, { Moment } from 'moment';
 import getStatusString from './getStatusString';
 import isActive from './isActive';
-import { mock } from 'jest-mock-extended';
+import { mock } from 'vitest-mock-extended';
 import { mocked } from 'jest-mock';
 import { Customer, Snack } from '@tnmo/types';
 

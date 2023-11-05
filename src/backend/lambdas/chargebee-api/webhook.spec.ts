@@ -8,7 +8,7 @@ import {
   AdminUpdateUserAttributesCommandInput,
 } from '@aws-sdk/client-cognito-identity-provider';
 
-import { mock } from 'jest-mock-extended';
+import { mock } from 'vitest-mock-extended';
 import { handler } from './webhook';
 import { mockClient } from 'aws-sdk-client-mock';
 import { when } from 'jest-when';
