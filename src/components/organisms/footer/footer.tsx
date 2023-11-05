@@ -18,7 +18,7 @@ const StyledFooter = styled.footer`
 `;
 
 const FooterStrip = styled.div`
-  background: url(${SeasonalPattern.src});
+  background: url(${SeasonalPattern});
   background-size: cover;
   background-position: 50%;
   height: 125px;

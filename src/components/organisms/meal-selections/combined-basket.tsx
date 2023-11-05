@@ -1,6 +1,6 @@
 import Basket from './basket';
 import styled from '@emotion/styled';
-import { defaultDeliveryDays } from '@tnmw/config';
+import { defaultDeliveryDays } from '@tnmo/config';
 import { totalOtherSelected } from './total-other-selected';
 import {
   BackendCustomer,
@@ -9,7 +9,7 @@ import {
   PlanWithMeals,
   Recipe,
   StandardPlan,
-} from '@tnmw/types';
+} from '@tnmo/types';
 import { updateAllSelectedMeals } from './update-all-selected';
 import {
   basketHeader,

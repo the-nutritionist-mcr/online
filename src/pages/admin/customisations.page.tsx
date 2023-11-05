@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import { MenuPaddedContent } from './menu-padded-content';
 import { AdminTemplate } from './admin-template';
 
-import { Exclusions } from '@tnmw/admin-app';
+import { Exclusions } from '@tnmo/admin-app';
 import { useCustomisations } from '../../hooks';
 import { RedirectIfLoggedOut } from '../../components/authentication/redirect-if-logged-out';
 import { useRouter } from 'next/router';

@@ -1,4 +1,4 @@
-import { ActivePlanWithMeals, PlanWithMeals } from '@tnmw/types';
+import { ActivePlanWithMeals, PlanWithMeals } from '@tnmo/types';
 
 const isActivePlan = (plan: PlanWithMeals): plan is ActivePlanWithMeals =>
   plan.status === 'active';

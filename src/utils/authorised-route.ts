@@ -3,10 +3,10 @@ import {
   GetServerSidePropsContext,
   PreviewData,
 } from 'next';
-import { verifyJwtToken } from '@tnmw/authorise-cognito-jwt';
+import { verifyJwtToken } from '@tnmo/authorise-cognito-jwt';
 import { backendRedirect } from './backend-redirect';
 import { getUserFromAws } from './get-user-from-aws';
-import { BackendCustomer } from '@tnmw/types';
+import { BackendCustomer } from '@tnmo/types';
 import { ParsedUrlQuery } from 'node:querystring';
 
 export interface AuthorizedRouteProps {

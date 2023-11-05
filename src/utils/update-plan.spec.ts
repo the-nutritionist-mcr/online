@@ -1,5 +1,5 @@
-import { SelectedMeal } from '@tnmw/meal-planning';
-import { HotOrCold, NewDelivery, Recipe } from '@tnmw/types';
+import { SelectedMeal } from '@tnmo/meal-planning';
+import { HotOrCold, NewDelivery, Recipe } from '@tnmo/types';
 import { updateDelivery } from './update-plan';
 
 const recipeOne: Recipe = {

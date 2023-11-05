@@ -4,7 +4,7 @@ import { ChargeBee } from 'chargebee-typescript';
 
 import { returnErrorResponse } from '../data-api/return-error-response';
 
-import { ENV, HTTP } from '@tnmw/constants';
+import { ENV, HTTP } from '@tnmo/constants';
 import { handleCustomerEvent } from './event-handlers/handle-customer-event';
 import { handleSubscriptionEvent } from './event-handlers/handle-subscription-event';
 import { authoriseBasic } from '../data-api/authorise';

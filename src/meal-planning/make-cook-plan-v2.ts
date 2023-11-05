@@ -1,11 +1,11 @@
-import { defaultDeliveryDays } from '@tnmw/config';
+import { defaultDeliveryDays } from '@tnmo/config';
 import { getRealRecipe } from './get-real-recipe';
 import {
   BackendCustomer,
   MealPlanGeneratedForIndividualCustomer,
   PlannedCook,
   Recipe,
-} from '@tnmw/types';
+} from '@tnmo/types';
 import { createVariant } from './create-variant';
 
 export interface PlanExtraConfiguration {

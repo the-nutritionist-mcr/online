@@ -8,7 +8,7 @@ import {
 import { useContext, useState } from 'react';
 import { AuthenticationServiceContext } from './authentication-service-context';
 import { LoginResponse } from './types/login';
-import { NavigationContext } from '@tnmw/utils';
+import { NavigationContext } from '@tnmo/utils';
 
 export enum LoginState {
   DoLogin = 'DoLogin',

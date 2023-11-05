@@ -1,8 +1,8 @@
 import { DocumentDefinition } from './downloadPdf';
 import formatPlanItem from './formatPlanItem';
 import { PdfBuilder } from './pdf-builder';
-import { createVariant } from '@tnmw/meal-planning';
-import { defaultDeliveryDays, itemFamilies } from '@tnmw/config';
+import { createVariant } from '@tnmo/meal-planning';
+import { defaultDeliveryDays, itemFamilies } from '@tnmo/config';
 
 import {
   Recipe,
@@ -11,7 +11,7 @@ import {
   PlannedDelivery,
   Swapped,
   PlannedCook,
-} from '@tnmw/types';
+} from '@tnmo/types';
 import moment from 'moment';
 import { selectionIsIncludedInPlan } from './selection-is-included-in-plan';
 import calendarFormat from './calendarFormat';

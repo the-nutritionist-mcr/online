@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
-import { Hero, ParagraphText } from '@tnmw/components';
-import { CONTACT_EMAIL } from '@tnmw/constants';
+import { Hero, ParagraphText } from '@tnmo/components';
+import { CONTACT_EMAIL } from '@tnmo/constants';
 
 const ErrorHeaderBox = styled('div')`
   text-align: center;

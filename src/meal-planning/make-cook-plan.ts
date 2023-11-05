@@ -1,5 +1,5 @@
 import { createVariant } from './create-variant';
-import { defaultDeliveryDays } from '@tnmw/config';
+import { defaultDeliveryDays } from '@tnmo/config';
 import {
   BackendCustomer,
   DeliveryItem,
@@ -8,7 +8,7 @@ import {
   Recipe,
   RecipeVariantMap,
   Swapped,
-} from '@tnmw/types';
+} from '@tnmo/types';
 
 const isSelectedMeal = (item: unknown): item is DeliveryMeal => {
   const itemAsAny = item as any;

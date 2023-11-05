@@ -1,6 +1,6 @@
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { DynamoDBDocumentClient, GetCommand } from '@aws-sdk/lib-dynamodb';
-import { ENV, HTTP } from '@tnmw/constants';
+import { ENV, HTTP } from '@tnmo/constants';
 import { APIGatewayProxyHandlerV2 } from 'aws-lambda';
 import { authoriseJwt } from '../data-api/authorise';
 import { HttpError } from '../data-api/http-error';

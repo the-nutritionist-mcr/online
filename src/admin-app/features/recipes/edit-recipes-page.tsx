@@ -14,8 +14,8 @@ import {
 } from 'grommet';
 import React from 'react';
 
-import { ParagraphText } from '@tnmw/components';
-import { Exclusion, Recipe, HotOrCold } from '@tnmw/types';
+import { ParagraphText } from '@tnmo/components';
+import { Exclusion, Recipe, HotOrCold } from '@tnmo/types';
 import {
   formGrid,
   alternatesGrid,

@@ -1,4 +1,4 @@
-import { AuthenticationServiceContext, LoadingContext } from '@tnmw/components';
+import { AuthenticationServiceContext, LoadingContext } from '@tnmo/components';
 import { Hub } from 'aws-amplify';
 import { ReactNode, useContext, useEffect, useState } from 'react';
 

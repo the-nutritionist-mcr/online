@@ -1,5 +1,5 @@
 import './init-dd-trace';
-import { COGNITO } from '@tnmw/constants';
+import { COGNITO } from '@tnmo/constants';
 import { PreTokenGenerationTriggerHandler } from 'aws-lambda';
 import { warmer } from './warmer';
 

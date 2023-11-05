@@ -4,7 +4,7 @@ import {
   Exclusion,
   MealPlanGeneratedForIndividualCustomer,
   Recipe,
-} from '@tnmw/types';
+} from '@tnmo/types';
 import mock from 'jest-mock-extended/lib/Mock';
 import { makeCookPlan } from './make-cook-plan-v2';
 

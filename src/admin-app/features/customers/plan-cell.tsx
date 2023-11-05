@@ -1,6 +1,6 @@
-import { BackendCustomer, SubscriptionStatus } from '@tnmw/types';
+import { BackendCustomer, SubscriptionStatus } from '@tnmo/types';
 import { Tag, Box } from 'grommet';
-import { itemFamilies } from '@tnmw/config';
+import { itemFamilies } from '@tnmo/config';
 
 import {
   planTagActive,

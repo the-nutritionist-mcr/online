@@ -1,4 +1,4 @@
-import { ExtrasLabels, Plan, PlanLabels } from "@tnmw/types";
+import { ExtrasLabels, Plan, PlanLabels } from "@tnmo/types";
 
 export const daysPerWeekOptions = [7, 6, 5];
 

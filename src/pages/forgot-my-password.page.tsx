@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Button, Hero, Input, ParagraphText } from '@tnmw/components';
+import { Button, Hero, Input, ParagraphText } from '@tnmo/components';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { HTTP } from '../infrastructure/constants';

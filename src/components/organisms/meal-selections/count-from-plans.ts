@@ -1,4 +1,4 @@
-import { ActivePlanWithMeals } from '@tnmw/types';
+import { ActivePlanWithMeals } from '@tnmo/types';
 
 type Counts = {
   [key: string]: number;

@@ -1,5 +1,5 @@
 import { currentUser } from '../aws/authenticate';
-import { getAppConfig } from '@tnmw/utils';
+import { getAppConfig } from '@tnmo/utils';
 import { Codes, HttpError } from '../backend/lambdas/data-api/http-error';
 
 const getFetchInit = async (init?: RequestInit) => {

@@ -4,9 +4,9 @@ import { APIGatewayProxyHandlerV2 } from 'aws-lambda';
 import { UpdateCommand } from '@aws-sdk/lib-dynamodb';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { DynamoDBDocumentClient } from '@aws-sdk/lib-dynamodb'; // ES6 import
-import { ENV, HTTP } from '@tnmw/constants';
+import { ENV, HTTP } from '@tnmo/constants';
 import { HttpError } from '../data-api/http-error';
-import { isPublishPlanBody } from '@tnmw/types';
+import { isPublishPlanBody } from '@tnmo/types';
 import { authoriseJwt } from '../data-api/authorise';
 import { returnOkResponse } from '../data-api/return-ok-response';
 import { warmer } from './warmer';

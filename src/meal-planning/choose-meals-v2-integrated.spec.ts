@@ -1,4 +1,4 @@
-import { BackendCustomer, Cook, HotOrCold, Recipe } from '@tnmw/types';
+import { BackendCustomer, Cook, HotOrCold, Recipe } from '@tnmo/types';
 import { chooseMealSelections } from './choose-meals-v2';
 
 const recipeOne: Recipe = {

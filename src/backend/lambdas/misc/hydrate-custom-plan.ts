@@ -1,4 +1,4 @@
-import { Delivery } from '@tnmw/types';
+import { Delivery } from '@tnmo/types';
 
 interface ItemFamily {
   name: string;

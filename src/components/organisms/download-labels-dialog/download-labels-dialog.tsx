@@ -14,7 +14,7 @@ import {
 } from 'grommet';
 import { Checkmark, Close } from 'grommet-icons';
 import React, { FC, useState } from 'react';
-import { defaultDeliveryDays } from '@tnmw/config';
+import { defaultDeliveryDays } from '@tnmo/config';
 
 interface DownloadLabelsDialogProps {
   onClose: () => void;

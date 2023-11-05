@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { IndexPage as IndexPageComponent } from '@tnmw/static-pages';
+import { IndexPage as IndexPageComponent } from '@tnmo/static-pages';
 
 const IndexPage: FC = () => {
   return <IndexPageComponent />;

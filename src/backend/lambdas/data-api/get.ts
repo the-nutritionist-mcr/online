@@ -6,10 +6,10 @@ import { BatchGetCommand, DynamoDBDocumentClient } from '@aws-sdk/lib-dynamodb';
 import { authoriseJwt } from './authorise';
 
 import { returnErrorResponse } from './return-error-response';
-import { scan } from '@tnmw/dynamo';
+import { scan } from '@tnmo/dynamo';
 import { returnOkResponse } from './return-ok-response';
 import { warmer } from '../misc/warmer';
-import { PAGE_SIZE } from '@tnmw/constants';
+import { PAGE_SIZE } from '@tnmo/constants';
 
 export const handler = warmer<APIGatewayProxyHandlerV2>(async (event) => {
   try {

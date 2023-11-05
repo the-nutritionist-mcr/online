@@ -1,4 +1,4 @@
-import { Hero, MealSelections } from '@tnmw/components';
+import { Hero, MealSelections } from '@tnmo/components';
 import { useEffect } from 'react';
 
 import { usePlan, useRecipes } from '../hooks';

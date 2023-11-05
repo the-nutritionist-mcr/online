@@ -1,4 +1,4 @@
-import { AuthenticationServiceContext, LoadingContext } from '@tnmw/components';
+import { AuthenticationServiceContext, LoadingContext } from '@tnmo/components';
 import { ReactNode, useContext, useEffect } from 'react';
 
 interface RedirectIfLoggedInProps {

@@ -6,9 +6,9 @@ import {
   DeliveryItem,
   PlannedCook,
   Recipe,
-} from '@tnmw/types';
+} from '@tnmo/types';
 import { cell } from './finalise.css';
-import { getRealRecipe } from '@tnmw/meal-planning';
+import { getRealRecipe } from '@tnmo/meal-planning';
 import { useEffect, useState } from 'react';
 
 interface FinalizeCellProps {

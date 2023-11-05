@@ -7,9 +7,9 @@ import {
   DaysPerWeek,
   CustomerPlan,
   PlanConfiguration,
-} from '@tnmw/types';
+} from '@tnmo/types';
 import { curry, pipe } from 'ramda';
-import { extrasLabels, planLabels, defaultDeliveryDays } from '@tnmw/config';
+import { extrasLabels, planLabels, defaultDeliveryDays } from '@tnmo/config';
 
 /*
  * Distribute a target item across an arbitrary number of deliveries

@@ -2,7 +2,7 @@ import { FC, useContext } from 'react';
 
 import { MenuPaddedContent } from './menu-padded-content';
 import { AdminTemplate } from './admin-template';
-import { EditCustomerPage } from '@tnmw/admin-app';
+import { EditCustomerPage } from '@tnmo/admin-app';
 import toast from 'react-hot-toast';
 
 import { useRouter } from 'next/router';

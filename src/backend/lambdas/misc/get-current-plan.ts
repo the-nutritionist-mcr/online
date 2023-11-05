@@ -7,13 +7,13 @@ import {
   GetPlanResponseAdmin,
   StoredMealPlanGeneratedForIndividualCustomer,
   WeeklyCookPlanWithoutCustomerPlans,
-} from '@tnmw/types';
-import { ENV, HTTP } from '@tnmw/constants';
+} from '@tnmo/types';
+import { ENV, HTTP } from '@tnmo/constants';
 import { authoriseJwt } from '../data-api/authorise';
 
 import { HttpError } from '../data-api/http-error';
 import { doQuery } from '../dynamodb';
-import { SerialisedDate } from '@tnmw/utils';
+import { SerialisedDate } from '@tnmo/utils';
 import { warmer } from './warmer';
 
 export const handler = warmer<APIGatewayProxyHandlerV2>(async (event) => {

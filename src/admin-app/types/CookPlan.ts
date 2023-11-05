@@ -1,4 +1,4 @@
-import { BackendCustomer, Recipe } from '@tnmw/types';
+import { BackendCustomer, Recipe } from '@tnmo/types';
 
 type CookPlan = {
   recipe: Recipe | string;

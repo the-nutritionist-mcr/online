@@ -5,7 +5,7 @@ import {
   Exclusion,
   PlanLabels,
   Recipe,
-} from '@tnmw/types';
+} from '@tnmo/types';
 import { SelectedItem, SelectedMeal } from './types';
 
 const hasExclusions = (exclusion: Exclusion, meal: Recipe | undefined) =>

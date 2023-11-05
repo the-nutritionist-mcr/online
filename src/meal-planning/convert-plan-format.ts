@@ -5,9 +5,9 @@ import {
   PlanLabels,
   DaysPerWeek,
   PlanConfiguration,
-} from '@tnmw/types';
+} from '@tnmo/types';
 
-import { defaultDeliveryDays, extrasLabels, planLabels } from '@tnmw/config';
+import { defaultDeliveryDays, extrasLabels, planLabels } from '@tnmo/config';
 import { makeNewPlan } from './distribution-generator';
 
 interface Family {

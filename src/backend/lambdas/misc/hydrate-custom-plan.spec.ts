@@ -1,4 +1,4 @@
-import { Delivery } from '@tnmw/types';
+import { Delivery } from '@tnmo/types';
 import { hydrateCustomPlan } from './hydrate-custom-plan';
 describe('hydrate custom plan', () => {
   it('marks extras when they are not present', () => {

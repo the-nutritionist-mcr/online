@@ -1,4 +1,4 @@
-import { StackConfig } from '@tnmw/types';
+import { StackConfig } from '@tnmo/types';
 
 const urlNeededForTestingCosNodeFetchDoesntSupport =
   process.env['FETCH_BASE_URL'] ?? '';

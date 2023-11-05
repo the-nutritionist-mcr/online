@@ -1,4 +1,4 @@
-import { PausedDelivery, Swapped } from '@tnmw/types';
+import { PausedDelivery, Swapped } from '@tnmo/types';
 import { CustomerMealDaySelection } from './generateDeliveryPlanDocumentDefinition';
 
 export const isLegimatePause = (delivery: Swapped<PausedDelivery>) => {

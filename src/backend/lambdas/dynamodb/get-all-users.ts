@@ -3,7 +3,7 @@ import {
   ListUsersCommand,
   ListUsersCommandInput,
 } from '@aws-sdk/client-cognito-identity-provider';
-import { BackendCustomer } from '@tnmw/types';
+import { BackendCustomer } from '@tnmo/types';
 import { parseCustomerList } from '../../../utils/parse-customer-list';
 
 export const getAllUsers = async (

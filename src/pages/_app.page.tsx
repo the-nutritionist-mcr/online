@@ -4,17 +4,17 @@ import Head from 'next/head';
 import { Hub } from 'aws-amplify';
 import { AppProps } from 'next/app';
 import toast, { Toaster } from 'react-hot-toast';
-import { Layout, Loading } from '@tnmw/components';
+import { Layout, Loading } from '@tnmo/components';
 import { ThemeProvider } from '@emotion/react';
 import { SWRConfig } from 'swr';
-import { NavigationContext } from '@tnmw/utils';
+import { NavigationContext } from '@tnmo/utils';
 import { ErrorBoundary } from 'react-error-boundary';
 
 import { theme } from '../theme';
 
 import '../assets/global.scss';
 import { HttpError } from '../backend/lambdas/data-api/http-error';
-import { HTTP } from '@tnmw/constants';
+import { HTTP } from '@tnmo/constants';
 import { DatadogProvider } from '../components/DataDogProvider';
 import { AuthenticationProvider } from '../components/authenticationprovider';
 import { HubCallback } from '@aws-amplify/core';

@@ -3,11 +3,11 @@ import TnmApp from './_app.page';
 import { Router } from 'next/router';
 import { mock } from 'jest-mock-extended';
 import { screen } from '@testing-library/react';
-import { getAppConfig } from '@tnmw/utils';
+import { getAppConfig } from '@tnmo/utils';
 
 // eslint-disable-next-line unicorn/prefer-module
 jest.mock('next/router', () => require('next-router-mock'));
-jest.mock('@tnmw/utils');
+jest.mock('@tnmo/utils');
 jest.mock('../aws/authenticate');
 
 beforeEach(() => {

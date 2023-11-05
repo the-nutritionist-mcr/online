@@ -6,7 +6,7 @@ import {
   DeliveryMeal,
   SwappedMealPlan,
   Swapped,
-} from '@tnmw/types';
+} from '@tnmo/types';
 
 const stringifyValue = (thing: unknown) =>
   typeof thing === 'number' ? String(thing) : thing;

@@ -1,4 +1,4 @@
-import { ENV, IAM, NODE_OPTS } from '@tnmw/constants';
+import { ENV, IAM, NODE_OPTS } from '@tnmo/constants';
 import { Duration } from 'aws-cdk-lib';
 import { Rule, Schedule } from 'aws-cdk-lib/aws-events';
 import { LambdaFunction } from 'aws-cdk-lib/aws-events-targets';

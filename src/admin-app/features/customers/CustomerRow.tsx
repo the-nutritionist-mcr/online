@@ -1,5 +1,5 @@
 import { Tag, TableCell, TableRow } from 'grommet';
-import { BackendCustomer } from '@tnmw/types';
+import { BackendCustomer } from '@tnmo/types';
 import { PlanCell } from './plan-cell';
 import { Link } from '../../components';
 import { customerRow } from './customers.css';

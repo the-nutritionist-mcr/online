@@ -4,7 +4,7 @@ import {
   MealPlanGeneratedForIndividualCustomer,
   SwappedMealPlan,
   Recipe,
-} from '@tnmw/types';
+} from '@tnmo/types';
 
 const findAlternate = (
   recipe: Recipe,

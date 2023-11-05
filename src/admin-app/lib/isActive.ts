@@ -1,4 +1,4 @@
-import { Customer } from '@tnmw/types';
+import { Customer } from '@tnmo/types';
 
 const isActive = (customer: Customer, date?: Date): boolean => {
   const now = date ?? new Date(Date.now());

@@ -1,4 +1,4 @@
-import { BackendCustomer } from '@tnmw/types';
+import { BackendCustomer } from '@tnmo/types';
 import { RecipeVariantMap } from '../types/CookPlan';
 import { DocumentDefinition } from './downloadPdf';
 import formatPlanItem from './formatPlanItem';

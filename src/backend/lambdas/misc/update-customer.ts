@@ -4,8 +4,8 @@ import {
   CognitoIdentityProviderClient,
   AdminUpdateUserAttributesCommand,
 } from '@aws-sdk/client-cognito-identity-provider';
-import { isUpdateCustomerBody } from '@tnmw/types';
-import { ENV, HTTP, COGNITO } from '@tnmw/constants';
+import { isUpdateCustomerBody } from '@tnmo/types';
+import { ENV, HTTP, COGNITO } from '@tnmo/constants';
 import { authoriseJwt } from '../data-api/authorise';
 import { returnOkResponse } from '../data-api/return-ok-response';
 import { returnErrorResponse } from '../data-api/return-error-response';

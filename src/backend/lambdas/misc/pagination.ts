@@ -1,8 +1,8 @@
 import { DynamoDBStreamHandler } from 'aws-lambda';
 import { DynamoDBDocumentClient, PutCommand } from '@aws-sdk/lib-dynamodb';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import { scan } from '@tnmw/dynamo';
-import { PAGE_SIZE } from '@tnmw/constants';
+import { scan } from '@tnmo/dynamo';
+import { PAGE_SIZE } from '@tnmo/constants';
 
 export const handler: DynamoDBStreamHandler = async (event) => {
   const dynamodb = new DynamoDBClient({});

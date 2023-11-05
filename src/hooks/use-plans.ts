@@ -4,9 +4,9 @@ import {
   GetPlanResponseNonAdmin,
   NotYetPublishedResponse,
   MealPlanGeneratedForIndividualCustomer,
-} from '@tnmw/types';
+} from '@tnmo/types';
 import useMutation from 'use-mutation';
-import { HTTP } from '@tnmw/constants';
+import { HTTP } from '@tnmo/constants';
 
 import { useSWRConfig } from 'swr';
 import toast from 'react-hot-toast';

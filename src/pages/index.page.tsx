@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { IndexPage as Index } from '@tnmw/static-pages';
+import { IndexPage as Index } from '@tnmo/static-pages';
 
 const IndexPage: FC = () => {
   return (

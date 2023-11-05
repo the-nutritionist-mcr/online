@@ -1,4 +1,4 @@
-import { LoadingContext } from '@tnmw/components';
+import { LoadingContext } from '@tnmo/components';
 import { useRouter } from 'next/router';
 import { ReactNode, useContext, useEffect } from 'react';
 

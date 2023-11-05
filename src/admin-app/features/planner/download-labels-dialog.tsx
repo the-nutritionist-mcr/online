@@ -17,7 +17,7 @@ import fileDownload from 'js-file-download';
 import { Checkmark } from 'grommet-icons';
 import JSZip from 'jszip';
 import { FC, useState } from 'react';
-import { defaultDeliveryDays } from '@tnmw/config';
+import { defaultDeliveryDays } from '@tnmo/config';
 import {
   BackendCustomer,
   MealPlanGeneratedForIndividualCustomer,
@@ -25,7 +25,7 @@ import {
   Swapped,
   WeeklyCookPlan,
   GetPlanResponseNew,
-} from '@tnmw/types';
+} from '@tnmo/types';
 import generateCookPlanDocumentDefinition from '../../lib/generateCookPlanDocumentDefinition';
 import {
   generateMealsCsvFromObjectArray,
@@ -37,8 +37,8 @@ import {
   makeCookPlan,
   makeCookPlanV2,
   performSwaps,
-} from '@tnmw/meal-planning';
-import { fetchData, generateDatestampedFilename } from '@tnmw/utils';
+} from '@tnmo/meal-planning';
+import { fetchData, generateDatestampedFilename } from '@tnmo/utils';
 import generateDeliveryPlanDocumentDefinition from '../../lib/generateDeliveryPlanDocumentDefinition';
 import generateCookPlanDocumentDefinitionV2 from '../../lib/generateCookPlanDocumentDefinitionV2';
 import downloadPdf from '../../lib/downloadPdf';

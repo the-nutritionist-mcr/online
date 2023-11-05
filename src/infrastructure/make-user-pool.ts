@@ -7,7 +7,7 @@ import {
 } from 'aws-cdk-lib/aws-cognito';
 import { CfnOutput, Duration, RemovalPolicy } from 'aws-cdk-lib';
 import { getResourceName } from './get-resource-name';
-import { COGNITO } from '@tnmw/constants';
+import { COGNITO } from '@tnmo/constants';
 import path from 'node:path';
 import { Construct } from 'constructs';
 import { makeInstrumentedFunctionGenerator } from './instrumented-nodejs-function';

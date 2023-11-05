@@ -1,5 +1,5 @@
-import { E2E } from '@tnmw/constants';
-import { SeedUser } from '@tnmw/seed-cognito';
+import { E2E } from '@tnmo/constants';
+import { SeedUser } from '@tnmo/seed-cognito';
 
 export const SEED_USERS: SeedUser[] = [
   {

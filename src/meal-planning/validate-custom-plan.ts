@@ -1,5 +1,5 @@
-import { itemFamilies } from "@tnmw/config";
-import { BackendCustomer, Delivery } from "@tnmw/types";
+import { itemFamilies } from "@tnmo/config";
+import { BackendCustomer, Delivery } from "@tnmo/types";
 // @ts-expect-error Types don't seem to exist anymore?
 import deepEqual from "deep-equal";
 import { convertPlanFormat } from "./convert-plan-format";

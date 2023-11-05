@@ -1,5 +1,5 @@
-import { itemFamilies } from '@tnmw/config';
-import { MealPlanGeneratedForIndividualCustomer, Recipe } from '@tnmw/types';
+import { itemFamilies } from '@tnmo/config';
+import { MealPlanGeneratedForIndividualCustomer, Recipe } from '@tnmo/types';
 import { v4 } from 'uuid';
 
 export const updateRecipeInSelection = (

@@ -1,5 +1,5 @@
 import { Box, FormField, Select, TextInput } from 'grommet';
-import { Exclusion } from '@tnmw/types';
+import { Exclusion } from '@tnmo/types';
 import React from 'react';
 import styled from 'styled-components';
 

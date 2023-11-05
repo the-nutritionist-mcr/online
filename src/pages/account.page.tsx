@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import Image from 'next/image';
-import { Hero, Account, AuthenticationServiceContext } from '@tnmw/components';
+import { Hero, Account, AuthenticationServiceContext } from '@tnmo/components';
 import { PageSpacing } from './page-spacing';
 
 import AccountIcon from '../images/TNM_Icons_Final_Account.png';

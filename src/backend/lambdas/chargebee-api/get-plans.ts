@@ -1,5 +1,5 @@
-import { CHARGEBEE } from '@tnmw/constants';
-import { StandardPlan, SubscriptionStatus } from '@tnmw/types';
+import { CHARGEBEE } from '@tnmo/constants';
+import { StandardPlan, SubscriptionStatus } from '@tnmo/types';
 import { ChargeBee } from 'chargebee-typescript';
 
 export const getPlans = async (

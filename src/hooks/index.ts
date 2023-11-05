@@ -1,5 +1,5 @@
 import { useResource } from './use-resource';
-import { Exclusion, Recipe } from '@tnmw/types';
+import { Exclusion, Recipe } from '@tnmo/types';
 export { usePlan } from './use-plans';
 
 export const useCustomisations = (page?: number) =>

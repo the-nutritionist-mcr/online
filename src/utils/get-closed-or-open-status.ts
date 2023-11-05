@@ -1,9 +1,9 @@
-import { getCookStatus } from '@tnmw/meal-planning';
+import { getCookStatus } from '@tnmo/meal-planning';
 import {
   BackendCustomer,
   MealPlanGeneratedForIndividualCustomer,
   PlannedCook,
-} from '@tnmw/types';
+} from '@tnmo/types';
 
 export const chooseablePlans = (
   customer: BackendCustomer,

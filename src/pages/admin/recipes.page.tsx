@@ -2,7 +2,7 @@ import { FC, useState } from 'react';
 import { MenuPaddedContent } from './menu-padded-content';
 import { AdminTemplate } from './admin-template';
 import toast from 'react-hot-toast';
-import { Recipes } from '@tnmw/admin-app';
+import { Recipes } from '@tnmo/admin-app';
 import { useCustomisations, useRecipes } from '../../hooks';
 import { swrFetcher } from '../../utils/swr-fetcher';
 import { RedirectIfLoggedOut } from '../../components/authentication/redirect-if-logged-out';

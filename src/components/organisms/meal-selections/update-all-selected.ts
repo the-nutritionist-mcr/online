@@ -1,7 +1,7 @@
 import {
   ActivePlanWithMeals,
   MealPlanGeneratedForIndividualCustomer,
-} from '@tnmw/types';
+} from '@tnmo/types';
 
 export const updateAllSelectedMeals = (
   selected: ActivePlanWithMeals,

@@ -13,10 +13,10 @@ import {
   TextInput,
 } from 'grommet';
 import { Checkmark, Close, Trash } from 'grommet-icons';
-import { HotOrCold, Recipe, Exclusion } from '@tnmw/types';
+import { HotOrCold, Recipe, Exclusion } from '@tnmo/types';
 import React from 'react';
 import { debounce } from 'lodash';
-import { ParagraphText } from '@tnmw/components';
+import { ParagraphText } from '@tnmo/components';
 import { TagInput } from '../../components';
 import { ProjectedRecipe } from './Recipes';
 

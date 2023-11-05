@@ -1,5 +1,5 @@
-import { NewCookPlan } from '@tnmw/meal-planning';
-import { MealPlanGeneratedForIndividualCustomer, Swapped } from '@tnmw/types';
+import { NewCookPlan } from '@tnmo/meal-planning';
+import { MealPlanGeneratedForIndividualCustomer, Swapped } from '@tnmo/types';
 import moment from 'moment';
 import { DocumentDefinition } from './downloadPdf';
 import { PdfBuilder } from './pdf-builder';

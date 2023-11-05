@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import { MenuPaddedContent } from './menu-padded-content';
 import { AdminTemplate } from './admin-template';
-import { Planner } from '@tnmw/admin-app';
+import { Planner } from '@tnmo/admin-app';
 import { useRecipes, usePlan, useCustomisations } from '../../hooks';
 import { RedirectIfLoggedOut } from '../../components/authentication/redirect-if-logged-out';
 import { useCustomers } from '../../hooks/use-customers';

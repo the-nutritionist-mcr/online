@@ -18,7 +18,7 @@ import {
   BackendCustomer,
   Exclusion,
   MealPlanGeneratedForIndividualCustomer,
-} from '@tnmw/types';
+} from '@tnmo/types';
 import { v4 } from 'uuid';
 import { TagInput } from '../../components';
 import { editGrid } from './add-ad-hoc-row-dialog.css';

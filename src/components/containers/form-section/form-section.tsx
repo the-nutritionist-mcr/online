@@ -8,7 +8,7 @@ import {
   withIcon,
 } from "./form-section.css";
 import { ToolTip } from "../../molecules";
-import { CONTACT_EMAIL } from "@tnmw/constants";
+import { CONTACT_EMAIL } from "@tnmo/constants";
 
 interface FormSectionProps {
   children: React.ReactNode;
@@ -32,7 +32,7 @@ const FormSection = (props: FormSectionProps) => {
             text={`This section cannot be edited - please email ${CONTACT_EMAIL} if you need to make any changes`}
           >
             <div className={iconContainer}>
-              <IconButton icon={QuestionMarkIcon.src} a11yLabel="Information" />
+              <IconButton icon={QuestionMarkIcon} a11yLabel="Information" />
             </div>
           </ToolTip>
         )}

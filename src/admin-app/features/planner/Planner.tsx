@@ -9,7 +9,7 @@ import {
   MealPlanGeneratedForIndividualCustomer,
   BackendCustomer,
   Exclusion,
-} from '@tnmw/types';
+} from '@tnmo/types';
 import { DownloadLabelsDialog } from './download-labels-dialog';
 
 interface PlannerProps {

@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Table, TableBody } from 'grommet';
 import PlanRow from './PlanRow';
 import PlanHeader from './PlanHeader';
-import { PlannerConfig, Delivery } from '@tnmw/types';
+import { PlannerConfig, Delivery } from '@tnmo/types';
 
 interface PlanTableProps {
   onChange: (deliveries: Delivery[]) => void;

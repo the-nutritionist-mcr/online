@@ -11,10 +11,10 @@ import {
 import {
   CustomerMealsSelectionWithChargebeeCustomer,
   isChangePlanRecipeBody,
-} from '@tnmw/types';
+} from '@tnmo/types';
 import { HttpError } from '../data-api/http-error';
-import { ENV, HTTP } from '@tnmw/constants';
-import { updateDelivery } from '@tnmw/utils';
+import { ENV, HTTP } from '@tnmo/constants';
+import { updateDelivery } from '@tnmo/utils';
 import { warmer } from './warmer';
 
 export const handler = warmer<APIGatewayProxyHandlerV2>(async (event) => {

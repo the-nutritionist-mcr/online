@@ -1,4 +1,4 @@
-import { defaultDeliveryDays, extrasLabels, planLabels } from '@tnmw/config';
+import { defaultDeliveryDays, extrasLabels, planLabels } from '@tnmo/config';
 import { v4 } from 'uuid';
 import {
   Recipe,
@@ -11,10 +11,10 @@ import {
   PlanWithMeals,
   PlanLabels,
   DaysPerWeek,
-} from '@tnmw/types';
+} from '@tnmo/types';
 import { generateDistribution } from './distribution-generator';
 import { getCookStatus } from './get-cook-status';
-import { itemFamilies } from '@tnmw/config';
+import { itemFamilies } from '@tnmo/config';
 
 export interface Cook {
   date: Date;

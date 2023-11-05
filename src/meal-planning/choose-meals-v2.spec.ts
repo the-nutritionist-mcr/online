@@ -3,7 +3,7 @@ import {
   Recipe,
   HotOrCold,
   BackendCustomer,
-} from '@tnmw/types';
+} from '@tnmo/types';
 import { chooseMealSelections, Cook } from './choose-meals-v2';
 import { getCookStatus } from './get-cook-status';
 import { when } from 'jest-when';

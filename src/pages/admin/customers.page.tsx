@@ -1,5 +1,5 @@
 import { AdminTemplate } from './admin-template';
-import { Customers } from '@tnmw/admin-app';
+import { Customers } from '@tnmo/admin-app';
 import { useCustomisations } from '../../hooks';
 import { FC } from 'react';
 import { useCustomers } from '../../hooks/use-customers';

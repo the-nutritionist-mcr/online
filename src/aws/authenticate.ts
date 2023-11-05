@@ -1,6 +1,6 @@
 import { Auth } from '@aws-amplify/auth';
 import { datadogRum } from '@datadog/browser-rum';
-import { getAppConfig } from '@tnmw/utils';
+import { getAppConfig } from '@tnmo/utils';
 
 type ExtractPromiseType<T> = T extends Promise<infer RT> ? RT : never;
 

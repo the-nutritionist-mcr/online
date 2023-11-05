@@ -1,9 +1,9 @@
 import { mock } from 'jest-mock-extended';
 import { GetServerSidePropsContext } from 'next';
-import { verifyJwtToken } from '@tnmw/authorise-cognito-jwt';
+import { verifyJwtToken } from '@tnmo/authorise-cognito-jwt';
 import { loggedOutOnlyRoute } from './logged-out-only-route';
 
-jest.mock('@tnmw/authorise-cognito-jwt');
+jest.mock('@tnmo/authorise-cognito-jwt');
 
 describe('logged out only route', () => {
   it('redirects to the supplied route if there is an accessToken and verification is successful', async () => {

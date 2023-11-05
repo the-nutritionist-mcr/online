@@ -1,5 +1,5 @@
-import { LoadingContext } from '@tnmw/components';
-import { recursivelyDeserialiseDate, SerialisedDate } from '@tnmw/utils';
+import { LoadingContext } from '@tnmo/components';
+import { recursivelyDeserialiseDate, SerialisedDate } from '@tnmo/utils';
 import { useContext } from 'react';
 import useSWR from 'swr';
 import { swrFetcher } from '../utils/swr-fetcher';

@@ -1,4 +1,4 @@
-import { HTTP } from '@tnmw/constants';
+import { HTTP } from '@tnmo/constants';
 import { setErrorOnServiceEntrySpan } from '../misc/init-dd-trace';
 import { HttpError } from './http-error';
 

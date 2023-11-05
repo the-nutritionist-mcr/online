@@ -1,7 +1,7 @@
 import { Button, TableCell, TableRow } from 'grommet';
 import { Edit, Trash } from 'grommet-icons';
 import EditExclusionDialog from './EditExclusionDialog';
-import { Exclusion } from '@tnmw/types';
+import { Exclusion } from '@tnmo/types';
 import { OkCancelDialog } from '../../components';
 import React from 'react';
 import styled from 'styled-components';

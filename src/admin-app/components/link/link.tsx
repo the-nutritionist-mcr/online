@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { NavigationContext } from '@tnmw/utils';
+import { NavigationContext } from '@tnmo/utils';
 import NextLink from 'next/link';
 
 interface LinkProps {

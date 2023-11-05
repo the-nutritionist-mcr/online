@@ -2,8 +2,8 @@ import {
   CookPlanGroup,
   NewCookPlan,
   PlanVariantConfiguration,
-} from '@tnmw/meal-planning';
-import { BackendCustomer } from '@tnmw/types';
+} from '@tnmo/meal-planning';
+import { BackendCustomer } from '@tnmo/types';
 import moment from 'moment';
 import { Content } from 'pdfmake/interfaces';
 import { DocumentDefinition } from './downloadPdf';

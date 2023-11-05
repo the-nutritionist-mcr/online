@@ -3,9 +3,9 @@ import { RedirectIfLoggedOut } from '../../components/authentication/redirect-if
 import { useCustomisations, useRecipes } from '../../hooks';
 import AdminTemplate from './admin-template';
 import { MenuPaddedContent } from './menu-padded-content';
-import { EditRecipesPage } from '@tnmw/admin-app';
+import { EditRecipesPage } from '@tnmo/admin-app';
 import { useContext } from 'react';
-import { NavigationContext } from '@tnmw/utils';
+import { NavigationContext } from '@tnmo/utils';
 
 const EditRecipe = () => {
   const router = useRouter();

@@ -2,7 +2,7 @@ import {
   AdminDeleteUserCommand,
   CognitoIdentityProviderClient,
 } from '@aws-sdk/client-cognito-identity-provider';
-import { ENV } from '@tnmw/constants';
+import { ENV } from '@tnmo/constants';
 
 export const handleDeleteCustomer = async (username: string) => {
   const poolId = process.env[ENV.varNames.CognitoPoolId];

@@ -1,5 +1,5 @@
-import { batchArray } from '@tnmw/utils';
-import { batchWrite } from '@tnmw/dynamo';
+import { batchArray } from '@tnmo/utils';
+import { batchWrite } from '@tnmo/dynamo';
 import {
   BatchWriteCommandInput,
   DynamoDBDocumentClient,

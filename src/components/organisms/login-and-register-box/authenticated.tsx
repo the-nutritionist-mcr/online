@@ -1,6 +1,6 @@
 import { ReactNode, useContext, useEffect } from 'react';
 import { User } from '../../contexts';
-import { NavigationContext } from '@tnmw/utils';
+import { NavigationContext } from '@tnmo/utils';
 
 export enum Redirect {
   IfLoggedIn,

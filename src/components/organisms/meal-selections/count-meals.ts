@@ -1,4 +1,4 @@
-import { MealPlanGeneratedForIndividualCustomer } from '@tnmw/types';
+import { MealPlanGeneratedForIndividualCustomer } from '@tnmo/types';
 import { countMealsInPlans } from './count-plans';
 
 export const countMeals = (

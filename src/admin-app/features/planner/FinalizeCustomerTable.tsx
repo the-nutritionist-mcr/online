@@ -10,7 +10,7 @@ import {
   Box,
 } from 'grommet';
 import { cell } from './finalise.css';
-import { Link } from '@tnmw/components';
+import { Link } from '@tnmo/components';
 import { Trash, FormAdd } from 'grommet-icons';
 import React, { useState } from 'react';
 import styled from 'styled-components';
@@ -28,7 +28,7 @@ import {
   PlannedDelivery,
   PlanWithMeals,
   Recipe,
-} from '@tnmw/types';
+} from '@tnmo/types';
 import {
   addPlanRowToDelivery,
   addRecipeToSelection,
@@ -36,7 +36,7 @@ import {
   removePlanRowFromDelivery,
   updateRecipeInSelection,
 } from './update-recipe-in-selection';
-import { itemFamilies } from '@tnmw/config';
+import { itemFamilies } from '@tnmo/config';
 
 interface FinalizeRowProps {
   customerSelection: MealPlanGeneratedForIndividualCustomer;

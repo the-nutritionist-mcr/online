@@ -7,13 +7,13 @@ import {
   PutCommand,
   ScanCommand,
 } from '@aws-sdk/lib-dynamodb';
-import { performSwaps } from '@tnmw/meal-planning';
+import { performSwaps } from '@tnmo/meal-planning';
 import {
   assertsMealSelectPayload,
   Recipe,
   StoredMealPlanGeneratedForIndividualCustomer,
-} from '@tnmw/types';
-import { ENV, HTTP, ORDERS_EMAIL } from '@tnmw/constants';
+} from '@tnmo/types';
+import { ENV, HTTP, ORDERS_EMAIL } from '@tnmo/constants';
 import { HttpError } from '../data-api/http-error';
 import {
   SendEmailCommand,

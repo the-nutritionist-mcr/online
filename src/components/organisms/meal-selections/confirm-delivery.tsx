@@ -9,8 +9,8 @@ import {
   itemCountNumber,
   deliveryContainer,
 } from './confirm-delivery.css';
-import { ActivePlanWithMeals, BackendCustomer, Recipe } from '@tnmw/types';
-import { getRealRecipe } from '@tnmw/meal-planning';
+import { ActivePlanWithMeals, BackendCustomer, Recipe } from '@tnmo/types';
+import { getRealRecipe } from '@tnmo/meal-planning';
 import { countsFromPlans } from './count-from-plans';
 import { getDeliveryLabel } from './get-delivery-label';
 

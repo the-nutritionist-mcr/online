@@ -1,4 +1,4 @@
-import { IAM } from '@tnmw/constants';
+import { IAM } from '@tnmo/constants';
 import { Effect, PolicyStatement } from 'aws-cdk-lib/aws-iam';
 import { Function } from 'aws-cdk-lib/aws-lambda';
 import { Construct } from 'constructs';

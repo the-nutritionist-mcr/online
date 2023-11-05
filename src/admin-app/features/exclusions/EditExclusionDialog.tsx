@@ -1,5 +1,5 @@
 import { CheckBox, FormField, TextInput } from 'grommet';
-import { Exclusion } from '@tnmw/types';
+import { Exclusion } from '@tnmo/types';
 import { OkCancelDialog } from '../../components';
 import React from 'react';
 

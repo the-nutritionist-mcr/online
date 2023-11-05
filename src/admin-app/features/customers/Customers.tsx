@@ -12,7 +12,7 @@ import {
   Exclusion,
   CustomerWithChargebeePlan,
   BackendCustomer,
-} from '@tnmw/types';
+} from '@tnmo/types';
 
 import CustomerRow from './CustomerRow';
 import React from 'react';

@@ -3,7 +3,7 @@ import { IUserPoolClient, UserPool } from 'aws-cdk-lib/aws-cognito';
 import { Construct } from 'constructs';
 import { makeUserPool } from './make-user-pool';
 import { makeDataApis } from './make-data-apis';
-import { getDomainName } from '@tnmw/utils';
+import { getDomainName } from '@tnmo/utils';
 import { IHostedZone, PublicHostedZone } from 'aws-cdk-lib/aws-route53';
 import { ITable } from 'aws-cdk-lib/aws-dynamodb';
 

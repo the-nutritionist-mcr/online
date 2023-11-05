@@ -1,12 +1,12 @@
 import { QuantityStepper } from '../../molecules';
 import styled from '@emotion/styled';
-import { getRealRecipe } from '@tnmw/meal-planning';
+import { getRealRecipe } from '@tnmo/meal-planning';
 import {
   ActivePlanWithMeals,
   BackendCustomer,
   Recipe,
   StandardPlan,
-} from '@tnmw/types';
+} from '@tnmo/types';
 import { countsFromPlans } from './count-from-plans';
 import { planFromCounts } from './plan-from-counts';
 import { planHeader } from './basket.css';

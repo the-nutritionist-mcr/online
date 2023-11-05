@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react';
-import { NavigationContext } from '@tnmw/utils';
+import { NavigationContext } from '@tnmo/utils';
 
 interface LinkProps {
   children?: React.ReactNode;

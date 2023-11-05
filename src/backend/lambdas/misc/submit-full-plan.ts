@@ -1,24 +1,24 @@
 import './init-dd-trace';
 import { APIGatewayProxyHandlerV2 } from 'aws-lambda';
-import { chooseMealSelections } from '@tnmw/meal-planning';
-import { ENV } from '@tnmw/constants';
+import { chooseMealSelections } from '@tnmo/meal-planning';
+import { ENV } from '@tnmo/constants';
 import { authoriseJwt } from '../data-api/authorise';
 import {
   StoredPlan,
   StoredMealPlanGeneratedForIndividualCustomer,
-} from '@tnmw/types';
+} from '@tnmo/types';
 import { returnErrorResponse } from '../data-api/return-error-response';
 import { HttpError } from '../data-api/http-error';
-import { recursivelySerialiseDate, SerialisedDate } from '@tnmw/utils';
+import { recursivelySerialiseDate, SerialisedDate } from '@tnmo/utils';
 
-import { HTTP } from '@tnmw/constants';
+import { HTTP } from '@tnmo/constants';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import {
   DynamoDBDocumentClient,
   BatchWriteCommandInput,
 } from '@aws-sdk/lib-dynamodb';
 import { v4 } from 'uuid';
-import { isWeeklyPlan } from '@tnmw/types';
+import { isWeeklyPlan } from '@tnmo/types';
 import { batchArray } from '../../../utils/batch-array';
 import { getUserFromAws } from '../../../utils/get-user-from-aws';
 import { getAllUsers } from '../dynamodb/get-all-users';

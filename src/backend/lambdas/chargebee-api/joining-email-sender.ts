@@ -1,5 +1,5 @@
 import '../misc/init-dd-trace';
-import { getDomainName } from '@tnmw/utils';
+import { getDomainName } from '@tnmo/utils';
 import {
   CustomMessageAdminCreateUserTriggerEvent,
   CustomMessageForgotPasswordTriggerEvent,

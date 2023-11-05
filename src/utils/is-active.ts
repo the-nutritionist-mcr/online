@@ -1,4 +1,4 @@
-import { StandardPlan } from '@tnmw/types';
+import { StandardPlan } from '@tnmo/types';
 
 const individualPlanIsActive = (cookDate: Date, plan: StandardPlan) => {
   const pauseStart = plan.pauseStart && new Date(plan.pauseStart);

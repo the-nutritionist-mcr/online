@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import MealDeliveriesTable from './MealDeliveriesTable';
-import { PlannerConfig, Exclusion, Delivery } from '@tnmw/types';
+import { PlannerConfig, Exclusion, Delivery } from '@tnmo/types';
 import { Box, Button, Header, Heading, Paragraph } from 'grommet';
 
 interface PlanPanelProps {

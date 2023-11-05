@@ -3,7 +3,7 @@ import getStatusString from './getStatusString';
 import isActive from './isActive';
 import { mock } from 'jest-mock-extended';
 import { mocked } from 'jest-mock';
-import { Customer, Snack } from '@tnmw/types';
+import { Customer, Snack } from '@tnmo/types';
 
 jest.mock('./isActive');
 jest.mock('moment');

@@ -6,7 +6,7 @@ import { RetentionDays } from 'aws-cdk-lib/aws-logs';
 import { IUserPool } from 'aws-cdk-lib/aws-cognito';
 import { Provider } from 'aws-cdk-lib/custom-resources';
 import { Effect, PolicyStatement } from 'aws-cdk-lib/aws-iam';
-import { IAM } from '@tnmw/constants';
+import { IAM } from '@tnmo/constants';
 import { Construct } from 'constructs';
 import {
   USER_POOL_ID_ENV_KEY_STRING,

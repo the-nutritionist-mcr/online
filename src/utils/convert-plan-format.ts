@@ -5,11 +5,11 @@ import {
   PlanLabels,
   DaysPerWeek,
   PlanConfiguration,
-} from '@tnmw/types';
+} from '@tnmo/types';
 
-import { makeNewPlan } from '@tnmw/meal-planning';
+import { makeNewPlan } from '@tnmo/meal-planning';
 
-import { defaultDeliveryDays, extrasLabels, planLabels } from '@tnmw/config';
+import { defaultDeliveryDays, extrasLabels, planLabels } from '@tnmo/config';
 
 interface Family {
   name: string;

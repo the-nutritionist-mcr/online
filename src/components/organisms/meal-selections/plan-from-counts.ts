@@ -1,4 +1,4 @@
-import { DeliveryItem, Recipe } from '@tnmw/types';
+import { DeliveryItem, Recipe } from '@tnmo/types';
 
 type Counts = {
   [key: string]: number;

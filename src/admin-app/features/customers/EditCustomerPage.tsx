@@ -20,7 +20,7 @@ import {
   extrasLabels,
   defaultDeliveryDays,
   itemFamilies,
-} from '@tnmw/config';
+} from '@tnmo/config';
 import { debounce } from 'lodash';
 import PlanPanel from './PlanPanel';
 
@@ -30,7 +30,7 @@ import {
   Exclusion,
   SubscriptionStatus,
   UpdateCustomerBody,
-} from '@tnmw/types';
+} from '@tnmo/types';
 import {
   planGrid,
   planTagActive,
@@ -38,7 +38,7 @@ import {
   planTagFuture,
   planTagPaused,
 } from './edit-customer-page.css';
-import { convertPlanFormat, validateCustomPlan } from '@tnmw/meal-planning';
+import { convertPlanFormat, validateCustomPlan } from '@tnmo/meal-planning';
 
 const SUBMIT_DEBOUNCE = 500;
 

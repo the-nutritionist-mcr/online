@@ -1,4 +1,4 @@
-import { ENV } from '@tnmw/constants';
+import { ENV } from '@tnmo/constants';
 import { APIGatewayProxyHandlerV2 } from 'aws-lambda';
 import { returnErrorResponse } from '../data-api/return-error-response';
 import { returnOkResponse } from '../data-api/return-ok-response';

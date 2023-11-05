@@ -1,4 +1,4 @@
-import { verifyJwtToken } from '@tnmw/authorise-cognito-jwt';
+import { verifyJwtToken } from '@tnmo/authorise-cognito-jwt';
 import { APIGatewayProxyEventV2 } from 'aws-lambda';
 
 import { HTTP } from '../../../infrastructure/constants';

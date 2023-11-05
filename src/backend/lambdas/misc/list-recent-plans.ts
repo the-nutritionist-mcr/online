@@ -1,7 +1,7 @@
 import { APIGatewayProxyHandlerV2 } from 'aws-lambda';
 import { returnErrorResponse } from '../data-api/return-error-response';
 import { returnOkResponse } from '../data-api/return-ok-response';
-import { ENV, HTTP } from '@tnmw/constants';
+import { ENV, HTTP } from '@tnmo/constants';
 import { authoriseJwt } from '../data-api/authorise';
 
 import { HttpError } from '../data-api/http-error';

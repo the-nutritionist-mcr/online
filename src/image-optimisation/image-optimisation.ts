@@ -7,7 +7,7 @@ import { RestApiOrigin } from 'aws-cdk-lib/aws-cloudfront-origins';
 import { BucketDeployment, Source } from 'aws-cdk-lib/aws-s3-deployment';
 import path from 'node:path';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
-import { HTTP } from '@tnmw/constants';
+import { HTTP } from '@tnmo/constants';
 import { Construct } from 'constructs';
 import { Runtime } from 'aws-cdk-lib/aws-lambda';
 import { Bucket } from 'aws-cdk-lib/aws-s3';

@@ -7,7 +7,7 @@ import {
   imgTags,
   summaryHeader,
 } from "./confirm-selections-container.css";
-import { defaultDeliveryDays } from "@tnmw/config";
+import { defaultDeliveryDays } from "@tnmo/config";
 import platesImage from "./plates.png";
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -21,7 +21,7 @@ import {
   PlanWithMeals,
   Recipe,
   StandardPlan,
-} from "@tnmw/types";
+} from "@tnmo/types";
 
 interface ConfirmSelectionsProps {
   selectedMeals: MealPlanGeneratedForIndividualCustomer;
@@ -84,16 +84,8 @@ export const ConfirmSelections = (props: ConfirmSelectionsProps) => {
             type="image/webp"
             className={imgTags}
           />
-          <source
-            srcSet={platesImage.src}
-            type="image/jpeg"
-            className={imgTags}
-          />
-          <img
-            src={platesImage.src}
-            alt="Plates of TNM food"
-            className={imgTags}
-          />
+          <source srcSet={platesImage} type="image/jpeg" className={imgTags} />
+          <img src={platesImage} alt="Plates of TNM food" className={imgTags} />
         </picture>
       </div>
     </div>

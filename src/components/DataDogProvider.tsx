@@ -1,6 +1,6 @@
 import { datadogRum } from '@datadog/browser-rum';
 import { ReactNode, useContext, useEffect } from 'react';
-import { AuthenticationServiceContext } from '@tnmw/components';
+import { AuthenticationServiceContext } from '@tnmo/components';
 import { ConfigContext } from './config-provider';
 
 interface DatadogProviderProps {

@@ -9,7 +9,7 @@ import {
   PlanWithMeals,
   Recipe,
   StandardPlan,
-} from '@tnmw/types';
+} from '@tnmo/types';
 import CombinedBasket from './combined-basket';
 import { updateAllSelectedMeals } from './update-all-selected';
 import {
@@ -21,7 +21,7 @@ import {
   planTabRow,
   tabGrid,
 } from './initial-selections.css';
-import { getCookStatus } from '@tnmw/meal-planning';
+import { getCookStatus } from '@tnmo/meal-planning';
 import { useState } from 'react';
 import { getDeliveryLabel } from './get-delivery-label';
 

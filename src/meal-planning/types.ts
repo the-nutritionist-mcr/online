@@ -1,4 +1,4 @@
-import { Customer, CustomerWithChargebeePlan, Recipe } from '@tnmw/types';
+import { Customer, CustomerWithChargebeePlan, Recipe } from '@tnmo/types';
 
 export interface SelectedMeal {
   recipe: Recipe;

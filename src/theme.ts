@@ -1,4 +1,4 @@
-import { Theme } from '@tnmw/components';
+import { Theme } from '@tnmo/components';
 
 export const theme: Theme = {
   colors: {

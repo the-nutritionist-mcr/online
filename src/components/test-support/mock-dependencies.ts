@@ -5,7 +5,7 @@ import {
 } from '../organisms/login-and-register-box/authentication-service-context';
 
 import React from 'react';
-import { NavigationContext, NavigationContextType } from '@tnmw/utils';
+import { NavigationContext, NavigationContextType } from '@tnmo/utils';
 
 export const mockDependencies = (
   dependencies?: AuthenticationContextType & NavigationContextType

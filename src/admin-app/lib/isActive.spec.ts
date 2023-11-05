@@ -1,4 +1,4 @@
-import { Customer, Snack } from '@tnmw/types';
+import { Customer, Snack } from '@tnmo/types';
 import isActive from './isActive';
 
 describe('isActive', () => {

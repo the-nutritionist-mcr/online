@@ -1,4 +1,4 @@
-import { BackendCustomer, PlannedCook, StandardPlan } from '@tnmw/types';
+import { BackendCustomer, PlannedCook, StandardPlan } from '@tnmo/types';
 import { mock } from 'jest-mock-extended';
 import { getClosedOrOpenStatus } from './get-closed-or-open-status';
 

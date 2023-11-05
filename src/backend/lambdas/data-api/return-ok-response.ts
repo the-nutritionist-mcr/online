@@ -1,4 +1,4 @@
-import { HTTP } from '@tnmw/constants';
+import { HTTP } from '@tnmo/constants';
 import { allowHeaders } from '../../allow-headers';
 
 export const returnOkResponse = <T>(body: T) => {

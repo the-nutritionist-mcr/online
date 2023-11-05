@@ -2,7 +2,7 @@ import { Story, Meta } from "@storybook/react";
 import { FC } from "react";
 
 import { Account as AccountComponent } from "./account";
-import { StandardPlan } from "@tnmw/types";
+import { StandardPlan } from "@tnmo/types";
 
 type PropsOfFC<T> = T extends FC<infer P> ? P : never;
 

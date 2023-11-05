@@ -5,7 +5,7 @@ import {
   AdminUpdateUserAttributesCommandInput,
   CognitoIdentityProviderClient,
 } from '@aws-sdk/client-cognito-identity-provider';
-import { CHARGEBEE, COGNITO, E2E, ENV } from '@tnmw/constants';
+import { CHARGEBEE, COGNITO, E2E, ENV } from '@tnmo/constants';
 import { ChargeBee } from 'chargebee-typescript';
 import { transformPhoneNumberToCognitoFormat } from '../../transform-phone-number';
 import { handleSubscriptionEvent } from './handle-subscription-event';

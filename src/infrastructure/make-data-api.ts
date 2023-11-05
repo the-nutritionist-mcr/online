@@ -5,7 +5,7 @@ import {
   BillingMode,
   StreamViewType,
 } from 'aws-cdk-lib/aws-dynamodb';
-import { ENV, HTTP } from '@tnmw/constants';
+import { ENV, HTTP } from '@tnmo/constants';
 import { getResourceName } from './get-resource-name';
 import { entryName } from './entry-name';
 import { Construct } from 'constructs';

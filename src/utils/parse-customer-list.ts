@@ -1,4 +1,4 @@
-import { BackendCustomer } from '@tnmw/types';
+import { BackendCustomer } from '@tnmo/types';
 
 import { ListUsersCommandOutput } from '@aws-sdk/client-cognito-identity-provider';
 import { parseCognitoResponse } from './parse-cognito-response';

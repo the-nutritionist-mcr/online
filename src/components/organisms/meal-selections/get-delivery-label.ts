@@ -1,4 +1,4 @@
-import { BackendCustomer } from '@tnmw/types';
+import { BackendCustomer } from '@tnmo/types';
 
 export const getDeliveryLabel = (
   customer: BackendCustomer,

@@ -3,7 +3,7 @@ import {
   AdminUpdateUserAttributesCommandInput,
   CognitoIdentityProviderClient,
 } from '@aws-sdk/client-cognito-identity-provider';
-import { COGNITO, ENV } from '@tnmw/constants';
+import { COGNITO, ENV } from '@tnmo/constants';
 import { ChargeBee } from 'chargebee-typescript';
 import { getPlans } from '../get-plans';
 

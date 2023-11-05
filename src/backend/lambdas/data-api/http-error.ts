@@ -1,4 +1,4 @@
-import { HTTP } from '@tnmw/constants';
+import { HTTP } from '@tnmo/constants';
 
 export type Codes =
   typeof HTTP['statusCodes'][keyof typeof HTTP['statusCodes']];

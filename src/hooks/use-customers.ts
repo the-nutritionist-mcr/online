@@ -1,4 +1,4 @@
-import { BackendCustomer } from '@tnmw/types';
+import { BackendCustomer } from '@tnmo/types';
 import { useSwrWrapper } from './use-swr-wrapper';
 
 interface CustomersResponse {

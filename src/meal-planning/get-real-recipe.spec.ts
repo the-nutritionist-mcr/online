@@ -1,4 +1,4 @@
-import { BackendCustomer, Exclusion, Recipe } from '@tnmw/types';
+import { BackendCustomer, Exclusion, Recipe } from '@tnmo/types';
 import { mock } from 'jest-mock-extended';
 import { getRealRecipe } from './get-real-recipe';
 

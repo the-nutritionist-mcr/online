@@ -17,10 +17,10 @@ import { table } from './recipes.css';
 import EditRecipesDialog from './EditRecipesDialog';
 import React, { useContext } from 'react';
 import RecipesRow from '../recipes/RecipesRow';
-import { defaultDeliveryDays } from '@tnmw/config';
+import { defaultDeliveryDays } from '@tnmo/config';
 import PlanningModeSummary from './PlanningModeSummary';
-import { Recipe, Exclusion, WeeklyPlan, HotOrCold } from '@tnmw/types';
-import { NavigationContext } from '@tnmw/utils';
+import { Recipe, Exclusion, WeeklyPlan, HotOrCold } from '@tnmo/types';
+import { NavigationContext } from '@tnmo/utils';
 
 export type ProjectedRecipe = Pick<
   Recipe,

@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { TableRow, TableCell, TableHeader } from 'grommet';
-import { defaultDeliveryDays } from '@tnmw/config';
+import { defaultDeliveryDays } from '@tnmo/config';
 
 interface PlanHeaderProps {
   deliveryDays: string[];

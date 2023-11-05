@@ -1,10 +1,10 @@
 import { FC, useEffect } from 'react';
 
-import { StandardPlan } from '@tnmw/types';
+import { StandardPlan } from '@tnmo/types';
 import { Button, Input, Link } from '../../atoms';
 import { FormSection } from '../../containers';
 import { useContext } from 'react';
-import { NavigationContext } from '@tnmw/utils';
+import { NavigationContext } from '@tnmo/utils';
 import { text } from './account.css';
 
 export interface User {

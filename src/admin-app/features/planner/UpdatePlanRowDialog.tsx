@@ -1,4 +1,4 @@
-import { defaultDeliveryDays } from '@tnmw/config';
+import { defaultDeliveryDays } from '@tnmo/config';
 import {
   Button,
   Card,

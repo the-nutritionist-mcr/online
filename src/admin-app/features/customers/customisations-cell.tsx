@@ -1,4 +1,4 @@
-import { Exclusion } from '@tnmw/types';
+import { Exclusion } from '@tnmo/types';
 import { Tag, Box } from 'grommet';
 import { container, noPlan } from './customisations-cell.css';
 

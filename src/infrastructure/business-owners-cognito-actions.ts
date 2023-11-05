@@ -1,4 +1,4 @@
-import { IAM } from '@tnmw/constants';
+import { IAM } from '@tnmo/constants';
 
 export const businessOwnersCognito = [
   IAM.actions.cognito.adminAddUserToGroup,

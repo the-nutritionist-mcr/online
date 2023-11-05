@@ -6,7 +6,7 @@ import { ThemeProvider, Theme } from '@emotion/react';
 
 import userEvent from '@testing-library/user-event';
 import LoginAndRegisterBox from './login-and-register-box';
-import { NavigationContext } from '@tnmw/utils';
+import { NavigationContext } from '@tnmo/utils';
 
 const theme: Theme = {
   colors: {

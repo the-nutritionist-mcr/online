@@ -1,4 +1,4 @@
-import { BackendCustomer, Delivery, StandardPlan } from '@tnmw/types';
+import { BackendCustomer, Delivery, StandardPlan } from '@tnmo/types';
 import { mock } from 'jest-mock-extended';
 import { validateCustomPlan } from './validate-custom-plan';
 

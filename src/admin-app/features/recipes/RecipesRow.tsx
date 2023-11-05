@@ -3,9 +3,9 @@ import { Edit, Trash } from 'grommet-icons';
 
 import { OkCancelDialog } from '../../components';
 import React, { useContext } from 'react';
-import { Recipe, Exclusion } from '@tnmw/types';
+import { Recipe, Exclusion } from '@tnmo/types';
 import styled from 'styled-components';
-import { NavigationContext } from '@tnmw/utils';
+import { NavigationContext } from '@tnmo/utils';
 import { CustomisationsCell } from '../customers/customisations-cell';
 import { actionsCell } from '../customers/customers.css';
 

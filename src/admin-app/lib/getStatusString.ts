@@ -1,7 +1,7 @@
 import calendarFormat from '../lib/calendarFormat';
 import isActive from './isActive';
 import moment from 'moment';
-import { Customer } from '@tnmw/types';
+import { Customer } from '@tnmo/types';
 
 const getStatusString = (customer: Customer, date?: Date): string => {
   const now = date ?? new Date(Date.now());

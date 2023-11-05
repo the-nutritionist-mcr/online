@@ -2,7 +2,7 @@ import {
   MealPlanGeneratedForIndividualCustomer,
   PlanWithMeals,
   StandardPlan,
-} from '@tnmw/types';
+} from '@tnmo/types';
 import { countMealsInPlans } from './count-plans';
 import { totalFromSamePlan } from './total-from-same-plan';
 

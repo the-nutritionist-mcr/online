@@ -15,10 +15,10 @@ import {
 } from '@aws-sdk/client-ses';
 import { getUserFromAws } from '../../../utils/get-user-from-aws';
 import { makeEmail } from '../chargebee-api/portal-welcome-email';
-import { getDomainName } from '@tnmw/utils';
+import { getDomainName } from '@tnmo/utils';
 import { warmer } from './warmer';
 import { HttpError } from '../data-api/http-error';
-import { HTTP } from '@tnmw/constants';
+import { HTTP } from '@tnmo/constants';
 
 export interface ResetPassswordPayload {
   username: string;

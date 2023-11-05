@@ -4,8 +4,8 @@ import {
   CognitoIdentityProviderClient,
   AdminGetUserCommand,
 } from '@aws-sdk/client-cognito-identity-provider';
-import { BackendCustomer } from '@tnmw/types';
-import { ENV, HTTP } from '@tnmw/constants';
+import { BackendCustomer } from '@tnmo/types';
+import { ENV, HTTP } from '@tnmo/constants';
 import { authoriseJwt } from '../data-api/authorise';
 import { returnOkResponse } from '../data-api/return-ok-response';
 import { returnErrorResponse } from '../data-api/return-error-response';

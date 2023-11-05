@@ -1,4 +1,4 @@
-import { StandardPlan } from '@tnmw/types';
+import { StandardPlan } from '@tnmo/types';
 import { convertPlanFormat } from './convert-plan-format';
 
 const families = [

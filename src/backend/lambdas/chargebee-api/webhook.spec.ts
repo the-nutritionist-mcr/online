@@ -12,10 +12,10 @@ import { mock } from 'jest-mock-extended';
 import { handler } from './webhook';
 import { mockClient } from 'aws-sdk-client-mock';
 import { when } from 'jest-when';
-import { ENV, HTTP, COGNITO, CHARGEBEE } from '@tnmw/constants';
+import { ENV, HTTP, COGNITO, CHARGEBEE } from '@tnmo/constants';
 import { getPlans } from './get-plans';
 import { getSecrets } from '../get-secrets';
-import { StandardPlan } from '@tnmw/types';
+import { StandardPlan } from '@tnmo/types';
 import { userExists } from './user-exists';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment

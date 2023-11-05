@@ -1,6 +1,6 @@
-import { E2E, COGNITO } from '@tnmw/constants';
-import { SeedUser } from '@tnmw/seed-cognito';
-import { BackendCustomer } from '@tnmw/types';
+import { E2E, COGNITO } from '@tnmo/constants';
+import { SeedUser } from '@tnmo/seed-cognito';
+import { BackendCustomer } from '@tnmo/types';
 
 const toDynamo = (
   user: Partial<Omit<BackendCustomer, 'plans'>> & {

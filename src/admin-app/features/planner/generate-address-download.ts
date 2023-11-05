@@ -1,4 +1,4 @@
-import { BackendCustomer, SwappedMealPlan } from '@tnmw/types';
+import { BackendCustomer, SwappedMealPlan } from '@tnmo/types';
 
 const titleCase = (string: string) =>
   string

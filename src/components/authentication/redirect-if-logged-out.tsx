@@ -1,5 +1,5 @@
-import { AuthenticationServiceContext, LoadingContext } from '@tnmw/components';
-import { NavigationContext } from '@tnmw/utils';
+import { AuthenticationServiceContext, LoadingContext } from '@tnmo/components';
+import { NavigationContext } from '@tnmo/utils';
 import { ReactNode, useContext, useEffect } from 'react';
 import { LOADING_KEY } from '../authenticationprovider';
 

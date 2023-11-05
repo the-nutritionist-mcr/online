@@ -2,8 +2,8 @@ import {
   BatchWriteCommandInput,
   DynamoDBDocumentClient,
 } from '@aws-sdk/lib-dynamodb';
-import { batchWrite, scan } from '@tnmw/dynamo';
-import { batchArray } from '@tnmw/utils';
+import { batchWrite, scan } from '@tnmo/dynamo';
+import { batchArray } from '@tnmo/utils';
 
 export const deleteAll = async (
   client: DynamoDBDocumentClient,

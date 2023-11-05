@@ -1,7 +1,7 @@
 import { AttributeType } from '@aws-sdk/client-cognito-identity-provider';
-import { itemFamilies } from '@tnmw/config';
-import { COGNITO } from '@tnmw/constants';
-import { BackendCustomer, StandardPlan } from '@tnmw/types';
+import { itemFamilies } from '@tnmo/config';
+import { COGNITO } from '@tnmo/constants';
+import { BackendCustomer, StandardPlan } from '@tnmo/types';
 import { hydrateCustomPlan } from '../backend/lambdas/misc/hydrate-custom-plan';
 
 const getAttributeValue = (attributes: AttributeType[], key: string) =>

@@ -1,5 +1,5 @@
-import { CognitoSeeder } from '@tnmw/seed-cognito';
-import { DynamoSeeder } from '@tnmw/seed-dynamo';
+import { CognitoSeeder } from '@tnmo/seed-cognito';
+import { DynamoSeeder } from '@tnmo/seed-dynamo';
 import { Stack, StackProps } from 'aws-cdk-lib';
 import { IUserPool } from 'aws-cdk-lib/aws-cognito';
 import { ITable } from 'aws-cdk-lib/aws-dynamodb';

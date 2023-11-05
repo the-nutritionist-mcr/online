@@ -18,8 +18,8 @@ import {
 import { Checkmark, Close } from 'grommet-icons';
 import React from 'react';
 import { debounce } from 'lodash';
-import { CustomerWithChargebeePlan, Exclusion, Snack } from '@tnmw/types';
-import { daysPerWeekOptions, plans } from '@tnmw/config';
+import { CustomerWithChargebeePlan, Exclusion, Snack } from '@tnmo/types';
+import { daysPerWeekOptions, plans } from '@tnmo/config';
 
 interface EditCustomerDialogProps {
   customer: CustomerWithChargebeePlan;

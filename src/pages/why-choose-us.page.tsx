@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { WhyChooseUs as WhyChooseUsComponent } from '@tnmw/static-pages';
+import { WhyChooseUs as WhyChooseUsComponent } from '@tnmo/static-pages';
 
 const WhyChooseUs: FC = () => {
   return <WhyChooseUsComponent />;

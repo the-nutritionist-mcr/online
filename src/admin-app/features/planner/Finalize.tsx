@@ -3,9 +3,9 @@ import {
   MealPlanGeneratedForIndividualCustomer,
   PlannedCook,
   Recipe,
-} from '@tnmw/types';
+} from '@tnmo/types';
 import { FaInfo } from 'react-icons/fa';
-import { calendarFormat } from '@tnmw/config';
+import { calendarFormat } from '@tnmo/config';
 import { Card, Paragraph } from 'grommet';
 import moment from 'moment';
 import React from 'react';
@@ -17,7 +17,7 @@ import {
   plannerInfoLi,
   plannerWarningLi,
 } from './finalise.css';
-import { getCookStatus } from '@tnmw/meal-planning';
+import { getCookStatus } from '@tnmo/meal-planning';
 
 interface FinalizeProps {
   customerMeals: MealPlanGeneratedForIndividualCustomer[];

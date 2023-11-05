@@ -1,4 +1,4 @@
-import { PlanWithMeals } from '@tnmw/types';
+import { PlanWithMeals } from '@tnmo/types';
 
 export const planSize = (plan: PlanWithMeals) => {
   if (plan.status !== 'active') {

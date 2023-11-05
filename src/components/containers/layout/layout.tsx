@@ -2,7 +2,7 @@ import { Header, Footer, AuthenticationServiceContext } from '../../organisms';
 import { useAxe } from '../../hooks';
 import styled from '@emotion/styled';
 import { ReactNode, useContext } from 'react';
-import { Loader } from '@tnmw/components';
+import { Loader } from '@tnmo/components';
 
 const MainContainer = styled('main')`
   display: flex;

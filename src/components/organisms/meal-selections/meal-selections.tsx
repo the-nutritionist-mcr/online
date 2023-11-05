@@ -1,8 +1,8 @@
 import { FC, useContext, useState } from 'react';
 import styled from '@emotion/styled';
 import { Button } from '../../atoms';
-import { CONTACT_EMAIL } from '@tnmw/constants';
-import { ParagraphText } from '@tnmw/components';
+import { CONTACT_EMAIL } from '@tnmo/constants';
+import { ParagraphText } from '@tnmo/components';
 import { InitialSelections } from './initial-selections';
 import { ConfirmSelections } from './confirm-selections';
 import {
@@ -10,7 +10,7 @@ import {
   BackendCustomer,
   PlannedCook,
   WeeklyCookPlanWithoutCustomerPlans,
-} from '@tnmw/types';
+} from '@tnmo/types';
 import {
   container,
   header,
@@ -18,10 +18,10 @@ import {
   headerText,
 } from './initial-selections.css';
 import { goAheadAndSubmit } from './confirm-selections-container.css';
-import { MealPlanGeneratedForIndividualCustomer } from '@tnmw/types';
+import { MealPlanGeneratedForIndividualCustomer } from '@tnmo/types';
 import { countRemainingMeals } from './count-remaining-meals';
-import { getCookStatus } from '@tnmw/meal-planning';
-import { NavigationContext } from '@tnmw/utils';
+import { getCookStatus } from '@tnmo/meal-planning';
+import { NavigationContext } from '@tnmo/utils';
 
 export interface ChooseMealsCustomer {
   customisations?: BackendCustomer['customisations'];

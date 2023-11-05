@@ -1,4 +1,4 @@
-import { HotOrCold, Recipe } from '@tnmw/types';
+import { HotOrCold, Recipe } from '@tnmo/types';
 
 const nutsExclusion = {
   id: '0',

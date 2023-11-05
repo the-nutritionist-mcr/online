@@ -1,4 +1,4 @@
-import { HTTP } from '@tnmw/constants';
+import { HTTP } from '@tnmo/constants';
 
 export const allowHeaders = [
   HTTP.headerNames.XDatadogOrigin,

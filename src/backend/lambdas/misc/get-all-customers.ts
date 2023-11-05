@@ -1,5 +1,5 @@
 import './init-dd-trace';
-import { ENV } from '@tnmw/constants';
+import { ENV } from '@tnmo/constants';
 import { authoriseJwt } from '../data-api/authorise';
 import { returnOkResponse } from '../data-api/return-ok-response';
 import { returnErrorResponse } from '../data-api/return-error-response';

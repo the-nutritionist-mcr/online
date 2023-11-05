@@ -6,7 +6,7 @@
 // import HeroWebp from '../../../styles/images/Hero.jpg?webp';
 // import Hero from '../../../styles/images/Hero.jpg';
 
-// import { Image } from '@tnmw/components';
+// import { Image } from '@tnmo/components';
 // import { dishesBlock, pageHeaderImage } from './index-page.css';
 
 export const IndexPage = () => (

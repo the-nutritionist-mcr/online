@@ -1,4 +1,4 @@
-import { ChangePlanRecipeBody, NewDelivery } from '@tnmw/types';
+import { ChangePlanRecipeBody, NewDelivery } from '@tnmo/types';
 
 export const updateDelivery = (
   deliveries: NewDelivery[],

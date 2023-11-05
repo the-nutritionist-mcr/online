@@ -3,11 +3,11 @@ import { when } from 'jest-when';
 import * as authenticate from './authenticate';
 import { mock } from 'jest-mock-extended';
 import { ISignUpResult } from 'amazon-cognito-identity-js';
-import { getAppConfig } from '@tnmw/utils';
+import { getAppConfig } from '@tnmo/utils';
 
 jest.mock('@aws-amplify/auth');
 jest.mock('aws-sdk');
-jest.mock('@tnmw/utils');
+jest.mock('@tnmo/utils');
 
 describe('The authenticate module', () => {
   describe('register()', () => {

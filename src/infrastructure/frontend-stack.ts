@@ -1,8 +1,8 @@
-import { StackConfig } from '@tnmw/types';
-import { getDomainName } from '@tnmw/utils';
+import { StackConfig } from '@tnmo/types';
+import { getDomainName } from '@tnmo/utils';
 import { Stack, StackProps } from 'aws-cdk-lib';
 import { DnsValidatedCertificate } from 'aws-cdk-lib/aws-certificatemanager';
-import { ImageOptimisation } from '@tnmw/image-optimisation';
+import { ImageOptimisation } from '@tnmo/image-optimisation';
 import { Distribution } from 'aws-cdk-lib/aws-cloudfront';
 import { S3Origin } from 'aws-cdk-lib/aws-cloudfront-origins';
 import { IUserPool, IUserPoolClient } from 'aws-cdk-lib/aws-cognito';

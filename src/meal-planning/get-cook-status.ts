@@ -1,4 +1,4 @@
-import { StandardPlan } from '@tnmw/types';
+import { StandardPlan } from '@tnmo/types';
 
 interface InTrialStatus {
   status: 'in_trial';

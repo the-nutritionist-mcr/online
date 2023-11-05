@@ -59,7 +59,7 @@ const QuantityStepper: FC<QuantityStepperProps> = (props) => {
           props.onChange?.((props.value ?? 0) - 1);
         }
       }}
-      icon={MinusIcon.src}
+      icon={MinusIcon}
       a11yLabel="Decrease"
       disabled={minusDisabled}
     />
@@ -72,7 +72,7 @@ const QuantityStepper: FC<QuantityStepperProps> = (props) => {
           props.onChange?.((props.value ?? 0) + 1);
         }
       }}
-      icon={AddIcon.src}
+      icon={AddIcon}
       a11yLabel="Increase"
       disabled={plusDisabled}
     />

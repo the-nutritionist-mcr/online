@@ -2,7 +2,7 @@ import {
   DeliveryMeal,
   MealPlanGeneratedForIndividualCustomer,
   Swapped,
-} from '@tnmw/types';
+} from '@tnmo/types';
 
 const isSelectedMeal = (item: unknown): item is DeliveryMeal => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -1,4 +1,4 @@
-import { WeeklyPlan, Recipe } from '@tnmw/types';
+import { WeeklyPlan, Recipe } from '@tnmo/types';
 import { selectedMealUl } from './planning-mode-summary.css';
 import {
   Box,
@@ -13,7 +13,7 @@ import {
   Paragraph,
 } from 'grommet';
 import React from 'react';
-import { defaultDeliveryDays } from '@tnmw/config';
+import { defaultDeliveryDays } from '@tnmo/config';
 
 interface PlanningModeSummaryProps {
   selectedDelivery: number;

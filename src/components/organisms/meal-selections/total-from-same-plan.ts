@@ -1,7 +1,7 @@
 import {
   MealPlanGeneratedForIndividualCustomer,
   StandardPlan,
-} from '@tnmw/types';
+} from '@tnmo/types';
 import { countMealsInPlans } from './count-plans';
 
 export const totalFromSamePlan = (

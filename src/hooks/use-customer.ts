@@ -1,6 +1,6 @@
 import toast from 'react-hot-toast';
-import { HTTP } from '@tnmw/constants';
-import { BackendCustomer, UpdateCustomerBody } from '@tnmw/types';
+import { HTTP } from '@tnmo/constants';
+import { BackendCustomer, UpdateCustomerBody } from '@tnmo/types';
 import { useSWRConfig } from 'swr';
 import useMutation from 'use-mutation';
 import { swrFetcher } from '../utils/swr-fetcher';
