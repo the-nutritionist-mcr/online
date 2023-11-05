@@ -1,7 +1,8 @@
-import { itemFamilies } from '@tnmw/config';
-import { BackendCustomer, Delivery } from '@tnmw/types';
-import deepEqual from 'deep-equal';
-import { convertPlanFormat } from './convert-plan-format';
+import { itemFamilies } from "@tnmw/config";
+import { BackendCustomer, Delivery } from "@tnmw/types";
+// @ts-expect-error Types don't seem to exist anymore?
+import deepEqual from "deep-equal";
+import { convertPlanFormat } from "./convert-plan-format";
 
 const countDeliveryItems = (deliveries: Delivery[]) =>
   Object.fromEntries(

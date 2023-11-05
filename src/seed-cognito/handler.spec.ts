@@ -11,7 +11,6 @@ import {
 import { mock } from "jest-mock-extended";
 import { handler } from "./handler";
 
-// @ts-expect-error I swae this had types when I originally installed it!
 import { mockClient } from "aws-sdk-client-mock";
 import {
   USER_POOL_ID_ENV_KEY_STRING,
@@ -70,7 +69,7 @@ describe.skip("the webhook handler", () => {
       // TODO raise bug report on aws-sdk-client-mock repo for this type error
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       AdminSetUserPasswordCommand as any,
-      changePasswordParams,
+      changePasswordParams
     );
 
     expect(changePasswordCalls).toHaveLength(1);
@@ -110,7 +109,7 @@ describe.skip("the webhook handler", () => {
       // TODO raise bug report on aws-sdk-client-mock repo for this type error
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       AdminDeleteUserCommand as any,
-      deleteInput,
+      deleteInput
     );
 
     expect(deleteCommandCall).toHaveLength(1);
@@ -124,7 +123,7 @@ describe.skip("the webhook handler", () => {
       // TODO raise bug report on aws-sdk-client-mock repo for this type error
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       AdminDeleteUserCommand as any,
-      deleteInputTwo,
+      deleteInputTwo
     );
 
     expect(deleteCommandCall2).toHaveLength(1);
@@ -151,7 +150,7 @@ describe.skip("the webhook handler", () => {
       // TODO raise bug report on aws-sdk-client-mock repo for this type error
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       AdminCreateUserCommand as any,
-      inputOne,
+      inputOne
     );
 
     expect(userOneCall).toHaveLength(1);
@@ -178,7 +177,7 @@ describe.skip("the webhook handler", () => {
       // TODO raise bug report on aws-sdk-client-mock repo for this type error
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       AdminCreateUserCommand as any,
-      inputTwo,
+      inputTwo
     );
 
     expect(userTwoCall).toHaveLength(1);
@@ -226,7 +225,7 @@ describe.skip("the webhook handler", () => {
       // TODO raise bug report on aws-sdk-client-mock repo for this type error
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       AdminSetUserPasswordCommand as any,
-      changePasswordParams,
+      changePasswordParams
     );
 
     expect(changePasswordCalls).toHaveLength(1);
@@ -266,7 +265,7 @@ describe.skip("the webhook handler", () => {
       // TODO raise bug report on aws-sdk-client-mock repo for this type error
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       AdminDeleteUserCommand as any,
-      deleteInput,
+      deleteInput
     );
 
     expect(deleteCommandCall).toHaveLength(1);
@@ -280,7 +279,7 @@ describe.skip("the webhook handler", () => {
       // TODO raise bug report on aws-sdk-client-mock repo for this type error
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       AdminDeleteUserCommand as any,
-      deleteInputTwo,
+      deleteInputTwo
     );
 
     expect(deleteCommandCall2).toHaveLength(1);
@@ -307,7 +306,7 @@ describe.skip("the webhook handler", () => {
       // TODO raise bug report on aws-sdk-client-mock repo for this type error
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       AdminCreateUserCommand as any,
-      inputOne,
+      inputOne
     );
 
     expect(userOneCall).toHaveLength(1);
@@ -334,7 +333,7 @@ describe.skip("the webhook handler", () => {
       // TODO raise bug report on aws-sdk-client-mock repo for this type error
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       AdminCreateUserCommand as any,
-      inputTwo,
+      inputTwo
     );
 
     expect(userTwoCall).toHaveLength(1);

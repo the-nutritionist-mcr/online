@@ -10,13 +10,28 @@
     "module": "esnext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
+    "resolvePackageJsonExports": false,
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@tnmw/types": ["./src/types/index.ts"],
+      "@tnmw/admin-app": ["./src/admin-app/index.ts"],
+      "@tnmw/constants": ["./src/constants/index.ts"],
+      "@tnmw/authorise-cognito-jwt": ["./src/authorise-cognito-jwt/index.ts"],
+      "@tnmw/utils": ["./src/utils/index.ts"],
+      "@tnmw/meal-planning": ["./src/meal-planning/index.ts"],
+      "@tnmw/components": ["./src/components/index.ts"],
+      "@tnmw/config": ["./src/config/index.ts"],
+      "@tnmw/static-pages": ["./src/static-pages/index.ts"],
+      "@tnmw/seed-cognito": ["./src/seed-cognito/index.ts"],
+      "@tnmw/seed-dynamo": ["./src/seed-dynamo/index.ts"],
+      "@tnmw/dynamo": ["./src/dynamo/index.ts"],
+      "@tnmw/image-optimisation": ["./src/image-optimisation/index.ts"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "$schema": "https://json.schemastore.org/tsconfig"
 }
