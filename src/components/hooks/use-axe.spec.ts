@@ -8,7 +8,7 @@ jest.mock("@axe-core/react");
 
 describe("use axe", () => {
   afterEach(() => {
-    delete process.env["NODE_ENV"];
+    delete (process.env as Record<string, string>)["NODE_ENV"];
     jest.resetAllMocks();
   });
 
@@ -21,7 +21,7 @@ describe("use axe", () => {
   // });
 
   it("should not do anything in production", async () => {
-    process.env["NODE_ENV"] = "production";
+    (process.env as Record<string, string>)["NODE_ENV"] = "production";
     renderHook(() => useAxe());
     await new Promise((resolve) => setTimeout(resolve, 1000));
     expect(mocked(axe, true)).not.toBeCalled();
