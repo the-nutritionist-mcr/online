@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "APP_VERSION=local next dev",
-    "build": "next build",
+    "build": "next build && next export",
     "start": "next start",
     "lint": "next lint",
     "test:api": "NODE_ENV=test vitest --run --api",
