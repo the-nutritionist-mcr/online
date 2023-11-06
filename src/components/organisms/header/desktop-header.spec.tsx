@@ -1,18 +1,17 @@
-import DesktopHeader from './desktop-header';
-import { shallow } from 'enzyme';
+import { render, screen } from "@testing-library/react";
+import DesktopHeader from "./desktop-header";
 
-describe('The desktop header', () => {
-  it('renders without an error', () => {
-    shallow(<DesktopHeader />);
+describe("The desktop header", () => {
+  it("renders without an error", () => {
+    render(<DesktopHeader />);
   });
 
-  it('contains an Our Story link', () => {
-    const wrapper = shallow(<DesktopHeader />);
+  it("contains an Our Story link", () => {
+    render(<DesktopHeader />);
 
-    const ourStoryLink = wrapper
-      .find('a')
-      .findWhere((link) => link.prop('href') === '/our-story/');
-
-    expect(ourStoryLink).toHaveLength(1);
+    expect(screen.getByRole("link", { name: "Our Story" })).toHaveAttribute(
+      "href",
+      expect.stringContaining("/our-story/")
+    );
   });
 });
