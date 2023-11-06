@@ -8,6 +8,7 @@ export default defineConfig({
     globals: true,
     include: ["src/**/*.spec.ts", "src/**/*.spec.tsx"],
     setupFiles: ["src/test-support/setup-tests.ts"],
+    pool: "forks",
     coverage: {
       all: true,
       include: ["src/**/*.ts", "src/**/*.tsx"],

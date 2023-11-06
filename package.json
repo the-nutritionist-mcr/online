@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "test:api": "NODE_ENV=test vitest --run --api",
-    "test": "NODE_ENV=test vitest --silent --coverage",
+    "test": "NODE_ENV=test vitest --pool forks --silent --coverage",
     "test:watch": "NODE_ENV=test vitest --watch --silent",
     "test:ui": "NODE_ENV=test vitest --ui --watch",
     "types": "tsc --noEmit",
@@ -173,7 +173,7 @@
     "use-mutation": "2.2.1",
     "uuid": "8.3.2",
     "vite-tsconfig-paths": "^4.2.1",
-    "vitest": "^0.34.6",
+    "vitest": "1.0.0-beta.3",
     "vitest-mock-extended": "^1.3.1",
     "webp-loader": "^0.6.0",
     "webpack-bundle-analyzer": "^4.5.0"
