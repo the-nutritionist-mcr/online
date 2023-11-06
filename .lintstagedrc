@@ -1,3 +1,5 @@
 {
   "*.{ts,tsx}": ["tsc-files", "eslint", "vitest related --run", "prettier"],
+  "*.json": ["prettier"],
+  "*.md": ["prettier"]
 }
