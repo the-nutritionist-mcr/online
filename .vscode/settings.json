@@ -4,4 +4,9 @@
     "vitest.include": [
         "src/**/*.{spec}.{ts,tsx}"
     ],
+    "eslint.enable": true,
+    "eslint.validate": [
+    
+    "javascript", "typescript", "typescriptreacct", "javascriptreact", "html"
+    ]
 }

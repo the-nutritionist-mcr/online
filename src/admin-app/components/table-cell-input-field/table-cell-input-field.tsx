@@ -16,13 +16,12 @@ const DebounceTime = 500;
 
 function assertFC<P>(
   _component: React.FC<P>
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
 ): asserts _component is React.FC<P> {}
 
 function TableCellInputField<T>(
   props: MutatorFieldProps<T, React.ChangeEvent<HTMLInputElement>> &
     InputFieldProps
-): React.ReactElement | null {
+): React.ReactElement | any {
   const [value, setValue] = React.useState(props.value);
 
   const theme = {
