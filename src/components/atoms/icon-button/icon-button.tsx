@@ -41,12 +41,8 @@ const VisuallyHiddenText = styled.span`
 `;
 
 const IconButton: FC<IconButtonProps> = (props) => {
-  const fired = (event: Event) => {
-    console.log("fired");
-    props.onClick?.(event);
-  };
   return (
-    <StyledButton onClick={fired} disabled={props.disabled}>
+    <StyledButton onClick={props.onClick} disabled={props.disabled}>
       <img src={props.icon} alt="" width="40px" height="40px" />
       <VisuallyHiddenText>{props.a11yLabel}</VisuallyHiddenText>
     </StyledButton>
