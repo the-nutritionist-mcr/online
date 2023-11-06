@@ -1,0 +1,28 @@
+name: Main CI
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    name: Run static checks
+    strategy:
+      fail-fast: false
+      matrix:
+        check: [test, types, lint]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup job
+        uses: ./.github/actions/install-deps
+      - run: npm run ${{ matrix.check }}

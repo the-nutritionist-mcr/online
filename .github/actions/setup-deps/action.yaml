@@ -1,0 +1,27 @@
+name: "Setup Node"
+description: "Install the right node version along with application dependencies"
+inputs:
+  node-version:
+    description: "Node Version"
+    required: true
+    default: 20.x
+
+runs:
+  using: "composite"
+  steps:
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: "npm"
+
+    - uses: actions/cache@v3
+      with:
+        path: "**/node_modules"
+
+        key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-npm-
+
+    - run: npm ci
+      shell: bash
