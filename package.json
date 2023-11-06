@@ -9,7 +9,7 @@
     "lint": "next lint",
     "test": "NODE_ENV=test vitest --silent --coverage",
     "test:watch": "NODE_ENV=test vitest --watch --silent",
-    "test:ui": "NODE_ENV=test --ui --watch",
+    "test:ui": "NODE_ENV=test vitest --ui --watch",
     "types": "tsc --noEmit",
     "types:watch": "tsc --noEmit --watch"
   },
