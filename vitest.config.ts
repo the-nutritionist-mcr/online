@@ -5,6 +5,7 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [tsconfigPaths(), react()],
   test: {
+    api: true,
     globals: true,
     include: ["src/**/*.spec.ts", "src/**/*.spec.tsx"],
     setupFiles: ["src/test-support/setup-tests.ts"],

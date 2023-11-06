@@ -49,7 +49,7 @@ describe("The login and register box", () => {
     );
   });
 
-  it("Changes the history bar if you click on a tab", () => {
+  it("Changes the history bar if you click on a tab", async () => {
     const replaceStateSpy = vi.spyOn(window.history, "replaceState");
     render(
       <ThemeProvider theme={theme}>
@@ -63,7 +63,7 @@ describe("The login and register box", () => {
 
     const registerTab = screen.getByRole("tab", { name: "Register" });
 
-    act(() => userEvent.click(registerTab));
+    await userEvent.click(registerTab);
 
     // eslint-disable-next-line unicorn/no-null
     expect(replaceStateSpy).toBeCalledWith(null, "", "/register/");

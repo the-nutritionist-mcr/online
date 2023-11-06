@@ -41,7 +41,12 @@ const projects: Record<string, UserWorkspaceConfig> = {
   },
   components: {
     plugins: [
-      react(),
+      react({
+        jsxImportSource: "@emotion/react",
+        babel: {
+          plugins: ["@emotion/babel-plugin"],
+        },
+      }),
       vanillaExtractPlugin({
         esbuildOptions: { loader: { ".svg": "text" } },
       }),

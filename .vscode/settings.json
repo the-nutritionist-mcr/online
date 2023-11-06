@@ -1,0 +1,7 @@
+{
+    "vitest.commandLine": "npm run test:api",
+    "vitest.enable": true,
+    "vitest.include": [
+        "src/**/*.{spec}.{ts,tsx}"
+    ],
+}

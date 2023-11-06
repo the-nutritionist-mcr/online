@@ -1,18 +1,20 @@
-import Authenticated, { Redirect } from './authenticated';
-import { mockDependencies } from '../../test-support';
-import { render, waitFor } from '@testing-library/react';
+import Authenticated, { Redirect } from "./authenticated";
+import { mockDependencies } from "../../test-support";
+import { render, waitFor } from "@testing-library/react";
 
-describe('The <Authenticated> component', () => {
-  it('Redirects to /login/ when there is no user', async () => {
+describe("The <Authenticated> component", () => {
+  it("Redirects to /login/ when there is no user", async () => {
     const navigate = vi.fn();
-    mockDependencies({ navigate });
+    const Wrapper = mockDependencies({ navigate });
 
     render(
-      <Authenticated user={undefined} redirect={Redirect.IfLoggedOut}>
-        Hello!
-      </Authenticated>
+      <Wrapper>
+        <Authenticated user={undefined} redirect={Redirect.IfLoggedOut}>
+          Hello!
+        </Authenticated>
+      </Wrapper>
     );
 
-    await waitFor(() => expect(navigate).toHaveBeenCalledWith('/login/'));
+    await waitFor(() => expect(navigate).toHaveBeenCalledWith("/login/"));
   });
 });
