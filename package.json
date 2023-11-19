@@ -4,7 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "APP_VERSION=local next dev",
-    "build": "next build && next export",
+    "deploy:test": "cdk deploy tnm-web-test-frontend-stack --require-approval never",
+    "deploy:cypress": "cdk deploy tnm-web-cypress-frontend-stack --require-approval never",
+    "build": "next build",
+    "build:local": "APP_VERSION=local next build",
     "start": "next start",
     "lint": "next lint",
     "test:api": "NODE_ENV=test vitest --run --api",

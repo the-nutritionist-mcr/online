@@ -1,40 +1,40 @@
-import { App } from 'aws-cdk-lib';
-import { CHARGEBEE_SITES } from './constants';
-import { UsersStack } from './permissions-stack';
+import { App } from "aws-cdk-lib";
+import { CHARGEBEE_SITES } from "./constants";
+import { UsersStack } from "./permissions-stack";
 
-import { BackendStack } from './backend-stack';
-import { AccountUsersStack } from './account-users-stack';
-import { FrontendStack } from './frontend-stack';
+import { BackendStack } from "./backend-stack";
+import { AccountUsersStack } from "./account-users-stack";
+import { FrontendStack } from "./frontend-stack";
 
 const app = new App();
 
 const gitHash = async (): Promise<string | undefined> => {
   /* eslint-disable unicorn/prefer-module */
   /* eslint-disable @typescript-eslint/no-var-requires */
-  const datadogCi = require('@datadog/datadog-ci');
+  const datadogCi = require("@datadog/datadog-ci");
 
-  const key = process.env['DATADOG_API_KEY'];
+  const key = process.env["DATADOG_API_KEY"];
   if (!key) {
     return undefined;
   }
-  return await datadogCi.gitMetadata.uploadGitCommitHash(key, 'datadoghq.eu');
+  return await datadogCi.gitMetadata.uploadGitCommitHash(key, "datadoghq.eu");
 };
 
-const account = process.env.IS_CDK_LOCAL ? '000000000000' : '568693217207';
+const account = process.env.IS_CDK_LOCAL ? "000000000000" : "568693217207";
 
 const env = {
   account,
-  region: 'eu-west-2',
+  region: "eu-west-2",
 };
 
 const sesIdentityArn = `arn:aws:ses:eu-west-2:568693217207:identity/thenutritionistmcr.com`;
 
-const forceUpdateKey = 'force-update-key';
+const forceUpdateKey = "force-update-key";
 
 const main = async () => {
-  new AccountUsersStack(app, 'tnm-web-credentials-stack', {
-    businessOwners: ['lawrence', 'jess', 'ryan'],
-    developers: ['ben'],
+  new AccountUsersStack(app, "tnm-web-credentials-stack", {
+    businessOwners: ["lawrence", "jess", "ryan"],
+    developers: ["ben"],
     stackProps: { env },
   });
 
@@ -47,15 +47,6 @@ const main = async () => {
   }
 
   const stacks: { [key: string]: StackConfig } = {
-    local: {
-      transient: true,
-      chargebeeSite: CHARGEBEE_SITES.test,
-    },
-    int: {
-      transient: true,
-      chargebeeSite: CHARGEBEE_SITES.test,
-    },
-
     test: {
       transient: true,
       chargebeeSite: CHARGEBEE_SITES.test,
@@ -100,7 +91,7 @@ const main = async () => {
     });
   });
 
-  new UsersStack(app, 'tnm-web-users-stack', {
+  new UsersStack(app, "tnm-web-users-stack", {
     stackProps: { env },
   });
   app.synth();

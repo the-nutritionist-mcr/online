@@ -35,6 +35,7 @@ const withPWA = require("next-pwa")({
 module.exports = withVanillaExtract(
   withOptimizedImages(
     withPWA({
+      output: "export",
       outputFileTracing: false,
       env: {
         APP_VERSION: process.env.APP_VERSION,
