@@ -23,43 +23,41 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Setup job
+      - name: Install Dependencies
         uses: ./.github/actions/setup-deps
       - run: npm run ${{ matrix.check }}
 
-  e2e-deploy:
+  end-to-end-tests:
+    timeout-minutes: 60
+    name: "End to End Tests"
     runs-on: ubuntu-latest
-    name: E2E Deploy
     steps:
       - uses: actions/checkout@v3
-      - name: Setup job
 
+      - name: Install Dependencies
         uses: ./.github/actions/setup-deps
-      - name: Get App Version
+
+      - name: Get app version
         shell: bash
         run: echo "APP_VERSION=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
       - run: npm run build
+        name: Build app
         env:
           APP_VERSION: ${{ env.APP_VERSION }}
 
       - run: npm run deploy:cypress
+        name: Deploy E2E environment
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
-  end-to-end-tests:
-    timeout-minutes: 60
-    needs: [e2e-deploy]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Setup job
-        uses: ./.github/actions/setup-deps
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
+
       - name: Run Playwright tests
         run: npx playwright test
+
       - uses: actions/upload-artifact@v3
         if: always()
         with:

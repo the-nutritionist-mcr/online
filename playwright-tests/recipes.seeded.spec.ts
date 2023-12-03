@@ -68,7 +68,6 @@ test("User can add a recipe which is then visible in the recipes table", async (
 
   await page.getByRole("option", { name: "CHIX GUMBO" }).click();
   await page.getByRole("button", { name: "Save" }).click();
-  await page.getByRole("cell", { name: "short-name" }).click();
   await expect(page.locator("tbody")).toContainText("short-name");
   await expect(page.locator("tbody")).toContainText("A recipe");
   await expect(page.locator("tbody")).toContainText("A delicious thing");
@@ -100,6 +99,7 @@ test("User can edit a recipe and the edit is then visible in the recipes table",
   await expect(page.locator("main")).not.toContainText("not added", {
     timeout: 60_000,
   });
+
   await expect(page.locator("tbody")).toContainText("BEEF BURRITO-2");
   const row = page.locator("tr:has-text('BEEF BURRITO-2')");
   await expect(row).toContainText("No Alcohol");
