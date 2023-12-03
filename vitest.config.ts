@@ -12,6 +12,7 @@ export default defineConfig({
     coverage: {
       all: true,
       include: ["src/**/*.ts", "src/**/*.tsx"],
+      exclude: ["src/test-support/**/*"],
       provider: "istanbul",
       thresholdAutoUpdate: true,
       functions: 23.01,
