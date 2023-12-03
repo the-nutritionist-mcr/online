@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "APP_VERSION=local next dev",
-    "deploy:test": "cdk deploy tnm-web-test-frontend-stack --require-approval never",
     "deploy:cypress": "cdk deploy tnm-web-cypress-frontend-stack --require-approval never",
+    "cdk": "cdk",
     "build": "next build",
     "build:local": "APP_VERSION=local next build",
     "start": "next start",
