@@ -27,10 +27,9 @@ jobs:
         uses: ./.github/actions/setup-deps
       - run: npm run ${{ matrix.check }}
 
-  deploy-for-cypress:
+  e2e-deploy:
     runs-on: ubuntu-latest
-    name: Deploy For Cypress
-    needs: [checks]
+    name: E2E Deploy
     steps:
       - uses: actions/checkout@v3
       - name: Setup job
@@ -48,6 +47,7 @@ jobs:
 
   end-to-end-tests:
     timeout-minutes: 60
+    needs: [e2e-deploy]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

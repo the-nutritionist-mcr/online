@@ -22,3 +22,52 @@ test("when recipes link is clicked, a page is loaded which contains recipe data"
     "Seared cypriot halloumi, parmesan, tarragon, semi dried tomatoes, lemon zest"
   );
 });
+
+test("User can add a recipe which is then visible in the recipes table", async ({
+  page,
+}) => {
+  await page.getByLabel("New Recipe").click();
+  await page.locator('input[name="name"]').fill("A recipe");
+  await page.locator('input[name="shortName"]').fill("short-name");
+  await page.locator('input[name="description"]').fill("A delicious thing");
+  await page.locator('input[name="hotOrCold"]').click();
+  await page.getByRole("option", { name: "Cold" }).click();
+
+  await page.locator('input[name="allergens"]').fill("Fish");
+
+  await page.locator('input[name="potentialExclusions"]').click();
+  await page.getByRole("option", { name: "Extra Meat" }).click();
+  await page.getByRole("option", { name: "No Alcohol" }).click();
+
+  await page.locator('input[name="invalidExclusions"]').click();
+  await page.getByRole("option", { name: "Extra Veg" }).click();
+
+  await page
+    .locator('[id="__next"] div')
+    .filter({ hasText: "Create" })
+    .nth(3)
+    .click();
+
+  await page.getByRole("button", { name: "Add" }).click();
+
+  await page
+    .locator("div")
+    .filter({ hasText: /^Customisation$/ })
+    .getByRole("textbox")
+    .click();
+
+  await page.getByRole("option", { name: "No Alcohol" }).click();
+  await page
+    .getByLabel("Open Drop", { exact: true })
+    .getByRole("textbox")
+    .click();
+
+  await page.getByRole("option", { name: "CHIX GUMBO" }).click();
+  await page.getByRole("button", { name: "Save" }).click();
+  await page.getByRole("cell", { name: "short-name" }).click();
+  await expect(page.locator("tbody")).toContainText("short-name");
+  await expect(page.locator("tbody")).toContainText("A recipe");
+  await expect(page.locator("tbody")).toContainText("A delicious thing");
+  await expect(page.locator("tbody")).toContainText("Extra Meat");
+  await expect(page.locator("tbody")).toContainText("No Alcohol");
+});
