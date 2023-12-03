@@ -16,7 +16,7 @@ Note that there is NO manual deployment step - If everything passes, the change 
 
 ## Commit Hooks
 
-In order to minimise failed pipeline runs, the project uses 'husy' to configure pre-commit hooks that will automatically run the following checks against staged files
+In order to minimise failed pipeline runs, the project uses 'husky' to configure pre-commit hooks that will automatically run the following checks against staged files
 
 - `tsc-files`
 - `eslint`

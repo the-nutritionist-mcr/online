@@ -47,7 +47,7 @@ jobs:
         env:
           APP_VERSION: ${{ env.APP_VERSION }}
 
-      - run: npm run deploy:cypress
+      - run: npm run deploy:e2e
         name: Deploy E2E environment
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
