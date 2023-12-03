@@ -198,6 +198,7 @@
     "@nrwl/storybook": "15.9.2",
     "@nrwl/web": "15.9.2",
     "@nrwl/workspace": "15.9.2",
+    "@playwright/test": "^1.40.1",
     "@storybook/addon-essentials": "6.5.16",
     "@storybook/builder-webpack5": "6.5.16",
     "@storybook/manager-webpack5": "6.5.16",

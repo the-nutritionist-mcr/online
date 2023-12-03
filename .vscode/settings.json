@@ -1,12 +1,16 @@
 {
-    "vitest.commandLine": "npm run test:api",
-    "vitest.enable": true,
-    "vitest.include": [
-        "src/**/*.{spec}.{ts,tsx}"
-    ],
-    "eslint.enable": true,
-    "eslint.validate": [
-    
-    "javascript", "typescript", "typescriptreacct", "javascriptreact", "html"
-    ]
+  "vitest.commandLine": "npm run test:api",
+  "vitest.enable": true,
+  "vitest.include": ["src/**/*.{spec}.{ts,tsx}"],
+  "eslint.enable": true,
+  "eslint.validate": [
+    "javascript",
+    "typescript",
+    "typescriptreacct",
+    "javascriptreact",
+    "html"
+  ],
+  "files.associations": {
+    "*.yaml": "home-assistant"
+  }
 }

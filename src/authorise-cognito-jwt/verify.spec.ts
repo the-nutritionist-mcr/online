@@ -1,7 +1,7 @@
 import { mock } from "vitest-mock-extended";
 import jsonwebtoken from "jsonwebtoken";
 import { Secret } from "jsonwebtoken";
-import { PublicKeyMeta } from "./public-key-meta";
+import type { PublicKeyMeta } from "./public-key-meta";
 import { verify } from "./verify";
 
 vi.mock("jsonwebtoken");
