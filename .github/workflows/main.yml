@@ -44,6 +44,9 @@ jobs:
           APP_VERSION: ${{ env.APP_VERSION }}
 
       - run: npm run deploy:cypress
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
   end-to-end-tests:
     timeout-minutes: 60
