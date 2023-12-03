@@ -68,6 +68,10 @@ test("User can add a recipe which is then visible in the recipes table", async (
 
   await page.getByRole("option", { name: "CHIX GUMBO" }).click();
   await page.getByRole("button", { name: "Save" }).click();
+  await expect(page.locator("body")).toContainText("successfully");
+  await expect(page.locator("main")).not.toContainText("not added", {
+    timeout: 60_000,
+  });
   await expect(page.locator("tbody")).toContainText("short-name");
   await expect(page.locator("tbody")).toContainText("A recipe");
   await expect(page.locator("tbody")).toContainText("A delicious thing");

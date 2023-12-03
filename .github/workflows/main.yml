@@ -30,6 +30,7 @@ jobs:
   end-to-end-tests:
     timeout-minutes: 60
     name: "End to End Tests"
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -68,6 +69,8 @@ jobs:
   test-deploy:
     runs-on: ubuntu-latest
     name: Test Deploy
+    if: github.ref == 'refs/heads/main'
+
     needs: [end-to-end-tests, checks]
     steps:
       - uses: actions/checkout@v3
@@ -90,6 +93,7 @@ jobs:
   prod-deploy:
     runs-on: ubuntu-latest
     name: Prod Deploy
+    if: github.ref == 'refs/heads/main'
     needs: [end-to-end-tests, checks]
     steps:
       - uses: actions/checkout@v3
