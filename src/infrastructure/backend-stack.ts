@@ -1,11 +1,12 @@
-import { Stack, StackProps } from 'aws-cdk-lib';
-import { IUserPoolClient, UserPool } from 'aws-cdk-lib/aws-cognito';
-import { Construct } from 'constructs';
-import { makeUserPool } from './make-user-pool';
-import { makeDataApis } from './make-data-apis';
-import { getDomainName } from '@tnmo/utils';
-import { IHostedZone, PublicHostedZone } from 'aws-cdk-lib/aws-route53';
-import { ITable } from 'aws-cdk-lib/aws-dynamodb';
+import { Stack, StackProps } from "aws-cdk-lib";
+import { IUserPoolClient, UserPool } from "aws-cdk-lib/aws-cognito";
+import { Construct } from "constructs";
+import { makeUserPool } from "./make-user-pool";
+import { makeDataApis } from "./make-data-apis";
+import { getDomainName } from "@tnmo/utils";
+import { IHostedZone, PublicHostedZone } from "aws-cdk-lib/aws-route53";
+import { ITable } from "aws-cdk-lib/aws-dynamodb";
+import { IRole } from "aws-cdk-lib/aws-iam";
 
 interface BackendStackProps {
   forceUpdateKey: string;
@@ -16,6 +17,7 @@ interface BackendStackProps {
   seed: boolean;
   chargebeeSite: string;
   sesIdentityArn: string;
+  prodDataAccessRole: IRole;
 }
 
 export class BackendStack extends Stack {
@@ -27,11 +29,11 @@ export class BackendStack extends Stack {
 
   public constructor(scope: Construct, id: string, props: BackendStackProps) {
     super(scope, id, props.stackProps);
-    const transient = props.envName !== 'prod';
+    const transient = props.envName !== "prod";
 
     const domainName = getDomainName(props.envName);
 
-    const hostedZone = new PublicHostedZone(this, 'HostedZone', {
+    const hostedZone = new PublicHostedZone(this, "HostedZone", {
       zoneName: domainName,
     });
 
@@ -52,6 +54,9 @@ export class BackendStack extends Stack {
       props.chargebeeSite,
       props.forceUpdateKey
     );
+
+    recipesTable.grantReadWriteData(props.prodDataAccessRole);
+    customisationsTable.grantReadWriteData(props.prodDataAccessRole);
 
     this.recipesTable = recipesTable;
     this.customisationsTable = customisationsTable;

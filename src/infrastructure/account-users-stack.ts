@@ -1,6 +1,13 @@
-import { Stack, StackProps } from 'aws-cdk-lib';
-import { Group, IGroup, ManagedPolicy, User } from 'aws-cdk-lib/aws-iam';
-import { Construct } from 'constructs';
+import { Stack, StackProps } from "aws-cdk-lib";
+import {
+  Group,
+  IGroup,
+  IRole,
+  ManagedPolicy,
+  Role,
+  User,
+} from "aws-cdk-lib/aws-iam";
+import { Construct } from "constructs";
 
 interface AccountUsersStackProps {
   businessOwners: string[];
@@ -8,24 +15,25 @@ interface AccountUsersStackProps {
   stackProps: StackProps;
 }
 
-const billing = ManagedPolicy.fromAwsManagedPolicyName('job-function/Billing');
+const billing = ManagedPolicy.fromAwsManagedPolicyName("job-function/Billing");
 
 export class AccountUsersStack extends Stack {
   public businessOwnersGroup: IGroup;
   public developersGroup: IGroup;
+  public prodDataAccessRole: IRole;
 
   constructor(scope: Construct, id: string, props: AccountUsersStackProps) {
     super(scope, id, props.stackProps);
 
     const readOnlyAccess =
-      ManagedPolicy.fromAwsManagedPolicyName('ReadOnlyAccess');
+      ManagedPolicy.fromAwsManagedPolicyName("ReadOnlyAccess");
 
     const cognitoPowerUser = ManagedPolicy.fromAwsManagedPolicyName(
-      'AmazonCognitoPowerUser'
+      "AmazonCognitoPowerUser"
     );
 
-    this.businessOwnersGroup = new Group(this, 'tnm-web-business-owner-group', {
-      groupName: 'tnm-web-business-owner',
+    this.businessOwnersGroup = new Group(this, "tnm-web-business-owner-group", {
+      groupName: "tnm-web-business-owner",
     });
 
     props.businessOwners.forEach(
@@ -37,8 +45,12 @@ export class AccountUsersStack extends Stack {
         })
     );
 
-    this.developersGroup = new Group(this, 'tnm-web-developers-group', {
-      groupName: 'tnm-web-developer',
+    this.developersGroup = new Group(this, "tnm-web-developers-group", {
+      groupName: "tnm-web-developer",
+    });
+
+    this.prodDataAccessRole = new Role(this, "prod-data-access", {
+      assumedBy: this.developersGroup,
     });
 
     props.developers.forEach(

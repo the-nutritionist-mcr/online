@@ -1,8 +1,8 @@
-## TNM Online
+# TNM Online
 
 This repository contains a web application built to manage the day to day business concerns of The Nutritionist Manchester.
 
-### Project Tasks
+## Project Tasks
 
 | Task                               | Command              |
 | ---------------------------------- | -------------------- |
@@ -14,8 +14,9 @@ This repository contains a web application built to manage the day to day busine
 | Run End to End Tests               | `npm run test:e2e`   |
 | Deploy End to End test Environment | `npm run deploy:e2e` |
 
-### Documentation
+## Documentation
 
 - [Continuous Integration and Deployment](docs/ci.md)
 - [Testing](docs/testing.md)
 - [Environments](docs/environments.md)
+- [Cloud Architecture](docs/cloud-architecture.md)

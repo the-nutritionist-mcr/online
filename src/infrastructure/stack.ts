@@ -32,7 +32,7 @@ const sesIdentityArn = `arn:aws:ses:eu-west-2:568693217207:identity/thenutrition
 const forceUpdateKey = "force-update-key";
 
 const main = async () => {
-  new AccountUsersStack(app, "tnm-web-credentials-stack", {
+  const users = new AccountUsersStack(app, "tnm-web-credentials-stack", {
     businessOwners: ["lawrence", "jess", "ryan"],
     developers: ["ben"],
     stackProps: { env },
@@ -78,6 +78,7 @@ const main = async () => {
       chargebeeSite: config.chargebeeSite,
       gitHash: hash,
       forceUpdateKey,
+      prodDataAccessRole: users.prodDataAccessRole,
     });
 
     new FrontendStack(app, `tnm-web-${envName}-frontend-stack`, {
