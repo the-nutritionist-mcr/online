@@ -1,4 +1,4 @@
-import { Trash } from 'grommet-icons';
+import { Trash } from "grommet-icons";
 import {
   Header,
   Heading,
@@ -11,19 +11,19 @@ import {
   Select,
   Card,
   CardFooter,
-} from 'grommet';
-import React from 'react';
+} from "grommet";
+import React from "react";
 
-import { ParagraphText } from '@tnmo/components';
-import { Exclusion, Recipe, HotOrCold } from '@tnmo/types';
+import { ParagraphText } from "@tnmo/components";
+import { Exclusion, Recipe, HotOrCold } from "@tnmo/types";
 import {
   formGrid,
   alternatesGrid,
   details,
   editRecipePage,
-} from './edit-recipes.page.css';
-import { v4 } from 'uuid';
-import { Link } from '../../components';
+} from "./edit-recipes.page.css";
+import { v4 } from "uuid";
+import { Link } from "../../components";
 
 export interface EditRecipesPageProps {
   recipe?: Recipe;
@@ -38,11 +38,11 @@ export const EditRecipesPage = (props: EditRecipesPageProps) => {
   const [dirty, setDirty] = React.useState(false);
   const defaultRecipe = props.recipe ?? {
     id: v4(),
-    name: '',
-    shortName: '',
+    name: "",
+    shortName: "",
     hotOrCold: HotOrCold.Hot,
-    description: '',
-    allergens: '',
+    description: "",
+    allergens: "",
     potentialExclusions: [],
     invalidExclusions: [],
     alternates: [],
@@ -74,7 +74,7 @@ export const EditRecipesPage = (props: EditRecipesPageProps) => {
       <Header
         justify="start"
         gap="small"
-        style={{ marginBottom: '2rem', marginTop: '1rem' }}
+        style={{ marginBottom: "2rem", marginTop: "1rem" }}
       >
         <Heading level={2}>{props.title}</Heading>
         <Button
@@ -98,7 +98,7 @@ export const EditRecipesPage = (props: EditRecipesPageProps) => {
         />
       </Header>
       <Form
-        style={{ width: '100%', maxWidth: '1460px' }}
+        style={{ width: "100%", maxWidth: "1460px" }}
         value={formRecipe}
         onReset={(): void => {
           setRecipe(defaultRecipe);
@@ -119,12 +119,12 @@ export const EditRecipesPage = (props: EditRecipesPageProps) => {
         onSubmit={onSubmit}
       >
         <div className={details}>
-          <Heading margin={{ bottom: '1rem' }} level={3}>
+          <Heading margin={{ bottom: "1rem" }} level={3}>
             Details
           </Heading>
           <div className={formGrid}>
             <FormField
-              style={{ minWidth: '20rem' }}
+              style={{ minWidth: "20rem" }}
               name="name"
               label="Name"
               required
@@ -135,7 +135,7 @@ export const EditRecipesPage = (props: EditRecipesPageProps) => {
               name="shortName"
               label="Short Name"
               required
-              style={{ minWidth: '20rem' }}
+              style={{ minWidth: "20rem" }}
             >
               <TextInput name="shortName" />
             </FormField>
@@ -153,6 +153,8 @@ export const EditRecipesPage = (props: EditRecipesPageProps) => {
             </FormField>
             <FormField name="potentialExclusions" label="Customisations">
               <Select
+                role="listbox"
+                a11yTitle="Customisations"
                 plain
                 multiple
                 closeOnChange={false}
@@ -174,7 +176,7 @@ export const EditRecipesPage = (props: EditRecipesPageProps) => {
             </FormField>
           </div>
         </div>
-        <Heading level={3} margin={{ bottom: '1rem' }}>
+        <Heading level={3} margin={{ bottom: "1rem" }}>
           <Box gap="medium" direction="row">
             <span>Alternates</span>
             <Button
@@ -185,8 +187,8 @@ export const EditRecipesPage = (props: EditRecipesPageProps) => {
                   alternates: [
                     ...(recipe.alternates ?? []),
                     {
-                      customisationId: '',
-                      recipeId: '',
+                      customisationId: "",
+                      recipeId: "",
                     },
                   ],
                 });
@@ -221,7 +223,7 @@ export const EditRecipesPage = (props: EditRecipesPageProps) => {
                         setDirty(true);
                       }}
                       labelKey="name"
-                      valueKey={{ reduce: true, key: 'id' }}
+                      valueKey={{ reduce: true, key: "id" }}
                     />
                   </FormField>
                   <FormField label="Recipe">
@@ -246,7 +248,7 @@ export const EditRecipesPage = (props: EditRecipesPageProps) => {
                         )}
                       value={alternate.recipeId}
                       labelKey="shortName"
-                      valueKey={{ key: 'id', reduce: true }}
+                      valueKey={{ key: "id", reduce: true }}
                     />
                   </FormField>
                 </CardBody>

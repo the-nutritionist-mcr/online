@@ -4,12 +4,13 @@ import { login } from "./login";
 test.beforeEach(async ({ page }) => {
   await login(page, "cypress-test-user", "password");
   await page.reload();
+  await page.getByRole("link", { name: "Recipes" }).click();
+  await expect(page.getByRole("main")).toContainText("Recipes");
 });
 
 test("when recipes link is clicked, a page is loaded which contains recipe data", async ({
   page,
 }) => {
-  await page.getByRole("link", { name: "Recipes" }).click();
   await expect(page.locator("tbody")).toContainText("CHIX ORZO");
   await expect(page.locator("tbody")).toContainText(
     "LEMON + HERB ROAST CHICKEN ORZO"
@@ -29,7 +30,6 @@ test("when recipes link is clicked, a page is loaded which contains recipe data"
 test("User can add a recipe which is then visible in the recipes table", async ({
   page,
 }) => {
-  await page.getByRole("link", { name: "Recipes" }).click();
   await page.getByLabel("New Recipe").click();
   await page.locator('input[name="name"]').fill("A recipe");
   await page.locator('input[name="shortName"]').fill("short-name");
@@ -74,4 +74,33 @@ test("User can add a recipe which is then visible in the recipes table", async (
   await expect(page.locator("tbody")).toContainText("A delicious thing");
   await expect(page.locator("tbody")).toContainText("Extra Meat");
   await expect(page.locator("tbody")).toContainText("No Alcohol");
+});
+
+test("User can edit a recipe and the edit is then visible in the recipes table", async ({
+  page,
+}) => {
+  await page
+    .getByRole("row", { name: "BEEF BURRITO SLOW COOKED BEEF" })
+    .getByLabel("Edit")
+    .first()
+    .click();
+  await expect(page.getByRole("main")).toContainText("Edit Recipe");
+
+  await page.locator('input[name="shortName"]').fill("BEEF BURRITO-2");
+  await page.getByLabel("Open Drop; Selected: Hot").click();
+  await page.getByRole("option", { name: "Cold" }).click();
+
+  await page.locator('input[name="potentialExclusions"]').click();
+  await page.getByRole("option", { name: "No Alcohol" }).click();
+  await page.locator("form").click();
+
+  await page.getByRole("button", { name: "Save" }).click();
+  await expect(page.locator("body")).toContainText("successfully");
+  await page.getByRole("link", { name: "Recipes" }).click();
+  await expect(page.locator("main")).not.toContainText("not added", {
+    timeout: 60_000,
+  });
+  await expect(page.locator("tbody")).toContainText("BEEF BURRITO-2");
+  const row = page.locator("tr:has-text('BEEF BURRITO-2')");
+  await expect(row).toContainText("No Alcohol");
 });
