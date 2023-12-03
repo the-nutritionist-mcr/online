@@ -36,7 +36,7 @@ jobs:
     if: github.ref == 'refs/heads/main'
     environment:
       name: cypress
-      url: https://cypress.app.thenutritionistmcr.co.uk
+      url: https://cypress.app.thenutritionistmcr.com
 
     steps:
       - uses: actions/checkout@v3
@@ -87,7 +87,7 @@ jobs:
     if: github.ref == 'refs/heads/main'
     environment:
       name: test
-      url: https://test.app.thenutritionistmcr.co.uk
+      url: https://test.app.thenutritionistmcr.com
 
     needs: [end-to-end-tests, checks]
     steps:
@@ -113,7 +113,7 @@ jobs:
     name: Prod Deploy
     environment:
       name: production
-      url: https://portal.thenutritionistmcr.co.uk
+      url: https://portal.thenutritionistmcr.com
 
     if: github.ref == 'refs/heads/main'
     needs: [end-to-end-tests, checks]
