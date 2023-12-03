@@ -44,7 +44,6 @@ const Login: FC = () => {
           <YourAccountHeader>Your Account</YourAccountHeader>
         </YourAccountHeaderBox>
       </Hero>
-      <p>Test deploy</p>
       <LoginAndRegisterBox defaultTab="Login" />
       <LoginAndRegisterPadding />
     </RedirectIfLoggedIn>
