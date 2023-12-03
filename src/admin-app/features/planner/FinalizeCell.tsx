@@ -1,15 +1,15 @@
-import { Text, Box, Button, Select, TableCell, ThemeContext } from 'grommet';
-import { Trash } from 'grommet-icons';
+import { Text, Box, Button, Select, TableCell, ThemeContext } from "grommet";
+import { Trash } from "grommet-icons";
 import {
   ActivePlanWithMeals,
   BackendCustomer,
   DeliveryItem,
   PlannedCook,
   Recipe,
-} from '@tnmo/types';
-import { cell } from './finalise.css';
-import { getRealRecipe } from '@tnmo/meal-planning';
-import { useEffect, useState } from 'react';
+} from "@tnmo/types";
+import { cell } from "./finalise.css";
+import { getRealRecipe } from "@tnmo/meal-planning";
+import { useEffect, useState } from "react";
 
 interface FinalizeCellProps {
   index: number;
@@ -26,14 +26,16 @@ interface FinalizeCellProps {
 const FinalizeCell = (props: FinalizeCellProps) => {
   const renderEntry = (recipe: Recipe) => {
     const realRecipe = getRealRecipe(recipe, props.customer, props.recipes);
-    const isAlternate = realRecipe.name !== realRecipe.originalName;
+    const isAlternate =
+      realRecipe.name.trim() !== realRecipe.originalName.trim();
+
     return (
       <Box>
         <Text
           style={{
-            padding: '6px',
-            fontSize: '12px',
-            color: isAlternate ? `green` : 'black',
+            padding: "6px",
+            fontSize: "12px",
+            color: isAlternate ? `green` : "black",
           }}
         >
           {realRecipe.name}
@@ -57,12 +59,12 @@ const FinalizeCell = (props: FinalizeCellProps) => {
       value={{
         table: {
           body: {
-            pad: 'small',
+            pad: "small",
           },
         },
         global: {
           input: {
-            padding: '0',
+            padding: "0",
             font: {
               weight: 400,
             },
@@ -84,8 +86,8 @@ const FinalizeCell = (props: FinalizeCellProps) => {
               size="xsmall"
               options={props.deliveryMeals[props.deliveryIndex].menu}
               placeholder="None"
-              labelKey={'name'}
-              valueKey={'name'}
+              labelKey={"name"}
+              valueKey={"name"}
               valueLabel={renderEntry}
               value={cellValue}
               onChange={(event) => {
@@ -96,7 +98,7 @@ const FinalizeCell = (props: FinalizeCellProps) => {
               {renderEntry}
             </Select>
           ) : (
-            <Text style={{ fontSize: '12px', cursor: 'not-allowed' }}>
+            <Text style={{ fontSize: "12px", cursor: "not-allowed" }}>
               {props.plan.name}
             </Text>
           )}
