@@ -11,20 +11,20 @@ import {
   TableRow,
   Text,
   TextInput,
-} from 'grommet';
-import { table } from './recipes.css';
+} from "grommet";
+import { table } from "./recipes.css";
 
-import EditRecipesDialog from './EditRecipesDialog';
-import React, { useContext } from 'react';
-import RecipesRow from '../recipes/RecipesRow';
-import { defaultDeliveryDays } from '@tnmo/config';
-import PlanningModeSummary from './PlanningModeSummary';
-import { Recipe, Exclusion, WeeklyPlan, HotOrCold } from '@tnmo/types';
-import { NavigationContext } from '@tnmo/utils';
+import EditRecipesDialog from "./EditRecipesDialog";
+import React, { useContext } from "react";
+import RecipesRow from "../recipes/RecipesRow";
+import { defaultDeliveryDays } from "@tnmo/config";
+import PlanningModeSummary from "./PlanningModeSummary";
+import { Recipe, Exclusion, WeeklyPlan, HotOrCold } from "@tnmo/types";
+import { NavigationContext } from "@tnmo/utils";
 
 export type ProjectedRecipe = Pick<
   Recipe,
-  'id' | 'shortName' | 'name' | 'description' | 'potentialExclusions'
+  "id" | "shortName" | "name" | "description" | "potentialExclusions"
 >;
 
 interface RecipesProps {
@@ -39,7 +39,7 @@ interface RecipesProps {
 
 const Recipes: React.FC<RecipesProps> = (props) => {
   const recipes = props.recipes ?? [];
-  const error = '';
+  const error = "";
   const [planningMode, setPlanningMode] = React.useState(false);
   const [showCreate, setShowCreate] = React.useState(false);
   const [selectedDelivery, setSelectedDelivery] = React.useState(-1);
@@ -55,7 +55,7 @@ const Recipes: React.FC<RecipesProps> = (props) => {
     .filter(
       (recipe) =>
         !recipe.potentialExclusions.some(
-          (exclusion) => exclusion.name === 'Alternate'
+          (exclusion) => exclusion.name === "Alternate"
         )
     )
     .reverse();
@@ -91,7 +91,7 @@ const Recipes: React.FC<RecipesProps> = (props) => {
         align="center"
         justify="start"
         gap="small"
-        style={{ marginBottom: '2rem', marginTop: '1rem' }}
+        style={{ marginBottom: "2rem", marginTop: "1rem" }}
       >
         <Heading level={2}>Recipes</Heading>
 
@@ -99,7 +99,7 @@ const Recipes: React.FC<RecipesProps> = (props) => {
           primary
           size="small"
           label="New"
-          a11yTitle="New Customer"
+          a11yTitle="New Recipe"
           onClick={(): void => {
             navigate?.(`/admin/create-recipe`);
           }}
@@ -113,7 +113,7 @@ const Recipes: React.FC<RecipesProps> = (props) => {
             onClick={() => setPlanningMode(true)}
           />
         )}
-        <Box direction="row" style={{ flexGrow: '3' }} justify="end">
+        <Box direction="row" style={{ flexGrow: "3" }} justify="end">
           <FormField>
             <TextInput
               placeholder="filter"
@@ -129,11 +129,11 @@ const Recipes: React.FC<RecipesProps> = (props) => {
             exclusions={props.customisations}
             recipes={props.recipes}
             recipe={{
-              id: '0',
-              shortName: '',
+              id: "0",
+              shortName: "",
               hotOrCold: HotOrCold.Hot,
-              name: '',
-              description: '',
+              name: "",
+              description: "",
               potentialExclusions: [],
             }}
             title="Create Recipe"
