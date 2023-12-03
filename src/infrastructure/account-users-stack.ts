@@ -8,6 +8,7 @@ import {
   User,
 } from "aws-cdk-lib/aws-iam";
 import { Construct } from "constructs";
+import { makeDevelopersGroup } from "./make-developers-group";
 
 interface AccountUsersStackProps {
   businessOwners: string[];
@@ -45,13 +46,10 @@ export class AccountUsersStack extends Stack {
         })
     );
 
-    this.developersGroup = new Group(this, "tnm-web-developers-group", {
-      groupName: "tnm-web-developer",
-    });
+    const { developersGroup, prodDataAccessRole } = makeDevelopersGroup(this);
 
-    this.prodDataAccessRole = new Role(this, "prod-data-access", {
-      assumedBy: this.developersGroup,
-    });
+    this.developersGroup = developersGroup;
+    this.prodDataAccessRole = prodDataAccessRole;
 
     props.developers.forEach(
       (developer) =>
