@@ -1,12 +1,12 @@
-import { FC } from 'react';
-import { LoginAndRegisterBox, Hero } from '@tnmo/components';
-import Image from 'next/image';
-import { loader } from '../utils/loader';
-import { RedirectIfLoggedIn } from '../components/authentication/redirect-if-logged-in';
-import AccountIcon from '../images/TNM_Icons_Final_Account.png';
-import styled from '@emotion/styled';
+import { FC } from "react";
+import { LoginAndRegisterBox, Hero } from "@tnmo/components";
+import Image from "next/image";
+import { loader } from "../utils/loader";
+import { RedirectIfLoggedIn } from "../components/authentication/redirect-if-logged-in";
+import AccountIcon from "../images/TNM_Icons_Final_Account.png";
+import styled from "@emotion/styled";
 
-const YourAccountHeaderBox = styled('div')`
+const YourAccountHeaderBox = styled("div")`
   text-align: center;
   color: #3b7d7a;
   align-items: center;
@@ -16,13 +16,13 @@ const YourAccountHeaderBox = styled('div')`
   gap: 1rem;
 `;
 
-const YourAccountHeader = styled('h1')`
+const YourAccountHeader = styled("h1")`
   font-size: 40px;
   display: auto;
   margin: 0.5rem 0 0 0;
 `;
 
-const LoginAndRegisterPadding = styled('div')`
+const LoginAndRegisterPadding = styled("div")`
   width: 100%;
   border-top: 1px solid black;
   min-height: 5rem;
@@ -44,6 +44,7 @@ const Login: FC = () => {
           <YourAccountHeader>Your Account</YourAccountHeader>
         </YourAccountHeaderBox>
       </Hero>
+      <p>Test deploy</p>
       <LoginAndRegisterBox defaultTab="Login" />
       <LoginAndRegisterPadding />
     </RedirectIfLoggedIn>
