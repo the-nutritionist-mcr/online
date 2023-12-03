@@ -142,15 +142,15 @@ jobs:
     needs: [end-to-end-tests]
 
     environment:
-      name: github-pages
+      name: docs
       url: https://the-nutritionist-mcr.github.io/online/
 
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Setup node environment
-        uses: ./.github/actions/setup-node-job
+      - name: Setup job
+        uses: ./.github/actions/setup-deps
 
       - name: Download Playwright Report
         uses: actions/download-artifact@v3
