@@ -82,11 +82,13 @@ test("User can add a recipe which is then visible in the recipes table", async (
 test("User can edit a recipe and the edit is then visible in the recipes table", async ({
   page,
 }) => {
+  await expect(page.locator("tbody")).toContainText("BEEF BURRITO");
   await page
-    .getByRole("row", { name: "BEEF BURRITO SLOW COOKED BEEF" })
+    .locator("tr", { has: page.locator("text=BEEF BURRITO") })
     .getByLabel("Edit")
     .first()
     .click();
+
   await expect(page.getByRole("main")).toContainText("Edit Recipe");
 
   await page.locator('input[name="shortName"]').fill("BEEF BURRITO-2");
