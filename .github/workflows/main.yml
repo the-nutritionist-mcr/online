@@ -27,28 +27,10 @@ jobs:
         uses: ./.github/actions/setup-deps
       - run: npm run ${{ matrix.check }}
 
-  build:
-    runs-on: ubuntu-latest
-    name: Run static checks
-    strategy:
-      fail-fast: false
-      matrix:
-        check: [test, types, lint]
-
-    steps:
-      - uses: actions/checkout@v3
-      - name: Setup job
-        uses: ./.github/actions/setup-deps
-      - run: npm run ${{ matrix.check }}
-
-      - name: Get App Version
-        shell: bash
-        run: echo "APP_VERSION=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
-
   deploy-for-cypress:
     runs-on: ubuntu-latest
     name: Deploy For Cypress
-    needs: [build, checks]
+    needs: [checks]
     steps:
       - uses: actions/checkout@v3
       - name: Setup job
