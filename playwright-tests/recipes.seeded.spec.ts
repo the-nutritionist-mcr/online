@@ -92,13 +92,13 @@ test("User can edit a recipe and the edit is then visible in the recipes table",
   await expect(page.getByRole("main")).toContainText("Edit Recipe");
 
   await page.locator('input[name="shortName"]').fill("BEEF BURRITO-2");
-  await page.getByLabel("Open Drop; Selected: Hot").click();
+  await page.locator('input[name="hotOrCold"]').click();
   await page.getByRole("option", { name: "Cold" }).click();
 
   await page.locator('input[name="potentialExclusions"]').click();
   await page.getByRole("option", { name: "No Alcohol" }).click();
-  await page.locator("form").click();
 
+  await page.locator("form").click();
   await page.getByRole("button", { name: "Save" }).click();
   await expect(page.locator("body")).toContainText("successfully");
   await page.getByRole("link", { name: "Recipes" }).click();

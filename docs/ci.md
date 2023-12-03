@@ -14,6 +14,15 @@ If all of those steps pass, the application will automatically be deployed
 
 Note that there is NO manual deployment step - If everything passes, the change _will_ be deployed automatically
 
+## Commit Hooks
+
+In order to minimise failed pipeline runs, the project uses 'husy' to configure pre-commit hooks that will automatically run the following checks against staged files
+
+- `tsc-files`
+- `eslint`
+- `vitest related`
+- `prettier`
+
 ## Deployment
 
 The correct way to deploy the application is via the CI pipeline. If you wish to deploy the `cypress` environment locally you can do (as long as you have AWS credentials in your environment) using `npm run deploy:cypress`
