@@ -32,6 +32,9 @@ jobs:
     name: "End to End Tests"
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    environment:
+      name: cypress
+      url: https://cypress.app.thenutritionistmcr.co.uk
     steps:
       - uses: actions/checkout@v3
 
@@ -70,6 +73,9 @@ jobs:
     runs-on: ubuntu-latest
     name: Test Deploy
     if: github.ref == 'refs/heads/main'
+    environment:
+      name: test
+      url: https://test.app.thenutritionistmcr.co.uk
 
     needs: [end-to-end-tests, checks]
     steps:
@@ -93,6 +99,10 @@ jobs:
   prod-deploy:
     runs-on: ubuntu-latest
     name: Prod Deploy
+    environment:
+      name: production
+      url: https://portal.thenutritionistmcr.co.uk
+
     if: github.ref == 'refs/heads/main'
     needs: [end-to-end-tests, checks]
     steps:
