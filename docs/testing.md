@@ -2,7 +2,7 @@
 
 ## Unit Tests
 
-Unit tests are written using `vitest` and a combination of React Testing Library with a bit of Enzyme. Test coverage is fairly low across the whole codebase (lessons learned :-(), but I'd like it not to drop any further, so the test are configured with a threshold which will fail the CI if coverage drops any further
+Unit tests are written using `vitest` and a combination of React Testing Library with a bit of Enzyme. Test coverage is fairly low across the whole codebase (lessons learned 😟), but I'd like it not to drop any further, so the test are configured with a threshold which will fail the CI if coverage drops any further
 
 ## End to End tests
 
