@@ -25,21 +25,18 @@ interface FrontendStackProps {
   userPool: IUserPool;
 }
 
-const DIST_PATH = path.join(
+const ROOT_PATH = path.join(
   // eslint-disable-next-line unicorn/prefer-module
   __dirname,
   '..',
   '..',
-  '..',
-  '..',
-  'dist'
 );
 
-const APP_PATH = path.join(DIST_PATH, 'apps', 'web-app');
+// const APP_PATH = path.join(ROOT_PATH, 'apps', 'web-app');
 
-const EXPORTED_PATH = path.join(APP_PATH, 'exported');
+const EXPORTED_PATH = path.join(ROOT_PATH, 'out');
 
-const DOT_NEXT_PATH = path.join(APP_PATH, '.next');
+// const DOT_NEXT_PATH = path.join(APP_PATH, '.next');
 
 export class FrontendStack extends Stack {
   public constructor(scope: Construct, id: string, props: FrontendStackProps) {
@@ -99,17 +96,17 @@ export class FrontendStack extends Stack {
       ChargebeeUrl: props.chargebeeUrl,
     };
 
-    new BucketDeployment(this, 'dot-next-bucket-deployment', {
-      sources: [Source.asset(path.join(DOT_NEXT_PATH, 'static', 'images'))],
-      destinationBucket: staticsBucket,
-      destinationKeyPrefix: '_next/static/images',
-      distribution,
-    });
+    // new BucketDeployment(this, 'dot-next-bucket-deployment', {
+    //   sources: [Source.asset(path.join(DOT_NEXT_PATH, 'static', 'images'))],
+    //   destinationBucket: staticsBucket,
+    //   destinationKeyPrefix: '_next/static/images',
+    //   distribution,
+    // });
 
-    new ImageOptimisation(this, `image-optimsation-api`, {
-      distribution,
-      assetsPath: path.join(APP_PATH, 'public', 'images'),
-    });
+    // new ImageOptimisation(this, `image-optimsation-api`, {
+    //   distribution,
+    //   assetsPath: path.join(APP_PATH, 'public', 'images'),
+    // });
 
     new BucketDeployment(this, 'exported-bucket-deployment', {
       sources: [
