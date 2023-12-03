@@ -1,11 +1,14 @@
 import { test, expect } from "@playwright/test";
 import { login } from "./login";
 
+test.beforeEach(async ({ page }) => {
+  await login(page, "cypress-test-user", "password");
+  await page.reload();
+});
+
 test("when recipes link is clicked, a page is loaded which contains recipe data", async ({
   page,
 }) => {
-  await login(page, "cypress-test-user", "password");
-  await page.reload();
   await page.getByRole("link", { name: "Recipes" }).click();
   await expect(page.locator("tbody")).toContainText("CHIX ORZO");
   await expect(page.locator("tbody")).toContainText(
@@ -26,6 +29,7 @@ test("when recipes link is clicked, a page is loaded which contains recipe data"
 test("User can add a recipe which is then visible in the recipes table", async ({
   page,
 }) => {
+  await page.getByRole("link", { name: "Recipes" }).click();
   await page.getByLabel("New Recipe").click();
   await page.locator('input[name="name"]').fill("A recipe");
   await page.locator('input[name="shortName"]').fill("short-name");
