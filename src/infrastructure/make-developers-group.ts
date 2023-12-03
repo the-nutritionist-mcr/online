@@ -1,4 +1,11 @@
-import { Group, ManagedPolicy, Role } from "aws-cdk-lib/aws-iam";
+import {
+  AnyPrincipal,
+  Effect,
+  Group,
+  ManagedPolicy,
+  PolicyStatement,
+  Role,
+} from "aws-cdk-lib/aws-iam";
 import { Construct } from "constructs";
 
 export const makeDevelopersGroup = (scope: Construct) => {
@@ -11,8 +18,16 @@ export const makeDevelopersGroup = (scope: Construct) => {
   });
 
   const prodDataAccessRole = new Role(scope, "prod-data-access", {
-    assumedBy: developersGroup,
+    assumedBy: new AnyPrincipal(),
   });
+
+  const assumePolicy = new PolicyStatement({
+    effect: Effect.ALLOW,
+    actions: ["sts:AssumeRole"],
+    resources: [prodDataAccessRole.roleArn],
+  });
+
+  developersGroup.addToPolicy(assumePolicy);
 
   return { developersGroup, prodDataAccessRole };
 };

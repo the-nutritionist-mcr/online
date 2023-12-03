@@ -55,7 +55,6 @@ export class AccountUsersStack extends Stack {
       (developer) =>
         new User(this, `${developer}-user`, {
           groups: [this.developersGroup],
-          managedPolicies: [readOnlyAccess],
           userName: developer,
         })
     );
