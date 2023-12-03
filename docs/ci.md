@@ -12,7 +12,7 @@ If all of those steps pass, the application will automatically be deployed
 - To production (`htttps://portal.thenutritionistmcr.com`) as well as
 - The test environment (`https://test.app.thenutritionistmcr.com`)
 
-Note that there is NO manual deployment step - If everyting passes, the change _will_ be deployed automatically
+Note that there is NO manual deployment step - If everything passes, the change _will_ be deployed automatically
 
 ## Deployment
 
