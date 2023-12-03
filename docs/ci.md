@@ -1,18 +1,22 @@
 # Continuous Integration
 
-Currently all pushes to the `main` branch trigger a Github Actions workflow that
+Currently all pushes to the `main` branch trigger a [Github Actions workflow](https://github.com/the-nutritionist-mcr/online/actions/workflows/main.yml) that
 
 - Runs all unit tests
 - Checks Typescript types
 - Runs the linter
-- Deploys the application to `https://cypress.app.thenutritionistmcr.com` and runs end to end tests against it
+- Deploys the application to a pre-production test environment and runs end to end tests against it
 
 If all of those steps pass, the application will automatically be deployed
 
-- To production (`htttps://portal.thenutritionistmcr.com`) as well as
-- The test environment (`https://test.app.thenutritionistmcr.com`)
+- To production as well as
+- Another test environment
 
-Note that there is NO manual deployment step - If everything passes, the change _will_ be deployed automatically
+Note that there is NO manual deployment step - If everything passes, the change _will_ be deployed automatically. See [Environments](./environments.md) for details of the different application environments.
+
+## Pipeline Times
+
+The time it takes for a change to be available in production varies depending on whether you are making complex changes to infrastructure or whether you are installing any new npm packages. However, simple changes should take about 15 minutes to be visible in production.
 
 ## Commit Hooks
 

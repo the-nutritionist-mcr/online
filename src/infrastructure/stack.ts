@@ -91,10 +91,6 @@ const main = async () => {
       chargebeeUrl: `https://${config.chargebeeSite}.chargebee.com`,
     });
   });
-
-  new UsersStack(app, "tnm-web-users-stack", {
-    stackProps: { env },
-  });
   app.synth();
 };
 
