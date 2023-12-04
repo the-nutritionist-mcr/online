@@ -80,7 +80,7 @@ const config = {
             items: [
               {
                 label: "Technical Documentation",
-                to: "/docs/technical-documentation",
+                to: "/docs/category/technical-documentation",
               },
             ],
           },
