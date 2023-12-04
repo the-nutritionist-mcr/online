@@ -16,7 +16,7 @@ Note that there is NO manual deployment step - If everything passes, the change 
 
 ## Pipeline Times
 
-The time it takes for a change to be available in production varies depending on whether you are making complex changes to infrastructure or whether you are installing any new npm packages. However, simple changes should take about 15 minutes to be visible in production.
+The time it takes for a change to be available in production varies depending on whether you are making complex changes to infrastructure or whether you are installing any new npm packages. However, simple changes should take about 20 minutes to be visible in production.
 
 ## Commit Hooks
 
