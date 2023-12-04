@@ -1,3 +1,16 @@
+---
+id: continuous-integration
+title: Continuous Integration
+tags:
+  - CI
+  - Automation
+  - Git Hooks
+  - Pipeline
+  - Commit Hooks
+  - Deployment
+description: How deployment for the application works through the CI pipeline, as well as how our commit hooks are configured
+---
+
 # Continuous Integration
 
 Currently all pushes to the `main` branch trigger a [Github Actions workflow](https://github.com/the-nutritionist-mcr/online/actions/workflows/main.yml) that
@@ -12,7 +25,7 @@ If all of those steps pass, the application will automatically be deployed
 - To production as well as
 - Another test environment
 
-Note that there is NO manual deployment step - If everything passes, the change _will_ be deployed automatically. See [Environments](./environments) for details of the different application environments.
+Note that there is NO manual deployment step - If everything passes, the change _will_ be deployed automatically. See [Environments](./environments.md) for details of the different application environments.
 
 ## Pipeline Times
 

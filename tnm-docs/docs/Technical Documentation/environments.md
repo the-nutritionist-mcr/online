@@ -1,5 +1,7 @@
 # Environments
 
+The application is deployed to the following environments - for more details see the [deployments](https://github.com/the-nutritionist-mcr/online/deployments) page on Github
+
 | Environment | URL                                        | Description                                                                                                |
 | ----------- | ------------------------------------------ | ---------------------------------------------------------------------------------------------------------- |
 | Production  | https://portal.thenutritionistmcr.com      | This is the application                                                                                    |
