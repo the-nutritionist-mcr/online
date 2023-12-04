@@ -21,6 +21,7 @@ export default defineConfig({
     {
       name: "chromium (No Seeding needed)",
       use: { ...devices["Desktop Chrome"] },
+      testIgnore: /.+\.seeded\.spec\.ts/,
       testMatch: /.+\.spec\.ts/,
     },
     {
