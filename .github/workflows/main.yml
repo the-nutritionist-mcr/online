@@ -152,14 +152,18 @@ jobs:
       - name: Setup job
         uses: ./.github/actions/setup-deps
 
+      - name: Generate Docs
+        run: npm run docs
+        working-directory: tnm-docs
+
       - name: Download Playwright Report
         uses: actions/download-artifact@v3
         with:
           name: playwright-report
-          path: docs/tests
+          path: tnm-docs/tests
 
       - name: Upload report
         if: always()
         uses: ./.github/actions/upload-pages
         with:
-          path: ./docs
+          path: ./tnm-docs

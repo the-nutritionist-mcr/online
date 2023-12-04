@@ -12,7 +12,7 @@ If all of those steps pass, the application will automatically be deployed
 - To production as well as
 - Another test environment
 
-Note that there is NO manual deployment step - If everything passes, the change _will_ be deployed automatically. See [Environments](./environments.md) for details of the different application environments.
+Note that there is NO manual deployment step - If everything passes, the change _will_ be deployed automatically. See [Environments](./environments) for details of the different application environments.
 
 ## Pipeline Times
 

@@ -110,3 +110,13 @@ test("User can edit a recipe and the edit is then visible in the recipes table",
   const row = page.locator("tr:has-text('BEEF BURRITO-2')");
   await expect(row).toContainText("No Alcohol");
 });
+
+test("user can delete a recipe and the deleted recipe is no longer visible", async ({
+  page,
+}) => {
+await page.goto('https://cypress.app.thenutritionistmcr.com/');
+await page.getByRole('button', { name: 'Login' }).click();
+await page.getByRole('link', { name: 'Recipes' }).click()
+await page.getByRole('button', { name: 'Checkmark Ok' }).nth(1).click();
+await page.getByRole('link', { name: 'Recipes' }).click();;
+});
