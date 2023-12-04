@@ -153,7 +153,7 @@ jobs:
         uses: ./.github/actions/setup-deps
 
       - name: Generate Docs
-        run: npm run docs
+        run: npm run build
         working-directory: tnm-docs
 
       - name: Download Playwright Report
