@@ -160,10 +160,10 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: playwright-report
-          path: tnm-docs/tests
+          path: tnm-docs/build/tests
 
       - name: Upload report
         if: always()
         uses: ./.github/actions/upload-pages
         with:
-          path: ./tnm-docs
+          path: ./tnm-docs/build
