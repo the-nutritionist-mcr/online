@@ -5,9 +5,9 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
+    "deploy": "cdk deploy '*'",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
-    "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
@@ -18,7 +18,11 @@
     "@docusaurus/preset-classic": "3.0.1",
     "@docusaurus/theme-mermaid": "^3.0.1",
     "@mdx-js/react": "^3.0.0",
+    "@tsconfig/recommended": "^1.0.3",
+    "aws-cdk": "^2.113.0",
+    "aws-cdk-lib": "^2.113.0",
     "clsx": "^2.0.0",
+    "constructs": "^10.3.0",
     "prism-react-renderer": "^2.3.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0"

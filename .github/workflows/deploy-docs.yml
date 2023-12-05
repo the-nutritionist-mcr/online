@@ -1,0 +1,40 @@
+name: Deploy Docs
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "tnm-docs/**"
+
+jobs:
+  deploy-docs:
+    name: Deploy Docs
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install Dependencies
+        run: npm install
+        working-directory: tnm-docs
+
+      - name: Generate Docs
+        run: npm run build
+        working-directory: tnm-docs
+
+      - name: Deploy Docs
+        run: npm run deploy
+        working-directory: tnm-docs
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
