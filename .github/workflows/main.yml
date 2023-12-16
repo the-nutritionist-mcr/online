@@ -141,7 +141,7 @@ jobs:
     name: Deploy Credentials
 
     if: github.ref == 'refs/heads/main'
-    needs: [cypress-deploy, prod-deploy, test-deploy]
+    needs: [prod-deploy, test-deploy]
     steps:
       - uses: actions/checkout@v3
       - name: Setup job
@@ -159,36 +159,3 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-
-  deploy-docs:
-    name: Deploy Docs
-    if: always()
-    runs-on: ubuntu-latest
-    needs: [end-to-end-tests]
-
-    environment:
-      name: docs
-      url: https://the-nutritionist-mcr.github.io/online/
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Setup job
-        uses: ./.github/actions/setup-deps
-
-      - name: Generate Docs
-        run: npm install && npm run build
-        working-directory: tnm-docs
-
-      - name: Download Playwright Report
-        uses: actions/download-artifact@v3
-        with:
-          name: playwright-report
-          path: tnm-docs/build/tests
-
-      - name: Upload report
-        if: always()
-        uses: ./.github/actions/upload-pages
-        with:
-          path: ./tnm-docs/build

@@ -57,11 +57,6 @@ const main = async () => {
       chargebeeSite: CHARGEBEE_SITES.test,
     },
 
-    dev: {
-      transient: true,
-      chargebeeSite: CHARGEBEE_SITES.test,
-    },
-
     prod: {
       transient: false,
       chargebeeSite: CHARGEBEE_SITES.live,

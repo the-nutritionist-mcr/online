@@ -19,6 +19,8 @@ export class DocsStack extends Stack {
 
     const assetsBucket = new Bucket(this, "AssetsBucket", {
       publicReadAccess: true,
+      websiteIndexDocument: "index.html",
+      websiteErrorDocument: "index.html",
       blockPublicAccess: {
         blockPublicAcls: false,
         blockPublicPolicy: false,
