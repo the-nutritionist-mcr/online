@@ -6,8 +6,8 @@ function handler(event) {
   var request = event.request;
   var headers = request.headers;
 
-  const authUser = "${user}";
-  const authPass = "${password}";
+  var authUser = "${user}";
+  var authPass = "${password}";
   var authString = "Basic " + (authUser + ":" + authPass).toString("base64");
 
   if (
