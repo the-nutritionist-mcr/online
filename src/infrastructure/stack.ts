@@ -34,7 +34,7 @@ const forceUpdateKey = "force-update-key";
 const main = async () => {
   const users = new AccountUsersStack(app, "tnm-web-credentials-stack", {
     businessOwners: ["lawrence", "jess", "ryan"],
-    developers: ["ben"],
+    developers: ["ben", "adam"],
     stackProps: { env },
   });
 

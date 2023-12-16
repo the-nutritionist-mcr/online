@@ -19,6 +19,12 @@ export class DocsStack extends Stack {
 
     const assetsBucket = new Bucket(this, "AssetsBucket", {
       publicReadAccess: true,
+      blockPublicAccess: {
+        blockPublicAcls: false,
+        blockPublicPolicy: false,
+        ignorePublicAcls: false,
+        restrictPublicBuckets: false,
+      },
     });
 
     new BucketDeployment(this, "AssetsDeployment", {
