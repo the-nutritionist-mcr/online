@@ -33,7 +33,8 @@ const config = {
       ({
         docs: {
           sidebarPath: "./sidebars.js",
-          editUrl: "https://github.com/the-nutritionist-mcr/online/tnm-docs",
+          editUrl:
+            "https://github.com/the-nutritionist-mcr/online/blob/main/tnm-docs",
         },
         blog: false,
         theme: {
