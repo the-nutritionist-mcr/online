@@ -17,6 +17,18 @@ export const makeDevelopersGroup = (scope: Construct) => {
     managedPolicies: [readOnlyAccess],
   });
 
+  const deployRole = Role.fromRoleArn(
+    scope,
+    "cdk-deploy-role",
+    "arn:aws:iam::568693217207:role/cdk-hnb659fds-deploy-role-568693217207-eu-west-2"
+  );
+
+  const filePublishingRole = Role.fromRoleArn(
+    scope,
+    "cdk-deploy-role",
+    "arn:aws:iam::568693217207:role/cdk-hnb659fds-file-publishing-role-568693217207-eu-west-2"
+  );
+
   const prodDataAccessRole = new Role(scope, "prod-data-access", {
     assumedBy: new AnyPrincipal(),
     managedPolicies: [readOnlyAccess],
@@ -25,7 +37,11 @@ export const makeDevelopersGroup = (scope: Construct) => {
   const assumePolicy = new PolicyStatement({
     effect: Effect.ALLOW,
     actions: ["sts:AssumeRole"],
-    resources: [prodDataAccessRole.roleArn],
+    resources: [
+      prodDataAccessRole.roleArn,
+      filePublishingRole.roleArn,
+      deployRole.roleArn,
+    ],
   });
 
   developersGroup.addToPolicy(assumePolicy);
