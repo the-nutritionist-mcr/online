@@ -1,3 +1,16 @@
+---
+id: testing
+title: Testing
+tags:
+  - testing
+  - unit tests
+  - e2e
+  - Cypress
+  - Playwright
+
+description: The current application testing strategy
+---
+
 # Testing
 
 ## Unit Tests

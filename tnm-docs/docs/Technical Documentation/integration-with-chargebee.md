@@ -1,3 +1,13 @@
+---
+id: integration-with-chargebee
+title: ChargeBee Integration
+tags:
+  - ChargeBee
+  - Webhook
+  - CRM
+description: How the ChargeBee integration works
+---
+
 # ChargeBee Integration
 
 ## Webhook Interactions

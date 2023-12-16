@@ -1,3 +1,12 @@
+---
+id: environments
+title: Environments
+tags:
+  - Environments
+
+description: Details of the different application environments
+---
+
 # Environments
 
 The application is deployed to the following environments - for more details see the [deployments](https://github.com/the-nutritionist-mcr/online/deployments) page on Github
