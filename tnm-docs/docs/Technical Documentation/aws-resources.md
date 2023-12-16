@@ -52,7 +52,7 @@ Stores the list of 'customisation' tags that are available.
 |--|--|
 | E2E | [tnm-web-customisation-table-cypress](https://eu-west-2.console.aws.amazon.com/dynamodbv2/home?region=eu-west-2#item-explorer?table=tnm-web-customisation-table-cypress)|
 | Test | [tnm-web-customisation-table-test](https://eu-west-2.console.aws.amazon.com/dynamodbv2/home?region=eu-west-2#item-explorer?operation=QUERY&table=tnm-web-customisation-table-test)|
-| Prod | [tnm-web-plan-table-table-prod](https://eu-west-2.console.aws.amazon.com/dynamodbv2/home?region=eu-west-2#item-explorer?operation=QUERY&table=tnm-web-plan-table-table-prod)|
+| Prod | [tnm-web-customisation-table-prod](https://eu-west-2.console.aws.amazon.com/dynamodbv2/home?region=eu-west-2#item-explorer?operation=QUERY&table=tnm-web-customisation-table-prod)|
 
 
 ### Recipes
