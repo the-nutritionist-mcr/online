@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "APP_VERSION=local next dev",
+    "dev": "NEXT_PUBLIC_IS_LOCAL_DEV=true APP_VERSION=local next dev",
     "deploy:e2e": "cdk deploy tnm-web-cypress-frontend-stack --require-approval never",
     "cdk": "cdk",
     "build": "next build",
