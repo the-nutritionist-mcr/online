@@ -25,7 +25,7 @@ export const makeDevelopersGroup = (scope: Construct) => {
 
   const filePublishingRole = Role.fromRoleArn(
     scope,
-    "cdk-deploy-role",
+    "cdk-file-publishing-role",
     "arn:aws:iam::568693217207:role/cdk-hnb659fds-file-publishing-role-568693217207-eu-west-2"
   );
 
