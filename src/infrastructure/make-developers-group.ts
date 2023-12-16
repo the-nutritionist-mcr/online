@@ -19,6 +19,7 @@ export const makeDevelopersGroup = (scope: Construct) => {
 
   const prodDataAccessRole = new Role(scope, "prod-data-access", {
     assumedBy: new AnyPrincipal(),
+    managedPolicies: [readOnlyAccess],
   });
 
   const assumePolicy = new PolicyStatement({

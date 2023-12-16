@@ -6,7 +6,7 @@ import { makeDataApis } from "./make-data-apis";
 import { getDomainName } from "@tnmo/utils";
 import { IHostedZone, PublicHostedZone } from "aws-cdk-lib/aws-route53";
 import { ITable } from "aws-cdk-lib/aws-dynamodb";
-import { IRole } from "aws-cdk-lib/aws-iam";
+import { IGroup, IRole } from "aws-cdk-lib/aws-iam";
 
 interface BackendStackProps {
   forceUpdateKey: string;
@@ -18,6 +18,7 @@ interface BackendStackProps {
   chargebeeSite: string;
   sesIdentityArn: string;
   prodDataAccessRole: IRole;
+  developerGroup: IGroup;
 }
 
 export class BackendStack extends Stack {
@@ -53,6 +54,17 @@ export class BackendStack extends Stack {
       props.sesIdentityArn,
       props.chargebeeSite,
       props.forceUpdateKey
+    );
+
+    userPool.grant(
+      props.developerGroup,
+      "cognito-idp:AdminDeleteUser",
+      "cognito-idp:AdminAddUserToGroup",
+      "cognito-idp:AdminRemoveUserFromGroup",
+      "cognito-idp:AdminDisableUser",
+      "cognito-idp:AdminEnableUser",
+      "cognito-idp:AdminSetUserPassword",
+      "cognito-idp:AdminUserGlobalSignOut"
     );
 
     recipesTable.grantReadWriteData(props.prodDataAccessRole);

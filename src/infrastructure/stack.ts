@@ -74,6 +74,7 @@ const main = async () => {
       gitHash: hash,
       forceUpdateKey,
       prodDataAccessRole: users.prodDataAccessRole,
+      developerGroup: users.developersGroup,
     });
 
     new FrontendStack(app, `tnm-web-${envName}-frontend-stack`, {
