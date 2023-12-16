@@ -15,7 +15,11 @@ import path from "path";
 
 export class DocsStack extends Stack {
   constructor(scope: Construct, id: string) {
-    super(scope, id);
+    super(scope, id, {
+      env: {
+        region: "eu-west-2",
+      },
+    });
 
     const assetsBucket = new Bucket(this, "AssetsBucket", {
       publicReadAccess: true,
