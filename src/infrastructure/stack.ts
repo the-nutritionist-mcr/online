@@ -81,8 +81,6 @@ const main = async () => {
       prodDataAccessRole: users.prodDataAccessRole,
     });
 
-    backend.addDependency(users);
-
     new FrontendStack(app, `tnm-web-${envName}-frontend-stack`, {
       stackProps: { env },
       envName,

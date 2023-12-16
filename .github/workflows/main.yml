@@ -136,6 +136,30 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
+  deploy-users:
+    runs-on: ubuntu-latest
+    name: Deploy Credentials
+
+    if: github.ref == 'refs/heads/main'
+    needs: [cypress-deploy, prod-deploy, test-deploy]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup job
+
+        uses: ./.github/actions/setup-deps
+      - name: Get App Version
+        shell: bash
+        run: echo "APP_VERSION=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+
+      - run: npm run build
+        env:
+          APP_VERSION: ${{ env.APP_VERSION }}
+
+      - run: npm run cdk -- deploy tnm-web-credentials-stack --require-approval never
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
   deploy-docs:
     name: Deploy Docs
     if: always()
