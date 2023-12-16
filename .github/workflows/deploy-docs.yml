@@ -20,6 +20,10 @@ jobs:
     name: Deploy Docs
     runs-on: ubuntu-latest
 
+    environment:
+      name: docs
+      url: https://the-nutritionist-mcr.github.io/online/
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
