@@ -39,11 +39,6 @@ export class DocsStack extends Stack {
       },
     });
 
-    new BucketDeployment(this, "AssetsDeployment", {
-      destinationBucket: assetsBucket,
-      sources: [Source.asset(path.join(__dirname, "..", "build"))],
-    });
-
     const domainName = "docs.thenutritionistmcr.com";
 
     const hostedZone = new PublicHostedZone(this, "HostedZone", {
@@ -72,11 +67,17 @@ export class DocsStack extends Stack {
           {
             function: authFunction,
             eventType: FunctionEventType.VIEWER_REQUEST,
-          }
-        ]
+          },
+        ],
       },
       certificate,
       domainNames: [domainName],
+    });
+
+    new BucketDeployment(this, "AssetsDeployment", {
+      destinationBucket: assetsBucket,
+      sources: [Source.asset(path.join(__dirname, "..", "build"))],
+      distribution,
     });
 
     new ARecord(this, "FrontendARecord", {
