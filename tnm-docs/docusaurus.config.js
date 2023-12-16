@@ -13,7 +13,7 @@ const config = {
   favicon: "img/favicon.ico",
 
   url: "https://the-nutritionist-mcr.github.io/",
-  baseUrl: "/online/",
+  baseUrl: "/",
 
   organizationName: "the-nutritionist-mcr",
   projectName: "online",
