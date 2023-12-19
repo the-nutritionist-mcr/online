@@ -16,4 +16,4 @@ description: Partially read only database of portal customers that allows us to 
 This page is **not customer facing**
 :::
 
-The customers page provides a **partially read only** view of the customers available in 
+The customers page provides a **partially read only** view of the customers available in our ChargeBee site. \*\*all per
