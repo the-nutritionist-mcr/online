@@ -16,7 +16,10 @@ description: Partially read only database of portal customers that allows us to 
 This page is **not customer facing**
 :::
 
-The customers page provides a **partially read only** view of the customers available in our ChargeBee site. **customer details** such as address, name and telephone number are all managed in ChargeBee. The portal however allows you to 
+The customers page provides a **partially read only** view of the customers available in our ChargeBee site. **customer details** such as address, name and telephone number are all managed in ChargeBee. 
+
+The portal **does** however allow you to 
 
 - Edit what customisation tags are associated with a given customer
-- Apply a 
+- Apply a 'custom plan' to a customer
+- 
