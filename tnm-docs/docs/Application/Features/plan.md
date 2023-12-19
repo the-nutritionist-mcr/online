@@ -35,8 +35,7 @@ flowchart TD
     subgraph Z[" "]
         direction LR
         A{{Custom plan on record?}}-->|Yes|B([Use custom plan])
-        A-->|No|C[DPW * MPD]
-        C-->D{{Is it an even number?}}
+        A-->D{{Is DPW an even number?}}
         D-->|Yes|E([D1 and D2 even split])
         D-->|No|F{{7 day plan?}}
         F-->|No|G(["D1: ((DPW + 1) / 2) x MPD, D2: (((DPW + 1) / 2) - 1) X MPD"])
