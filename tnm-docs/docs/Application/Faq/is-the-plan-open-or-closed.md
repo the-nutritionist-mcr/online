@@ -12,16 +12,16 @@ description: How the application decides if the plan is open or closed
 
 # Is the plan open or closed?
 
-The logic that governs whether a plan is open or closed is governed using the following flow
+The logic that governs whether a plan is open or closed for customers is governed using the following flow
 
 ```mermaid
 flowchart TD
-    A{{"`Has midnight on the first Wednesday after the **_most recent plan was created_** passed?`"}} -->|Yes| B([Closed])
+    A{{"`Has **_midnight_** on the **_first Wednesday_** after the **_most recent plan was created_** passed?`"}} -->|Yes| B(["`The plan is **closed**`"])
     A -->|No| C{{"`Has the **_publish button been pressed_** on that plan?`"}}
     C -->|No| B
     C -->|Yes| D{{"`Are **_all subscriptions for the customer_** going to be active for **_both cooks_**?`"}}
     D -->|No| B
-    D -->|Yes| E([Open])
+    D -->|Yes| E(["`The plan is **open**`"])
 ```
 
 this will impact the following parts of the application
