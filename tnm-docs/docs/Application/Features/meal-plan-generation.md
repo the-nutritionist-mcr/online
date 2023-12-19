@@ -63,3 +63,22 @@ Given the same set of recipes, if recipe `B` is tagged with `no pork` as an `exc
 :::warning
 At the time of writing, meal `B` will still be visible to the customer on the [choose meals](../Pages/choose-meals.md) page - with a quantity set to zero.
 :::
+
+## Alternates
+
+It is possible to tag recipes as 'alternate' recipes. This means mark a recipe so that
+
+- Given recipe D
+- If the customer is tagged with `x`
+- Supply recipe F instead
+
+So given the same set of recipes, but assuming that the `D->F` alternate tag is applied and the customer has a matching tag, the distribution for that customer will now look like this
+
+| Plan  |     |     |     |       |     |     |
+| ----- | --- | --- | --- | ----- | --- | --- |
+| Micro | A   | B   | C   | **F** | E   | A   |
+| Mass  | A   | B   | C   |       |     |     |
+
+:::info
+This behaviour is recursive - if `F` were found to have an `F->G` alternate tag that also matches the tags attached to the customer, recipe `G` will be supplied instead
+:::
