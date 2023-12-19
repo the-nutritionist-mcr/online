@@ -28,20 +28,21 @@ Meals are only added to the plan for a given customer of the customer's chargebe
 
 To calculate how many meals should be allocated for a given plan on each delivery, the following algorithm is used. Note the following abbreviations
 
-- MPD: Meals per day
-- DPW: Days per week
-- D1/D2: Delivery 1/Delivery 2
+- **MPD** - Meals per day
+- **DPW** - Days per week
+- **D1** - Delivery 1
+- **D2** - Delivery 2
 
 ```mermaid
 flowchart LR
     A{{Custom plan on record?}}-->|Yes|B([Use custom plan])
-    A-->|No|D{{Is DPW an even number?}}
+    A-->|No|D{{"`Is **DPW** an even number?`"}}
     D-->|Yes|E(["`**D1** and **D2** even split`"])
     D-->|No|F{{7 day plan?}}
-    F-->|No|G(["`**D1**: ((DPW + 1) / 2) **x** MPD
-    **D2**: (((DPW + 1) / 2) - 1) **x** MPD`"])
-    F-->|Yes|H(["`**D1**: 4 **x** MPD
-    **D2**: 3 **x** MPD`"])
+    F-->|No|G(["`**D1**: ((**DPW** + 1) / 2) x **MPD**
+    **D2**: (((**DPW** + 1) / 2) - 1) x **MPD**`"])
+    F-->|Yes|H(["`**D1**: 4 x **MPD**
+    **D2**: 3 x **MPD**`"])
 ```
 
 ## Allocating meals per plan
