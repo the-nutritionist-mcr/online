@@ -9,8 +9,6 @@ tags:
 description: View personal information that the business has on file for the customer
 ---
 
-# Account
-
 :::warning
 This page is **customer facing** - should you spot any bugs or issues, they should be discussed as a matter of priority
 :::

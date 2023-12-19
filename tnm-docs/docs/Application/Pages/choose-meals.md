@@ -9,8 +9,6 @@ tags:
 description: Allows customers to view and change meal quantities for the upcoming cook
 ---
 
-# Choose Meals
-
 :::warning
 This page is **customer facing** - should you spot any bugs or issues, they should be discussed as a matter of priority
 :::

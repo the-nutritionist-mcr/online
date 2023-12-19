@@ -8,9 +8,6 @@ tags:
 description: Details of the different AWS resources that back the application
 ---
 
-  
-# AWS Resources
-
 Resources for the TNM application are deployed into `eu-west-2`, with the exception of TLS certificates
 
 ## Route 53

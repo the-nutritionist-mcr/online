@@ -10,8 +10,6 @@ tags:
 description: Database of all the recipes that can be cooked by the business
 ---
 
-# Recipes
-
 :::info
 This page is **not customer facing**
 :::

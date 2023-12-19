@@ -8,8 +8,6 @@ tags:
 description: How the ChargeBee integration works
 ---
 
-# ChargeBee Integration
-
 ## Webhook Interactions
 
 The application is configured to respond to webhooks sent from the Chargebee API when certain events take place.

@@ -17,8 +17,6 @@ tags:
 description: How the planning algorithm works
 ---
 
-# Meal Plan Generation
-
 Once a selection of recipes has been picked using [planning mode](../Pages/recipes.md#planning-mode) on the recipes page, the system will automatically generate a plan containing details of exactly what meals should be cooked for each customer. It does so using the following set of rules
 
 ## Subscription status

@@ -8,8 +8,6 @@ tags:
 description: High level overview of how the various AWS resources used by the application connect together
 ---
 
-# Cloud Architecture
-
 The application is hosted on AWS. It is a statically rendered NextJS application backed by an API built on API Gateway, AWS Lambda and AWS Dynamodb. See [AWS Resources](./aws-resources.md) for more details.
 
 ```mermaid

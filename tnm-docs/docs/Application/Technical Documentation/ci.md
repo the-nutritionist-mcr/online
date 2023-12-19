@@ -11,8 +11,6 @@ tags:
 description: How deployment for the application works through the CI pipeline, as well as how our commit hooks are configured
 ---
 
-# Continuous Integration
-
 Currently all pushes to the `main` branch trigger a [Github Actions workflow](https://github.com/the-nutritionist-mcr/online/actions/workflows/main.yml) that
 
 - Runs all unit tests

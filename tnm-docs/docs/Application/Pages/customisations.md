@@ -8,8 +8,6 @@ tags:
 description: Database of all the customisation tags that can be applied to customers or recipes
 ---
 
-# Customisations
-
 :::info
 This page is **not customer facing**
 :::

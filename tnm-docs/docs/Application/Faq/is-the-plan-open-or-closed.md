@@ -10,8 +10,6 @@ tags:
 description: How the application decides if the plan is open or closed
 ---
 
-# Is the plan open or closed?
-
 The logic that governs whether a plan is open or closed for customers is governed using the following flow
 
 ```mermaid
