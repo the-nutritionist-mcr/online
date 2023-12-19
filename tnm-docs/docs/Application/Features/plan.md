@@ -31,14 +31,11 @@ To calculate how many meals should be allocated for a given plan on each deliver
 - D1/D2: Delivery 1/Delivery 2
 
 ```mermaid
-flowchart TD
-    subgraph Z[" "]
-        direction LR
-        A{{Custom plan on record?}}-->|Yes|B([Use custom plan])
-        A-->D{{Is DPW an even number?}}
-        D-->|Yes|E([D1 and D2 even split])
-        D-->|No|F{{7 day plan?}}
-        F-->|No|G(["D1: ((DPW + 1) / 2) x MPD, D2: (((DPW + 1) / 2) - 1) X MPD"])
-        F-->|Yes|H(["D1: 4 x MPD, D2: 3 X MPD"])
-    end
+flowchart LR
+    A{{Custom plan on record?}}-->|Yes|B([Use custom plan])
+    A-->D{{Is DPW an even number?}}
+    D-->|Yes|E([D1 and D2 even split])
+    D-->|No|F{{7 day plan?}}
+    F-->|NO|G(["D1: ((DPW + 1) / 2) x MPD, D2: (((DPW + 1) / 2) - 1) X MPD"])
+    F-->|Yes|H(["D1: 4 x MPD, D2: 3 X MPD"])
 ```
