@@ -29,7 +29,7 @@ const sections = [
   {
     title: "The Business",
     description: "Information about the TNM business",
-    url: "docs/category/application",
+    url: "docs/category/the-business",
   },
 ];
 

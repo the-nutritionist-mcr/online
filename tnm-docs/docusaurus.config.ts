@@ -8,7 +8,7 @@ const presets: [string, Preset.Options][] = [
     "classic",
     {
       docs: {
-        sidebarPath: "./sidebars.js",
+        sidebarPath: "./sidebars.ts",
         editUrl:
           "https://github.com/the-nutritionist-mcr/online/blob/main/tnm-docs",
       },
@@ -25,13 +25,13 @@ const themeConfig: Preset.ThemeConfig = {
   navbar: {
     title: "TNM",
     logo: {
-      alt: "My Site Logo",
+      alt: "The Nutritionist Manchester Documentation",
       src: "img/logo.svg",
     },
     items: [
       {
         type: "docSidebar",
-        sidebarId: "tutorialSidebar",
+        sidebarId: "mainSidebar",
         position: "left",
         label: "Docs",
       },
@@ -46,11 +46,28 @@ const themeConfig: Preset.ThemeConfig = {
     style: "dark",
     links: [
       {
+        title: "Site",
+        items: [
+          {
+            label: "Home",
+            to: "/",
+          },
+          {
+            label: "Tags",
+            to: "/docs/tags",
+          },
+        ],
+      },
+      {
         title: "Docs",
         items: [
           {
-            label: "Technical Documentation",
-            to: "/docs/category/technical-documentation",
+            label: "The TNM Portal",
+            to: "/docs/category/application",
+          },
+          {
+            label: "About the Business",
+            to: "/docs/category/the-business",
           },
         ],
       },

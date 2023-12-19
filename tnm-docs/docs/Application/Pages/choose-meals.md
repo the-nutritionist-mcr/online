@@ -28,7 +28,7 @@ Because different customers recieve their meals on different days, the `Monday` 
 
 ## Number of meals
 
-Note that the number meals that a customer can pick is limited **per plan** across **both delivery days**. This can be a little confusing because it means that at any given time there are selections on a _different tab_ that will influence how many meals can be selected on the current tab. For example, on the screenshot above to work out how many meals can be selected on **current tab**
+Note that the number meals that a customer can pick is limited **per plan** across **both delivery days**. This can be a little confusing because it means that at any given time there are selections on a _different tab_ that will influence how many meals can be selected on the current tab. For example, on the screenshot above to work out how many meals can be selected on the **current tab**
 
 - The `Micro` and `Ultra Micro` tabs are **not relevant**
 - The `Wednesday` button **is relevant**
