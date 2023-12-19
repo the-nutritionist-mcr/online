@@ -22,3 +22,5 @@ Note that the below is _roughly_ what happens; the reality is more complex than 
 | 4    | Wednesday | Meals from Wednesday cook out for delivery                                                                             |
 | 4    | Thursday  | Meals from Wednesday cook out for delivery                                                                             |
 | 4    | Friday    | Meals from Wednesday cook out for delivery                                                                             |
+
+This of course overlaps; so Thursday of week 2 we are _also_ selecting the meals that are going to be cooked in week 4 and so on.
