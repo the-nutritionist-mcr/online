@@ -20,7 +20,7 @@ This date should be the date that the meals are actually _cooked_ on. When gener
 
 ## The Planning Algorithm
 
-At this point, you can click through to the [planner](../Pages/planner.md) page to see a visual representation of each customer and what meals they are going to recieve each week, which can be edited on that page and then downloaded as a PDF. In order to actually _pick_ the meals available for each customer, the following algorithms are used:
+At this point, you can click through to the [planner](../Pages/planner.md) page to see a visual representation of each customer and what meals they are going to recieve each week, which can be edited on that page and then downloaded as a PDF. In order to automatically pick the meals that will be supplied to each customer, the following algorithms are used:
 
 ### Number of meals per delivery
 
