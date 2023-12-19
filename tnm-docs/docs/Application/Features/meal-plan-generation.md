@@ -87,7 +87,7 @@ So given the same set of recipes, but assuming that the `D->F` alternate tag is 
 
 ### Extras
 
-Some plans are identified by the application as 'extras' (this is currently hardcoded, unfortunately). In the case of an extra, the [number of meals per delivery](#number-of-meals-per-delivery) logic is still used, but we are not drawing from the selected recipes any more. So given the above set of meals and a customer who had 6 Micro meals and 3 Breakfasts, you'd get something like this.
+Some plans are identified by the application as 'extras' (this is derived from [a custom field](../Technical%20Documentation/integration-with-chargebee.md#data-model) in places but is also hardcoded in a few places, so you might want to ask **Ben** if you have to touch this!). In the case of an extra, the [number of meals per delivery](#number-of-meals-per-delivery) logic is still used, but we are not drawing from the selected recipes any more. So given the above set of meals and a customer who had 6 Micro meals and 3 Breakfasts, you'd get something like this.
 
 | Plan      |     |     |     |     |     |     |
 | --------- | --- | --- | --- | --- | --- | --- |
