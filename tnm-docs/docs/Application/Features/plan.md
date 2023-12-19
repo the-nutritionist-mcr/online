@@ -39,3 +39,12 @@ flowchart LR
     F-->|NO|G(["D1: ((DPW + 1) / 2) x MPD, D2: (((DPW + 1) / 2) - 1) X MPD"])
     F-->|Yes|H(["D1: 4 x MPD, D2: 3 X MPD"])
 ```
+
+### Allocating meals per plan
+
+Given this number and a set of meals that the business has selected will be cooked, meals are then allocated on a rotating basis starting with the first recipe. So given the set of recipes A, B, C, D and E, if a customer has two plans, one Micro (with 6 meals in this delivery) and one Mass (with 3 meals in this delivery), they will be allocated in the following way
+
+| Plan  |     |     |     |     |     |     |
+| ----- | --- | --- | --- | --- | --- | --- |
+| Micro | A   | B   | C   | D   | E   | A   |
+| Mass  | A   | B   | C   |     |     |     |
