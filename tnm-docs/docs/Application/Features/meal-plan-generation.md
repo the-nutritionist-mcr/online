@@ -1,6 +1,6 @@
 ---
 id: meal-plan-generation
-title: Automatic Meal Plan Generation
+title: Meal Plan Generation
 tags:
   - Planning Mode
   - Planning
@@ -16,7 +16,7 @@ tags:
 description: Details of how the planning algorithm works
 ---
 
-# Automatic Meal Plan Generation
+# Meal Plan Generation
 
 Once a selection of recipes has been picked using [planning mode](../Pages/recipes.md#planning-mode) on the recipes page, the system will automatically generate a plan containing details of exactly what meals should be cooked for each customer. It does so using the following set of rules
 
@@ -72,6 +72,10 @@ It is possible to tag recipes as 'alternate' recipes. This means mark a recipe s
 - If the customer is tagged with `x`
 - Supply recipe F instead
 
+:::info
+This behaviour is recursive - if `F` were found to have an `F->G` alternate tag that also matches the tags attached to the customer, recipe `G` will be supplied instead
+:::
+
 So given the same set of recipes, but assuming that the `D->F` alternate tag is applied and the customer has a matching tag, the distribution for that customer will now look like this
 
 | Plan  |     |     |     |       |     |     |
@@ -79,6 +83,13 @@ So given the same set of recipes, but assuming that the `D->F` alternate tag is 
 | Micro | A   | B   | C   | **F** | E   | A   |
 | Mass  | A   | B   | C   |       |     |     |
 
-:::info
-This behaviour is recursive - if `F` were found to have an `F->G` alternate tag that also matches the tags attached to the customer, recipe `G` will be supplied instead
-:::
+### Extras
+
+Some plans are identified by the application as 'extras' (which ones this is is currently hardcoded, unfortunately). In the case of an extra, the [number of meals per delivery](#number-of-meals-per-delivery) logic is still used, but we are not drawing from the selected recipes any more. So given the above set of meals and a customer who had 6 Micro meals and 3 Breakfasts, you'd get something like this.
+
+| Plan      |     |     |     |     |     |     |
+| --------- | --- | --- | --- | --- | --- | --- |
+| Micro     | A   | B   | C   | D   | E   | A   |
+| Breakfast | Ex  | Ex  | Ex  |     |     |     |
+
+Indicating that would cook 2 x A, 1 x B, C, D and E, and 3 X Breakfast
