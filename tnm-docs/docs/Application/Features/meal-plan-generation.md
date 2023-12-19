@@ -13,7 +13,7 @@ tags:
   - Meals per week
   - Subscription status
 
-description: The Recipes page and planning mode
+description: Details of how the planning algorithm works
 ---
 
 # Automatic Meal Plan Generation
@@ -50,3 +50,12 @@ Given this number and a set of meals that the business has selected will be cook
 | ----- | --- | --- | --- | --- | --- | --- |
 | Micro | A   | B   | C   | D   | E   | A   |
 | Mass  | A   | B   | C   |     |     |     |
+
+## Exclusions
+
+Given the same set of recipes, if recipe `B` is tagged with `no pork` as an `exclusion`, and a customer is tagged with `no pork`, the planning algorithm will simply skip recipe `B` when allocating. So you'll get a distribution that looks like this
+
+| Plan  |     |     |     |     |     |     |
+| ----- | --- | --- | --- | --- | --- | --- |
+| Micro | A   | C   | D   | E   | A   | C   |
+| Mass  | A   | C   | A   |     |     |     |
