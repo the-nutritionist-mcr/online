@@ -4,7 +4,7 @@ This application is designed to support the current business process. To underst
 
 ## Day by day
 
-Note that the below is _roughly_ what happens; the reality is more complex than that. I'm including this here for illustrative purposes but if you want to see the actual schedule, please request access to the [Google Sheet](https://docs.google.com/spreadsheets/d/1LBY5p61E-bITjZvRc_GqADWdDG-Gdr5ABMS0XDCGsp8/edit#gid=1805924418)
+Note that the below is _roughly_ what happens; the reality is more complex than this and there may be inaccuracies. I'm including this here for illustrative purposes but if you want to see the actual schedule, please request access to the [Google Sheet](https://docs.google.com/spreadsheets/d/1LBY5p61E-bITjZvRc_GqADWdDG-Gdr5ABMS0XDCGsp8/edit#gid=1805924418)
 
 | Week | Day       | Activity                                                                                                               |
 | ---- | --------- | ---------------------------------------------------------------------------------------------------------------------- |
