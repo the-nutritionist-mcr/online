@@ -59,3 +59,7 @@ Given the same set of recipes, if recipe `B` is tagged with `no pork` as an `exc
 | ----- | --- | --- | --- | --- | --- | --- |
 | Micro | A   | C   | D   | E   | A   | C   |
 | Mass  | A   | C   | A   |     |     |     |
+
+:::warning
+At the time of writing, meal `B` will still be visible to the customer on the [choose meals](../Pages/choose-meals.md) page - with a quantity set to zero.
+:::
