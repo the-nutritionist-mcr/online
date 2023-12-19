@@ -1,6 +1,7 @@
 ---
 id: meal-plan-generation
 title: Meal Plan Generation
+sidebar_position: 1
 tags:
   - Planning Mode
   - Planning

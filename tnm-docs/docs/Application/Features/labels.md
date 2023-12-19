@@ -1,6 +1,7 @@
 ---
 id: labels
 title: CSV Label Generation
+sidebar_position: 2
 tags:
   - CSV
   - Bartender
