@@ -33,7 +33,7 @@ To calculate how many meals should be allocated for a given plan on each deliver
 ```mermaid
 flowchart LR
     A{{Custom plan on record?}}-->|Yes|B([Use custom plan])
-    A-->D{{Is DPW an even number?}}
+    A-->|No|D{{Is DPW an even number?}}
     D-->|Yes|E([D1 and D2 even split])
     D-->|No|F{{7 day plan?}}
     F-->|No|G(["D1: ((DPW + 1) / 2) x MPD, D2: (((DPW + 1) / 2) - 1) X MPD"])
