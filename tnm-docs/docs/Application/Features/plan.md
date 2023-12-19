@@ -38,7 +38,7 @@ flowchart TD
         C-->D{{Is it an even number?}}
         D-->|Yes|E([D1 and D2 even split])
         D-->|No|F{{7 day plan?}}
-        F-->|NO|G(["D1: ((DPW + 1) / 2) x MPD, D2: (((DPW + 1) / 2) - 1) X MPD"])
+        F-->|No|G(["D1: ((DPW + 1) / 2) x MPD, D2: (((DPW + 1) / 2) - 1) X MPD"])
         F-->|Yes|H(["D1: 4 x MPD, D2: 3 X MPD"])
     end
 ```
