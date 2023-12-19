@@ -23,10 +23,8 @@ The account page provides a customer with a view of the information we hold on f
 
 ## Choose Meals Button
 
-At the buttom of the account page is a button which a customer can use to access the [choose meals page](./choose-meals.md).
+At the buttom of the account page is a button which a customer can use to access the [choose meals page](./choose-meals.md). This button will either be disabled or enabled depending on [whether the plan is open or closed](../Faq/is-the-plan-open-or-closed.md)
 
 <figure>
 ![Choose Meals Button](/img/pages/choose-meals-button.png)
 </figure>
-
-
