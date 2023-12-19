@@ -11,3 +11,7 @@ description: Partially read only database of portal customers that allows us to 
 ---
 
 # Customers
+
+:::info
+This page is **not customer facing**
+:::

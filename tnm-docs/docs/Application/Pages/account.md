@@ -20,3 +20,5 @@ The account page provides a customer with a view of the information we hold on f
 <figure>
 ![Account Page](/img/pages/account.png)
 </figure>
+
+## Choose Meals Button

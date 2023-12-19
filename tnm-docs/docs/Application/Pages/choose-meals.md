@@ -11,6 +11,10 @@ description: Allows customers to view and change meal quantities for the upcomin
 
 # Choose Meals
 
+:::warning
+This page is **customer facing** - should you spot any bugs or issues, they should be discussed as a matter of priority
+:::
+
 Given a plan has been generated using [planning mode](./recipes.md#planning-mode) this page
 
 - provides a customer facing view of what meals are going to be cooked that week

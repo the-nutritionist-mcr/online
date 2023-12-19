@@ -13,3 +13,7 @@ description: Manage the generated meal plan and download associated reports and 
 ---
 
 # Planner
+
+:::info
+This page is **not customer facing**
+:::

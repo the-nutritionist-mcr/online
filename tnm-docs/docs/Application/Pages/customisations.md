@@ -10,6 +10,10 @@ description: Database of all the customisation tags that can be applied to custo
 
 # Customisations
 
+:::info
+This page is **not customer facing**
+:::
+
 The core of this application is build around the concept of 'customisations'. These are simple tags which can apply to both [recipes](./recipes.md) and [customers](./customers.md). When generating a [plan](../Features/meal-plan-generation.md) when a customer is to be supplied with a recipe that includes a tag also attached to a customer, this is highlighted in a number of places
 
 - On the meal [label](../Features/labels.md) - so the customer is confidence their food is correct

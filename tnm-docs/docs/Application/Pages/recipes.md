@@ -12,6 +12,10 @@ description: Database of all the recipes that can be cooked by the business
 
 # Recipes
 
+:::info
+This page is **not customer facing**
+:::
+
 The [recipes](https://portal.thenutritionistmcr.com/admin/recipes) page maintains a database of all the recipes that are available to be cooked which can then be edited by clicking on the pencil icon. On the edit page you are able to edit the details that are printed on the planner (and associated reports) but also in some cases on customer facing outputs such as the [choose meals page](./choose-meals.md) and the meal [label](../Features/labels.md). It also allows you to configure
 
 1. [Customisations](../Features/meal-plan-generation.md#customisations)
