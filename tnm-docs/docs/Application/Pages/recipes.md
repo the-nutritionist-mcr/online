@@ -5,7 +5,7 @@ tags:
   - Recipes
   - Planning Mode
   - Planning
-  - Edit recips
+  - Edit recipes
 
 description: Database of all the recipes that can be cooked by the business
 ---

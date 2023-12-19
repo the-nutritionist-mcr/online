@@ -2,7 +2,7 @@
 id: integration-with-chargebee
 title: ChargeBee Integration
 tags:
-  - ChargeBee
+  - Chargebee
   - Webhook
   - CRM
 description: How the ChargeBee integration works
