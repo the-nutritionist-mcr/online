@@ -51,7 +51,7 @@ Given this number and a set of meals that the business has selected will be cook
 | Micro | A   | B   | C   | D   | E   | A   |
 | Mass  | A   | B   | C   |     |     |     |
 
-## Exclusions
+### Exclusions
 
 Given the same set of recipes, if recipe `B` is tagged with `no pork` as an `exclusion`, and a customer is tagged with `no pork`, the planning algorithm will simply skip recipe `B` when allocating. So you'll get a distribution that looks like this
 
@@ -64,7 +64,7 @@ Given the same set of recipes, if recipe `B` is tagged with `no pork` as an `exc
 At the time of writing, meal `B` will still be visible to the customer on the [choose meals](../Pages/choose-meals.md) page - with a quantity set to zero.
 :::
 
-## Alternates
+### Alternates
 
 It is possible to tag recipes as 'alternate' recipes. This means mark a recipe so that
 
