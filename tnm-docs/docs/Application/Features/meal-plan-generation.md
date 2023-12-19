@@ -85,14 +85,14 @@ So given the same set of recipes, but assuming that the `D->F` alternate tag is 
 
 ### Extras
 
-Some plans are identified by the application as 'extras' (which ones this is is currently hardcoded, unfortunately). In the case of an extra, the [number of meals per delivery](#number-of-meals-per-delivery) logic is still used, but we are not drawing from the selected recipes any more. So given the above set of meals and a customer who had 6 Micro meals and 3 Breakfasts, you'd get something like this.
+Some plans are identified by the application as 'extras' (this is currently hardcoded, unfortunately). In the case of an extra, the [number of meals per delivery](#number-of-meals-per-delivery) logic is still used, but we are not drawing from the selected recipes any more. So given the above set of meals and a customer who had 6 Micro meals and 3 Breakfasts, you'd get something like this.
 
 | Plan      |     |     |     |     |     |     |
 | --------- | --- | --- | --- | --- | --- | --- |
 | Micro     | A   | B   | C   | D   | E   | A   |
 | Breakfast | Ex  | Ex  | Ex  |     |     |     |
 
-Indicating that would cook
+Indicating that we would cook
 
 - **A** x 2
 - **B, C, D, E** x 1
