@@ -13,7 +13,7 @@ tags:
   - Meals per week
   - Subscription status
 
-description: Details of how the planning algorithm works
+description: How the planning algorithm works
 ---
 
 # Meal Plan Generation

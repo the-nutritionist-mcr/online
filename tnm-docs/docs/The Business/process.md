@@ -1,6 +1,6 @@
 # Process
 
-This application is designed to support the current business process. To understand the application, it helps to understand it in the context of the journey the business goes through over the period of a few weeks
+The [TNM portal application](/docs/Category/application) is designed to support the current business process. To understand the application, it helps to understand it in the context of the journey the business goes through over the period of a few weeks
 
 ## Day by day
 

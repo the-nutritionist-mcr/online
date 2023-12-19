@@ -1,8 +1,7 @@
 import clsx from "clsx";
-import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
-import HomepageFeatures from "@site/src/components/HomepageFeatures";
+import { StartingButton } from "@site/src/components";
 
 import Heading from "@theme/Heading";
 import styles from "./index.module.css";
@@ -21,14 +20,37 @@ function HomepageHeader() {
   );
 }
 
+const sections = [
+  {
+    title: "Application",
+    description: "Everything about the TNM portal application",
+    url: "docs/category/application",
+  },
+  {
+    title: "The Business",
+    description: "Information about the TNM business",
+    url: "docs/category/application",
+  },
+];
+
 export default function Home() {
-  const { siteConfig } = useDocusaurusContext();
+  const context = useDocusaurusContext();
+  console.log(context);
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
+      title={`Hello from ${context.siteConfig.title}`}
       description="Description will go into a meta tag in <head />"
     >
       <HomepageHeader />
+      <main>
+        <div className="container">
+          <div className={`row ${styles.buttons}`}>
+            {sections.map((section, index) => (
+              <StartingButton key={index} {...section} />
+            ))}
+          </div>
+        </div>
+      </main>
     </Layout>
   );
 }

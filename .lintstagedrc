@@ -1,5 +1,16 @@
 {
-  "*.{ts,tsx}": ["tsc-files", "eslint", "vitest related --run", "prettier"],
+  "!(tnm-docs/**/*)*.{ts,tsx}": [
+    "tsc-files",
+    "eslint",
+    "vitest related --run",
+    "prettier"
+  ],
+  "tnm-docs/**/*.{ts,tsx}": [
+    "cd tnm-docs && tsc-files --project ./tsconfig.json",
+    "eslint",
+    "vitest related --run",
+    "prettier"
+  ],
   "*.json": ["prettier"],
   "*.md": ["prettier"]
 }
