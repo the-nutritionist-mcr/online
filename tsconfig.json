@@ -32,6 +32,6 @@
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "tnm-docs"],
   "$schema": "https://json.schemastore.org/tsconfig"
 }
