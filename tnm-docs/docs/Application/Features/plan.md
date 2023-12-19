@@ -28,6 +28,7 @@ To calculate how many meals should be allocated for a given plan on each deliver
 
 - MPD: Meals per day
 - DPW: Days per week
+- D1/D2: Delivery 1/Delivery 2
 
 ```mermaid
 flowchart TD
