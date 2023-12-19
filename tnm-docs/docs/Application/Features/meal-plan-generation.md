@@ -92,4 +92,20 @@ Some plans are identified by the application as 'extras' (which ones this is is 
 | Micro     | A   | B   | C   | D   | E   | A   |
 | Breakfast | Ex  | Ex  | Ex  |     |     |     |
 
-Indicating that would cook 2 x A, 1 x B, C, D and E, and 3 X Breakfast
+Indicating that would cook
+
+- **A** x 2
+- **B, C, D, E** x 1
+- **Breakfast** x 3
+
+### Customisations
+
+:::warning
+Customisations are not _technically_ related to the planning algorithm, because they don't change what meal gets picked for a customer. However, I'm including this here for the sake of completeness
+:::
+
+When a meal is tagged with an available customisation that means 'when a customer also has this customisation tag, the kitchen needs to make an alteration'. In this case, given meal `A` with tag `x` when a customer also has tag `X`, the following will happen
+
+- The alteration will be highlighted on the cook plan
+- The alteration will be highlighted on the pack plan
+- The alteration will be visible on the meal label
