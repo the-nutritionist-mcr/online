@@ -22,3 +22,11 @@ The account page provides a customer with a view of the information we hold on f
 </figure>
 
 ## Choose Meals Button
+
+At the buttom of the account page is a button which a customer can use to access the [choose meals page](./choose-meals.md).
+
+<figure>
+![Choose Meals Button](/img/pages/choose-meals-button.png)
+</figure>
+
+

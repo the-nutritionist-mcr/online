@@ -1,0 +1,8 @@
+{
+  "label": "Faqs",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "Issues or queries that come up repeatedly"
+  }
+}
