@@ -35,7 +35,6 @@ const sections = [
 
 export default function Home() {
   const context = useDocusaurusContext();
-  console.log(context);
   return (
     <Layout
       title={`Hello from ${context.siteConfig.title}`}
