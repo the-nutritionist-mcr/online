@@ -11,11 +11,15 @@ description: The Recipes page and planning mode
 
 # Recipes
 
-On the admin portal, the [recipes](https://portal.thenutritionistmcr.com/admin/recipes) page maintains a database of all the recipes that are available to be cooked. Recipe entries store
+The [recipes](https://portal.thenutritionistmcr.com/admin/recipes) page maintains a database of all the recipes that are available to be cooked which can then be edited by clicking on the pencil icon. On the edit page you are able to edit the details that are printed on the planner (and associated reports) but also in some cases on customer facing outputs such as the [choose meals page](./choose-meals.md) and the meal [label](../Features/labels.md). It also allows you to configure
 
-- The details that will be printed on the label
-- Tags that represent [customisations](./customisations.md) that can apply to this recipe
-- A record of potential [alternates](./alternates.md) recipes given a particular tag is present on a customer
+1. Customisations
+2. [Exclusions](../Features/meal-plan-generation.md#exclusions)
+3. [Alternates](../Features/meal-plan-generation.md#alternates)
+
+<figure>
+![Edit Recipes Page](/img/pages/edit-recipes.png)
+</figure>
 
 ## Planning Mode
 
