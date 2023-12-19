@@ -22,4 +22,4 @@ The portal **does** however allow you to
 
 - Edit what customisation tags are associated with a given customer
 - Apply a 'custom plan' to a customer
-- 
+- Reset a customer's password (which automatically sends out a new welcome email)
