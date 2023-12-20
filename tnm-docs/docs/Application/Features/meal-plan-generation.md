@@ -35,7 +35,7 @@ To calculate how many meals should be allocated for a given plan on each deliver
 - **D2** - Delivery 2
 
 ```mermaid
-flowchart LR
+flowchart TD
     A{{Custom plan on record?}}-->|Yes|B([Use custom plan])
     A-->|No|D{{"`Is **DPW** an even number?`"}}
     D-->|Yes|E(["`**D1** and **D2** even split`"])
