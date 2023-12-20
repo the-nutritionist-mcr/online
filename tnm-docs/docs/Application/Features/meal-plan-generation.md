@@ -42,8 +42,8 @@ flowchart LR
     D-->|No|F{{7 day plan?}}
     F-->|No|G(["`**D1**: ((**DPW** + 1) / 2) x **MPD**
     **D2**: (((**DPW** + 1) / 2) - 1) x **MPD**`"])
-    F-->|Yes|H(["`**D1**: 4 x **MPD**
-    **D2**: 3 x **MPD**`"])
+    F-->|Yes|H(["`**D1**: 3 x **MPD**
+    **D2**: 4 x **MPD**`"])
 ```
 
 ## Allocating meals per plan
