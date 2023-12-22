@@ -14,7 +14,7 @@ import { mockClient } from "aws-sdk-client-mock";
 import { when } from "jest-when";
 import { ENV, HTTP, COGNITO, CHARGEBEE } from "@tnmo/constants";
 import { getPlans } from "../../utils/get-plans";
-import { getSecrets } from "../../utils/get-secrets";
+import { getSecrets } from "@tnmo/core-backend";
 import { StandardPlan } from "@tnmo/types";
 import { userExists } from "../../utils/user-exists";
 
@@ -24,7 +24,11 @@ const cognitoMock = mockClient(CognitoIdentityProviderClient);
 
 vi.mock("../../utils/get-plans");
 vi.mock("../../utils/user-exists");
-vi.mock("../../utils/get-secrets");
+
+vi.mock("@tnmo/core-backend", async (importOriginal) => ({
+  ...((await vi.importActual("@tnmo/core-backend")) as Record<string, unknown>),
+  getSecrets: vi.fn(),
+}));
 
 describe("the webhook handler", () => {
   beforeEach(() => {

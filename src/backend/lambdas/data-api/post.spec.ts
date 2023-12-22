@@ -7,7 +7,7 @@ import { protectRoute } from "@tnmo/core-backend";
 import { v4 } from "uuid";
 import { APIGatewayProxyEventV2, EventBridgeEvent } from "aws-lambda";
 import { HTTP } from "../../../infrastructure/constants";
-import { HttpError } from "./http-error";
+import { HttpError } from "@tnmo/core";
 import { vi } from "vitest";
 
 vi.mock("uuid");

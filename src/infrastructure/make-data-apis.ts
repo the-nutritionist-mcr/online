@@ -34,6 +34,8 @@ export const makeDataApis = (
   const chargebeeAccessToken = new Secret(context, "ChargeeAccessToken", {
     secretName: getResourceName(`chargebee-access-token`, envName),
   });
+  
+  chargebeeAccessToken.secretName
 
   const chargeBeeWebhookUsername = new Secret(
     context,

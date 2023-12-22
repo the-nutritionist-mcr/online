@@ -8,7 +8,7 @@ import {
   ScanCommand,
 } from "@aws-sdk/lib-dynamodb";
 import { protectRoute } from "@tnmo/core-backend";
-import { HttpError } from "./http-error";
+import { HttpError } from "@tnmo/core";
 import { HTTP } from "../../../infrastructure/constants";
 import { allowHeaders } from "../../allow-headers";
 

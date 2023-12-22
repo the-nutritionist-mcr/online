@@ -10,7 +10,7 @@ import { ChargeBee } from "chargebee-typescript";
 import { transformPhoneNumberToCognitoFormat } from "../utils/transform-phone-number";
 import { handleSubscriptionEvent } from "./handle-subscription-event";
 import { userExists } from "../utils/user-exists";
-import { getEnv } from "../utils/get-env";
+import { getEnv } from "../../core-backend/get-env";
 
 export const handleCustomerEvent = async (
   client: ChargeBee,

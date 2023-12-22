@@ -2,13 +2,16 @@ import "../../utils/init-dd-trace";
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 import { ChargeBee } from "chargebee-typescript";
 
-import { returnErrorResponse } from "@tnmo/core-backend";
 import { ENV, HTTP } from "@tnmo/constants";
 import { handleCustomerEvent } from "../../event-handlers/handle-customer-event";
 import { handleSubscriptionEvent } from "../../event-handlers/handle-subscription-event";
-import { authoriseBasic } from "../../../core-backend/protect-route";
-import { getEnv } from "../../utils/get-env";
-import { getSecrets } from "../../utils/get-secrets";
+import {
+  getSecrets,
+  getEnv,
+  authoriseBasic,
+  returnErrorResponse,
+} from "@tnmo/core-backend";
+
 import { handleDeleteCustomer } from "../../event-handlers/handle-delete-customer";
 
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {

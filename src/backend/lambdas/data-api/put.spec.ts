@@ -5,7 +5,7 @@ import { mockClient } from "aws-sdk-client-mock";
 import { DynamoDBDocumentClient, PutCommand } from "@aws-sdk/lib-dynamodb";
 import { APIGatewayProxyEventV2, EventBridgeEvent } from "aws-lambda";
 import { protectRoute } from "@tnmo/core-backend";
-import { HttpError } from "./http-error";
+import { HttpError } from "@tnmo/core";
 import { HTTP } from "../../../infrastructure/constants";
 
 const dynamodbMock = mockClient(DynamoDBDocumentClient);
