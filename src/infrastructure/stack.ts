@@ -1,6 +1,5 @@
 import { App } from "aws-cdk-lib";
 import { CHARGEBEE_SITES } from "./constants";
-import { UsersStack } from "./permissions-stack";
 
 import { BackendStack } from "./backend-stack";
 import { AccountUsersStack } from "./account-users-stack";
