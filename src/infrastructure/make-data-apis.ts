@@ -1,23 +1,23 @@
-import { CfnOutput, Duration } from 'aws-cdk-lib';
-import { DnsValidatedCertificate } from 'aws-cdk-lib/aws-certificatemanager';
-import { ARecord, RecordTarget } from 'aws-cdk-lib/aws-route53';
-import { ApiGatewayDomain } from 'aws-cdk-lib/aws-route53-targets';
-import { Secret } from 'aws-cdk-lib/aws-secretsmanager';
-import { IHostedZone } from 'aws-cdk-lib/aws-route53';
-import { getResourceName } from './get-resource-name';
-import { Effect, PolicyStatement } from 'aws-cdk-lib/aws-iam';
-import { LambdaIntegration, RestApi } from 'aws-cdk-lib/aws-apigateway';
-import { getDomainName } from '@tnmo/utils';
-import { IUserPool } from 'aws-cdk-lib/aws-cognito';
-import { IAM, ENV, HTTP, RESOURCES, NODE_OPTS } from '@tnmo/constants';
-import { makeDataApi } from './make-data-api';
-import { entryName } from './entry-name';
-import { AttributeType, BillingMode, Table } from 'aws-cdk-lib/aws-dynamodb';
-import { Construct } from 'constructs';
-import { Rule, Schedule } from 'aws-cdk-lib/aws-events';
-import { LambdaFunction } from 'aws-cdk-lib/aws-events-targets';
-import { allowHeaders } from '../backend/allow-headers';
-import { makeInstrumentedFunctionGenerator } from './instrumented-nodejs-function';
+import { CfnOutput, Duration } from "aws-cdk-lib";
+import { DnsValidatedCertificate } from "aws-cdk-lib/aws-certificatemanager";
+import { ARecord, RecordTarget } from "aws-cdk-lib/aws-route53";
+import { ApiGatewayDomain } from "aws-cdk-lib/aws-route53-targets";
+import { Secret } from "aws-cdk-lib/aws-secretsmanager";
+import { IHostedZone } from "aws-cdk-lib/aws-route53";
+import { getResourceName } from "./get-resource-name";
+import { Effect, PolicyStatement } from "aws-cdk-lib/aws-iam";
+import { LambdaIntegration, RestApi } from "aws-cdk-lib/aws-apigateway";
+import { getDomainName } from "@tnmo/utils";
+import { IUserPool } from "aws-cdk-lib/aws-cognito";
+import { IAM, ENV, HTTP, RESOURCES, NODE_OPTS } from "@tnmo/constants";
+import { makeDataApi } from "./make-data-api";
+import { entryName } from "./entry-name";
+import { AttributeType, BillingMode, Table } from "aws-cdk-lib/aws-dynamodb";
+import { Construct } from "constructs";
+import { Rule, Schedule } from "aws-cdk-lib/aws-events";
+import { LambdaFunction } from "aws-cdk-lib/aws-events-targets";
+import { allowHeaders } from "../backend/allow-headers";
+import { makeInstrumentedFunctionGenerator } from "./instrumented-nodejs-function";
 
 export const makeDataApis = (
   context: Construct,
@@ -29,15 +29,15 @@ export const makeDataApis = (
   chargebeeSite: string,
   forceUpdateKey: string
 ) => {
-  const domainName = getDomainName(envName, 'api');
+  const domainName = getDomainName(envName, "api");
 
-  const chargebeeAccessToken = new Secret(context, 'ChargeeAccessToken', {
+  const chargebeeAccessToken = new Secret(context, "ChargeeAccessToken", {
     secretName: getResourceName(`chargebee-access-token`, envName),
   });
 
   const chargeBeeWebhookUsername = new Secret(
     context,
-    'ChargeBeeWebhookUsername',
+    "ChargeBeeWebhookUsername",
     {
       secretName: getResourceName(`chargebee-webhook-username`, envName),
     }
@@ -45,7 +45,7 @@ export const makeDataApis = (
 
   const chargeWebhookPassword = new Secret(
     context,
-    'ChargeBeeWebhookPassword',
+    "ChargeBeeWebhookPassword",
     {
       secretName: getResourceName(`chargebee-webhook-password`, envName),
     }
@@ -63,12 +63,12 @@ export const makeDataApis = (
     FORCE_UPDATE_KEY: forceUpdateKey,
   };
 
-  new CfnOutput(context, 'ApiDomainName', {
+  new CfnOutput(context, "ApiDomainName", {
     value: domainName,
   });
 
-  const api = new RestApi(context, 'data-api', {
-    restApiName: getResourceName('data-api', envName),
+  const api = new RestApi(context, "data-api", {
+    restApiName: getResourceName("data-api", envName),
     defaultCorsPreflightOptions: {
       allowHeaders,
       allowMethods: [
@@ -78,7 +78,7 @@ export const makeDataApis = (
         HTTP.verbs.Options,
       ],
       allowCredentials: true,
-      allowOrigins: ['*'],
+      allowOrigins: ["*"],
     },
   });
 
@@ -106,9 +106,9 @@ export const makeDataApis = (
     gitHash
   );
 
-  if (envName === 'cypress') {
+  if (envName === "cypress") {
     const seed = makeFunction(`seed-function`, {
-      entry: entryName('misc', 'seed.ts'),
+      entry: entryName("handlers", "seed.ts"),
       timeout: Duration.minutes(15),
       environment: {
         ...defaultEnvironmentVars,
@@ -118,8 +118,8 @@ export const makeDataApis = (
     });
     customisationsTable.grantReadWriteData(seed);
     recipesTable.grantReadWriteData(seed);
-    const seedResource = api.root.addResource('seed');
-    seedResource.addMethod('POST', new LambdaIntegration(seed));
+    const seedResource = api.root.addResource("seed");
+    seedResource.addMethod("POST", new LambdaIntegration(seed));
 
     seed.addToRolePolicy(
       new PolicyStatement({
@@ -135,32 +135,21 @@ export const makeDataApis = (
     );
   }
 
-  const reportsFunction = makeFunction(`reports-function`, {
-    entry: entryName('misc', 'reports-function.ts'),
-    environment: defaultEnvironmentVars,
-  });
-
-  const eventRule = new Rule(context, 'rule', {
-    schedule: Schedule.rate(Duration.days(7)),
-  });
-
-  eventRule.addTarget(new LambdaFunction(reportsFunction));
-
   const planDataTable = new Table(context, `plan-table`, {
     tableName: getResourceName(`plan-table-table`, envName),
     billingMode: BillingMode.PAY_PER_REQUEST,
     partitionKey: {
-      name: 'id',
+      name: "id",
       type: AttributeType.STRING,
     },
     sortKey: {
-      name: 'sort',
+      name: "sort",
       type: AttributeType.STRING,
     },
   });
 
   const listPlansFunction = makeFunction(`list-plans-function`, {
-    entry: entryName('misc', 'list-recent-plans.ts'),
+    entry: entryName("handlers", "list-recent-plans.ts"),
     environment: {
       ...defaultEnvironmentVars,
       [ENV.varNames.DynamoDBTable]: planDataTable.tableName,
@@ -168,16 +157,16 @@ export const makeDataApis = (
   });
 
   const planFunction = makeFunction(`plan-function`, {
-    entry: entryName('misc', 'submit-full-plan.ts'),
+    entry: entryName("handlers", "submit-full-plan.ts"),
     environment: {
       ...defaultEnvironmentVars,
       [ENV.varNames.DynamoDBTable]: planDataTable.tableName,
     },
   });
 
-  const planResource = api.root.addResource('plan');
+  const planResource = api.root.addResource("plan");
 
-  const listResource = planResource.addResource('list');
+  const listResource = planResource.addResource("list");
 
   listResource.addMethod(
     HTTP.verbs.Get,
@@ -198,7 +187,7 @@ export const makeDataApis = (
   );
 
   const getPlanFunction = makeFunction(`get-plan-function`, {
-    entry: entryName('misc', 'get-current-plan.ts'),
+    entry: entryName("handlers", "get-current-plan.ts"),
     environment: {
       ...defaultEnvironmentVars,
       [ENV.varNames.DynamoDBTable]: planDataTable.tableName,
@@ -206,14 +195,14 @@ export const makeDataApis = (
   });
 
   const getOldPlanFunction = makeFunction(`get-old-plan-function`, {
-    entry: entryName('misc', 'get-old-plan.ts'),
+    entry: entryName("handlers", "get-old-plan.ts"),
     environment: {
       ...defaultEnvironmentVars,
       [ENV.varNames.DynamoDBTable]: planDataTable.tableName,
     },
   });
 
-  const oldPlan = planResource.addResource('{plan}');
+  const oldPlan = planResource.addResource("{plan}");
   oldPlan.addMethod(HTTP.verbs.Get, new LambdaIntegration(getOldPlanFunction));
   planDataTable.grantReadData(getOldPlanFunction);
 
@@ -224,7 +213,7 @@ export const makeDataApis = (
   planDataTable.grantReadData(getPlanFunction);
 
   const changePlanFunction = makeFunction(`change-plan-function`, {
-    entry: entryName('misc', 'change-plan-recipe.ts'),
+    entry: entryName("handlers", "change-plan-recipe.ts"),
     environment: {
       ...defaultEnvironmentVars,
       [ENV.varNames.DynamoDBTable]: planDataTable.tableName,
@@ -238,14 +227,14 @@ export const makeDataApis = (
   planDataTable.grantReadWriteData(changePlanFunction);
 
   const publishPlanFunction = makeFunction(`publish-plan-function`, {
-    entry: entryName('misc', 'publish-plan.ts'),
+    entry: entryName("handlers", "publish-plan.ts"),
     environment: {
       ...defaultEnvironmentVars,
       [ENV.varNames.DynamoDBTable]: planDataTable.tableName,
     },
   });
 
-  const publishResource = planResource.addResource('publish');
+  const publishResource = planResource.addResource("publish");
 
   publishResource.addMethod(
     HTTP.verbs.Post,
@@ -254,16 +243,16 @@ export const makeDataApis = (
 
   planDataTable.grantWriteData(publishPlanFunction);
 
-  const customer = api.root.addResource('customer');
+  const customer = api.root.addResource("customer");
 
-  const username = customer.addResource('{username}');
+  const username = customer.addResource("{username}");
 
   const getCustomerFunction = makeFunction(`get-customer-function`, {
-    entry: entryName('misc', 'get-customer.ts'),
+    entry: entryName("handlers", "get-customer.ts"),
     environment: defaultEnvironmentVars,
   });
 
-  username.addMethod('GET', new LambdaIntegration(getCustomerFunction));
+  username.addMethod("GET", new LambdaIntegration(getCustomerFunction));
 
   getCustomerFunction.addToRolePolicy(
     new PolicyStatement({
@@ -276,7 +265,7 @@ export const makeDataApis = (
   const updateCustomerPlanFunction = makeFunction(
     `update-customer-plan-function`,
     {
-      entry: entryName('misc', 'update-customer-plan.ts'),
+      entry: entryName("handlers", "update-customer-plan.ts"),
       environment: {
         ...defaultEnvironmentVars,
         [ENV.varNames.DynamoDBTable]: planDataTable.tableName,
@@ -287,7 +276,7 @@ export const makeDataApis = (
   );
 
   const resetPasswordFunction = makeFunction(`reset-password-function`, {
-    entry: entryName('misc', 'reset-password.ts'),
+    entry: entryName("handlers", "reset-password.ts"),
     environment: defaultEnvironmentVars,
   });
 
@@ -299,9 +288,9 @@ export const makeDataApis = (
     })
   );
 
-  const resetPassword = customer.addResource('reset-password');
+  const resetPassword = customer.addResource("reset-password");
 
-  resetPassword.addMethod('POST', new LambdaIntegration(resetPasswordFunction));
+  resetPassword.addMethod("POST", new LambdaIntegration(resetPasswordFunction));
 
   resetPasswordFunction.addToRolePolicy(
     new PolicyStatement({
@@ -339,10 +328,10 @@ export const makeDataApis = (
     })
   );
 
-  const updatePlanResource = customer.addResource('update-plan');
+  const updatePlanResource = customer.addResource("update-plan");
 
   updatePlanResource.addMethod(
-    'PUT',
+    "PUT",
     new LambdaIntegration(updateCustomerPlanFunction)
   );
 
@@ -350,7 +339,7 @@ export const makeDataApis = (
   recipesTable.grantReadData(updateCustomerPlanFunction);
 
   const updateCustomerFunction = makeFunction(`update-customer-function`, {
-    entry: entryName('misc', 'update-customer.ts'),
+    entry: entryName("handlers", "update-customer.ts"),
     environment: defaultEnvironmentVars,
   });
 
@@ -362,16 +351,16 @@ export const makeDataApis = (
     })
   );
 
-  username.addMethod('POST', new LambdaIntegration(updateCustomerFunction));
+  username.addMethod("POST", new LambdaIntegration(updateCustomerFunction));
 
-  const customers = api.root.addResource('customers');
+  const customers = api.root.addResource("customers");
 
   const getAllCustomersFunction = makeFunction(`get-all-customers-function`, {
-    entry: entryName('misc', 'get-all-customers.ts'),
+    entry: entryName("handlers", "get-all-customers.ts"),
     environment: defaultEnvironmentVars,
   });
 
-  customers.addMethod('GET', new LambdaIntegration(getAllCustomersFunction));
+  customers.addMethod("GET", new LambdaIntegration(getAllCustomersFunction));
 
   getAllCustomersFunction.addToRolePolicy(
     new PolicyStatement({
@@ -381,10 +370,10 @@ export const makeDataApis = (
     })
   );
 
-  const me = customers.addResource('me');
+  const me = customers.addResource("me");
 
   const individualAcccessFunction = makeFunction(`chargebee-me-function`, {
-    entry: entryName('misc', 'me.ts'),
+    entry: entryName("handlers", "me.ts"),
     environment: defaultEnvironmentVars,
   });
 
@@ -398,15 +387,15 @@ export const makeDataApis = (
 
   chargebeeAccessToken.grantRead(individualAcccessFunction);
 
-  me.addMethod('GET', new LambdaIntegration(individualAcccessFunction));
+  me.addMethod("GET", new LambdaIntegration(individualAcccessFunction));
 
   const receiveChargebeeWebhook = api.root.addResource(
-    'receive-chargebee-webhook'
+    "receive-chargebee-webhook"
   );
 
   const chargeBeeWebhookFunction = makeFunction(`chargebee-webhook-function`, {
-    entry: entryName('chargebee-api', 'webhook.ts'),
-    environment: { ...defaultEnvironmentVars, FORCE_DEPLOY: 'true' },
+    entry: entryName("handlers", "webhook.ts"),
+    environment: { ...defaultEnvironmentVars, FORCE_DEPLOY: "true" },
   });
 
   chargeBeeWebhookUsername.grantRead(chargeBeeWebhookFunction);
@@ -414,7 +403,7 @@ export const makeDataApis = (
   chargebeeAccessToken.grantRead(chargeBeeWebhookFunction);
 
   receiveChargebeeWebhook.addMethod(
-    'POST',
+    "POST",
     new LambdaIntegration(chargeBeeWebhookFunction)
   );
 
@@ -431,17 +420,17 @@ export const makeDataApis = (
     })
   );
 
-  const apiCert = new DnsValidatedCertificate(context, 'apiCertificate', {
+  const apiCert = new DnsValidatedCertificate(context, "apiCertificate", {
     domainName,
     hostedZone,
   });
 
-  const apiDomainName = api.addDomainName('data-api-domain-name', {
+  const apiDomainName = api.addDomainName("data-api-domain-name", {
     domainName,
     certificate: apiCert,
   });
 
-  new ARecord(context, 'ApiARecord', {
+  new ARecord(context, "ApiARecord", {
     zone: hostedZone,
     recordName: domainName,
     target: RecordTarget.fromAlias(new ApiGatewayDomain(apiDomainName)),

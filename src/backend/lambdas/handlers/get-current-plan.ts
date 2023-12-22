@@ -1,56 +1,57 @@
-import { APIGatewayProxyHandlerV2 } from 'aws-lambda';
-import { returnErrorResponse } from '../data-api/return-error-response';
-import { returnOkResponse } from '../data-api/return-ok-response';
+import { APIGatewayProxyHandlerV2 } from "aws-lambda";
+import { returnErrorResponse } from "../data-api/return-error-response";
+import { returnOkResponse } from "../data-api/return-ok-response";
 import {
   StoredPlan,
   GetPlanResponseNonAdmin,
   GetPlanResponseAdmin,
   StoredMealPlanGeneratedForIndividualCustomer,
   WeeklyCookPlanWithoutCustomerPlans,
-} from '@tnmo/types';
-import { ENV, HTTP } from '@tnmo/constants';
-import { authoriseJwt } from '../data-api/authorise';
+} from "@tnmo/types";
+import { ENV, HTTP } from "@tnmo/constants";
+import { authoriseJwt } from "../data-api/authorise";
 
-import { HttpError } from '../data-api/http-error';
-import { doQuery } from '../dynamodb';
-import { SerialisedDate } from '@tnmo/utils';
-import { warmer } from './warmer';
+import { HttpError } from "../data-api/http-error";
+import { doQuery } from "../../dynamodb";
+import { SerialisedDate } from "@tnmo/utils";
+import { warmer } from "../../utils/warmer";
 
 export const handler = warmer<APIGatewayProxyHandlerV2>(async (event) => {
   try {
-    const requestedPlan = event.pathParameters?.plan;
     const { groups, username: currentUser } = await authoriseJwt(event);
 
     const tableName = process.env[ENV.varNames.DynamoDBTable];
 
-    const response = await doQuery(tableName ?? '', 'id = :id', ['plan']);
+    const response = await doQuery(tableName ?? "", "id = :id", ["plan"]);
 
     if (!response?.length) {
       throw new HttpError(
         HTTP.statusCodes.InternalServerError,
-        'Dynamodb did not return a response'
+        "Dynamodb did not return a response"
       );
     }
 
     const plans = response as SerialisedDate<StoredPlan>[] | undefined;
 
     // eslint-disable-next-line fp/no-mutating-methods
-    const plan = plans?.find((plan) => plan.sort === requestedPlan);
+    const plan = plans
+      ?.slice()
+      .sort((a, b) => (Number(a.sort) < Number(b.sort) ? 1 : -1))?.[0];
 
     if (!plan) {
       throw new HttpError(
         HTTP.statusCodes.InternalServerError,
-        'A plan was not found in the database'
+        "A plan was not found in the database"
       );
     }
 
     const { planId, menus, published, createdBy, createdOn, sort } = plan;
 
-    const selectionResponse = await doQuery(tableName ?? '', `id = :id`, [
+    const selectionResponse = await doQuery(tableName ?? "", `id = :id`, [
       `plan-${planId}-selection`,
     ]);
 
-    if (!published && !groups.includes('admin')) {
+    if (!published && !groups.includes("admin")) {
       return returnOkResponse({ available: false, admin: false });
     }
 
@@ -68,7 +69,7 @@ export const handler = warmer<APIGatewayProxyHandlerV2>(async (event) => {
     };
 
     type DefaultResponse = SerialisedDate<
-      Omit<GetPlanResponseNonAdmin, 'available' | 'plan' | 'admin'> & {
+      Omit<GetPlanResponseNonAdmin, "available" | "plan" | "admin"> & {
         plan: WeeklyCookPlanWithoutCustomerPlans;
       }
     >;
@@ -81,7 +82,7 @@ export const handler = warmer<APIGatewayProxyHandlerV2>(async (event) => {
       currentUserSelection,
     };
 
-    if (groups.includes('admin')) {
+    if (groups.includes("admin")) {
       const finalResponse: SerialisedDate<GetPlanResponseAdmin> = {
         ...defaultResponse,
         available: true,

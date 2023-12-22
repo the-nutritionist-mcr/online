@@ -1,29 +1,29 @@
-import './init-dd-trace';
-import { APIGatewayProxyHandlerV2 } from 'aws-lambda';
-import { chooseMealSelections } from '@tnmo/meal-planning';
-import { ENV } from '@tnmo/constants';
-import { authoriseJwt } from '../data-api/authorise';
+import "../../utils/init-dd-trace";
+import { APIGatewayProxyHandlerV2 } from "aws-lambda";
+import { chooseMealSelections } from "@tnmo/meal-planning";
+import { ENV } from "@tnmo/constants";
+import { authoriseJwt } from "../data-api/authorise";
 import {
   StoredPlan,
   StoredMealPlanGeneratedForIndividualCustomer,
-} from '@tnmo/types';
-import { returnErrorResponse } from '../data-api/return-error-response';
-import { HttpError } from '../data-api/http-error';
-import { recursivelySerialiseDate, SerialisedDate } from '@tnmo/utils';
+} from "@tnmo/types";
+import { returnErrorResponse } from "../data-api/return-error-response";
+import { HttpError } from "../data-api/http-error";
+import { recursivelySerialiseDate, SerialisedDate } from "@tnmo/utils";
 
-import { HTTP } from '@tnmo/constants';
-import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+import { HTTP } from "@tnmo/constants";
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import {
   DynamoDBDocumentClient,
   BatchWriteCommandInput,
-} from '@aws-sdk/lib-dynamodb';
-import { v4 } from 'uuid';
-import { isWeeklyPlan } from '@tnmo/types';
-import { batchArray } from '../../../utils/batch-array';
-import { getUserFromAws } from '../../../utils/get-user-from-aws';
-import { getAllUsers } from '../dynamodb/get-all-users';
-import { batchWrite } from '../data-api/get-data/batch-write';
-import { warmer } from './warmer';
+} from "@aws-sdk/lib-dynamodb";
+import { v4 } from "uuid";
+import { isWeeklyPlan } from "@tnmo/types";
+import { batchArray } from "../../../utils/batch-array";
+import { getUserFromAws } from "../../../utils/get-user-from-aws";
+import { getAllUsers } from "../../dynamodb/get-all-users";
+import { batchWrite } from "../data-api/get-data/batch-write";
+import { warmer } from "../../utils/warmer";
 
 export const handler = warmer<APIGatewayProxyHandlerV2>(async (event) => {
   try {
@@ -34,17 +34,17 @@ export const handler = warmer<APIGatewayProxyHandlerV2>(async (event) => {
       },
     });
 
-    const { username } = await authoriseJwt(event, ['admin']);
+    const { username } = await authoriseJwt(event, ["admin"]);
     const { firstName, surname } = await getUserFromAws(username);
 
-    const payload = JSON.parse(event.body ?? '');
+    const payload = JSON.parse(event.body ?? "");
 
     if (!isWeeklyPlan(payload)) {
-      throw new HttpError(HTTP.statusCodes.BadRequest, 'Request was invalid');
+      throw new HttpError(HTTP.statusCodes.BadRequest, "Request was invalid");
     }
 
     const list = await getAllUsers(
-      process.env[ENV.varNames.CognitoPoolId] ?? ''
+      process.env[ENV.varNames.CognitoPoolId] ?? ""
     );
 
     const cooks = payload.dates.map((date, index) => ({
@@ -59,7 +59,7 @@ export const handler = warmer<APIGatewayProxyHandlerV2>(async (event) => {
         if (delivery.paused) {
           return true;
         }
-        return delivery.plans.some((plan) => plan.status !== 'cancelled');
+        return delivery.plans.some((plan) => plan.status !== "cancelled");
       })
     );
 
@@ -80,7 +80,7 @@ export const handler = warmer<APIGatewayProxyHandlerV2>(async (event) => {
       }));
 
     const plan: SerialisedDate<StoredPlan> = {
-      id: 'plan',
+      id: "plan",
       sort: String(payload.timestamp),
       published: false,
       planId,
@@ -101,7 +101,7 @@ export const handler = warmer<APIGatewayProxyHandlerV2>(async (event) => {
       batches.map(async (batch) => {
         const input: BatchWriteCommandInput = {
           RequestItems: {
-            [tableName ?? '']: batch.map((item) => ({
+            [tableName ?? ""]: batch.map((item) => ({
               PutRequest: {
                 Item: recursivelySerialiseDate(item),
               },
@@ -115,10 +115,10 @@ export const handler = warmer<APIGatewayProxyHandlerV2>(async (event) => {
 
     return {
       statusCode: HTTP.statusCodes.Ok,
-      body: '{}',
+      body: "{}",
       headers: {
-        [HTTP.headerNames.AccessControlAllowOrigin]: '*',
-        [HTTP.headerNames.AccessControlAllowHeaders]: '*',
+        [HTTP.headerNames.AccessControlAllowOrigin]: "*",
+        [HTTP.headerNames.AccessControlAllowHeaders]: "*",
       },
     };
   } catch (error) {

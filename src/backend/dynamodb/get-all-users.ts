@@ -2,9 +2,9 @@ import {
   CognitoIdentityProviderClient,
   ListUsersCommand,
   ListUsersCommandInput,
-} from '@aws-sdk/client-cognito-identity-provider';
-import { BackendCustomer } from '@tnmo/types';
-import { parseCustomerList } from '../../../utils/parse-customer-list';
+} from "@aws-sdk/client-cognito-identity-provider";
+import { BackendCustomer } from "@tnmo/types";
+import { parseCustomerList } from "../../utils/parse-customer-list";
 
 export const getAllUsers = async (
   userPool: string,

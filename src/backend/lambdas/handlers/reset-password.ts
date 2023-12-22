@@ -1,24 +1,24 @@
-import randomString from 'randomstring';
-import { authoriseJwt } from '../data-api/authorise';
-import { returnOkResponse } from '../data-api/return-ok-response';
-import { returnErrorResponse } from '../data-api/return-error-response';
-import { APIGatewayProxyHandlerV2 } from 'aws-lambda';
+import randomString from "randomstring";
+import { authoriseJwt } from "../data-api/authorise";
+import { returnOkResponse } from "../data-api/return-ok-response";
+import { returnErrorResponse } from "../data-api/return-error-response";
+import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 import {
   CognitoIdentityProviderClient,
   AdminSetUserPasswordCommand,
   ListUsersCommand,
-} from '@aws-sdk/client-cognito-identity-provider';
+} from "@aws-sdk/client-cognito-identity-provider";
 import {
   SendEmailCommand,
   SendEmailCommandInput,
   SESClient,
-} from '@aws-sdk/client-ses';
-import { getUserFromAws } from '../../../utils/get-user-from-aws';
-import { makeEmail } from '../chargebee-api/portal-welcome-email';
-import { getDomainName } from '@tnmo/utils';
-import { warmer } from './warmer';
-import { HttpError } from '../data-api/http-error';
-import { HTTP } from '@tnmo/constants';
+} from "@aws-sdk/client-ses";
+import { getUserFromAws } from "../../../utils/get-user-from-aws";
+import { makeEmail } from "../../utils/portal-welcome-email";
+import { getDomainName } from "@tnmo/utils";
+import { warmer } from "../../utils/warmer";
+import { HttpError } from "../data-api/http-error";
+import { HTTP } from "@tnmo/constants";
 
 export interface ResetPassswordPayload {
   username: string;
@@ -29,11 +29,11 @@ export interface ResetPassswordPayload {
 
 export const handler = warmer<APIGatewayProxyHandlerV2>(async (event) => {
   try {
-    const { authenticated } = await authoriseJwt(event, ['admin'], {
+    const { authenticated } = await authoriseJwt(event, ["admin"], {
       allowUnauthenticated: true,
     });
 
-    const body = JSON.parse(event.body ?? '{}');
+    const body = JSON.parse(event.body ?? "{}");
 
     const cognito = new CognitoIdentityProviderClient({
       region: process.env.AWS_REGION,
@@ -41,7 +41,7 @@ export const handler = warmer<APIGatewayProxyHandlerV2>(async (event) => {
 
     const getUsernameFromEmail = async (email: string): Promise<string> => {
       const params = {
-        UserPoolId: process.env['COGNITO_POOL_ID'],
+        UserPoolId: process.env["COGNITO_POOL_ID"],
         Limit: 1,
         // eslint-disable-next-line no-useless-escape
         Filter: `email ^= \"${email.trim()}\"`,
@@ -58,7 +58,7 @@ export const handler = warmer<APIGatewayProxyHandlerV2>(async (event) => {
         );
       }
 
-      return response.Users[0].Username ?? '';
+      return response.Users[0].Username ?? "";
     };
 
     const username = authenticated
@@ -84,7 +84,7 @@ export const handler = warmer<APIGatewayProxyHandlerV2>(async (event) => {
 
     await cognito.send(command);
 
-    const domainName = getDomainName(process.env.ENVIRONMENT_NAME ?? '');
+    const domainName = getDomainName(process.env.ENVIRONMENT_NAME ?? "");
 
     const email: SendEmailCommandInput = {
       Destination: {
@@ -94,10 +94,10 @@ export const handler = warmer<APIGatewayProxyHandlerV2>(async (event) => {
         Body: {
           Html: {
             // eslint-disable-next-line unicorn/text-encoding-identifier-case
-            Charset: 'UTF-8',
+            Charset: "UTF-8",
             Data: makeEmail(
               user.firstName,
-              user.username ?? '',
+              user.username ?? "",
               password,
               `https://${domainName}`
             ),
@@ -105,11 +105,11 @@ export const handler = warmer<APIGatewayProxyHandlerV2>(async (event) => {
         },
         Subject: {
           // eslint-disable-next-line unicorn/text-encoding-identifier-case
-          Charset: 'UTF-8',
-          Data: 'Welcome to your personal Members Area',
+          Charset: "UTF-8",
+          Data: "Welcome to your personal Members Area",
         },
       },
-      Source: 'no-reply@thenutritionistmcr.com',
+      Source: "no-reply@thenutritionistmcr.com",
     };
 
     const sendEmailCommand = new SendEmailCommand(email);

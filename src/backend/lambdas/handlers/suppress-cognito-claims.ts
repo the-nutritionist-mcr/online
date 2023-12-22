@@ -1,7 +1,7 @@
-import './init-dd-trace';
-import { COGNITO } from '@tnmo/constants';
-import { PreTokenGenerationTriggerHandler } from 'aws-lambda';
-import { warmer } from './warmer';
+import "../../utils/init-dd-trace";
+import { COGNITO } from "@tnmo/constants";
+import { PreTokenGenerationTriggerHandler } from "aws-lambda";
+import { warmer } from "../../utils/warmer";
 
 export const handler = warmer<PreTokenGenerationTriggerHandler>(
   async (event) => {

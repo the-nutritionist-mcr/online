@@ -4,13 +4,13 @@ import {
   AdminUpdateUserAttributesCommand,
   AdminUpdateUserAttributesCommandInput,
   CognitoIdentityProviderClient,
-} from '@aws-sdk/client-cognito-identity-provider';
-import { CHARGEBEE, COGNITO, E2E, ENV } from '@tnmo/constants';
-import { ChargeBee } from 'chargebee-typescript';
-import { transformPhoneNumberToCognitoFormat } from '../../transform-phone-number';
-import { handleSubscriptionEvent } from './handle-subscription-event';
-import { userExists } from '../user-exists';
-import { getEnv } from '../get-env';
+} from "@aws-sdk/client-cognito-identity-provider";
+import { CHARGEBEE, COGNITO, E2E, ENV } from "@tnmo/constants";
+import { ChargeBee } from "chargebee-typescript";
+import { transformPhoneNumberToCognitoFormat } from "../utils/transform-phone-number";
+import { handleSubscriptionEvent } from "./handle-subscription-event";
+import { userExists } from "../utils/user-exists";
+import { getEnv } from "../utils/get-env";
 
 export const handleCustomerEvent = async (
   client: ChargeBee,
@@ -45,7 +45,7 @@ export const handleCustomerEvent = async (
   } = billing_address ?? {};
 
   const hasChargebeeId =
-    event.event_type === 'customer_created'
+    event.event_type === "customer_created"
       ? [
           {
             Name: `custom:${COGNITO.customAttributes.ChargebeeId}`,
@@ -60,55 +60,55 @@ export const handleCustomerEvent = async (
     UserAttributes: [
       {
         Name: `custom:${COGNITO.customAttributes.City}`,
-        Value: city ?? '',
+        Value: city ?? "",
       },
       {
         Name: `custom:${COGNITO.customAttributes.Country}`,
-        Value: country ?? '',
+        Value: country ?? "",
       },
       {
         Name: `custom:${COGNITO.customAttributes.Postcode}`,
-        Value: postcode ?? '',
+        Value: postcode ?? "",
       },
       {
         Name: `custom:${COGNITO.customAttributes.NumberOfBags}`,
-        Value: String(numberOfBags ?? '1'),
+        Value: String(numberOfBags ?? "1"),
       },
       {
         Name: COGNITO.standardAttributes.phone,
-        Value: transformPhoneNumberToCognitoFormat(phone ?? ''),
+        Value: transformPhoneNumberToCognitoFormat(phone ?? ""),
       },
       {
         Name: `custom:${COGNITO.customAttributes.AddressLine1}`,
-        Value: line1 ?? '',
+        Value: line1 ?? "",
       },
       {
         Name: `custom:${COGNITO.customAttributes.AddressLine2}`,
-        Value: line2 ?? '',
+        Value: line2 ?? "",
       },
       {
         Name: `custom:${COGNITO.customAttributes.AddressLine3}`,
-        Value: line3 ?? '',
+        Value: line3 ?? "",
       },
       {
         Name: `custom:${COGNITO.customAttributes.ProfileNotes}`,
-        Value: profileNotes ?? '',
+        Value: profileNotes ?? "",
       },
       {
         Name: `custom:${COGNITO.customAttributes.DeliveryDay1}`,
-        Value: delivery1 ?? '',
+        Value: delivery1 ?? "",
       },
       {
         Name: `custom:${COGNITO.customAttributes.DeliveryDay2}`,
-        Value: delivery2 ?? '',
+        Value: delivery2 ?? "",
       },
       {
         Name: `custom:${COGNITO.customAttributes.DeliveryDay3}`,
-        Value: delivery3 ?? '',
+        Value: delivery3 ?? "",
       },
       {
         Name: `custom:${COGNITO.customAttributes.DeliveryNotes}`,
-        Value: deliveryNotes ?? '',
+        Value: deliveryNotes ?? "",
       },
       {
         Name: `custom:${COGNITO.customAttributes.CustomerUpdateTimestamp}`,
@@ -137,34 +137,34 @@ export const handleCustomerEvent = async (
   const cognito = new CognitoIdentityProviderClient({});
 
   if (
-    event.event_type === 'customer_changed' &&
+    event.event_type === "customer_changed" &&
     !(await userExists(id, poolId))
   ) {
     console.log('changed and doesn"t exist');
     await cognito.send(
       new AdminCreateUserCommand({
         ...input,
-        DesiredDeliveryMediums: ['EMAIL'],
-        MessageAction: 'SUPPRESS',
+        DesiredDeliveryMediums: ["EMAIL"],
+        MessageAction: "SUPPRESS",
       })
     );
 
     await handleSubscriptionEvent(client, id);
   } else {
-    console.log('else');
-    await (event.event_type === 'customer_created'
+    console.log("else");
+    await (event.event_type === "customer_created"
       ? cognito.send(
           new AdminCreateUserCommand({
             ...input,
-            DesiredDeliveryMediums: ['EMAIL'],
-            MessageAction: 'SUPPRESS',
+            DesiredDeliveryMediums: ["EMAIL"],
+            MessageAction: "SUPPRESS",
           })
         )
       : cognito.send(new AdminUpdateUserAttributesCommand(input)));
   }
 
   if (
-    environment !== 'prod' &&
+    environment !== "prod" &&
     email?.trim()?.toLowerCase() === E2E.testCustomer.email
   ) {
     const client = new CognitoIdentityProviderClient({});

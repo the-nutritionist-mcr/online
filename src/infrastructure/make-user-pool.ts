@@ -4,17 +4,17 @@ import {
   VerificationEmailStyle,
   UserPoolEmail,
   StringAttribute,
-} from 'aws-cdk-lib/aws-cognito';
-import { CfnOutput, Duration, RemovalPolicy } from 'aws-cdk-lib';
-import { getResourceName } from './get-resource-name';
-import { COGNITO } from '@tnmo/constants';
-import path from 'node:path';
-import { Construct } from 'constructs';
-import { makeInstrumentedFunctionGenerator } from './instrumented-nodejs-function';
+} from "aws-cdk-lib/aws-cognito";
+import { CfnOutput, Duration, RemovalPolicy } from "aws-cdk-lib";
+import { getResourceName } from "./get-resource-name";
+import { COGNITO } from "@tnmo/constants";
+import path from "node:path";
+import { Construct } from "constructs";
+import { makeInstrumentedFunctionGenerator } from "./instrumented-nodejs-function";
 
 const entryName = (folder: string, name: string) =>
   // eslint-disable-next-line unicorn/prefer-module
-  path.resolve(__dirname, '..', 'backend', 'lambdas', folder, name);
+  path.resolve(__dirname, "..", "backend", "lambdas", folder, name);
 
 export const makeUserPool = (
   context: Construct,
@@ -35,7 +35,7 @@ export const makeUserPool = (
   const adminCreateUserEmailSender = makeFunction(
     `admin-create-user-email-sender`,
     {
-      entry: entryName('chargebee-api', 'joining-email-sender.ts'),
+      entry: entryName("handlers", "joining-email-sender.ts"),
       environment: {
         ENVIRONMENT: environmentName,
       },
@@ -47,7 +47,7 @@ export const makeUserPool = (
     `pre-token-generation-trigger`,
     {
       timeout: Duration.seconds(20),
-      entry: entryName('misc', 'suppress-cognito-claims.ts'),
+      entry: entryName("handlers", "suppress-cognito-claims.ts"),
       environment: {
         ENVIRONMENT: environmentName,
       },
@@ -55,25 +55,25 @@ export const makeUserPool = (
   );
 
   const email = UserPoolEmail.withSES({
-    fromEmail: 'no-reply@thenutritionistmcr.com',
-    fromName: 'The Nutritionist MCR',
-    replyTo: 'hello@thenutrionistmcr.com',
-    sesVerifiedDomain: 'thenutritionistmcr.com',
+    fromEmail: "no-reply@thenutritionistmcr.com",
+    fromName: "The Nutritionist MCR",
+    replyTo: "hello@thenutrionistmcr.com",
+    sesVerifiedDomain: "thenutritionistmcr.com",
   });
 
   const verificationString =
-    'Hey {username}! Thanks for signing up to The Nutritionist Manchester. Your verification code is {####}';
+    "Hey {username}! Thanks for signing up to The Nutritionist Manchester. Your verification code is {####}";
   const invitationString =
-    'Hey {username}! you have been invited to join The Nutritionist Manchester. Your temporary password is {####}';
-  const userPool = new UserPool(context, 'user-pool', {
+    "Hey {username}! you have been invited to join The Nutritionist Manchester. Your temporary password is {####}";
+  const userPool = new UserPool(context, "user-pool", {
     removalPolicy,
-    userPoolName: getResourceName('user-pool', environmentName),
+    userPoolName: getResourceName("user-pool", environmentName),
     selfSignUpEnabled: true,
     email,
 
     userVerification: {
       emailBody: verificationString,
-      emailSubject: 'TNM signup',
+      emailSubject: "TNM signup",
       emailStyle: VerificationEmailStyle.CODE,
     },
 
@@ -83,7 +83,7 @@ export const makeUserPool = (
     },
 
     userInvitation: {
-      emailSubject: 'TNM invite',
+      emailSubject: "TNM invite",
       emailBody: invitationString,
     },
 
@@ -185,38 +185,26 @@ export const makeUserPool = (
     },
   });
 
-  // businessOwnersGroup.addManagedPolicy(
-  //   new ManagedPolicy(context, 'business-owners-cognito-access-policy', {
-  //     statements: [
-  //       new PolicyStatement({
-  //         effect: Effect.ALLOW,
-  //         resources: [userPool.userPoolArn],
-  //         actions: businessOwnersCognito,
-  //       }),
-  //     ],
-  //   })
-  // );
-
-  new CfnOutput(context, 'UserPoolId', {
+  new CfnOutput(context, "UserPoolId", {
     value: userPool.userPoolId,
   });
 
-  const client = userPool.addClient('Client', {
+  const client = userPool.addClient("Client", {
     disableOAuth: true,
   });
 
-  new CfnOutput(context, 'UserPoolArn', {
+  new CfnOutput(context, "UserPoolArn", {
     value: userPool.userPoolArn,
   });
 
-  new CfnOutput(context, 'ClientId', {
+  new CfnOutput(context, "ClientId", {
     value: client.userPoolClientId,
   });
 
-  new CfnUserPoolGroup(context, 'AdminGroup', {
+  new CfnUserPoolGroup(context, "AdminGroup", {
     userPoolId: userPool.userPoolId,
-    description: 'TNM Administrators',
-    groupName: 'admin',
+    description: "TNM Administrators",
+    groupName: "admin",
     precedence: 0,
   });
 

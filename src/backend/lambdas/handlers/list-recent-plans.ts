@@ -1,25 +1,25 @@
-import { APIGatewayProxyHandlerV2 } from 'aws-lambda';
-import { returnErrorResponse } from '../data-api/return-error-response';
-import { returnOkResponse } from '../data-api/return-ok-response';
-import { ENV, HTTP } from '@tnmo/constants';
-import { authoriseJwt } from '../data-api/authorise';
+import { APIGatewayProxyHandlerV2 } from "aws-lambda";
+import { returnErrorResponse } from "../data-api/return-error-response";
+import { returnOkResponse } from "../data-api/return-ok-response";
+import { ENV, HTTP } from "@tnmo/constants";
+import { authoriseJwt } from "../data-api/authorise";
 
-import { HttpError } from '../data-api/http-error';
-import { doQuery } from '../dynamodb';
-import { warmer } from './warmer';
+import { HttpError } from "../data-api/http-error";
+import { doQuery } from "../../dynamodb";
+import { warmer } from "../../utils/warmer";
 
 const MAX_PLANS = 20;
 
 export const handler = warmer<APIGatewayProxyHandlerV2>(async (event) => {
   try {
-    await authoriseJwt(event, ['admin']);
+    await authoriseJwt(event, ["admin"]);
 
     const tableName = process.env[ENV.varNames.DynamoDBTable];
 
     const response = await doQuery(
-      tableName ?? '',
-      'id = :id',
-      ['plan'],
+      tableName ?? "",
+      "id = :id",
+      ["plan"],
       { Limit: MAX_PLANS, ScanIndexForward: false },
       1
     );
@@ -27,7 +27,7 @@ export const handler = warmer<APIGatewayProxyHandlerV2>(async (event) => {
     if (!response?.length) {
       throw new HttpError(
         HTTP.statusCodes.InternalServerError,
-        'Dynamodb did not return a response'
+        "Dynamodb did not return a response"
       );
     }
 

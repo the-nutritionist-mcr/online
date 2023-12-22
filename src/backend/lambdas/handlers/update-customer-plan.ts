@@ -1,27 +1,27 @@
-import { returnErrorResponse } from '../data-api/return-error-response';
-import { authoriseJwt } from '../data-api/authorise';
-import { APIGatewayProxyHandlerV2 } from 'aws-lambda';
-import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+import { returnErrorResponse } from "../data-api/return-error-response";
+import { authoriseJwt } from "../data-api/authorise";
+import { APIGatewayProxyHandlerV2 } from "aws-lambda";
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import {
   DynamoDBDocumentClient,
   PutCommand,
   ScanCommand,
-} from '@aws-sdk/lib-dynamodb';
-import { performSwaps } from '@tnmo/meal-planning';
+} from "@aws-sdk/lib-dynamodb";
+import { performSwaps } from "@tnmo/meal-planning";
 import {
   assertsMealSelectPayload,
   Recipe,
   StoredMealPlanGeneratedForIndividualCustomer,
-} from '@tnmo/types';
-import { ENV, HTTP, ORDERS_EMAIL } from '@tnmo/constants';
-import { HttpError } from '../data-api/http-error';
+} from "@tnmo/types";
+import { ENV, HTTP, ORDERS_EMAIL } from "@tnmo/constants";
+import { HttpError } from "../data-api/http-error";
 import {
   SendEmailCommand,
   SendEmailCommandInput,
   SESClient,
-} from '@aws-sdk/client-ses';
-import { makeEmail } from './submit-order-email-template';
-import { warmer } from './warmer';
+} from "@aws-sdk/client-ses";
+import { makeEmail } from "../../utils/submit-order-email-template";
+import { warmer } from "../../utils/warmer";
 
 export const handler = warmer<APIGatewayProxyHandlerV2>(async (event) => {
   try {
@@ -32,16 +32,16 @@ export const handler = warmer<APIGatewayProxyHandlerV2>(async (event) => {
     const ses = new SESClient({});
 
     const dynamodbClient = new DynamoDBClient({});
-    const payload = JSON.parse(event.body ?? '');
+    const payload = JSON.parse(event.body ?? "");
     const tableName = process.env[ENV.varNames.DynamoDBTable];
 
     assertsMealSelectPayload(payload);
 
     if (
-      !groups.includes('admin') &&
+      !groups.includes("admin") &&
       username !== payload.selection.customer.username
     ) {
-      throw new HttpError(HTTP.statusCodes.Forbidden, 'nice try...');
+      throw new HttpError(HTTP.statusCodes.Forbidden, "nice try...");
     }
     const environment = process.env[ENV.varNames.EnvironmentName];
 
@@ -76,7 +76,7 @@ export const handler = warmer<APIGatewayProxyHandlerV2>(async (event) => {
 
       const recipes = items as Recipe[];
 
-      const bcc = environment === 'prod' ? [ORDERS_EMAIL] : [];
+      const bcc = environment === "prod" ? [ORDERS_EMAIL] : [];
 
       const email: SendEmailCommandInput = {
         Destination: {
@@ -87,7 +87,7 @@ export const handler = warmer<APIGatewayProxyHandlerV2>(async (event) => {
           Body: {
             Html: {
               // eslint-disable-next-line unicorn/text-encoding-identifier-case
-              Charset: 'UTF-8',
+              Charset: "UTF-8",
               Data: makeEmail(
                 selection.customer.firstName,
                 performSwaps(selection, selection.customer, recipes)
@@ -96,11 +96,11 @@ export const handler = warmer<APIGatewayProxyHandlerV2>(async (event) => {
           },
           Subject: {
             // eslint-disable-next-line unicorn/text-encoding-identifier-case
-            Charset: 'UTF-8',
-            Data: 'Your Meal Choices',
+            Charset: "UTF-8",
+            Data: "Your Meal Choices",
           },
         },
-        Source: 'no-reply@thenutritionistmcr.com',
+        Source: "no-reply@thenutritionistmcr.com",
       };
 
       const sendEmailCommand = new SendEmailCommand(email);
@@ -110,10 +110,10 @@ export const handler = warmer<APIGatewayProxyHandlerV2>(async (event) => {
 
     return {
       statusCode: HTTP.statusCodes.Ok,
-      body: '{}',
+      body: "{}",
       headers: {
-        [HTTP.headerNames.AccessControlAllowOrigin]: '*',
-        [HTTP.headerNames.AccessControlAllowHeaders]: '*',
+        [HTTP.headerNames.AccessControlAllowOrigin]: "*",
+        [HTTP.headerNames.AccessControlAllowHeaders]: "*",
       },
     };
   } catch (error) {

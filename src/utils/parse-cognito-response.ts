@@ -1,15 +1,15 @@
-import { AttributeType } from '@aws-sdk/client-cognito-identity-provider';
-import { itemFamilies } from '@tnmo/config';
-import { COGNITO } from '@tnmo/constants';
-import { BackendCustomer, StandardPlan } from '@tnmo/types';
-import { hydrateCustomPlan } from '../backend/lambdas/misc/hydrate-custom-plan';
+import { AttributeType } from "@aws-sdk/client-cognito-identity-provider";
+import { itemFamilies } from "@tnmo/config";
+import { COGNITO } from "@tnmo/constants";
+import { BackendCustomer, StandardPlan } from "@tnmo/types";
+import { hydrateCustomPlan } from "../backend/utils/hydrate-custom-plan";
 
 const getAttributeValue = (attributes: AttributeType[], key: string) =>
-  attributes.find((attribute) => attribute.Name === key)?.Value ?? '';
+  attributes.find((attribute) => attribute.Name === key)?.Value ?? "";
 
 export const parseCognitoResponse = (
   attributes: AttributeType[]
-): Omit<BackendCustomer, 'username' | 'groups'> => {
+): Omit<BackendCustomer, "username" | "groups"> => {
   const plansValue = getAttributeValue(
     attributes,
     `custom:${COGNITO.customAttributes.Plans}`
@@ -30,7 +30,7 @@ export const parseCognitoResponse = (
 
   return {
     numberOfBags: Number(
-      bags === null || typeof bags === 'undefined' || bags === '' ? 1 : bags
+      bags === null || typeof bags === "undefined" || bags === "" ? 1 : bags
     ),
     salutation: getAttributeValue(
       attributes,
@@ -80,8 +80,8 @@ export const parseCognitoResponse = (
       `custom:${COGNITO.customAttributes.Postcode}`
     ),
     plans: (
-      JSON.parse(plansValue ? plansValue : '[]') as StandardPlan[]
-    ).filter((plan) => plan.subscriptionStatus !== 'cancelled'),
+      JSON.parse(plansValue ? plansValue : "[]") as StandardPlan[]
+    ).filter((plan) => plan.subscriptionStatus !== "cancelled"),
     customerUpdateTime: getAttributeValue(
       attributes,
       `custom:${COGNITO.customAttributes.CustomerUpdateTimestamp}`

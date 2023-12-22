@@ -13,18 +13,18 @@ import { handler } from "./webhook";
 import { mockClient } from "aws-sdk-client-mock";
 import { when } from "jest-when";
 import { ENV, HTTP, COGNITO, CHARGEBEE } from "@tnmo/constants";
-import { getPlans } from "./get-plans";
-import { getSecrets } from "../get-secrets";
+import { getPlans } from "../../utils/get-plans";
+import { getSecrets } from "../../utils/get-secrets";
 import { StandardPlan } from "@tnmo/types";
-import { userExists } from "./user-exists";
+import { userExists } from "../../utils/user-exists";
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 const cognitoMock = mockClient(CognitoIdentityProviderClient);
 
-vi.mock("./get-plans");
-vi.mock("./user-exists");
-vi.mock("../get-secrets");
+vi.mock("../../utils/get-plans");
+vi.mock("../../utils/user-exists");
+vi.mock("../../utils/get-secrets");
 
 describe("the webhook handler", () => {
   beforeEach(() => {

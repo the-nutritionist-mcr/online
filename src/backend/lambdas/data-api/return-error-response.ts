@@ -1,11 +1,11 @@
-import { HTTP } from '@tnmo/constants';
-import { setErrorOnServiceEntrySpan } from '../misc/init-dd-trace';
-import { HttpError } from './http-error';
+import { HTTP } from "@tnmo/constants";
+import { setErrorOnServiceEntrySpan } from "../../utils/init-dd-trace";
+import { HttpError } from "./http-error";
 
 export const returnErrorResponse = (error?: Error | unknown) => {
   const stack =
     !(error instanceof Error) ||
-    process.env['ENVIRONMENT_NAME'] === 'prod' ||
+    process.env["ENVIRONMENT_NAME"] === "prod" ||
     !error
       ? {}
       : { stack: error.stack };
@@ -28,8 +28,8 @@ export const returnErrorResponse = (error?: Error | unknown) => {
     body: JSON.stringify({ ...errorObj, ...stack }),
     statusCode,
     headers: {
-      [HTTP.headerNames.AccessControlAllowOrigin]: '*',
-      [HTTP.headerNames.AccessControlAllowHeaders]: '*',
+      [HTTP.headerNames.AccessControlAllowOrigin]: "*",
+      [HTTP.headerNames.AccessControlAllowHeaders]: "*",
     },
   };
 };

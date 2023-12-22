@@ -2,10 +2,10 @@ import {
   AdminUpdateUserAttributesCommand,
   AdminUpdateUserAttributesCommandInput,
   CognitoIdentityProviderClient,
-} from '@aws-sdk/client-cognito-identity-provider';
-import { COGNITO, ENV } from '@tnmo/constants';
-import { ChargeBee } from 'chargebee-typescript';
-import { getPlans } from '../get-plans';
+} from "@aws-sdk/client-cognito-identity-provider";
+import { COGNITO, ENV } from "@tnmo/constants";
+import { ChargeBee } from "chargebee-typescript";
+import { getPlans } from "../utils/get-plans";
 
 export const handleSubscriptionEvent = async (
   client: ChargeBee,

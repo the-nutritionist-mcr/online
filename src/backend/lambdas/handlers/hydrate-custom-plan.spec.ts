@@ -1,38 +1,38 @@
-import { Delivery } from '@tnmo/types';
-import { hydrateCustomPlan } from './hydrate-custom-plan';
-describe('hydrate custom plan', () => {
-  it('marks extras when they are not present', () => {
+import { Delivery } from "@tnmo/types";
+import { hydrateCustomPlan } from "../../utils/hydrate-custom-plan";
+describe("hydrate custom plan", () => {
+  it("marks extras when they are not present", () => {
     const families = [
       {
-        name: 'Equilibrium',
+        name: "Equilibrium",
         isExtra: false,
       },
       {
-        name: 'Mass',
+        name: "Mass",
         isExtra: false,
       },
       {
-        name: 'Micro',
+        name: "Micro",
         isExtra: false,
       },
       {
-        name: 'Ultra Micro',
+        name: "Ultra Micro",
         isExtra: false,
       },
       {
-        name: 'Low-CHO',
+        name: "Low-CHO",
         isExtra: false,
       },
       {
-        name: 'Seasonal Soup',
+        name: "Seasonal Soup",
         isExtra: true,
       },
       {
-        name: 'Breakfast',
+        name: "Breakfast",
         isExtra: true,
       },
       {
-        name: 'Snacks',
+        name: "Snacks",
         isExtra: true,
       },
     ];
@@ -40,35 +40,35 @@ describe('hydrate custom plan', () => {
       {
         items: [
           {
-            name: 'Equilibrium',
+            name: "Equilibrium",
             quantity: 2,
           },
           {
-            name: 'Mass',
+            name: "Mass",
             quantity: 0,
           },
           {
-            name: 'Micro',
+            name: "Micro",
             quantity: 0,
           },
           {
-            name: 'Ultra Micro',
+            name: "Ultra Micro",
             quantity: 0,
           },
           {
-            name: 'Low-CHO',
+            name: "Low-CHO",
             quantity: 0,
           },
           {
-            name: 'Seasonal Soup',
+            name: "Seasonal Soup",
             quantity: 0,
           },
           {
-            name: 'Breakfast',
+            name: "Breakfast",
             quantity: 1,
           },
           {
-            name: 'Snacks',
+            name: "Snacks",
             quantity: 0,
           },
         ],
@@ -77,35 +77,35 @@ describe('hydrate custom plan', () => {
       {
         items: [
           {
-            name: 'Equilibrium',
+            name: "Equilibrium",
             quantity: 2,
           },
           {
-            name: 'Mass',
+            name: "Mass",
             quantity: 0,
           },
           {
-            name: 'Micro',
+            name: "Micro",
             quantity: 0,
           },
           {
-            name: 'Ultra Micro',
+            name: "Ultra Micro",
             quantity: 0,
           },
           {
-            name: 'Low-CHO',
+            name: "Low-CHO",
             quantity: 0,
           },
           {
-            name: 'Seasonal Soup',
+            name: "Seasonal Soup",
             quantity: 0,
           },
           {
-            name: 'Breakfast',
+            name: "Breakfast",
             quantity: 1,
           },
           {
-            name: 'Snacks',
+            name: "Snacks",
             quantity: 0,
           },
         ],
