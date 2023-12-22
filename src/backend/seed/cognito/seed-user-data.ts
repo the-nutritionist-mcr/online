@@ -1,16 +1,15 @@
-import { E2E, COGNITO } from '@tnmo/constants';
-import { SeedUser } from '@tnmo/seed-cognito';
-import { BackendCustomer } from '@tnmo/types';
+import { E2E, COGNITO } from "@tnmo/constants";
+import { BackendCustomer } from "@tnmo/types";
 
 const toDynamo = (
-  user: Partial<Omit<BackendCustomer, 'plans'>> & {
+  user: Partial<Omit<BackendCustomer, "plans">> & {
     phoneNumberFull?: string;
     plans?: string;
   },
   password: string,
-  state: 'Complete' | 'ForceChangePassword',
+  state: "Complete" | "ForceChangePassword",
   groups: string[]
-): SeedUser => {
+) => {
   const otherAttributes = [
     {
       Name: `custom:${COGNITO.customAttributes.Postcode}`,
@@ -64,39 +63,39 @@ const toDynamo = (
 
   return {
     otherAttributes: otherAttributes.filter((attr) => Boolean(attr.Value)),
-    username: user.username ?? '',
+    username: user.username ?? "",
     password,
-    email: user.email ?? '',
+    email: user.email ?? "",
     state,
     groups,
   };
 };
 
-export const SEED_USERS: SeedUser[] = [
-  toDynamo(E2E.adminUserOne, E2E.adminUserOne.password, 'Complete', ['admin']),
-  toDynamo(E2E.adminUserTwo, E2E.adminUserTwo.password, 'Complete', ['admin']),
-  toDynamo(E2E.normalUserOne, E2E.normalUserOne.password, 'Complete', []),
+export const SEED_USERS = [
+  toDynamo(E2E.adminUserOne, E2E.adminUserOne.password, "Complete", ["admin"]),
+  toDynamo(E2E.adminUserTwo, E2E.adminUserTwo.password, "Complete", ["admin"]),
+  toDynamo(E2E.normalUserOne, E2E.normalUserOne.password, "Complete", []),
   toDynamo(
     E2E.anotherE2ECustomer,
     E2E.anotherE2ECustomer.password,
-    'Complete',
+    "Complete",
     []
   ),
   toDynamo(
     E2E.anotherE2ECustomerAgain,
     E2E.anotherE2ECustomerAgain.password,
-    'Complete',
+    "Complete",
     []
   ),
-  toDynamo(E2E.e2eCustomer2, E2E.e2eCustomer2.password, 'Complete', []),
+  toDynamo(E2E.e2eCustomer2, E2E.e2eCustomer2.password, "Complete", []),
   ...Array.from({ length: 40 }).map((item, index) => {
-    const [first, second] = E2E.testCustomer.email.split('+');
-    const email = [first, '+', String(index), second].join('');
+    const [first, second] = E2E.testCustomer.email.split("+");
+    const email = [first, "+", String(index), second].join("");
 
     return toDynamo(
       { ...E2E.testCustomer, email, username: `test-customer-${index}` },
       E2E.testCustomer.password,
-      'Complete',
+      "Complete",
       []
     );
   }),
