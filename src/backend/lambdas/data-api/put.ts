@@ -3,13 +3,13 @@ import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient, PutCommand } from "@aws-sdk/lib-dynamodb";
-import { returnErrorResponse } from "./return-error-response";
-import { authoriseJwt } from "./authorise";
+import { returnErrorResponse } from "../../../core-backend/return-error-response";
+import { protectRoute } from "@tnmo/core-backend";
 import { warmer } from "../../utils/warmer";
 
 export const handler = warmer<APIGatewayProxyHandlerV2>(async (event) => {
   try {
-    await authoriseJwt(event, ["admin"]);
+    await protectRoute(event, ["admin"]);
     const dynamodb = new DynamoDBClient({});
 
     const client = DynamoDBDocumentClient.from(dynamodb);

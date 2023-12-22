@@ -1,7 +1,7 @@
 import "../../utils/init-dd-trace";
-import { returnErrorResponse } from "../data-api/return-error-response";
-import { authoriseJwt } from "../data-api/authorise";
+import { returnErrorResponse, protectRoute } from "@tnmo/core-backend";
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
+
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import {
   DynamoDBDocumentClient,
@@ -18,7 +18,7 @@ import { warmer } from "../../utils/warmer";
 
 export const handler = warmer<APIGatewayProxyHandlerV2>(async (event) => {
   try {
-    await authoriseJwt(event, ["admin"]);
+    await protectRoute(event, ["admin"]);
     const dynamodbClient = new DynamoDBClient({});
     const changePlanData = JSON.parse(event.body ?? "");
     const tableName = process.env[ENV.varNames.DynamoDBTable];

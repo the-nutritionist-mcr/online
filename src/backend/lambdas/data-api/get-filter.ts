@@ -3,17 +3,17 @@ import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
-import { authoriseJwt } from "./authorise";
+import { protectRoute } from "../../../core-backend/protect-route";
 
-import { returnErrorResponse } from "./return-error-response";
+import { returnErrorResponse } from "../../../core-backend/return-error-response";
 import { scan } from "./get-data/scan";
-import { returnOkResponse } from "./return-ok-response";
+import { returnOkResponse } from "../../../core-backend/return-ok-response";
 import Fuse from "fuse.js";
 import { warmer } from "../../utils/warmer";
 
 export const handler = warmer<APIGatewayProxyHandlerV2>(async (event) => {
   try {
-    await authoriseJwt(event, ["admin"]);
+    await protectRoute(event, ["admin"]);
 
     const searchTerm = event.queryStringParameters?.searchTerm;
 

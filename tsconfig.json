@@ -30,7 +30,8 @@
       "@tnmo/seed-dynamo": ["./src/seed-dynamo/index.ts"],
       "@tnmo/dynamo": ["./src/dynamo/index.ts"],
       "@tnmo/image-optimisation": ["./src/image-optimisation/index.ts"],
-      "@tnmo/core": ["./src/core/index.ts"]
+      "@tnmo/core": ["./src/core/index.ts"],
+      "@tnmo/core-backend": ["./src/core-backend/index.ts"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

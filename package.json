@@ -12,7 +12,7 @@
     "lint": "next lint",
     "test:api": "NODE_ENV=test vitest --run --api",
     "test": "NODE_ENV=test vitest --pool forks --silent --coverage",
-    "test:watch": "NODE_ENV=test vitest --watch --silent",
+    "test:watch": "NODE_ENV=test vitest --watch",
     "test:ui": "NODE_ENV=test vitest --ui --watch",
     "test:e2e": "playwright test",
     "types": "tsc --noEmit",

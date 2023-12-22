@@ -1,32 +1,50 @@
 ---
-id: working-with-the-backendj
-title: Working with the backend
+id: create-an-api-route
+title: Create an API route
 tags:
   - API
   - Lambda
   - API Gateway
   - CDK
 
-description: How to setup API routes and request data from them in the frontend
+description: How to setup API routes
 ---
-
-## How to create an API route
 
 Backend execution is handled by [AWS Lambda](https://aws.amazon.com/lambda/) and deployed using the [aws CDK](https://aws.amazon.com/cdk/) - an IAC framework that allows me to declare all the infrastructure as TypeScript. That means setting up new infrastructure is as simple as adding a few lines of TypeScript code.
 
-### Create the handler function
+## Create the handler function
+
+:::warning
+If you do not call **protectRoute** at the start of your handler, your API will be available for **anyone on the internet to call regardless if they are logged in or not**
+:::
 
 This should be a Typescript module living in `src/backend/lambda/handlers`. The module should export a single function called `handler`, which looks like this:
 
 ```TypeScript
 import { APIGatewayProxyEventV2 } from "aws-lambda";
+import { returnOkResponse } from "../utils/return-ok-response";
+import { returnErrorResponse } from "../utils/return-error-response";
+import { protectRoute } from "@tnmo/core"
 
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {
-   // Some code
+  try {
+    await protectRoute(event)
+
+
+    // Some code that possible creates this responseData object
+
+    const responseData = {
+      hello: "world"
+    }
+
+    return returnOkResponse(responseData)
+  } catch(error) {
+    return returnErrorResponse(error)
+  }
 }
 ```
 
-### Set up the infrastructure
+## Set up the infrastructure
 
 Add the following to `src/infrastructure/make-data-apis.ts`
 

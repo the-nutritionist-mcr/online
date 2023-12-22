@@ -2,12 +2,11 @@ import "../../utils/init-dd-trace";
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 import { chooseMealSelections } from "@tnmo/meal-planning";
 import { ENV } from "@tnmo/constants";
-import { authoriseJwt } from "../data-api/authorise";
 import {
   StoredPlan,
   StoredMealPlanGeneratedForIndividualCustomer,
 } from "@tnmo/types";
-import { returnErrorResponse } from "../data-api/return-error-response";
+import { returnErrorResponse, protectRoute } from "@tnmo/core-backend";
 import { HttpError } from "../data-api/http-error";
 import { recursivelySerialiseDate, SerialisedDate } from "@tnmo/utils";
 
@@ -34,7 +33,7 @@ export const handler = warmer<APIGatewayProxyHandlerV2>(async (event) => {
       },
     });
 
-    const { username } = await authoriseJwt(event, ["admin"]);
+    const { username } = await protectRoute(event, ["admin"]);
     const { firstName, surname } = await getUserFromAws(username);
 
     const payload = JSON.parse(event.body ?? "");

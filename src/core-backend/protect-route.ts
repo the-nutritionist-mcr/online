@@ -1,8 +1,8 @@
-import { verifyJwtToken } from '@tnmo/authorise-cognito-jwt';
-import { APIGatewayProxyEventV2 } from 'aws-lambda';
+import { verifyJwtToken } from "@tnmo/authorise-cognito-jwt";
+import { APIGatewayProxyEventV2 } from "aws-lambda";
 
-import { HTTP } from '../../../infrastructure/constants';
-import { HttpError } from './http-error';
+import { HTTP } from "../infrastructure/constants";
+import { HttpError } from "../backend/lambdas/data-api/http-error";
 
 interface AuthoriseResponse {
   username: string;
@@ -12,7 +12,13 @@ interface AuthoriseResponse {
   authenticated: boolean;
 }
 
-export const authoriseJwt = async (
+/**
+ * Call this function at the start of your lambda handler to ensure that the user is authenticated and authorised to access the route
+ *
+ * @param event - The event object from the lambda handler
+ * @param groups - The groups that the user must be a member of to be authorised
+ */
+export const protectRoute = async (
   event: APIGatewayProxyEventV2,
   groups?: string[],
   options?: { allowUnauthenticated: boolean }
@@ -20,16 +26,16 @@ export const authoriseJwt = async (
   const authHeader =
     event.headers &&
     Object.entries(event.headers).find(
-      (pair) => pair[0].toLowerCase() === 'authorization'
+      (pair) => pair[0].toLowerCase() === "authorization"
     )?.[1];
 
   if (!authHeader && options?.allowUnauthenticated) {
     return {
       authenticated: false,
-      username: '',
+      username: "",
       groups: [],
-      firstName: '',
-      surname: '',
+      firstName: "",
+      surname: "",
     };
   }
 
@@ -62,17 +68,17 @@ export const authoriseJwt = async (
 };
 
 const decodeBasicAuth = (authHeaderValue: string) => {
-  const base64Encoded = authHeaderValue.split(' ')[1];
-  const parts = Buffer.from(base64Encoded, 'base64')
-    .toString('utf8')
-    .split(':');
+  const base64Encoded = authHeaderValue.split(" ")[1];
+  const parts = Buffer.from(base64Encoded, "base64")
+    .toString("utf8")
+    .split(":");
 
   const username = parts[0];
   const [, ...passwordParts] = parts;
 
   return {
     username,
-    password: passwordParts.join(''),
+    password: passwordParts.join(""),
   };
 };
 
@@ -82,7 +88,7 @@ export const authoriseBasic = (
   password: string
 ) => {
   const credentials = decodeBasicAuth(
-    event.headers[HTTP.headerNames.Authorization] ?? ''
+    event.headers[HTTP.headerNames.Authorization] ?? ""
   );
 
   if (credentials.username !== username || credentials.password !== password) {

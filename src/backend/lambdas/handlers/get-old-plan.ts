@@ -1,6 +1,4 @@
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
-import { returnErrorResponse } from "../data-api/return-error-response";
-import { returnOkResponse } from "../data-api/return-ok-response";
 import {
   StoredPlan,
   GetPlanResponseNonAdmin,
@@ -9,7 +7,12 @@ import {
   WeeklyCookPlanWithoutCustomerPlans,
 } from "@tnmo/types";
 import { ENV, HTTP } from "@tnmo/constants";
-import { authoriseJwt } from "../data-api/authorise";
+
+import {
+  returnOkResponse,
+  returnErrorResponse,
+  protectRoute,
+} from "@tnmo/core-backend";
 
 import { HttpError } from "../data-api/http-error";
 import { doQuery } from "../../dynamodb";
@@ -19,7 +22,7 @@ import { warmer } from "../../utils/warmer";
 export const handler = warmer<APIGatewayProxyHandlerV2>(async (event) => {
   try {
     const requestedPlan = event.pathParameters?.plan;
-    const { groups, username: currentUser } = await authoriseJwt(event);
+    const { groups, username: currentUser } = await protectRoute(event);
 
     const tableName = process.env[ENV.varNames.DynamoDBTable];
 

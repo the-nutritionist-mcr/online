@@ -4,7 +4,7 @@ import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 
-import { returnErrorResponse } from "./return-error-response";
+import { returnErrorResponse } from "../../../core-backend/return-error-response";
 import { batchGet } from "./get-data/batch-get";
 import { warmer } from "../../utils/warmer";
 

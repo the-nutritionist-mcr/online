@@ -1,6 +1,6 @@
 import { HTTP } from "@tnmo/constants";
-import { setErrorOnServiceEntrySpan } from "../../utils/init-dd-trace";
-import { HttpError } from "./http-error";
+import { setErrorOnServiceEntrySpan } from "../backend/utils/init-dd-trace";
+import { HttpError } from "../backend/lambdas/data-api/http-error";
 
 export const returnErrorResponse = (error?: Error | unknown) => {
   const stack =

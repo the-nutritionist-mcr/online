@@ -3,14 +3,18 @@ import { handler } from "./post";
 
 import { mockClient } from "aws-sdk-client-mock";
 import { DynamoDBDocumentClient, PutCommand } from "@aws-sdk/lib-dynamodb";
-import { authoriseJwt } from "./authorise";
+import { protectRoute } from "@tnmo/core-backend";
 import { v4 } from "uuid";
 import { APIGatewayProxyEventV2, EventBridgeEvent } from "aws-lambda";
 import { HTTP } from "../../../infrastructure/constants";
 import { HttpError } from "./http-error";
+import { vi } from "vitest";
 
 vi.mock("uuid");
-vi.mock("./authorise");
+vi.mock("@tnmo/core-backend", async (importOriginal) => ({
+  ...((await vi.importActual("@tnmo/core-backend")) as Record<string, unknown>),
+  protectRoute: vi.fn(),
+}));
 
 const dynamodbMock = mockClient(DynamoDBDocumentClient);
 
@@ -22,7 +26,7 @@ beforeEach(() => {
 
 describe("the get handler", () => {
   it("returns a response with the statuscode from the error when an httpError is thrown by authorise", async () => {
-    vi.mocked(authoriseJwt).mockRejectedValue(
+    vi.mocked(protectRoute).mockRejectedValue(
       new HttpError(HTTP.statusCodes.Forbidden, "oh no!")
     );
 

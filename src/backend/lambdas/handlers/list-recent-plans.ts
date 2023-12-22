@@ -1,8 +1,10 @@
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
-import { returnErrorResponse } from "../data-api/return-error-response";
-import { returnOkResponse } from "../data-api/return-ok-response";
+import {
+  returnOkResponse,
+  returnErrorResponse,
+  protectRoute,
+} from "@tnmo/core-backend";
 import { ENV, HTTP } from "@tnmo/constants";
-import { authoriseJwt } from "../data-api/authorise";
 
 import { HttpError } from "../data-api/http-error";
 import { doQuery } from "../../dynamodb";
@@ -12,7 +14,7 @@ const MAX_PLANS = 20;
 
 export const handler = warmer<APIGatewayProxyHandlerV2>(async (event) => {
   try {
-    await authoriseJwt(event, ["admin"]);
+    await protectRoute(event, ["admin"]);
 
     const tableName = process.env[ENV.varNames.DynamoDBTable];
 

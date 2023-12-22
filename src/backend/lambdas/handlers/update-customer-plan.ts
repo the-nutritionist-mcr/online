@@ -1,5 +1,4 @@
-import { returnErrorResponse } from "../data-api/return-error-response";
-import { authoriseJwt } from "../data-api/authorise";
+import { returnErrorResponse, protectRoute } from "@tnmo/core-backend";
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import {
@@ -25,7 +24,7 @@ import { warmer } from "../../utils/warmer";
 
 export const handler = warmer<APIGatewayProxyHandlerV2>(async (event) => {
   try {
-    const { groups, username } = await authoriseJwt(event);
+    const { groups, username } = await protectRoute(event);
     const marshallOptions = {
       removeUndefinedValues: true,
     };
