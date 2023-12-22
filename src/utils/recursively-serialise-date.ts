@@ -1,29 +1,29 @@
 type DateLike = { getMonth: () => number };
-type SerialisedDateLike = { $type: 'date'; value: number };
+type SerialisedDateLike = { $type: "date"; value: number };
 
 const isDate = (foo: unknown): foo is Date => {
-  return typeof (foo as Date)?.getMonth === 'function';
+  return typeof (foo as Date)?.getMonth === "function";
 };
 
 const isSerialisedDate = (
   foo: unknown
-): foo is { $type: 'date'; value: number } => {
+): foo is { $type: "date"; value: number } => {
   return (
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    typeof (foo as any)?.value === 'string' &&
+    typeof (foo as any)?.value === "string" &&
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (foo as any)?.['$type'] === 'date'
+    (foo as any)?.["$type"] === "date"
   );
 };
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 const isObjectType = (foo: unknown): foo is {} => {
-  return foo !== null && typeof foo === 'object';
+  return foo !== null && typeof foo === "object";
 };
 
 export type SerialisedDate<T> = {
   [K in keyof T]: T[K] extends DateLike
-    ? { $type: 'date'; value: number }
+    ? { $type: "date"; value: number }
     : SerialisedDate<T[K]>;
 };
 
@@ -41,7 +41,7 @@ export const recursivelySerialiseDate = <T extends {}>(
     if (isDate(value)) {
       // eslint-disable-next-line fp/no-mutating-assign
       return Object.assign(accum, {
-        [key]: { ['$type']: 'date', value: String(value.getTime()) },
+        [key]: { ["$type"]: "date", value: String(value.getTime()) },
       });
     }
 

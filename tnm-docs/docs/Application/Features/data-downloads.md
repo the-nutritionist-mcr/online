@@ -1,14 +1,15 @@
 ---
 id: cook-plan
-title: PDF Reports
+title: Data Downloads
 sidebar_position: 3
 tags:
   - Cook Plan
   - Pack Plan
   - PDF
   - Report
+  - CSV
 
-description: PDF Reports that the application generates to support business operations
+description: Data downloads that the application generates to support business operations
 ---
 
 Once the [meal plan has been generated](./meal-plan-generation.md), clicking the `downloads` button allows you to download the following artifacts
@@ -32,4 +33,4 @@ This download provides a zip file containing, for each recipe, a CSV file that h
 
 ## Address Data
 
-This is a CSV export which 
+A CSV file containing at least one row for each customer which we import into Bartender in order to print address labels. Note - the number of rows that are contained in this file per customer is dictated by the `number of bags` custom field on Chargebee
