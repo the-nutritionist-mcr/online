@@ -1,8 +1,8 @@
-import { LoadingContext } from '@tnmo/components';
-import { recursivelyDeserialiseDate, SerialisedDate } from '@tnmo/utils';
-import { useContext } from 'react';
-import useSWR from 'swr';
-import { swrFetcher } from '../utils/swr-fetcher';
+import { LoadingContext } from "@tnmo/components";
+import { apiRequest } from "@tnmo/core";
+import { recursivelyDeserialiseDate, SerialisedDate } from "@tnmo/utils";
+import { useContext } from "react";
+import useSWR from "swr";
 
 type ParamsType<T> = Parameters<typeof useSWR<SerialisedDate<T>>>;
 
@@ -13,9 +13,9 @@ export const useSwrWrapper = <T = unknown>(
 ) => {
   const { useLoading } = useContext(LoadingContext);
 
-  const finalKey = typeof key === 'function' ? key() : key;
-  if (finalKey && typeof finalKey !== 'string') {
-    throw new TypeError('useSwrWrapper can only be used with string keys');
+  const finalKey = typeof key === "function" ? key() : key;
+  if (finalKey && typeof finalKey !== "string") {
+    throw new TypeError("useSwrWrapper can only be used with string keys");
   }
 
   const loadingKey = `swr-${finalKey}`;
@@ -26,13 +26,13 @@ export const useSwrWrapper = <T = unknown>(
   );
 
   type OnErrorType = Exclude<
-    Exclude<typeof options, undefined>['onError'],
+    Exclude<typeof options, undefined>["onError"],
     undefined
   >;
 
   const error = (...args: Parameters<OnErrorType>) => {
     options?.onError?.(...args);
-    if (getLoadingState() === 'Started') {
+    if (getLoadingState() === "Started") {
       stopLoading();
     }
   };
@@ -41,7 +41,7 @@ export const useSwrWrapper = <T = unknown>(
 
   const finalArgs = [
     key,
-    swrFetcher,
+    apiRequest,
     { ...options, onerror: error, refreshInterval },
   ] as const;
 
@@ -50,7 +50,7 @@ export const useSwrWrapper = <T = unknown>(
   const { data, ...rest } = response;
 
   if (data !== undefined) {
-    setLoadingState('Finished');
+    setLoadingState("Finished");
   }
 
   return {

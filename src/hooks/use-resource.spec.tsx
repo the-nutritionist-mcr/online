@@ -1,12 +1,12 @@
-import { renderHook } from '@testing-library/react-hooks';
-import { CognitoUser, currentUser } from '../aws/authenticate';
-import { useResource } from './use-resource';
-import { SWRConfig } from 'swr';
-import { ReactNode } from 'react';
-import nock from 'nock';
-import { mock } from 'vitest-mock-extended';
+import { renderHook } from "@testing-library/react-hooks";
+import { CognitoUser, currentUser } from "../core/aws/authenticate";
+import { useResource } from "./use-resource";
+import { SWRConfig } from "swr";
+import { ReactNode } from "react";
+import nock from "nock";
+import { mock } from "vitest-mock-extended";
 
-vi.mock('../aws/authenticate');
+vi.mock("../aws/authenticate");
 
 const SwrConfigComponent = (props: { children: ReactNode }) => (
   <SWRConfig value={{ dedupingInterval: 0, provider: () => new Map() }}>
@@ -28,19 +28,19 @@ const dummyAppConfig = `{
 }
 `;
 
-process.env.FETCH_BASE_URL = 'http://localhost';
+process.env.FETCH_BASE_URL = "http://localhost";
 
-const mockToken = 'mock-token';
+const mockToken = "mock-token";
 
 beforeEach(() => {
   vi.resetAllMocks();
   nock.disableNetConnect();
-  process.env.FETCH_BASE_URL = 'http://localhost';
-  const root = nock('http://localhost');
+  process.env.FETCH_BASE_URL = "http://localhost";
+  const root = nock("http://localhost");
   root
-    .get('/app-config.json')
+    .get("/app-config.json")
     .reply(200, dummyAppConfig)
-    .get('/app-config.json');
+    .get("/app-config.json");
 
   root.persist();
 
@@ -63,24 +63,24 @@ afterEach(async () => {
   await new Promise(requestAnimationFrame);
 });
 
-describe('useResource', () => {
-  it.skip('returns undefined on first load', () => {
-    const { result } = renderHook(() => useResource({ type: 'foo' }), {
+describe("useResource", () => {
+  it.skip("returns undefined on first load", () => {
+    const { result } = renderHook(() => useResource({ type: "foo" }), {
       wrapper: SwrConfigComponent,
     });
 
     expect(result.current.items).toBeUndefined();
   });
 
-  it.skip('makes a call to the api with the token attached and returns the response', async () => {
+  it.skip("makes a call to the api with the token attached and returns the response", async () => {
     const mockItems = [
       {
-        id: '1',
-        foo: 'bar',
+        id: "1",
+        foo: "bar",
       },
       {
-        id: '2',
-        foo: 'baz',
+        id: "2",
+        foo: "baz",
       },
     ];
 
@@ -88,17 +88,17 @@ describe('useResource', () => {
       items: mockItems,
     };
 
-    nock('https://api.cypress.app.thenutritionistmcr.com:443', {
+    nock("https://api.cypress.app.thenutritionistmcr.com:443", {
       encodedQueryParams: true,
       reqheaders: {
         authorization: mockToken,
       },
     })
-      .get('/foo')
+      .get("/foo")
       .reply(200, mockResponse);
 
     const { result, waitForNextUpdate } = renderHook(
-      () => useResource({ type: 'foo' }),
+      () => useResource({ type: "foo" }),
       {
         wrapper: SwrConfigComponent,
       }
@@ -109,15 +109,15 @@ describe('useResource', () => {
     expect(result.current.items).toEqual(mockItems);
   });
 
-  it.skip('create makes a post request that optimistically opdates current dataset', async () => {
+  it.skip("create makes a post request that optimistically opdates current dataset", async () => {
     const mockItems = [
       {
-        id: '1',
-        foo: 'bar',
+        id: "1",
+        foo: "bar",
       },
       {
-        id: '2',
-        foo: 'baz',
+        id: "2",
+        foo: "baz",
       },
     ];
 
@@ -125,19 +125,19 @@ describe('useResource', () => {
       items: mockItems,
     };
 
-    nock('https://api.cypress.app.thenutritionistmcr.com:443', {
+    nock("https://api.cypress.app.thenutritionistmcr.com:443", {
       encodedQueryParams: true,
       reqheaders: {
         authorization: mockToken,
       },
     })
-      .get('/foo')
+      .get("/foo")
       .reply(200, mockResponse)
-      .post('/foo')
-      .reply(200, { id: '3' });
+      .post("/foo")
+      .reply(200, { id: "3" });
 
     const { result, waitForNextUpdate } = renderHook(
-      () => useResource<{ id: string; foo: string }>({ type: 'foo' }),
+      () => useResource<{ id: string; foo: string }>({ type: "foo" }),
       {
         wrapper: SwrConfigComponent,
       }
@@ -146,8 +146,8 @@ describe('useResource', () => {
     await waitForNextUpdate();
 
     const newItem = {
-      id: '0',
-      foo: 'bip',
+      id: "0",
+      foo: "bip",
     };
 
     result.current.create(newItem);
@@ -160,7 +160,7 @@ describe('useResource', () => {
 
     expect(result.current.items).toEqual([
       ...mockItems,
-      { id: '3', foo: 'bip' },
+      { id: "3", foo: "bip" },
     ]);
   });
 });

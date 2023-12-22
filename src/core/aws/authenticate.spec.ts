@@ -3,11 +3,11 @@ import { when } from "jest-when";
 import * as authenticate from "./authenticate";
 import { mock } from "vitest-mock-extended";
 import { ISignUpResult } from "amazon-cognito-identity-js";
-import { getAppConfig } from "@tnmo/utils";
+import { getAppConfig } from "@tnmo/core";
 
 vi.mock("@aws-amplify/auth");
 vi.mock("aws-sdk");
-vi.mock("@tnmo/utils");
+vi.mock("@tnmo/core");
 
 describe("The authenticate module", () => {
   describe("register()", () => {

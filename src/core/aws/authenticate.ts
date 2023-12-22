@@ -1,6 +1,6 @@
-import { Auth } from '@aws-amplify/auth';
-import { datadogRum } from '@datadog/browser-rum';
-import { getAppConfig } from '@tnmo/utils';
+import { Auth } from "@aws-amplify/auth";
+import { datadogRum } from "@datadog/browser-rum";
+import { getAppConfig } from "../get-app-config";
 
 type ExtractPromiseType<T> = T extends Promise<infer RT> ? RT : never;
 
@@ -13,7 +13,7 @@ const getConfigurer = () => {
       config = await getAppConfig();
 
       const domain = process.env.NEXT_PUBLIC_IS_LOCAL_DEV
-        ? 'localhost'
+        ? "localhost"
         : config.DomainName;
       const secure = !process.env.NEXT_PUBLIC_IS_LOCAL_DEV;
 
@@ -25,7 +25,7 @@ const getConfigurer = () => {
           cookieStorage: {
             domain,
             secure,
-            path: '/',
+            path: "/",
             expires: 365,
             region: config.AwsRegion,
           },
@@ -49,13 +49,13 @@ export interface CognitoUser {
         given_name: string;
         family_name: string;
         email: string;
-        'cognito:username': string;
+        "cognito:username": string;
       };
     };
     accessToken: {
       jwtToken: string;
       payload: {
-        'cognito:groups': string[];
+        "cognito:groups": string[];
       };
     };
   };
@@ -66,7 +66,7 @@ interface LoginResponse {
   success: boolean;
 }
 
-const datadogAppId = process.env['NX_DATADOG_APP_ID'];
+const datadogAppId = process.env["NX_DATADOG_APP_ID"];
 
 export const login = async (
   username: string,

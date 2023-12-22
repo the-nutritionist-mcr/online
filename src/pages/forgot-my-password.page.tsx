@@ -1,18 +1,18 @@
-import styled from '@emotion/styled';
-import { Button, Hero, Input, ParagraphText } from '@tnmo/components';
-import { useState } from 'react';
-import toast from 'react-hot-toast';
-import { HTTP } from '../infrastructure/constants';
-import { swrFetcher } from '../utils/swr-fetcher';
-import { actions, container } from './forgot-my-password.css';
+import styled from "@emotion/styled";
+import { Button, Hero, Input, ParagraphText } from "@tnmo/components";
+import { useState } from "react";
+import toast from "react-hot-toast";
+import { HTTP } from "../infrastructure/constants";
+import { apiRequest } from "../core/api-request";
+import { actions, container } from "./forgot-my-password.css";
 
-const Header = styled('h1')`
+const Header = styled("h1")`
   font-size: 40px;
   display: auto;
   margin: 0.5rem 0 0 0;
 `;
 
-const ForgotPasswordBox = styled('div')`
+const ForgotPasswordBox = styled("div")`
   text-align: center;
   color: #3b7d7a;
   align-items: center;
@@ -31,8 +31,8 @@ const PageSpacing = styled.section`
 `;
 
 const resetPassword = async (payload: { username: string }): Promise<void> => {
-  await swrFetcher(
-    'customer/reset-password',
+  await apiRequest(
+    "customer/reset-password",
     {
       method: HTTP.verbs.Post,
       body: JSON.stringify({ ...payload, generateNew: true }),
@@ -40,12 +40,12 @@ const resetPassword = async (payload: { username: string }): Promise<void> => {
     false
   );
   toast.success(
-    'Your password was successfully reset. Please check your email'
+    "Your password was successfully reset. Please check your email"
   );
 };
 
 const ForgotMyPassword = () => {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
 
   return (
     <>

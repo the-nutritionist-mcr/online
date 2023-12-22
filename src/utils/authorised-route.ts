@@ -2,12 +2,14 @@ import {
   GetServerSideProps,
   GetServerSidePropsContext,
   PreviewData,
-} from 'next';
-import { verifyJwtToken } from '@tnmo/authorise-cognito-jwt';
-import { backendRedirect } from './backend-redirect';
-import { getUserFromAws } from './get-user-from-aws';
-import { BackendCustomer } from '@tnmo/types';
-import { ParsedUrlQuery } from 'node:querystring';
+} from "next";
+import { verifyJwtToken } from "@tnmo/authorise-cognito-jwt";
+import { BackendCustomer } from "@tnmo/types";
+
+import { backendRedirect } from "./backend-redirect";
+import { getUserFromAws } from "./get-user-from-aws";
+
+import { ParsedUrlQuery } from "node:querystring";
 
 export interface AuthorizedRouteProps {
   user: BackendCustomer & { admin: boolean };
@@ -25,7 +27,7 @@ const getCookie = <Q extends ParsedUrlQuery, D extends PreviewData>(
   callback: (key: string, value: string) => boolean
 ) =>
   Object.entries(context.req.cookies).find(([key, value]) =>
-    callback(key, value ?? '')
+    callback(key, value ?? "")
   )?.[1];
 
 export const authorizedRoute: AuthorizedRouteWrapper = ({
@@ -33,29 +35,29 @@ export const authorizedRoute: AuthorizedRouteWrapper = ({
   getServerSideProps,
 } = {}): GetServerSideProps<AuthorizedRouteProps> => {
   return async (context) => {
-    const userId = getCookie(context, (key) => key.endsWith('LastAuthUser'));
+    const userId = getCookie(context, (key) => key.endsWith("LastAuthUser"));
 
     const token = getCookie(context, (key) =>
       key.endsWith(`${userId}.accessToken`)
     );
 
     if (!token) {
-      return backendRedirect('login', 'No .accessToken found');
+      return backendRedirect("login", "No .accessToken found");
     }
 
     const verifyResult = await verifyJwtToken({ token: token });
 
     if (!verifyResult.isValid) {
       return backendRedirect(
-        'login',
+        "login",
         `Token verification failed: ${verifyResult.error?.message}`
       );
     }
 
     if (groups?.some((group) => !verifyResult.groups.includes(group))) {
       return backendRedirect(
-        'login',
-        'Verification was successful, but user is not authorised to access this route'
+        "login",
+        "Verification was successful, but user is not authorised to access this route"
       );
     }
 
@@ -64,7 +66,7 @@ export const authorizedRoute: AuthorizedRouteWrapper = ({
         props: {
           user: {
             ...(await getUserFromAws(verifyResult.userName)),
-            admin: verifyResult.groups.includes('admin'),
+            admin: verifyResult.groups.includes("admin"),
             groups: verifyResult.groups,
           },
         },

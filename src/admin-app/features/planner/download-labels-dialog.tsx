@@ -38,12 +38,13 @@ import {
   makeCookPlanV2,
   performSwaps,
 } from "@tnmo/meal-planning";
-import { fetchData, generateDatestampedFilename } from "@tnmo/utils";
+import { generateDatestampedFilename } from "@tnmo/utils";
 import generateDeliveryPlanDocumentDefinition from "../../lib/generateDeliveryPlanDocumentDefinition";
 import generateCookPlanDocumentDefinitionV2 from "../../lib/generateCookPlanDocumentDefinitionV2";
 import downloadPdf from "../../lib/downloadPdf";
 import { generateAddressDownload } from "./generate-address-download";
 import { generateCookReport } from "../../lib/generate-cook-report";
+import { apiRequest } from "@tnmo/core";
 
 interface PlanId {
   sort: string;
@@ -99,7 +100,7 @@ export const DownloadLabelsDialog: FC<DownloadLabelsDialogProps> = ({
       };
     }
 
-    const response = await fetchData<GetPlanResponseNew>(`plan/${plan}`);
+    const response = await apiRequest<GetPlanResponseNew>(`plan/${plan}`);
     if (response.admin) {
       return {
         swappedCustomerPlans: response.plan.customerPlans.map((plan) =>

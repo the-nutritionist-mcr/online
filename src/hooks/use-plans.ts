@@ -1,26 +1,26 @@
-import { swrFetcher } from '../utils/swr-fetcher';
+import { apiRequest } from "../core/api-request";
 import {
   GetPlanResponseAdmin,
   GetPlanResponseNonAdmin,
   NotYetPublishedResponse,
   MealPlanGeneratedForIndividualCustomer,
-} from '@tnmo/types';
-import useMutation from 'use-mutation';
-import { HTTP } from '@tnmo/constants';
+} from "@tnmo/types";
+import useMutation from "use-mutation";
+import { HTTP } from "@tnmo/constants";
 
-import { useSWRConfig } from 'swr';
-import toast from 'react-hot-toast';
+import { useSWRConfig } from "swr";
+import toast from "react-hot-toast";
 type GetPlanResponse =
   | GetPlanResponseAdmin
   | GetPlanResponseNonAdmin
   | NotYetPublishedResponse;
 
-import { useSwrWrapper } from './use-swr-wrapper';
+import { useSwrWrapper } from "./use-swr-wrapper";
 
 export const usePlan = () => {
   const { mutate, cache } = useSWRConfig();
 
-  const { data } = useSwrWrapper<GetPlanResponse>('plan', {
+  const { data } = useSwrWrapper<GetPlanResponse>("plan", {
     revalidateIfStale: true,
   });
 
@@ -29,12 +29,12 @@ export const usePlan = () => {
       const args = {
         method: HTTP.verbs.Post,
         body: JSON.stringify({
-          id: 'plan',
+          id: "plan",
           sort: data?.available && data.sort,
         }),
       };
-      await swrFetcher('plan/publish', args);
-      toast.success('Plan successfully published!');
+      await apiRequest("plan/publish", args);
+      toast.success("Plan successfully published!");
     } catch (error) {
       console.log(error);
     }
@@ -42,14 +42,14 @@ export const usePlan = () => {
 
   const [publish] = useMutation<void>(publishPlan, {
     onMutate() {
-      const data: GetPlanResponseAdmin = cache.get('plan');
+      const data: GetPlanResponseAdmin = cache.get("plan");
       const newData = {
         ...data,
         published: true,
       };
-      mutate('plan', newData, false);
+      mutate("plan", newData, false);
       return () => {
-        mutate('plan', data, false);
+        mutate("plan", data, false);
       };
     },
   });
@@ -57,7 +57,7 @@ export const usePlan = () => {
   const changePlanItem = async (
     newItem: MealPlanGeneratedForIndividualCustomer
   ): Promise<void> =>
-    await swrFetcher('customer/update-plan', {
+    await apiRequest("customer/update-plan", {
       method: HTTP.verbs.Put,
       body: JSON.stringify({
         id: data?.available && data.planId,
@@ -67,7 +67,7 @@ export const usePlan = () => {
 
   const [update] = useMutation(changePlanItem, {
     onMutate({ input }) {
-      const data: GetPlanResponse = cache.get('plan');
+      const data: GetPlanResponse = cache.get("plan");
 
       const { available, admin } = data;
 
@@ -89,21 +89,21 @@ export const usePlan = () => {
               : [...(plan?.customerPlans ?? []), input],
           },
         };
-        mutate('plan', newData, false);
+        mutate("plan", newData, false);
       }
 
       return () => {
-        mutate('plan', data, false);
+        mutate("plan", data, false);
       };
     },
 
     onFailure() {
-      toast.error('Failed to update plan');
+      toast.error("Failed to update plan");
     },
 
     onSuccess() {
-      console.log('success');
-      toast.success('Plan successfully updated');
+      console.log("success");
+      toast.success("Plan successfully updated");
     },
   });
 

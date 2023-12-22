@@ -1,6 +1,6 @@
-import { currentUser } from '../aws/authenticate';
-import { getAppConfig } from '@tnmo/utils';
-import { Codes, HttpError } from '../backend/lambdas/data-api/http-error';
+import { currentUser } from "./aws/authenticate";
+import { getAppConfig } from "./get-app-config";
+import { Codes, HttpError } from "../backend/lambdas/data-api/http-error";
 
 const getFetchInit = async (init?: RequestInit) => {
   const user = await currentUser();
@@ -22,7 +22,7 @@ const getFetchInit = async (init?: RequestInit) => {
   return init ? { ...init, ...withToken } : withToken;
 };
 
-export const swrFetcher = async <T>(
+export const apiRequest = async <T>(
   path: string,
   init?: RequestInit,
   auth = true

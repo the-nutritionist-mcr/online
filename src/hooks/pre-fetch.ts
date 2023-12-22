@@ -1,6 +1,6 @@
-import { mutate } from 'swr';
-import { swrFetcher } from '../utils/swr-fetcher';
+import { mutate } from "swr";
+import { apiRequest } from "../core/api-request";
 
 export const prefetch = (paths: string[]) => {
-  paths.forEach((path) => mutate(path, swrFetcher(path)));
+  paths.forEach((path) => mutate(path, apiRequest(path)));
 };
