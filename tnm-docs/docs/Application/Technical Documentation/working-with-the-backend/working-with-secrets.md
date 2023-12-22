@@ -4,6 +4,8 @@ title: Working with secrets
 tags:
   - Secrets
   - AWS Secrets Manager
+  - CDK
+  - IAC
 
 description: How to correctly use secrets in your backend functions
 ---

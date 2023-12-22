@@ -6,6 +6,7 @@ tags:
   - Lambda
   - API Gateway
   - CDK
+  - IAC
 
 description: How to setup API routes
 ---
