@@ -1,5 +1,17 @@
 import { E2E, COGNITO } from "@tnmo/constants";
 import { BackendCustomer } from "@tnmo/types";
+import { AttributeType } from "@aws-sdk/client-cognito-identity-provider";
+
+type SeedUserState = "Complete" | "ForceChangePassword";
+
+export interface SeedUser {
+  username: string;
+  password?: string;
+  groups?: string[];
+  email: string;
+  state: SeedUserState;
+  otherAttributes?: AttributeType[];
+}
 
 const toDynamo = (
   user: Partial<Omit<BackendCustomer, "plans">> & {
@@ -9,7 +21,7 @@ const toDynamo = (
   password: string,
   state: "Complete" | "ForceChangePassword",
   groups: string[]
-) => {
+): SeedUser => {
   const otherAttributes = [
     {
       Name: `custom:${COGNITO.customAttributes.Postcode}`,
@@ -71,7 +83,7 @@ const toDynamo = (
   };
 };
 
-export const SEED_USERS = [
+export const SEED_USERS: SeedUser[] = [
   toDynamo(E2E.adminUserOne, E2E.adminUserOne.password, "Complete", ["admin"]),
   toDynamo(E2E.adminUserTwo, E2E.adminUserTwo.password, "Complete", ["admin"]),
   toDynamo(E2E.normalUserOne, E2E.normalUserOne.password, "Complete", []),
