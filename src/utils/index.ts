@@ -1,5 +1,3 @@
-export { authorizedRoute } from "./authorised-route";
-export { loggedOutOnlyRoute } from "./logged-out-only-route";
 export { NavigationContext } from "./navigation-context";
 export type { NavigationContextType } from "./navigation-context";
 export { generateDatestampedFilename } from "./generate-date-stamped-filename";
