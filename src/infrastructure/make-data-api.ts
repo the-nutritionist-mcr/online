@@ -1,22 +1,22 @@
-import { IRestApi, LambdaIntegration } from 'aws-cdk-lib/aws-apigateway';
+import { IRestApi, LambdaIntegration } from "aws-cdk-lib/aws-apigateway";
 import {
   Table,
   AttributeType,
   BillingMode,
   StreamViewType,
-} from 'aws-cdk-lib/aws-dynamodb';
-import { ENV, HTTP } from '@tnmo/constants';
-import { getResourceName } from './get-resource-name';
-import { entryName } from './entry-name';
-import { Construct } from 'constructs';
-import { makeInstrumentedFunctionGenerator } from './instrumented-nodejs-function';
-import { DynamoEventSource } from 'aws-cdk-lib/aws-lambda-event-sources';
-import { StartingPosition } from 'aws-cdk-lib/aws-lambda';
+} from "aws-cdk-lib/aws-dynamodb";
+import { ENV, HTTP } from "@tnmo/constants";
+import { getResourceName } from "./get-resource-name";
+import { entryName } from "./entry-name";
+import { Construct } from "constructs";
+import { makeInstrumentedFunctionGenerator } from "./instrumented-nodejs-function";
+import { DynamoEventSource } from "aws-cdk-lib/aws-lambda-event-sources";
+import { StartingPosition } from "aws-cdk-lib/aws-lambda";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export enum ReadWriteMode {
-  ReadOnly = 'ReadOnly',
-  ReadWrite = 'ReadWrite',
+  ReadOnly = "ReadOnly",
+  ReadWrite = "ReadWrite",
 }
 
 export const makeDataApi = (
@@ -35,7 +35,7 @@ export const makeDataApi = (
     billingMode: BillingMode.PAY_PER_REQUEST,
     stream: StreamViewType.KEYS_ONLY,
     partitionKey: {
-      name: 'id',
+      name: "id",
       type: AttributeType.STRING,
     },
   });
@@ -45,7 +45,7 @@ export const makeDataApi = (
     billingMode: BillingMode.PAY_PER_REQUEST,
     stream: StreamViewType.KEYS_ONLY,
     partitionKey: {
-      name: 'name',
+      name: "name",
       type: AttributeType.STRING,
     },
   });
@@ -62,7 +62,7 @@ export const makeDataApi = (
   });
 
   const getCountLambda = makeFunction(`${name}-getcount`, {
-    entry: entryName('misc', 'get-count.ts'),
+    entry: entryName("handlers", "get-count.ts"),
     environment: {
       ...defaultEnvironmentVars,
       [ENV.varNames.DynamoDBTable]: dataTable.tableName,
@@ -71,7 +71,7 @@ export const makeDataApi = (
   });
 
   const countLambda = makeFunction(`${name}-count-lambda`, {
-    entry: entryName('misc', 'pagination.ts'),
+    entry: entryName("handlers", "pagination.ts"),
     environment: {
       ...defaultEnvironmentVars,
       [ENV.varNames.DynamoDBTable]: dataTable.tableName,
@@ -100,10 +100,10 @@ export const makeDataApi = (
     return crudFunction;
   };
 
-  const getFunction = makeCrudFunction(entryName('data-api', 'get.ts'), `get`);
+  const getFunction = makeCrudFunction(entryName("data-api", "get.ts"), `get`);
 
   const getFilterFunction = makeCrudFunction(
-    entryName('data-api', 'get-filter.ts'),
+    entryName("data-api", "get-filter.ts"),
     `get`,
     `filter`
   );
@@ -111,7 +111,7 @@ export const makeDataApi = (
   apiResource.addMethod(HTTP.verbs.Get, new LambdaIntegration(getFunction));
 
   apiResource
-    .addResource('search')
+    .addResource("search")
     .addMethod(HTTP.verbs.Get, new LambdaIntegration(getFilterFunction));
   dataTable.grantReadData(getFilterFunction);
 
@@ -119,13 +119,13 @@ export const makeDataApi = (
   metaTable.grantReadData(getFunction);
 
   const getByIdFunction = makeCrudFunction(
-    entryName('data-api', 'get-by-id.ts'),
-    'get-by-id'
+    entryName("data-api", "get-by-id.ts"),
+    "get-by-id"
   );
 
   dataTable.grantReadData(getByIdFunction);
 
-  const byIdResource = apiResource.addResource('get-by-id');
+  const byIdResource = apiResource.addResource("get-by-id");
 
   byIdResource.addMethod(
     HTTP.verbs.Get,
@@ -133,8 +133,8 @@ export const makeDataApi = (
   );
 
   const createFunction = makeCrudFunction(
-    entryName('data-api', 'post.ts'),
-    'create'
+    entryName("data-api", "post.ts"),
+    "create"
   );
 
   if (readWrite !== ReadWriteMode.ReadOnly) {
@@ -145,7 +145,7 @@ export const makeDataApi = (
     dataTable.grantWriteData(createFunction);
 
     const updateFunction = makeCrudFunction(
-      entryName('data-api', 'put.ts'),
+      entryName("data-api", "put.ts"),
       `update`
     );
 
