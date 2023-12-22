@@ -22,9 +22,12 @@ This should be a Typescript module living in `src/backend/lambda/handlers`. The 
 
 ```TypeScript
 import { APIGatewayProxyEventV2 } from "aws-lambda";
-import { returnOkResponse } from "../utils/return-ok-response";
-import { returnErrorResponse } from "../utils/return-error-response";
-import { protectRoute } from "@tnmo/core"
+
+import {
+  protectRoute,
+  returnOkResponse,
+  returnErrorResponse,
+} from "@tnmo/core-backend";
 
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   try {
