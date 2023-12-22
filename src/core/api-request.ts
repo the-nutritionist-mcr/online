@@ -23,6 +23,14 @@ const getFetchInit = async (init?: RequestInit) => {
   return init ? { ...init, ...withToken } : withToken;
 };
 
+/**
+ * Make a frontend API request to the TNM API. By default, this function will automatically add the authorization header to the request if the user is logged in.
+ *
+ * @param path - The path to the API endpoint, e.g. `api/v1/users` (NOT including preceding slash)
+ * @param init - Fetch API initialisation parameters
+ * @param auth - Whether or not to add the authorization header to the request
+ * @returns
+ */
 export const apiRequest = async <T>(
   path: string,
   init?: RequestInit,

@@ -1,13 +1,13 @@
-import { StackConfig } from '@tnmo/types';
+import { StackConfig } from "@tnmo/types";
 
 const urlNeededForTestingCosNodeFetchDoesntSupport =
-  process.env['FETCH_BASE_URL'] ?? '';
+  process.env["FETCH_BASE_URL"] ?? "";
 
 const CONFIG_FILE = `app-config.json`;
 
 const path = `${urlNeededForTestingCosNodeFetchDoesntSupport}/${CONFIG_FILE}`;
 
-const isBrowser = typeof window !== 'undefined';
+const isBrowser = typeof window !== "undefined";
 
 const getOutputJson = async (path: string) => {
   if (isBrowser) {
@@ -20,6 +20,12 @@ const getOutputJson = async (path: string) => {
 // eslint-disable-next-line fp/no-let
 let outputJson: Awaited<ReturnType<typeof getOutputJson>> | undefined;
 
+/**
+ * Configuration which connects the frontend to the correct backend resources can be found in the app-config.json file.
+ * This function returns the data from that file.
+ *
+ * @returns
+ */
 export const getAppConfig = async (): Promise<StackConfig> => {
   if (!outputJson) {
     try {

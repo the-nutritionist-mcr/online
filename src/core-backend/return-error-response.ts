@@ -2,6 +2,11 @@ import { HTTP } from "@tnmo/constants";
 import { setErrorOnServiceEntrySpan } from "../backend/utils/init-dd-trace";
 import { HttpError } from "@tnmo/core";
 
+/**
+ * Parse an error thrown by application code and return a response object that can be returned by a lambda
+ *
+ * @param error - The thrown error
+ */
 export const returnErrorResponse = (error?: Error | unknown) => {
   const stack =
     !(error instanceof Error) ||

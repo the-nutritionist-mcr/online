@@ -13,7 +13,8 @@ interface AuthoriseResponse {
 }
 
 /**
- * Call this function at the start of your lambda handler to ensure that the user is authenticated and authorised to access the route
+ * Validate the JWT token in the authorization header of the request. If the token is valid, return the user's username and Cognito groups encoded in the claim.
+ * If you wish to limit a route to only users in certain groups, pass the groups as the second arguments.
  *
  * @param event - The event object from the lambda handler
  * @param groups - The groups that the user must be a member of to be authorised
