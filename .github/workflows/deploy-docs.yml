@@ -22,7 +22,7 @@ jobs:
 
     environment:
       name: docs
-      url: https://the-nutritionist-mcr.github.io/online/
+      url: https://docs.thenutritionistmcr.com
 
     steps:
       - name: Checkout
