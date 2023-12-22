@@ -53,6 +53,10 @@ This will do the following
 
 We do it like this so that each stack has its own unique set of secrets; meaning we can easily associate different environments with different tokens.
 
+## Add the secret value
+
+Once you make the above changes and deploy it, you'll have some 'secret' resources created that are available in the AWS console. At present, they will have randomly generated values in them. You'll need to login to the AWS console and update them to the correct values.
+
 ## Get the secret at runtime
 
 To get access to that secret in your [lambda handler](./create-an-api-route.md#create-the-handler-function), do the following:
