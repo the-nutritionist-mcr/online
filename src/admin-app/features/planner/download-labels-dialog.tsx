@@ -190,7 +190,7 @@ export const DownloadLabelsDialog: FC<DownloadLabelsDialogProps> = ({
             />
             <Button
               primary
-              label="Cook Plan V2"
+              label="Cook Plan"
               onClick={async () => {
                 const { originalPlan } = await getPlan();
                 if (originalPlan) {
