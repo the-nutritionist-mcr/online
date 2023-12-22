@@ -208,18 +208,6 @@ export const DownloadLabelsDialog: FC<DownloadLabelsDialogProps> = ({
             />
             <Button
               primary
-              label="Cook Plan"
-              onClick={async () => {
-                const { swappedCustomerPlans } = await getPlan();
-                const plan = makeCookPlan(swappedCustomerPlans, recipes);
-                downloadPdf(
-                  generateCookPlanDocumentDefinition(plan),
-                  generateDatestampedFilename('cook-plan', 'pdf')
-                );
-              }}
-            />
-            <Button
-              primary
               label="Address Data"
               onClick={async () => {
                 const { swappedCustomerPlans } = await getPlan();
