@@ -1,5 +1,7 @@
 import { test, expect } from "@playwright/test";
-import { login } from "./login";
+import { login } from "../helpers/login";
+import { RecipesPage } from "../pages/recipes";
+import { EditRecipePage } from "../pages/edit-recipe";
 
 test.beforeEach(async ({ page }) => {
   await login(page, "cypress-test-user", "password");
@@ -11,18 +13,20 @@ test.beforeEach(async ({ page }) => {
 test("when recipes link is clicked, a page is loaded which contains recipe data", async ({
   page,
 }) => {
-  await expect(page.locator("tbody")).toContainText("CHIX ORZO");
-  await expect(page.locator("tbody")).toContainText(
+  const recipesPage = new RecipesPage(page);
+
+  await expect(recipesPage.tableBody()).toContainText("CHIX ORZO");
+  await expect(recipesPage.tableBody()).toContainText(
     "LEMON + HERB ROAST CHICKEN ORZO"
   );
-  await expect(page.locator("tbody")).toContainText(
+  await expect(recipesPage.tableBody()).toContainText(
     "Basil pesto cream sauce, roasted cherry vine tomatoes, summer vegetables, aged parmesan"
   );
-  await expect(page.locator("tbody")).toContainText("ASPARA RISSO");
-  await expect(page.locator("tbody")).toContainText(
+  await expect(recipesPage.tableBody()).toContainText("ASPARA RISSO");
+  await expect(recipesPage.tableBody()).toContainText(
     "ASPARAGUS, PEA + BROAD BEAN RISOTTO"
   );
-  await expect(page.locator("tbody")).toContainText(
+  await expect(recipesPage.tableBody()).toContainText(
     "Seared cypriot halloumi, parmesan, tarragon, semi dried tomatoes, lemon zest"
   );
 });
@@ -30,21 +34,25 @@ test("when recipes link is clicked, a page is loaded which contains recipe data"
 test("User can add a recipe which is then visible in the recipes table", async ({
   page,
 }) => {
-  await page.getByLabel("New Recipe").click();
-  await page.locator('input[name="name"]').fill("A recipe");
-  await page.locator('input[name="shortName"]').fill("short-name");
-  await page.locator('input[name="description"]').fill("A delicious thing");
-  await page.locator('input[name="hotOrCold"]').click();
-  await page.getByRole("option", { name: "Cold" }).click();
+  const recipesPage = new RecipesPage(page);
 
-  await page.locator('input[name="allergens"]').fill("Fish");
+  await recipesPage.newRecipeButton().click();
 
-  await page.locator('input[name="potentialExclusions"]').click();
-  await page.getByRole("option", { name: "Extra Meat" }).click();
-  await page.getByRole("option", { name: "No Alcohol" }).click();
+  const editRecipePage = new EditRecipePage(page);
 
-  await page.locator('input[name="invalidExclusions"]').click();
-  await page.getByRole("option", { name: "Extra Veg" }).click();
+  await editRecipePage.nameField.fill("A recipe");
+  await editRecipePage.shortNameField.fill("short-name");
+  await editRecipePage.descriptionField.fill("A delicious thing");
+
+  await editRecipePage.setHotOrColdField("Cold");
+  await editRecipePage.allergensField.fill("Fish");
+
+  await editRecipePage.setPotentialExclusionsField([
+    "Extra Meat",
+    "No Alcohol",
+  ]);
+
+  await editRecipePage.setInvalidExclusionsField(["Extra Veg"]);
 
   await page
     .locator('[id="__next"] div')
