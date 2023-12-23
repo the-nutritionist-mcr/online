@@ -6,7 +6,7 @@ import {
   Recipe,
 } from "@tnmo/types";
 import { mock } from "vitest-mock-extended";
-import { makeCookPlan } from "./make-cook-plan-v2";
+import { makeCookPlan } from "./make-cook-plan";
 
 const generateCustomers = (count: number) =>
   Array.from({ length: count }).map(() =>

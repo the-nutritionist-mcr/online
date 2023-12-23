@@ -26,7 +26,6 @@ import {
   WeeklyCookPlan,
   GetPlanResponseNew,
 } from "@tnmo/types";
-import generateCookPlanDocumentDefinition from "../../lib/generateCookPlanDocumentDefinition";
 import {
   generateMealsCsvFromObjectArray,
   generateIndividualCsv,
@@ -34,7 +33,6 @@ import {
 
 import {
   generateLabelData,
-  makeCookPlan,
   makeCookPlanV2,
   performSwaps,
 } from "@tnmo/meal-planning";
