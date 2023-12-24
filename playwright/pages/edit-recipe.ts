@@ -1,8 +1,13 @@
 import { Page } from "@playwright/test";
+import { multiSelectFromDropdown } from "../helpers/multi-select-from-dropdown";
 import { selectFromDropdown } from "../helpers/select-from-dropdown";
 
 export class EditRecipePage {
   constructor(private page: Page) {}
+
+  public get tableBody() {
+    return this.page.locator("tbody");
+  }
 
   public get nameField() {
     return this.page.locator("input[name='name']");
@@ -21,7 +26,7 @@ export class EditRecipePage {
   }
 
   public async setHotOrColdField(value: string) {
-    await selectFromDropdown(this.page, this.hotOrColdField, [value]);
+    await selectFromDropdown(this.page, this.hotOrColdField, value);
   }
 
   public get allergensField() {
@@ -33,7 +38,11 @@ export class EditRecipePage {
   }
 
   public async setPotentialExclusionsField(values: string[]) {
-    await selectFromDropdown(this.page, this.potentialExclusionsField, values);
+    await multiSelectFromDropdown(
+      this.page,
+      this.potentialExclusionsField,
+      values
+    );
   }
 
   public get invalidExclusionsField() {
@@ -41,28 +50,53 @@ export class EditRecipePage {
   }
 
   public async setInvalidExclusionsField(values: string[]) {
-    await selectFromDropdown(this.page, this.invalidExclusionsField, values);
+    await multiSelectFromDropdown(
+      this.page,
+      this.invalidExclusionsField,
+      values
+    );
   }
 
   public get addAlternateButton() {
     return this.page.getByRole("button", { name: "Add" });
   }
 
-  public getCustomisationCards(index: number) {
-    return this.page
-      .locator("div")
-      .filter({ hasText: /^Customisation$/ })
-      .nth(index);
+  public get alternateCards() {
+    return this.page.locator("div[data-testid='alternate-card']");
   }
 
-  public get customisationsField() {
-    return this.page
-      .locator("div")
-      .filter({ hasText: /^Customisation$/ })
-      .getByRole("textbox");
+  public get saveButton() {
+    return this.page.getByText("Save");
   }
 
-  public setCustomisationsField(values: string[]) {
-    return selectFromDropdown(this.page, this.customisationsField, values);
+  public getAlternateCustomisationField(alternateIndex: number) {
+    return this.alternateCards
+      .nth(alternateIndex)
+      .locator("input[name='alternate-customisation']");
+  }
+
+  public getAlternateRecipeField(alternateIndex: number) {
+    return this.alternateCards
+      .nth(alternateIndex)
+      .locator("input[name='alternate-recipe']");
+  }
+
+  public async setAlternateRecipe(alternateIndex: number, value: string) {
+    await selectFromDropdown(
+      this.page,
+      this.getAlternateRecipeField(alternateIndex),
+      value
+    );
+  }
+
+  public async setAlternateCustomisation(
+    alternateIndex: number,
+    value: string
+  ) {
+    await selectFromDropdown(
+      this.page,
+      this.getAlternateCustomisationField(alternateIndex),
+      value
+    );
   }
 }

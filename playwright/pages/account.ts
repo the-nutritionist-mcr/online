@@ -6,4 +6,8 @@ export class AccountPage {
   public get logoutButton() {
     return this.page.getByRole("button", { name: "Logout" });
   }
+
+  public get visit() {
+    return this.page.goto("/account");
+  }
 }
