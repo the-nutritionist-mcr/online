@@ -209,6 +209,7 @@ export const EditRecipesPage = (props: EditRecipesPageProps) => {
                 <CardBody>
                   <FormField label="Customisation">
                     <Select
+                      name="alternate-customisation"
                       options={exclusions}
                       value={alternate.customisationId}
                       onChange={(event) => {
@@ -228,6 +229,7 @@ export const EditRecipesPage = (props: EditRecipesPageProps) => {
                   </FormField>
                   <FormField label="Recipe">
                     <Select
+                      name="alternate-recipe"
                       onChange={(event) => {
                         const newAlternates = [...(recipe.alternates ?? [])];
 
