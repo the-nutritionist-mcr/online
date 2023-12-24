@@ -205,7 +205,7 @@ export const EditRecipesPage = (props: EditRecipesPageProps) => {
         ) : (
           <div className={alternatesGrid}>
             {recipe.alternates?.map((alternate, index) => (
-              <Card pad="medium">
+              <Card pad="medium" data-testid="alternate-card">
                 <CardBody>
                   <FormField label="Customisation">
                     <Select

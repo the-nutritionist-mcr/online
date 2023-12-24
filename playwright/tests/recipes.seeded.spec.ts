@@ -54,13 +54,7 @@ test("User can add a recipe which is then visible in the recipes table", async (
 
   await editRecipePage.setInvalidExclusionsField(["Extra Veg"]);
 
-  await page
-    .locator('[id="__next"] div')
-    .filter({ hasText: "Create" })
-    .nth(3)
-    .click();
-
-  await page.getByRole("button", { name: "Add" }).click();
+  await editRecipePage.addAlternateButton.click();
 
   await page
     .locator("div")
