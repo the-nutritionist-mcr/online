@@ -79,7 +79,7 @@ jobs:
         if: always()
         uses: ./.github/actions/upload-pages
         with:
-          path: playwright-report/
+          path: ./playwright-report
 
   test-deploy:
     runs-on: ubuntu-latest
