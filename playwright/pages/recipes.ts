@@ -15,6 +15,12 @@ export class RecipesPage {
     return this.getRecipeRow(textContentToSelectRow).getByLabel("Edit").first();
   }
 
+  public getRecipeRowDeleteButton(textContentToSelectRow: string) {
+    return this.getRecipeRow(textContentToSelectRow)
+      .getByLabel("Delete")
+      .first();
+  }
+
   public get newRecipeButton() {
     return this.page.getByLabel("New Recipe");
   }

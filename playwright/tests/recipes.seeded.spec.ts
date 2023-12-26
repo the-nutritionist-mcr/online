@@ -10,7 +10,7 @@ test.beforeEach(async ({ page }) => {
   await expect(page.getByRole("main")).toContainText("Recipes");
 });
 
-test("when recipes link is clicked, a page is loaded which contains recipe data", async ({
+test("When the user clicks on the recipes page link, a page appears containing loaded recipe data", async ({
   page,
 }) => {
   const recipesPage = new RecipesPage(page);
@@ -31,7 +31,7 @@ test("when recipes link is clicked, a page is loaded which contains recipe data"
   );
 });
 
-test("User can add a recipe which is then visible in the recipes table", async ({
+test("When a user creates a new recipe, the recipe appears on the recipes page", async ({
   page,
 }) => {
   const recipesPage = new RecipesPage(page);
@@ -73,7 +73,7 @@ test("User can add a recipe which is then visible in the recipes table", async (
   await expect(editRecipePage.tableBody).toContainText("No Alcohol");
 });
 
-test("User can edit a recipe and the edit is then visible in the recipes table", async ({
+test("When a user edits a recipe, the edit appears on the recipes page", async ({
   page,
 }) => {
   const recipesPage = new RecipesPage(page);
@@ -103,12 +103,11 @@ test("User can edit a recipe and the edit is then visible in the recipes table",
 });
 
 test.fixme(
-  "user can delete a recipe and the deleted recipe is no longer visible",
+  "When a user deletes a recipe, it is no longer visible on the page",
   async ({ page }) => {
-    await page.goto("https://cypress.app.thenutritionistmcr.com/");
-    await page.getByRole("button", { name: "Login" }).click();
-    await page.getByRole("link", { name: "Recipes" }).click();
-    await page.getByRole("button", { name: "Checkmark Ok" }).nth(1).click();
-    await page.getByRole("link", { name: "Recipes" }).click();
+    const recipesPage = new RecipesPage(page);
+    await expect(recipesPage.tableBody).toContainText("ASIAN PORK");
+    await recipesPage.getRecipeRowDeleteButton("ASIAN PORK").click();
+    await expect(recipesPage.tableBody).not.toContainText("ASIAN PORK");
   }
 );
