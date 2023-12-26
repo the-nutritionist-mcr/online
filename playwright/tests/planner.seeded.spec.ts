@@ -5,6 +5,8 @@ import { createChargebeeCustomer } from "../helpers/chargebee/create-customer";
 import { CustomersPage } from "../pages/customers";
 import { deleteChargebeeCustomer } from "../helpers/chargebee/delete-customer";
 import { login } from "../helpers/login";
+import { addTestCard } from "../helpers/chargebee/add-test-card";
+import { addSubscription } from "../helpers/chargebee/add-subscription";
 
 test.beforeAll(async () => {
   await deleteChargebeeCustomer(E2E.e2eCustomer.username);
@@ -38,7 +40,15 @@ test("When a user generates a plan using planning mode on the recipes page, that
 
   const customersPage = new CustomersPage(page);
   await customersPage.visit();
-  await expect(
-    customersPage.customerRow(testUser.firstName, testUser.surname)
-  ).toBeVisible({ timeout: 5 * 60_000 });
+
+  const theCustomerRow = customersPage.customerRow(
+    testUser.firstName,
+    testUser.surname
+  );
+  await expect(theCustomerRow).toBeVisible({ timeout: 5 * 60_000 });
+
+  await addTestCard(testUser.username);
+  await addSubscription(E2E.e2eCustomer.username, "EQ-1-Monthly-5-2022");
+
+  await expect(theCustomerRow).toContainText("EQ-5");
 });
