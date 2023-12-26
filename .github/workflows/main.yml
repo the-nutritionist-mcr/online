@@ -75,12 +75,11 @@ jobs:
       - name: Run Playwright tests
         run: npx playwright test
 
-      - uses: actions/upload-artifact@v3
+      - name: Upload test report
         if: always()
+        uses: ./.github/actions/upload-pages
         with:
-          name: playwright-report
           path: playwright-report/
-          retention-days: 30
 
   test-deploy:
     runs-on: ubuntu-latest
