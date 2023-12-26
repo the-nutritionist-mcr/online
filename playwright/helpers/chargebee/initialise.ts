@@ -1,3 +1,5 @@
+import "dotenv/config";
+
 import { CHARGEBEE, ENV } from "@tnmo/constants";
 import { ChargeBee } from "chargebee-typescript";
 

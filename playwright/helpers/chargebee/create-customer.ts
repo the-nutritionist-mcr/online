@@ -1,11 +1,10 @@
-import { chargebee } from "./chargebee";
+import { chargebee } from "./initialise";
 
 export interface Customer {
   username: string;
   country: string;
   deliveryDay1: string;
   deliveryDay2: string;
-  deliveryDay3: string;
   addressLine1: string;
   addressLine2: string;
   phoneNumber: string;
@@ -18,8 +17,6 @@ export interface Customer {
 }
 
 export const createChargebeeCustomer = async (customer: Customer) => {
-  console.log(`Creating customer with username ${customer.username}`);
-
   await chargebee.customer
     .create({
       id: customer.username,
@@ -39,8 +36,4 @@ export const createChargebeeCustomer = async (customer: Customer) => {
       },
     })
     .request();
-
-  console.log("Customer created");
-
-  return null;
 };

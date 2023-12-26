@@ -16,6 +16,4 @@ export const waitUntilCognitoUserDoesntExist = async (username: string) => {
   } else {
     console.log("User not found");
   }
-
-  return null;
 };
