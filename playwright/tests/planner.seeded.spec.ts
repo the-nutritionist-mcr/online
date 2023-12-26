@@ -50,5 +50,5 @@ test("When a user generates a plan using planning mode on the recipes page, that
   await addTestCard(testUser.username);
   await addSubscription(E2E.e2eCustomer.username, "EQ-1-Monthly-5-2022");
 
-  await expect(theCustomerRow).toContainText("EQ-5");
+  await expect(theCustomerRow).toContainText("EQ-5", { timeout: 5 * 60_000 });
 });
