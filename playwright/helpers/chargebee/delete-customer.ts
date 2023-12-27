@@ -27,7 +27,7 @@ export const deleteChargebeeCustomer = async (id: string) => {
 
     return null;
   } catch (error) {
-    const parsedError = chargebeeErrorType.parse(error);
-    console.log(`Failed to delete chargebee user: ${parsedError.message}`);
+    const errorAs = error as { message: string };
+    console.log(`Failed to delete chargebee user: ${errorAs.message}`);
   }
 };
