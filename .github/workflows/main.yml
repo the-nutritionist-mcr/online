@@ -77,11 +77,11 @@ jobs:
         env:
           CHARGEBEE_TOKEN: ${{ secrets.CHARGEBEE_TOKEN }}
 
-      - name: Upload test report
-        if: always()
-        uses: ./.github/actions/upload-pages
-        with:
-          path: ./playwright-report
+      # - name: Upload test report
+      #   if: always()
+      #   uses: ./.github/actions/upload-pages
+      #   with:
+      #     path: ./playwright-report
 
   test-deploy:
     runs-on: ubuntu-latest
