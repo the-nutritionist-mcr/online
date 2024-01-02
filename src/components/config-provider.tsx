@@ -1,6 +1,6 @@
 import { LoadingContext } from '@tnmo/components';
 import { StackConfig } from '@tnmo/types';
-import { getAppConfig } from '@tnmo/utils';
+import { getAppConfig } from '@tnmo/core';
 import {
   createContext,
   ReactNode,

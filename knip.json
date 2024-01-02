@@ -1,0 +1,9 @@
+{
+  "entry": [
+    "src/pages/*.page.tsx",
+    "src/pages/admin/*.page.tsx",
+    "src/backend/lambdas/handlers/*.ts",
+    "src/infrastructure/stack.ts",
+    "!**/*.spec.*"
+  ]
+}

@@ -16,6 +16,7 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
+      "@tnmo/aws": ["./src/core/aws/index.ts"],
       "@tnmo/types": ["./src/types/index.ts"],
       "@tnmo/admin-app": ["./src/admin-app/index.ts"],
       "@tnmo/constants": ["./src/constants/index.ts"],
@@ -28,10 +29,12 @@
       "@tnmo/seed-cognito": ["./src/seed-cognito/index.ts"],
       "@tnmo/seed-dynamo": ["./src/seed-dynamo/index.ts"],
       "@tnmo/dynamo": ["./src/dynamo/index.ts"],
-      "@tnmo/image-optimisation": ["./src/image-optimisation/index.ts"]
+      "@tnmo/image-optimisation": ["./src/image-optimisation/index.ts"],
+      "@tnmo/core": ["./src/core/index.ts"],
+      "@tnmo/core-backend": ["./src/core-backend/index.ts"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "tnm-docs"],
   "$schema": "https://json.schemastore.org/tsconfig"
 }

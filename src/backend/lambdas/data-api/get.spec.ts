@@ -7,14 +7,17 @@ import {
   DynamoDBDocumentClient,
   ScanCommand,
 } from "@aws-sdk/lib-dynamodb";
-import { authoriseJwt } from "./authorise";
-import { HttpError } from "./http-error";
+import { protectRoute } from "@tnmo/core-backend";
+import { HttpError } from "@tnmo/core";
 import { HTTP } from "../../../infrastructure/constants";
 import { allowHeaders } from "../../allow-headers";
 
 const dynamodbMock = mockClient(DynamoDBDocumentClient);
 
-vi.mock("./authorise");
+vi.mock("@tnmo/core-backend", async (importOriginal) => ({
+  ...((await vi.importActual("@tnmo/core-backend")) as Record<string, unknown>),
+  protectRoute: vi.fn(),
+}));
 
 beforeEach(() => {
   vi.resetAllMocks();
@@ -25,7 +28,7 @@ beforeEach(() => {
 
 describe("the get handler", () => {
   it("returns a response with the statuscode from the error when an httpError is thrown by authorise", async () => {
-    vi.mocked(authoriseJwt).mockRejectedValue(
+    vi.mocked(protectRoute).mockRejectedValue(
       new HttpError(HTTP.statusCodes.Forbidden, "oh no!")
     );
 

@@ -11,13 +11,13 @@ import {
   DateInput,
   Button,
   Box,
-} from 'grommet';
-import { DateTime } from 'luxon';
-import fileDownload from 'js-file-download';
-import { Checkmark } from 'grommet-icons';
-import JSZip from 'jszip';
-import { FC, useState } from 'react';
-import { defaultDeliveryDays } from '@tnmo/config';
+} from "grommet";
+import { DateTime } from "luxon";
+import fileDownload from "js-file-download";
+import { Checkmark } from "grommet-icons";
+import JSZip from "jszip";
+import { FC, useState } from "react";
+import { defaultDeliveryDays } from "@tnmo/config";
 import {
   BackendCustomer,
   MealPlanGeneratedForIndividualCustomer,
@@ -25,25 +25,24 @@ import {
   Swapped,
   WeeklyCookPlan,
   GetPlanResponseNew,
-} from '@tnmo/types';
-import generateCookPlanDocumentDefinition from '../../lib/generateCookPlanDocumentDefinition';
+} from "@tnmo/types";
 import {
   generateMealsCsvFromObjectArray,
   generateIndividualCsv,
-} from '../../lib/generateCsvStringFromObjectArray';
+} from "../../lib/generateCsvStringFromObjectArray";
 
 import {
   generateLabelData,
-  makeCookPlan,
   makeCookPlanV2,
   performSwaps,
-} from '@tnmo/meal-planning';
-import { fetchData, generateDatestampedFilename } from '@tnmo/utils';
-import generateDeliveryPlanDocumentDefinition from '../../lib/generateDeliveryPlanDocumentDefinition';
-import generateCookPlanDocumentDefinitionV2 from '../../lib/generateCookPlanDocumentDefinitionV2';
-import downloadPdf from '../../lib/downloadPdf';
-import { generateAddressDownload } from './generate-address-download';
-import { generateCookReport } from '../../lib/generate-cook-report';
+} from "@tnmo/meal-planning";
+import { generateDatestampedFilename } from "@tnmo/utils";
+import generateDeliveryPlanDocumentDefinition from "../../lib/generateDeliveryPlanDocumentDefinition";
+import generateCookPlanDocumentDefinitionV2 from "../../lib/generateCookPlanDocumentDefinitionV2";
+import downloadPdf from "../../lib/downloadPdf";
+import { generateAddressDownload } from "./generate-address-download";
+import { generateCookReport } from "../../lib/generate-cook-report";
+import { apiRequest } from "@tnmo/core";
 
 interface PlanId {
   sort: string;
@@ -71,8 +70,8 @@ const downloadLabels = async (
   csvData.forEach((csvData) =>
     zip.file(`${csvData.filename}.csv`, csvData.data)
   );
-  const file = await zip.generateAsync({ type: 'blob' });
-  fileDownload(file, generateDatestampedFilename('labels', 'zip'));
+  const file = await zip.generateAsync({ type: "blob" });
+  fileDownload(file, generateDatestampedFilename("labels", "zip"));
 };
 
 export const DownloadLabelsDialog: FC<DownloadLabelsDialogProps> = ({
@@ -82,15 +81,15 @@ export const DownloadLabelsDialog: FC<DownloadLabelsDialogProps> = ({
   plan: originalPlan,
   customers,
 }) => {
-  const [cookNumber, setCookNumber] = useState('1');
-  const [plan, setPlan] = useState('Current');
-  const [useBy, setUseBy] = useState('');
+  const [cookNumber, setCookNumber] = useState("1");
+  const [plan, setPlan] = useState("Current");
+  const [useBy, setUseBy] = useState("");
   const cooks = Array.from({ length: defaultDeliveryDays.length }, (_, i) =>
     String(i + 1)
   );
 
   const getPlan = async () => {
-    if (plan === 'Current') {
+    if (plan === "Current") {
       return {
         swappedCustomerPlans: originalPlan.customerPlans.map((plan) =>
           performSwaps(plan, plan.customer, recipes)
@@ -99,7 +98,7 @@ export const DownloadLabelsDialog: FC<DownloadLabelsDialogProps> = ({
       };
     }
 
-    const response = await fetchData<GetPlanResponseNew>(`plan/${plan}`);
+    const response = await apiRequest<GetPlanResponseNew>(`plan/${plan}`);
     if (response.admin) {
       return {
         swappedCustomerPlans: response.plan.customerPlans.map((plan) =>
@@ -132,7 +131,7 @@ export const DownloadLabelsDialog: FC<DownloadLabelsDialogProps> = ({
               labelKey="label"
               valueKey="value"
               options={[
-                'Current',
+                "Current",
                 ...plansList.map((plan) => ({
                   value: plan.sort,
                   label: DateTime.fromJSDate(plan.createdOn).toLocaleString(
@@ -173,7 +172,7 @@ export const DownloadLabelsDialog: FC<DownloadLabelsDialogProps> = ({
             direction="row"
             justify="center"
             wrap
-            style={{ rowGap: '1em', marginTop: '1em' }}
+            style={{ rowGap: "1em", marginTop: "1em" }}
           >
             <Button
               primary
@@ -190,7 +189,7 @@ export const DownloadLabelsDialog: FC<DownloadLabelsDialogProps> = ({
             />
             <Button
               primary
-              label="Cook Plan V2"
+              label="Cook Plan"
               onClick={async () => {
                 const { originalPlan } = await getPlan();
                 if (originalPlan) {
@@ -201,21 +200,9 @@ export const DownloadLabelsDialog: FC<DownloadLabelsDialogProps> = ({
                   );
                   downloadPdf(
                     generateCookPlanDocumentDefinitionV2(plan),
-                    generateDatestampedFilename('cook-plan', 'pdf')
+                    generateDatestampedFilename("cook-plan", "pdf")
                   );
                 }
-              }}
-            />
-            <Button
-              primary
-              label="Cook Plan"
-              onClick={async () => {
-                const { swappedCustomerPlans } = await getPlan();
-                const plan = makeCookPlan(swappedCustomerPlans, recipes);
-                downloadPdf(
-                  generateCookPlanDocumentDefinition(plan),
-                  generateDatestampedFilename('cook-plan', 'pdf')
-                );
               }}
             />
             <Button
@@ -231,7 +218,7 @@ export const DownloadLabelsDialog: FC<DownloadLabelsDialogProps> = ({
                 const csvData = generateIndividualCsv(addresses);
                 fileDownload(
                   csvData,
-                  generateDatestampedFilename('addresses', 'csv')
+                  generateDatestampedFilename("addresses", "csv")
                 );
               }}
             />
@@ -247,7 +234,7 @@ export const DownloadLabelsDialog: FC<DownloadLabelsDialogProps> = ({
                 );
                 downloadPdf(
                   plan,
-                  generateDatestampedFilename('pack-plan', 'pdf')
+                  generateDatestampedFilename("pack-plan", "pdf")
                 );
               }}
             />
@@ -266,7 +253,7 @@ export const DownloadLabelsDialog: FC<DownloadLabelsDialogProps> = ({
 
                 downloadPdf(
                   report,
-                  generateDatestampedFilename('cook-report', 'pdf')
+                  generateDatestampedFilename("cook-report", "pdf")
                 );
               }}
             />

@@ -1,9 +1,9 @@
-import { getCookStatus } from '@tnmo/meal-planning';
+import { getCookStatus } from "@tnmo/meal-planning";
 import {
   BackendCustomer,
   MealPlanGeneratedForIndividualCustomer,
   PlannedCook,
-} from '@tnmo/types';
+} from "@tnmo/types";
 
 export const chooseablePlans = (
   customer: BackendCustomer,
@@ -11,7 +11,7 @@ export const chooseablePlans = (
 ) => {
   return customer.plans.filter((plan) => {
     const every = cooks.every((cook) => {
-      const status = getCookStatus(cook.date, plan).status === 'active';
+      const status = getCookStatus(cook.date, plan).status === "active";
       return status;
     });
 
@@ -32,6 +32,15 @@ const getClosingDate = (date: Date): Date => {
   return newDate;
 };
 
+/**
+ * Identify if the meal plan is closed or open
+ *
+ * @param now - the date to compare against
+ * @param data - the meal plan data
+ * @param customer - details of the customer who we are checking for
+ *
+ * @returns true if the meal plan is open, false if it is closed
+ */
 export const getClosedOrOpenStatus = (
   now: Date,
   data:

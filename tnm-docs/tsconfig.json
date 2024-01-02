@@ -1,12 +1,10 @@
 {
+  "extends": "@docusaurus/tsconfig",
   "compilerOptions": {
-    "target": "es2015",
-    "module": "commonjs",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "baseUrl": ".",
+    "jsx": "preserve",
+    "esModuleInterop": true
   },
   "$schema": "https://json.schemastore.org/tsconfig",
-  "display": "Recommended"
+  "display": "Docusaurus"
 }

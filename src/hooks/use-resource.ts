@@ -1,8 +1,8 @@
-import toast from 'react-hot-toast';
-import { useSWRConfig } from 'swr';
-import useMutation from 'use-mutation';
-import { swrFetcher } from '../utils/swr-fetcher';
-import { useSwrWrapper } from './use-swr-wrapper';
+import toast from "react-hot-toast";
+import { useSWRConfig } from "swr";
+import useMutation from "use-mutation";
+import { apiRequest } from "../core/api-request";
+import { useSwrWrapper } from "./use-swr-wrapper";
 
 interface Response<T> {
   items: T[];
@@ -48,11 +48,11 @@ export const useResource = <
   const getType = () => {
     const pageString = page ? `&page=${page}` : ``;
 
-    if (typeof projection !== 'undefined') {
-      return `${type}?projection=${projection?.join(',')}${pageString}`;
+    if (typeof projection !== "undefined") {
+      return `${type}?projection=${projection?.join(",")}${pageString}`;
     }
 
-    if (typeof idsOrSearchTerm === 'string') {
+    if (typeof idsOrSearchTerm === "string") {
       return `${type}/search?searchTerm=${idsOrSearchTerm}`;
     }
 
@@ -62,7 +62,7 @@ export const useResource = <
 
     if (idsOrSearchTerm) {
       const deDupedIds = Array.from(new Set(idsOrSearchTerm));
-      return `${type}/get-by-id?ids=${deDupedIds.join(',')}`;
+      return `${type}/get-by-id?ids=${deDupedIds.join(",")}`;
     }
 
     const typePageString = page ? `?page=${page}` : ``;
@@ -72,19 +72,19 @@ export const useResource = <
   const { data: getData } = useSwrWrapper<Response<R>>(
     getType,
     {},
-    typeof idsOrSearchTerm !== 'string' && !page
+    typeof idsOrSearchTerm !== "string" && !page
   );
 
   const createItem = async <T extends { id: string }>(input: T): Promise<T> =>
-    await swrFetcher<T>(type, {
-      method: 'POST',
+    await apiRequest<T>(type, {
+      method: "POST",
       body: JSON.stringify(input),
     });
 
   const [create] = useMutation(createItem, {
     onMutate({ input }: { input: T }) {
       const { data } = getCache<T>(type);
-      const items = [...(data?.items ?? []), { ...input, id: '0' }];
+      const items = [...(data?.items ?? []), { ...input, id: "0" }];
       mutate(type, { items }, false);
 
       return () => {
@@ -102,7 +102,7 @@ export const useResource = <
       const { data: oldData } = getCache<T>(type);
       const newData = {
         items: oldData?.items.map((item: T) => {
-          return item.id === '0' ? { ...input, id: data.id } : item;
+          return item.id === "0" ? { ...input, id: data.id } : item;
         }),
       };
 
@@ -117,8 +117,8 @@ export const useResource = <
   });
 
   const updateItem = async <T extends { id: string }>(input: T): Promise<T> =>
-    await swrFetcher<T>(type, {
-      method: 'PUT',
+    await apiRequest<T>(type, {
+      method: "PUT",
       body: JSON.stringify(input),
     });
 
@@ -152,8 +152,8 @@ export const useResource = <
   const removeItem = async <T extends { id: string }>(
     input: T
   ): Promise<void> => {
-    await swrFetcher<T>(type, {
-      method: 'PUT',
+    await apiRequest<T>(type, {
+      method: "PUT",
       body: JSON.stringify({ ...input, deleted: true }),
     });
   };

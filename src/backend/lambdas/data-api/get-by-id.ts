@@ -1,12 +1,12 @@
-import '../misc/init-dd-trace';
-import { APIGatewayProxyHandlerV2 } from 'aws-lambda';
+import "../../utils/init-dd-trace";
+import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 
-import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import { DynamoDBDocumentClient } from '@aws-sdk/lib-dynamodb';
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 
-import { returnErrorResponse } from './return-error-response';
-import { batchGet } from './get-data/batch-get';
-import { warmer } from '../misc/warmer';
+import { returnErrorResponse } from "../../../core-backend/return-error-response";
+import { batchGet } from "./get-data/batch-get";
+import { warmer } from "../../utils/warmer";
 
 export const handler = warmer<APIGatewayProxyHandlerV2>(async (event) => {
   try {
@@ -15,17 +15,17 @@ export const handler = warmer<APIGatewayProxyHandlerV2>(async (event) => {
     const dynamodb = new DynamoDBClient({});
     const client = DynamoDBDocumentClient.from(dynamodb);
 
-    const ids = event?.queryStringParameters?.ids?.split(',');
+    const ids = event?.queryStringParameters?.ids?.split(",");
 
     const response = await batchGet(client, {
       RequestItems: {
-        [process.env['DYNAMODB_TABLE'] ?? '']: {
+        [process.env["DYNAMODB_TABLE"] ?? ""]: {
           Keys: ids?.map((id: string) => ({ id })) ?? [],
         },
       },
     });
 
-    const items = response?.Responses?.[process.env['DYNAMODB_TABLE'] ?? ''];
+    const items = response?.Responses?.[process.env["DYNAMODB_TABLE"] ?? ""];
 
     const body = JSON.stringify({
       items: items?.filter((item) => !item.deleted),
@@ -35,8 +35,8 @@ export const handler = warmer<APIGatewayProxyHandlerV2>(async (event) => {
       statusCode: 200,
       body,
       headers: {
-        'access-control-allow-origin': '*',
-        'access-control-allow-headers': '*',
+        "access-control-allow-origin": "*",
+        "access-control-allow-headers": "*",
       },
     };
   } catch (error) {

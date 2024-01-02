@@ -1,19 +1,18 @@
-import { StackConfig } from '@tnmo/types';
-import { getDomainName } from '@tnmo/utils';
-import { Stack, StackProps } from 'aws-cdk-lib';
-import { DnsValidatedCertificate } from 'aws-cdk-lib/aws-certificatemanager';
-import { ImageOptimisation } from '@tnmo/image-optimisation';
-import { Distribution } from 'aws-cdk-lib/aws-cloudfront';
-import { S3Origin } from 'aws-cdk-lib/aws-cloudfront-origins';
-import { IUserPool, IUserPoolClient } from 'aws-cdk-lib/aws-cognito';
-import { ARecord, IHostedZone, RecordTarget } from 'aws-cdk-lib/aws-route53';
-import { CloudFrontTarget } from 'aws-cdk-lib/aws-route53-targets';
-import { Bucket } from 'aws-cdk-lib/aws-s3';
-import { BucketDeployment, Source } from 'aws-cdk-lib/aws-s3-deployment';
-import { StringParameter } from 'aws-cdk-lib/aws-ssm';
-import { Construct } from 'constructs';
-import path from 'node:path';
-import { getResourceName } from './get-resource-name';
+import { StackConfig } from "@tnmo/types";
+import { getDomainName } from "@tnmo/utils";
+import { Stack, StackProps } from "aws-cdk-lib";
+import { DnsValidatedCertificate } from "aws-cdk-lib/aws-certificatemanager";
+import { Distribution } from "aws-cdk-lib/aws-cloudfront";
+import { S3Origin } from "aws-cdk-lib/aws-cloudfront-origins";
+import { IUserPool, IUserPoolClient } from "aws-cdk-lib/aws-cognito";
+import { ARecord, IHostedZone, RecordTarget } from "aws-cdk-lib/aws-route53";
+import { CloudFrontTarget } from "aws-cdk-lib/aws-route53-targets";
+import { Bucket } from "aws-cdk-lib/aws-s3";
+import { BucketDeployment, Source } from "aws-cdk-lib/aws-s3-deployment";
+import { StringParameter } from "aws-cdk-lib/aws-ssm";
+import { Construct } from "constructs";
+import path from "node:path";
+import { getResourceName } from "./get-resource-name";
 
 interface FrontendStackProps {
   stackProps: StackProps;
@@ -28,15 +27,11 @@ interface FrontendStackProps {
 const ROOT_PATH = path.join(
   // eslint-disable-next-line unicorn/prefer-module
   __dirname,
-  '..',
-  '..',
+  "..",
+  ".."
 );
 
-// const APP_PATH = path.join(ROOT_PATH, 'apps', 'web-app');
-
-const EXPORTED_PATH = path.join(ROOT_PATH, 'out');
-
-// const DOT_NEXT_PATH = path.join(APP_PATH, '.next');
+const EXPORTED_PATH = path.join(ROOT_PATH, "out");
 
 export class FrontendStack extends Stack {
   public constructor(scope: Construct, id: string, props: FrontendStackProps) {
@@ -44,19 +39,19 @@ export class FrontendStack extends Stack {
 
     const domainName = getDomainName(props.envName);
 
-    const staticsBucket = new Bucket(this, 'tnm-web-bucket', {
+    const staticsBucket = new Bucket(this, "tnm-web-bucket", {
       publicReadAccess: true,
-      websiteIndexDocument: 'index.html',
-      websiteErrorDocument: 'index.html',
+      websiteIndexDocument: "index.html",
+      websiteErrorDocument: "index.html",
     });
 
-    const certificate = new DnsValidatedCertificate(this, 'cert', {
+    const certificate = new DnsValidatedCertificate(this, "cert", {
       domainName,
       hostedZone: props.hostedZone,
-      region: 'us-east-1',
+      region: "us-east-1",
     });
 
-    const distribution = new Distribution(this, 'tnm-web-distribution', {
+    const distribution = new Distribution(this, "tnm-web-distribution", {
       defaultBehavior: {
         origin: new S3Origin(staticsBucket),
       },
@@ -64,24 +59,24 @@ export class FrontendStack extends Stack {
       domainNames: [domainName],
     });
 
-    new ARecord(this, 'FrontendARecord', {
+    new ARecord(this, "FrontendARecord", {
       zone: props.hostedZone,
       recordName: domainName,
       target: RecordTarget.fromAlias(new CloudFrontTarget(distribution)),
     });
 
-    const apiDomainName = getDomainName(props.envName, 'api');
+    const apiDomainName = getDomainName(props.envName, "api");
 
-    const userPoolIdParam = new StringParameter(this, 'userPoolId', {
-      parameterName: getResourceName('user-pool-id', props.envName),
+    const userPoolIdParam = new StringParameter(this, "userPoolId", {
+      parameterName: getResourceName("user-pool-id", props.envName),
       stringValue: props.userPool.userPoolId,
     });
 
     const userPoolClientIdParam = new StringParameter(
       this,
-      'userPoolClientId',
+      "userPoolClientId",
       {
-        parameterName: getResourceName('user-pool-client-id', props.envName),
+        parameterName: getResourceName("user-pool-client-id", props.envName),
         stringValue: props.poolClient.userPoolClientId,
       }
     );
@@ -108,10 +103,10 @@ export class FrontendStack extends Stack {
     //   assetsPath: path.join(APP_PATH, 'public', 'images'),
     // });
 
-    new BucketDeployment(this, 'exported-bucket-deployment', {
+    new BucketDeployment(this, "exported-bucket-deployment", {
       sources: [
         Source.asset(EXPORTED_PATH),
-        Source.jsonData('app-config.json', config),
+        Source.jsonData("app-config.json", config),
       ],
       destinationBucket: staticsBucket,
       distribution,

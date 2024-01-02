@@ -1,11 +1,11 @@
-import { FC, useState } from 'react';
-import { MenuPaddedContent } from './menu-padded-content';
-import { AdminTemplate } from './admin-template';
-import toast from 'react-hot-toast';
-import { Recipes } from '@tnmo/admin-app';
-import { useCustomisations, useRecipes } from '../../hooks';
-import { swrFetcher } from '../../utils/swr-fetcher';
-import { RedirectIfLoggedOut } from '../../components/authentication/redirect-if-logged-out';
+import { FC, useState } from "react";
+import { MenuPaddedContent } from "./menu-padded-content";
+import { AdminTemplate } from "./admin-template";
+import toast from "react-hot-toast";
+import { Recipes } from "@tnmo/admin-app";
+import { useCustomisations, useRecipes } from "../../hooks";
+import { apiRequest } from "../../core/api-request";
+import { RedirectIfLoggedOut } from "../../components/authentication/redirect-if-logged-out";
 
 const RecipesPage: FC = () => {
   const [filter, setFilter] = useState<string | undefined>();
@@ -14,17 +14,17 @@ const RecipesPage: FC = () => {
   const { items: customisations } = useCustomisations();
 
   return (
-    <RedirectIfLoggedOut allowedGroups={['admin']} redirectTo="/login">
+    <RedirectIfLoggedOut allowedGroups={["admin"]} redirectTo="/login">
       <MenuPaddedContent>
         <AdminTemplate>
           <Recipes
             onSubmitPlan={async (plan) => {
-              await swrFetcher('plan', {
-                method: 'POST',
+              await apiRequest("plan", {
+                method: "POST",
                 body: JSON.stringify(plan),
               });
               toast.success(
-                'New plan successfully generated! Check the planner page to view it'
+                "New plan successfully generated! Check the planner page to view it"
               );
             }}
             customisations={customisations}

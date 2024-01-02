@@ -4,13 +4,13 @@ import { handler } from "./put";
 import { mockClient } from "aws-sdk-client-mock";
 import { DynamoDBDocumentClient, PutCommand } from "@aws-sdk/lib-dynamodb";
 import { APIGatewayProxyEventV2, EventBridgeEvent } from "aws-lambda";
-import { authoriseJwt } from "./authorise";
-import { HttpError } from "./http-error";
+import { protectRoute } from "@tnmo/core-backend";
+import { HttpError } from "@tnmo/core";
 import { HTTP } from "../../../infrastructure/constants";
 
 const dynamodbMock = mockClient(DynamoDBDocumentClient);
 
-vi.mock("./authorise");
+vi.mock("@tnmo/core-backend");
 
 beforeEach(() => {
   vi.resetAllMocks();
@@ -20,7 +20,7 @@ beforeEach(() => {
 
 describe("the get handler", () => {
   it("returns a response with the statuscode from the error when an httpError is thrown by authorise", async () => {
-    vi.mocked(authoriseJwt).mockRejectedValue(
+    vi.mocked(protectRoute).mockRejectedValue(
       new HttpError(HTTP.statusCodes.Forbidden, "oh no!")
     );
 
@@ -45,6 +45,8 @@ describe("the get handler", () => {
 
   it("calls dynamodb putItem with input object and returns success", async () => {
     process.env["DYNAMODB_TABLE"] = "foo-table";
+
+    vi.mocked(protectRoute).mockResolvedValue(mock());
 
     const inputItem = {
       foo: "baz",

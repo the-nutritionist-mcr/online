@@ -1,6 +1,6 @@
-import { AuthenticationServiceContext, LoadingContext } from '@tnmo/components';
-import { Hub } from 'aws-amplify';
-import { ReactNode, useContext, useEffect, useState } from 'react';
+import { AuthenticationServiceContext, LoadingContext } from "@tnmo/components";
+import { Hub } from "aws-amplify";
+import { ReactNode, useContext, useEffect, useState } from "react";
 
 import {
   confirmSignup,
@@ -11,7 +11,7 @@ import {
   register,
   signOut,
   CognitoUser,
-} from '../aws/authenticate';
+} from "../core/aws/authenticate";
 
 const authenticationService = {
   login,
@@ -26,7 +26,7 @@ interface AuthenticationProviderProps {
   children: ReactNode;
 }
 
-export const LOADING_KEY = 'get-user';
+export const LOADING_KEY = "get-user";
 
 export const AuthenticationProvider = (props: AuthenticationProviderProps) => {
   const { useLoading } = useContext(LoadingContext);
@@ -40,22 +40,22 @@ export const AuthenticationProvider = (props: AuthenticationProviderProps) => {
         ...foundUser,
         isAdmin:
           foundUser?.signInUserSession?.accessToken?.payload[
-            'cognito:groups'
-          ]?.includes('admin'),
+            "cognito:groups"
+          ]?.includes("admin"),
       }
     );
     stopLoading();
   };
 
   useEffect(() => {
-    Hub.listen('auth', loadUser);
+    Hub.listen("auth", loadUser);
     (async () => {
-      if (getLoadingState() === 'Started') {
+      if (getLoadingState() === "Started") {
         await loadUser();
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    return () => Hub.remove('auth', loadUser);
+    return () => Hub.remove("auth", loadUser);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
   return (

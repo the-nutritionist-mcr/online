@@ -1,0 +1,8 @@
+{
+  "label": "Features",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "Application features that are not specific to an individual page or component."
+  }
+}

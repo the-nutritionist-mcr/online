@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { currentUser } from '../aws/authenticate';
-import Router from 'next/router';
+import { useState } from "react";
+import { useEffect } from "react";
+import { currentUser } from "../core/aws/authenticate";
+import Router from "next/router";
 
 export const useAuthorisation = (authorisedGroups?: ReadonlyArray<string>) => {
   const [loading, setLoading] = useState(true);
@@ -15,13 +15,13 @@ export const useAuthorisation = (authorisedGroups?: ReadonlyArray<string>) => {
             authorisedGroups?.length === 0 ||
             authorisedGroups?.some((group) =>
               user?.signInUserSession.accessToken.payload[
-                'cognito:groups'
+                "cognito:groups"
               ]?.includes(group)
             ));
 
         if (!authorised) {
           // eslint-disable-next-line fp/no-mutating-methods
-          await Router.push('/login');
+          await Router.push("/login");
         }
       } finally {
         setLoading(false);

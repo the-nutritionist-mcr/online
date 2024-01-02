@@ -1,10 +1,10 @@
-import toast from 'react-hot-toast';
-import { HTTP } from '@tnmo/constants';
-import { BackendCustomer, UpdateCustomerBody } from '@tnmo/types';
-import { useSWRConfig } from 'swr';
-import useMutation from 'use-mutation';
-import { swrFetcher } from '../utils/swr-fetcher';
-import { useSwrWrapper } from './use-swr-wrapper';
+import toast from "react-hot-toast";
+import { HTTP } from "@tnmo/constants";
+import { BackendCustomer, UpdateCustomerBody } from "@tnmo/types";
+import { useSWRConfig } from "swr";
+import useMutation from "use-mutation";
+import { apiRequest } from "../core/api-request";
+import { useSwrWrapper } from "./use-swr-wrapper";
 
 // eslint-disable-next-line fp/no-let
 let originalData: BackendCustomer | undefined;
@@ -17,7 +17,7 @@ export const useCustomer = (username: string | undefined) => {
   );
 
   const updateCustomer = async (input: UpdateCustomerBody): Promise<void> => {
-    await swrFetcher(key, {
+    await apiRequest(key, {
       method: HTTP.verbs.Post,
       body: JSON.stringify(input),
     });
@@ -48,11 +48,11 @@ export const useCustomer = (username: string | undefined) => {
       };
 
       switch (status) {
-        case 'success':
+        case "success":
           toast.success(`Customer record saved successfully`);
           mutate(key, newCustomer, false);
           break;
-        case 'failure':
+        case "failure":
           mutate(key, originalData, false);
           originalData = undefined;
           break;

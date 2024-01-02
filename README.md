@@ -16,7 +16,4 @@ This repository contains a web application built to manage the day to day busine
 
 ## Documentation
 
-- [Continuous Integration and Deployment](docs/ci.md)
-- [Testing](docs/testing.md)
-- [Environments](docs/environments.md)
-- [Cloud Architecture](docs/cloud-architecture.md)
+For more information about this project, please [check out its documentation](https://docs.thenutritionistmcr.com)

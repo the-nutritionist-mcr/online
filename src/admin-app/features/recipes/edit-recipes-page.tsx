@@ -205,10 +205,11 @@ export const EditRecipesPage = (props: EditRecipesPageProps) => {
         ) : (
           <div className={alternatesGrid}>
             {recipe.alternates?.map((alternate, index) => (
-              <Card pad="medium">
+              <Card pad="medium" data-testid="alternate-card">
                 <CardBody>
                   <FormField label="Customisation">
                     <Select
+                      name="alternate-customisation"
                       options={exclusions}
                       value={alternate.customisationId}
                       onChange={(event) => {
@@ -228,6 +229,7 @@ export const EditRecipesPage = (props: EditRecipesPageProps) => {
                   </FormField>
                   <FormField label="Recipe">
                     <Select
+                      name="alternate-recipe"
                       onChange={(event) => {
                         const newAlternates = [...(recipe.alternates ?? [])];
 
