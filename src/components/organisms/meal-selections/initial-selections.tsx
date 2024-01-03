@@ -6,6 +6,8 @@ import {
   BackendCustomer,
   MealPlanGeneratedForIndividualCustomer,
   PlannedCook,
+  ActivePlanWithMeals,
+  DeliveryMeal,
   PlanWithMeals,
   Recipe,
   StandardPlan,
@@ -22,8 +24,9 @@ import {
   tabGrid,
 } from './initial-selections.css';
 import { getCookStatus } from '@tnmo/meal-planning';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getDeliveryLabel } from './get-delivery-label';
+import { useMe } from '../../../hooks/use-me';
 
 export type SelectedMeals = { [key: string]: number }[][];
 
@@ -44,8 +47,10 @@ const getActivePlan = (plans: PlanWithMeals[], customerPlan: StandardPlan) => {
 };
 
 export const InitialSelections = (props: InitialSelectionsProps) => {
+  const user = useMe();
   const [currentCook, setCurrentCook] = useState(0);
   const [currentPlan, setCurrentPlan] = useState(0);
+
   return (
     <div>
       <h2 className={chooseDayHeader}>Delivery Day</h2>
@@ -86,55 +91,66 @@ export const InitialSelections = (props: InitialSelectionsProps) => {
                     const chosenSelection = getActivePlan(
                       delivery.plans,
                       category
-                    );
+                    ) as ActivePlanWithMeals;
 
                     if (!chosenSelection) {
                       return [];
                     }
 
-                    return chosenSelection.status === 'active' &&
-                      !chosenSelection.isExtra ? (
-                      <Tab
-                        tabTitle={category.name}
-                        key={`${category.id}-${dayIndex}-tab`}
-                      >
-                        <div className={tabGrid}>
-                          <MealList
-                            customer={props.customer}
-                            recipes={props.recipes}
-                            things={props.cooks[dayIndex].menu}
-                            selected={chosenSelection}
-                            plan={category}
-                            setSelected={(selected) => {
-                              updateAllSelectedMeals(
-                                selected,
-                                props.currentSelection,
-                                props.setSelectedMeals,
-                                dayIndex
-                              );
-                            }}
-                            max={
-                              category.totalMeals -
-                              totalOtherSelected(
-                                props.currentSelection,
-                                chosenSelection,
-                                category
-                              )
-                            }
-                          />
+                    // filter exclusions
+                    chosenSelection.meals = chosenSelection.meals.filter(meal => {
+                      let filtered = false;
+                      user?.customisations.forEach(customisation => {
+                        const deliveryMeal = meal as DeliveryMeal;
+                        if (deliveryMeal.recipe.invalidExclusions === undefined) return;
+                        if (deliveryMeal.recipe.invalidExclusions.includes(customisation.id)) filtered = true;
+                      })
+                      return !filtered;
+                    });
 
-                          <CombinedBasket
-                            customer={props.customer}
-                            cooks={props.cooks}
-                            currentSelection={props.currentSelection}
-                            setSelectedMeals={props.setSelectedMeals}
-                            recipes={props.recipes}
-                          />
-                        </div>
-                      </Tab>
-                    ) : (
-                      []
-                    );
+                    return chosenSelection.status === 'active' && !chosenSelection.isExtra
+                      ? (
+                        <Tab
+                          tabTitle={category.name}
+                          key={`${category.id}-${dayIndex}-tab`}
+                        >
+                          <div className={tabGrid}>
+                            <MealList
+                              customer={props.customer}
+                              recipes={props.recipes}
+                              things={props.cooks[dayIndex].menu}
+                              selected={chosenSelection}
+                              plan={category}
+                              setSelected={(selected) => {
+                                updateAllSelectedMeals(
+                                  selected,
+                                  props.currentSelection,
+                                  props.setSelectedMeals,
+                                  dayIndex
+                                );
+                              }}
+                              max={
+                                category.totalMeals -
+                                totalOtherSelected(
+                                  props.currentSelection,
+                                  chosenSelection,
+                                  category
+                                )
+                              }
+                            />
+
+                            <CombinedBasket
+                              customer={props.customer}
+                              cooks={props.cooks}
+                              currentSelection={props.currentSelection}
+                              setSelectedMeals={props.setSelectedMeals}
+                              recipes={props.recipes}
+                            />
+                          </div>
+                        </Tab>
+                      ) : (
+                        []
+                      );
                   })}
                 </TabBox>
               </Tab>

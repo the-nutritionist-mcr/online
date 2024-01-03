@@ -5,6 +5,7 @@ import {
   ActivePlanWithMeals,
   BackendCustomer,
   Recipe,
+  DeliveryMeal,
   StandardPlan,
 } from '@tnmo/types';
 import { countsFromPlans } from './count-from-plans';
@@ -22,37 +23,42 @@ interface MealListProps {
 
 const MealList = (props: MealListProps) => {
   const counts = countsFromPlans(props.selected);
-
   const max = props.max - props.selected.meals.length;
+
+  console.log('THINGS:', props.things)
+  console.log('MEALS:', props.selected.meals)
 
   return (
     <div className={mealListGrid}>
-      {props.things.map((thing) => {
-        const realRecipe = getRealRecipe(thing, props.customer, props.recipes);
+      {
+        props.selected.meals.map(deliveryItem => {
+          const meal = deliveryItem as DeliveryMeal;
+          const realRecipe = getRealRecipe(meal.recipe, props.customer, props.recipes);
 
-        const countOfThisRecipe = props.selected.meals.filter(
-          (meal) => !meal.isExtra && meal.recipe.id === thing.id
-        ).length;
+          const countOfThisRecipe = props.selected.meals.filter(
+            (meal) => !meal.isExtra && meal.recipe.id === meal.recipe.id
+          ).length;
 
-        return (
-          <MealCounter
-            key={thing.id}
-            title={realRecipe.name ?? ''}
-            description={realRecipe.description ?? ''}
-            contains={thing.allergens}
-            value={counts[thing.id]}
-            min={0}
-            max={max + countOfThisRecipe}
-            onChange={(value) => {
-              const newCounts = { ...counts, [thing.id]: value };
-              props.setSelected({
-                ...props.selected,
-                meals: planFromCounts(newCounts, props.things, props.plan.name),
-              });
-            }}
-          />
-        );
-      })}
+          return (
+            <MealCounter
+              key={meal.recipe.id}
+              title={realRecipe.name ?? ''}
+              description={realRecipe.description ?? ''}
+              contains={meal.recipe.allergens}
+              value={counts[meal.recipe.id]}
+              min={0}
+              max={max + countOfThisRecipe}
+              onChange={(value) => {
+                const newCounts = { ...counts, [meal.recipe.id]: value };
+                props.setSelected({
+                  ...props.selected,
+                  meals: planFromCounts(newCounts, props.things, props.plan.name),
+                });
+              }}
+            />
+          );
+        })
+      }
     </div>
   );
 };
