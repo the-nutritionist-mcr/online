@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC, Fragment, useEffect } from 'react';
 
 import { StandardPlan } from '@tnmo/types';
 import { Button, Input, Link } from '../../atoms';
@@ -100,16 +100,18 @@ export const Account: FC<AccountProps> = ({
       </FormSection>
       {(plans?.length ?? 0) > 0 && (
         <FormSection heading="Your Plan" showQuestionMarkIcon>
-          {plans?.map((plan) => (
-            <>
-              <Input label="Meal Size" value={plan.name} disabled />
-              <Input
-                label="Weekly Meals"
-                value={String(plan.totalMeals)}
-                disabled
-              />
-            </>
-          ))}
+          {
+            plans?.map(plan => (
+              <Fragment key={plan.id}>
+                <Input label="Meal Size" value={plan.name} disabled />
+                <Input
+                  label="Weekly Meals"
+                  value={String(plan.totalMeals)}
+                  disabled
+                />
+              </Fragment>
+            ))
+          }
         </FormSection>
       )}
       {(plans?.filter((plan) => !plan.isExtra).length ?? 0) > 0 && (
