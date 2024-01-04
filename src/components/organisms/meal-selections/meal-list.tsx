@@ -25,9 +25,6 @@ const MealList = (props: MealListProps) => {
   const counts = countsFromPlans(props.selected);
   const max = props.max - props.selected.meals.length;
 
-  console.log('THINGS:', props.things)
-  console.log('MEALS:', props.selected.meals)
-
   return (
     <div className={mealListGrid}>
       {
