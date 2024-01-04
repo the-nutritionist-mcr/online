@@ -26,7 +26,6 @@ import {
 import { getCookStatus } from '@tnmo/meal-planning';
 import { useEffect, useState } from 'react';
 import { getDeliveryLabel } from './get-delivery-label';
-import { useMe } from '../../../hooks/use-me';
 
 export type SelectedMeals = { [key: string]: number }[][];
 
@@ -47,7 +46,6 @@ const getActivePlan = (plans: PlanWithMeals[], customerPlan: StandardPlan) => {
 };
 
 export const InitialSelections = (props: InitialSelectionsProps) => {
-  const user = useMe();
   const [currentCook, setCurrentCook] = useState(0);
   const [currentPlan, setCurrentPlan] = useState(0);
 
@@ -91,22 +89,11 @@ export const InitialSelections = (props: InitialSelectionsProps) => {
                     const chosenSelection = getActivePlan(
                       delivery.plans,
                       category
-                    ) as ActivePlanWithMeals;
+                    );
 
                     if (!chosenSelection) {
                       return [];
                     }
-
-                    // filter exclusions
-                    chosenSelection.meals = chosenSelection.meals.filter(meal => {
-                      let filtered = false;
-                      user?.customisations.forEach(customisation => {
-                        const deliveryMeal = meal as DeliveryMeal;
-                        if (deliveryMeal.recipe.invalidExclusions === undefined) return;
-                        if (deliveryMeal.recipe.invalidExclusions.includes(customisation.id)) filtered = true;
-                      })
-                      return !filtered;
-                    });
 
                     return chosenSelection.status === 'active' && !chosenSelection.isExtra
                       ? (

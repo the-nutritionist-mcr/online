@@ -10,6 +10,8 @@ import {
   BackendCustomer,
   PlannedCook,
   WeeklyCookPlanWithoutCustomerPlans,
+  Exclusion,
+  DeliveryItem
 } from '@tnmo/types';
 import {
   container,
@@ -22,6 +24,7 @@ import { MealPlanGeneratedForIndividualCustomer } from '@tnmo/types';
 import { countRemainingMeals } from './count-remaining-meals';
 import { getCookStatus } from '@tnmo/meal-planning';
 import { NavigationContext } from '@tnmo/utils';
+import { useMe } from '../../../hooks/use-me';
 
 export interface ChooseMealsCustomer {
   customisations?: BackendCustomer['customisations'];
@@ -46,11 +49,48 @@ const DivContainer = styled.div`
   gap: 2rem;
 `;
 
+const applyExclusions = ({ meals, customisations }: { meals?: DeliveryItem[], customisations: Exclusion[] }): DeliveryItem[] => {
+  if (!meals) return [];
+  const filteredMeals = meals.filter(meal => {
+    let filtered = false;
+    customisations.forEach(customisation => {
+      if (meal.isExtra) return;
+      if (meal.recipe.invalidExclusions === undefined) return;
+      if (meal.recipe.invalidExclusions.includes(customisation.id)) filtered = true;
+    })
+    return !filtered;
+  });
+  return filteredMeals;
+}
+
 const MealSelections: FC<MealSelectionsProps> = (props) => {
   const { navigate } = useContext(NavigationContext);
   const [showConfirm, setShowConfirm] = useState(false);
-  const [selectedMeals, setSelectedMeals] =
-    useState<MealPlanGeneratedForIndividualCustomer>(props.currentSelection);
+  const user = useMe();
+
+  const deliveriesFiltered = props.currentSelection.deliveries.map(delivery => {
+    if (delivery.paused === true) return delivery;
+    const plansFiltered = delivery.plans.map(plan => {
+      if (plan.status !== 'active') return plan;
+      const mealsFiltered = applyExclusions({meals: plan.meals, customisations: user?.customisations ?? []});
+      return {
+        ...plan,
+        meals: mealsFiltered
+      }
+    });
+    return {
+      ...delivery,
+      plans: plansFiltered
+    }
+  });
+
+  const currentSelectionFiltered = {
+    ...props.currentSelection,
+    deliveries: deliveriesFiltered
+  };
+
+  console.log('FILTERED:', currentSelectionFiltered);
+  const [selectedMeals, setSelectedMeals] = useState<MealPlanGeneratedForIndividualCustomer>(currentSelectionFiltered);
 
   const [submittingOrder, setSubmittingOrder] = useState(false);
   const [complete, setComplete] = useState(false);
