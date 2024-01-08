@@ -12,7 +12,7 @@ import { countsFromPlans } from './count-from-plans';
 import { planFromCounts } from './plan-from-counts';
 
 interface MealListProps {
-  things: Recipe[];
+  menu: Recipe[];
   customer: BackendCustomer;
   recipes: Recipe[];
   plan: StandardPlan;
@@ -28,28 +28,27 @@ const MealList = (props: MealListProps) => {
   return (
     <div className={mealListGrid}>
       {
-        props.selected.meals.map(deliveryItem => {
-          const meal = deliveryItem as DeliveryMeal;
-          const realRecipe = getRealRecipe(meal.recipe, props.customer, props.recipes);
+        props.menu.map(menuItem => {
+          const realRecipe = getRealRecipe(menuItem, props.customer, props.recipes);
 
           const countOfThisRecipe = props.selected.meals.filter(
-            (meal) => !meal.isExtra && meal.recipe.id === meal.recipe.id
+            (meal) => !meal.isExtra && meal.recipe.id === menuItem.id
           ).length;
 
           return (
             <MealCounter
-              key={meal.recipe.id}
+              key={menuItem.id}
               title={realRecipe.name ?? ''}
               description={realRecipe.description ?? ''}
-              contains={meal.recipe.allergens}
-              value={counts[meal.recipe.id]}
+              contains={menuItem.allergens}
+              value={counts[menuItem.id]}
               min={0}
               max={max + countOfThisRecipe}
               onChange={(value) => {
-                const newCounts = { ...counts, [meal.recipe.id]: value };
+                const newCounts = { ...counts, [menuItem.id]: value };
                 props.setSelected({
                   ...props.selected,
-                  meals: planFromCounts(newCounts, props.things, props.plan.name),
+                  meals: planFromCounts(newCounts, props.menu, props.plan.name),
                 });
               }}
             />

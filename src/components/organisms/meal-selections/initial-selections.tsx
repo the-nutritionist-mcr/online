@@ -105,7 +105,7 @@ export const InitialSelections = (props: InitialSelectionsProps) => {
                             <MealList
                               customer={props.customer}
                               recipes={props.recipes}
-                              things={props.cooks[dayIndex].menu}
+                              menu={props.cooks[dayIndex].menu}
                               selected={chosenSelection}
                               plan={category}
                               setSelected={(selected) => {
