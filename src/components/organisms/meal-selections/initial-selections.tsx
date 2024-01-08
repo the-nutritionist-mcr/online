@@ -35,6 +35,7 @@ export interface InitialSelectionsProps {
   currentTabIndex: number;
   onChangeIndex: (index: number) => void;
   recipes: Recipe[];
+  recipesMinusUserExclusions: Set<string>;
   cooks: PlannedCook[];
   customer: BackendCustomer;
 }
@@ -105,6 +106,7 @@ export const InitialSelections = (props: InitialSelectionsProps) => {
                             <MealList
                               customer={props.customer}
                               recipes={props.recipes}
+                              recipesMinusUserExclusions={props.recipesMinusUserExclusions}
                               menu={props.cooks[dayIndex].menu}
                               selected={chosenSelection}
                               plan={category}
