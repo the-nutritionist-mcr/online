@@ -1,13 +1,16 @@
 import { FC } from 'react';
 import { Button } from '../../atoms';
+import { apiRequest } from '../../../core/api-request';
+import { BackendCustomer } from '@tnmo/types';
 
-interface PauseButtonProps {
-}
+const PauseButton: FC<{}> = () => {
+  const handleClick = async () => {
+    const data = await apiRequest<BackendCustomer>("customer", {
+      method: "GET"
+    })
 
-const PauseButton: FC<PauseButtonProps> = () => {
-  const handleClick = () => {
-    console.log('Pause button clicked');
-  };
+    console.log({ data })
+  }
 
   return (
     <Button primary onClick={() => handleClick()}>
