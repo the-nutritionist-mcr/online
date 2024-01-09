@@ -6,6 +6,7 @@ import { FormSection } from '../../containers';
 import { useContext } from 'react';
 import { NavigationContext } from '@tnmo/utils';
 import { text } from './account.css';
+import PauseButton from './pauseButton';
 
 export interface User {
   username: string;
@@ -141,6 +142,11 @@ export const Account: FC<AccountProps> = ({
           )}
         </FormSection>
       )}
+
+      <FormSection heading="Temp">
+        <p className={text}>Test calling lambda</p>
+        <PauseButton />
+      </FormSection>
 
       <FormSection heading="Logout">
         <Button backgroundColor="#E3E3E3" onClick={logout} primary>
