@@ -19,6 +19,13 @@ export const withIcon = style({
   paddingTop: '2.2rem',
 });
 
+export const sectionContainer = style({
+  display: 'block',
+  position: 'relative',
+  width: '100%',
+  marginTop: '2rem'
+});
+
 export const sectionContents = style({
   borderTop: '1px dashed #b8b8b8',
   width: '100%',
