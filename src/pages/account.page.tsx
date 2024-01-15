@@ -25,6 +25,7 @@ const YourAccountHeaderBox = styled('div')`
 
 const YourAccountHeader = styled('h1')`
   font-size: 40px;
+  font-weight: 700;
   display: auto;
   margin: 0.5rem 0 0 0;
 `;

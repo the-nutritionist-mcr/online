@@ -56,4 +56,5 @@ export const header = style({
   fontSize: '2rem',
   marginBottom: '1rem',
   fontFamily: "'Accumin Pro', Arial, sans-serif",
+  fontWeight: 700,
 });

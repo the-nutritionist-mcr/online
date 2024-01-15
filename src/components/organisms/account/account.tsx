@@ -145,6 +145,7 @@ export const Account: FC<AccountProps> = ({
 
       <FormSection heading="Temp">
         <p className={text}>Test calling lambda</p>
+        <div className='text-orange-500'>Is this orange? ANSWER ME!</div>
         <PauseButton />
       </FormSection>
 
