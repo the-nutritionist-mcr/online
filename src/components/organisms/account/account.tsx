@@ -1,4 +1,4 @@
-import { FC, Fragment, useEffect } from 'react';
+import { FC, Fragment, useEffect, useMemo, useState } from 'react';
 
 import { StandardPlan } from '@tnmo/types';
 import { Button, Input, Link } from '../../atoms';
@@ -7,6 +7,9 @@ import { useContext } from 'react';
 import { NavigationContext } from '@tnmo/utils';
 import { text } from './account.css';
 import PauseButton from './pauseButton';
+import { Header, Section, Text } from './account-elements';
+import PauseSelector from './pause-selector';
+import { DateTime } from 'luxon';
 
 export interface User {
   username: string;
@@ -40,6 +43,8 @@ export const Account: FC<AccountProps> = ({
   logout,
 }) => {
   const plans = userDetails?.plans?.filter((plan) => plan.totalMeals > 0);
+  const showPlans = useMemo(() => (plans?.length ?? 0) > 0, [plans]);
+  const [showPausePanel, setShowPausePanel] = useState(false);
 
   const { prefetch } = useContext(NavigationContext);
 
@@ -99,14 +104,19 @@ export const Account: FC<AccountProps> = ({
         />
         <Input name="city" label="City" value={userDetails.city} disabled />
       </FormSection>
-      
+
       {
-        (plans?.length ?? 0) > 0 && (
+        showPlans &&
+        <>
           <FormSection heading="Your Plan" showQuestionMarkIcon>
             {
               plans?.map(plan => (
                 <Fragment key={plan.id}>
-                  <Input label="Meal Size" value={plan.name} disabled />
+                  <Input
+                    label="Meal Size"
+                    value={plan.name}
+                    disabled
+                  />
                   <Input
                     label="Weekly Meals"
                     value={String(plan.totalMeals)}
@@ -115,10 +125,26 @@ export const Account: FC<AccountProps> = ({
                 </Fragment>
               ))
             }
+            {
+              !showPausePanel &&
+              <Button primary onClick={() => setShowPausePanel(true)}>
+                Pause your plan
+              </Button>
+            }
           </FormSection>
-        )
+          {
+            showPausePanel &&
+            <Section>
+              <Header>Pause your plan</Header>
+              <Text>
+                You can pause your plan whenever you like. Just remember to provide us with a minimum of one week's notice, as we order our fresh ingredients a week in advance. If we've already taken your subscription payment for the month, we'll credit your pause duration amount in the following month.
+              </Text>
+              <PauseSelector />
+            </Section>
+          }
+        </>
       }
-      
+
       {(plans?.filter((plan) => !plan.isExtra).length ?? 0) > 0 && (
         <FormSection heading="Choose Meals">
           {chooseIsOpen ? (
@@ -146,12 +172,6 @@ export const Account: FC<AccountProps> = ({
           )}
         </FormSection>
       )}
-
-      {/* <FormSection heading="Temp">
-        <p className={text}>Test calling lambda</p>
-        <div className='text-orange-500'>Is this orange? ANSWER ME!</div>
-        <PauseButton />
-      </FormSection> */}
 
       <FormSection heading="Logout">
         <Button backgroundColor="#E3E3E3" onClick={logout} primary>

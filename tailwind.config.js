@@ -50,11 +50,6 @@ module.exports = {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
-        },
-        fontFamily: {
-          AcuminPro: ['acumin-pro', 'Arial', 'sans-serif'],
-          AcuminProSemiCondensed: ['acumin-pro-semi-condensed', 'Arial', 'sans-serif'],
-          IBMPlexSerif: ['ibm-plex-serif', 'Arial', 'sans-serif'],
         }
       },
       borderRadius: {
@@ -77,6 +72,11 @@ module.exports = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
+    fontFamily: {
+      'acumin-pro': ['acumin-pro', 'Arial', 'sans-serif'],
+      'acumin-pro-semi-condensed': ['acumin-pro-semi-condensed', 'Arial', 'sans-serif'],
+      'ibm-plex-serif': ['ibm-plex-serif', 'Arial', 'sans-serif'],
+    }
   },
   future: {
     hoverOnlyWhenSupported: true
