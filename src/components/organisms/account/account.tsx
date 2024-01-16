@@ -99,22 +99,26 @@ export const Account: FC<AccountProps> = ({
         />
         <Input name="city" label="City" value={userDetails.city} disabled />
       </FormSection>
-      {(plans?.length ?? 0) > 0 && (
-        <FormSection heading="Your Plan" showQuestionMarkIcon>
-          {
-            plans?.map(plan => (
-              <Fragment key={plan.id}>
-                <Input label="Meal Size" value={plan.name} disabled />
-                <Input
-                  label="Weekly Meals"
-                  value={String(plan.totalMeals)}
-                  disabled
-                />
-              </Fragment>
-            ))
-          }
-        </FormSection>
-      )}
+      
+      {
+        (plans?.length ?? 0) > 0 && (
+          <FormSection heading="Your Plan" showQuestionMarkIcon>
+            {
+              plans?.map(plan => (
+                <Fragment key={plan.id}>
+                  <Input label="Meal Size" value={plan.name} disabled />
+                  <Input
+                    label="Weekly Meals"
+                    value={String(plan.totalMeals)}
+                    disabled
+                  />
+                </Fragment>
+              ))
+            }
+          </FormSection>
+        )
+      }
+      
       {(plans?.filter((plan) => !plan.isExtra).length ?? 0) > 0 && (
         <FormSection heading="Choose Meals">
           {chooseIsOpen ? (
@@ -143,11 +147,11 @@ export const Account: FC<AccountProps> = ({
         </FormSection>
       )}
 
-      <FormSection heading="Temp">
+      {/* <FormSection heading="Temp">
         <p className={text}>Test calling lambda</p>
         <div className='text-orange-500'>Is this orange? ANSWER ME!</div>
         <PauseButton />
-      </FormSection>
+      </FormSection> */}
 
       <FormSection heading="Logout">
         <Button backgroundColor="#E3E3E3" onClick={logout} primary>
