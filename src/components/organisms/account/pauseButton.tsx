@@ -5,7 +5,7 @@ import { BackendCustomer } from '@tnmo/types';
 
 const PauseButton: FC<{}> = () => {
   const handleClick = async () => {
-    const data = await apiRequest<BackendCustomer>("customer", {
+    const data = await apiRequest<BackendCustomer>("customers", {
       method: "GET"
     })
 

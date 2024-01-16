@@ -11,7 +11,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'daddy': '#FFF6600',
+        
+      },
+      fontFamily: {
+        AcuminPro: ['acumin-pro', 'Arial', 'sans-serif'],
+        AcuminProSemiCondensed: ['acumin-pro-semi-condensed', 'Arial', 'sans-serif'],
+        IBMPlexSerif: ['ibm-plex-serif', 'Arial', 'sans-serif'],
       }
     },
   },

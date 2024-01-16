@@ -59,16 +59,16 @@ const InputField = styled.input<InputProps>((props) => {
       }
     : {};
 
-  const borderColor = props.disabled ? '#B8B8B8' : theme.colors['buttonBlack'];
+  const borderColor = props.disabled ? '#dddddd' : theme.colors['buttonBlack'];
 
   return {
-    fontFamily: 'acumin-pro, Arial, sans-serif',
+    fontFamily: 'ibm-plex-serif, Arial, sans-serif',
     margin: 0,
-    borderRadius: 0,
+    borderRadius: '2px',
     border: `1px solid ${props.error ? 'red' : borderColor}`,
     backgroundColor: props.disabled ? '#fafafa' : 'white',
     lineHeight: `1.5rem`,
-    padding: `0.5rem 0.5rem`,
+    padding: `8px 12px`,
     ...width,
   };
 });
