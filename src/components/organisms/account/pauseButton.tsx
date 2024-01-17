@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { Button } from '../../atoms';
 import { apiRequest } from '../../../core/api-request';
 import { BackendCustomer } from '@tnmo/types';
+import MainButton from '@/components/ui/main-button';
 
 const PauseButton: FC<{}> = () => {
   const handleClick = async () => {
@@ -14,9 +15,9 @@ const PauseButton: FC<{}> = () => {
   }
 
   return (
-    <Button primary onClick={() => handleClick()}>
+    <MainButton onClick={() => handleClick()}>
       Pause your plan
-    </Button>
+    </MainButton>
   )
 };
 
