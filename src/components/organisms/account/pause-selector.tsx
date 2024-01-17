@@ -3,27 +3,22 @@ import {
   Select,
   SelectContent,
   SelectItem,
+  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
 import { DateTime } from 'luxon';
+import MainButton from '@/components/ui/main-button';
 
-const PauseSelector: FC<{}> = () => {
+const PauseSelector = () => {
   const [startDates, setStartDates] = useState<DateTime[]>([]);
+  const [showScheduleButton, setShowScheduleButton] = useState<boolean>(false);
 
   useEffect(() => {
     const date = DateTime.now();
-    console.log("Date from (now):", date.toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY));
-    console.log("Weekday:", date.weekday);
-
-    const nextMondayInAtLeast1Week: DateTime =
-      date.weekday === 1
-        ? date.plus({ weeks: 1 })
-        : date.plus({ days: 7 - (date.weekday - 1), weeks: 1 });
-    console.log(
-      "Next Monday at least a week away:",
-      nextMondayInAtLeast1Week.toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)
-    );
+    const nextMondayInAtLeast1Week: DateTime = date.weekday === 1
+      ? date.plus({ weeks: 1 })
+      : date.plus({ days: 7 - (date.weekday - 1), weeks: 1 });
 
     const dates: DateTime[] = [];
     for (let i: number = 0; i < 4; i++) {
@@ -34,30 +29,39 @@ const PauseSelector: FC<{}> = () => {
   }, []);
 
   return (
-    <div className='grid grid-cols-[auto_1fr] gap-4 items-center'>
-      <div>Pause for 1 week from</div>
-      <div>
-        <Select>
-          <SelectTrigger className="max-w-[300px] rounded-[2px] shadow-none text-[16px] leading-6 py-5 border-black">
-            <SelectValue placeholder="Select a start date" />
-          </SelectTrigger>
-          {
-            startDates.length > 0 &&
-            <SelectContent>
-              {
-                startDates.map((date: DateTime) => {
-                  return (
-                    <SelectItem value={date.toISODate() ?? ''} key={date.toISODate()}>
-                      {date.toLocaleString(DateTime.DATE_HUGE)}
-                    </SelectItem>
-                  )
-                })
-              }
-            </SelectContent>
-          }
-        </Select>
+    <>
+      <div className='grid grid-cols-[auto_1fr] gap-4 items-center'>
+        <div>Pause for the week beginning</div>
+        <div>
+          <Select onValueChange={e => setShowScheduleButton(true)}>
+            <SelectTrigger className="max-w-[300px] rounded-[2px] shadow-none text-[16px] leading-6 py-5 border-black">
+              <SelectValue placeholder="Select a start date" />
+            </SelectTrigger>
+            {
+              startDates.length > 0 &&
+              <SelectContent>
+                {/* <SelectLabel>Available pause dates</SelectLabel> */}
+                {
+                  startDates.map((date: DateTime) => {
+                    return (
+                      <SelectItem value={date.toISODate() ?? ''} key={date.toISODate()}>
+                        {date.toLocaleString(DateTime.DATE_HUGE)}
+                      </SelectItem>
+                    )
+                  })
+                }
+              </SelectContent>
+            }
+          </Select>
+        </div>
       </div>
-    </div>
+      {
+        showScheduleButton && 
+        <div>
+          <MainButton>Schedule this pause</MainButton>
+        </div>
+      }
+    </>
   )
 }
 

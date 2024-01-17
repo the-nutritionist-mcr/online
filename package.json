@@ -53,6 +53,7 @@
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.10",
     "@radix-ui/react-icons": "^1.3.0",
     "@radix-ui/react-select": "^2.0.0",
+    "@radix-ui/react-slot": "^1.0.2",
     "@reduxjs/toolkit": "1.9.5",
     "@seeebiii/ses-verify-identities": "^4.1.0",
     "@sls-next/cdk-construct": "^3.7.0",

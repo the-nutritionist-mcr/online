@@ -20,7 +20,7 @@ export const Header: FC<HeaderProps> = ({ children }) => {
   )
 }
 
-export const Text: FC<{ children: React.ReactNode }> = ({ children }) => {
+export const TextBlock: FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <p className='black w-full max-w-[500px] leading-6'>{children}</p>
   )
