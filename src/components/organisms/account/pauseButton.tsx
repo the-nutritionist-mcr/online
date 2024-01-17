@@ -1,12 +1,16 @@
 import { FC } from 'react';
-import { Button } from '../../atoms';
 import { apiRequest } from '../../../core/api-request';
 import { BackendCustomer } from '@tnmo/types';
 import MainButton from '@/components/ui/main-button';
+import { DateTime } from 'luxon';
 
-const PauseButton: FC<{}> = () => {
+interface PauseButtonProps {
+  pauseDate: DateTime | null;
+}
+
+const PauseButton: FC<PauseButtonProps> = ({ pauseDate }) => {
   const handleClick = async () => {
-    
+    console.log(pauseDate?.toLocaleString(DateTime.DATE_HUGE));
 
     // const data = await apiRequest<BackendCustomer>("customers", {
     //   method: "GET"
@@ -16,7 +20,7 @@ const PauseButton: FC<{}> = () => {
 
   return (
     <MainButton onClick={() => handleClick()}>
-      Pause your plan
+      Schedule this pause
     </MainButton>
   )
 };

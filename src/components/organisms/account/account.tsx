@@ -10,6 +10,7 @@ import PauseButton from './pauseButton';
 import { Header, Section, TextBlock } from './account-elements';
 import PauseSelector from './pause-selector';
 import { DateTime } from 'luxon';
+import MainButton from '@/components/ui/main-button';
 
 export interface User {
   username: string;
@@ -127,9 +128,9 @@ export const Account: FC<AccountProps> = ({
             }
             {
               !showPausePanel &&
-              <Button primary onClick={() => setShowPausePanel(true)}>
+              <MainButton onClick={() => setShowPausePanel(true)}>
                 Pause your plan
-              </Button>
+              </MainButton>
             }
           </FormSection>
           {
