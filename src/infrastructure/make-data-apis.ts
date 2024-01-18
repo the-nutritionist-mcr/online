@@ -34,7 +34,7 @@ export const makeDataApis = (
   const chargebeeAccessToken = new Secret(context, "ChargeeAccessToken", {
     secretName: getResourceName(`chargebee-access-token`, envName),
   });
-  
+
   chargebeeAccessToken.secretName
 
   const chargeBeeWebhookUsername = new Secret(
@@ -421,6 +421,31 @@ export const makeDataApis = (
       resources: [pool.userPoolArn],
     })
   );
+
+
+
+
+
+  // Create the lambda function
+  const yourFunction = makeFunction(`test-handler`, {
+    entry: entryName("handlers", "testhandler.ts"),
+    environment: defaultEnvironmentVars,
+  });
+
+  // Create https://api.portal.thenutritionistmcr.com/test-handler
+  const yourApiResource = api.root.addResource(
+    "adamstesthandler"
+  );
+
+  // Make `/test-handler` called with a GET request trigger your lambda function
+  yourApiResource.addMethod(
+    "GET",
+    new LambdaIntegration(yourFunction)
+  );
+
+
+
+
 
   const apiCert = new DnsValidatedCertificate(context, "apiCertificate", {
     domainName,
