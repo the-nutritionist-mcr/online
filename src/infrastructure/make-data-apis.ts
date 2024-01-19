@@ -426,22 +426,22 @@ export const makeDataApis = (
 
 
 
-  // Create the lambda function
-  const yourFunction = makeFunction(`test-handler`, {
-    entry: entryName("handlers", "testhandler.ts"),
+  // Get chargebee customer
+  const chargebeeGetCustomerFunction = makeFunction(`chargebee-get-customer`, {
+    entry: entryName("handlers", "chargebee-get-customer.ts"),
     environment: defaultEnvironmentVars,
   });
 
-  // Create https://api.portal.thenutritionistmcr.com/test-handler
-  const yourApiResource = api.root.addResource(
-    "adamstesthandler"
+  const chargebeeGetCustomer = api.root.addResource(
+    "chargebee-get-customer"
   );
 
-  // Make `/test-handler` called with a GET request trigger your lambda function
-  yourApiResource.addMethod(
-    "GET",
-    new LambdaIntegration(yourFunction)
+  chargebeeGetCustomer.addMethod(
+    "POST",
+    new LambdaIntegration(chargebeeGetCustomerFunction)
   );
+
+  chargebeeAccessToken.grantRead(chargeBeeWebhookFunction);
 
 
 
