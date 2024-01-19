@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "NEXT_PUBLIC_IS_LOCAL_DEV=true APP_VERSION=local next dev",
     "deploy:e2e": "cdk deploy tnm-web-cypress-frontend-stack --require-approval never",
-    "deploy:backend:watch": "cdk watch deploy tnm-web-cypress-stack --require-approval never",
+    "deploy:backend:watch": "cdk watch deploy tnm-web-cypress-stack --require-approval never --hotswap-fallback",
     "cdk": "cdk",
     "build": "next build",
     "build:local": "APP_VERSION=local next build",
