@@ -6,7 +6,6 @@ import {
 
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 import { getUserFromAws } from "../../../utils/get-user-from-aws";
-import { warmer } from "../../utils/warmer";
 
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   try {
