@@ -12,46 +12,51 @@ const PauseStatus: FC<PauseStatusProps> = ({ handleOpenPausePanel }) => {
   const user = useMe();
   const [pauseStart, setPauseStart] = useState<DateTime | null>(null);
   const [pauseEnd, setPauseEnd] = useState<DateTime | null>(null);
-  const [pausedNow, setPausedNow] = useState<boolean>(false);
-  const now = DateTime.now()
+  const [pausedNow, setPausedNow] = useState<boolean | null>(false);
+  const now = DateTime.now();
 
   useEffect(() => {
     if (!user) return
-    const pauseStart = user.plans[0]?.pauseStart ? DateTime.fromMillis(user.plans[0]?.pauseStart).plus({days: 1}) : null
-    setPauseStart(pauseStart)   
+    console.log({user})
+    const pauseStart = user.plans[0]?.pauseStart ? DateTime.fromMillis(user.plans[0]?.pauseStart).plus({ days: 1 }) : null
+    setPauseStart(pauseStart)
 
-    const pauseEnd = user.plans[0]?.pauseEnd ? DateTime.fromMillis(user.plans[0]?.pauseEnd).plus({days: 1}) : null
-    setPauseEnd(pauseEnd)       
-    
-    const paused = pauseStart && user.plans[0].pauseEnd
-      ? pauseStart.toMillis() <= now.toMillis() && now.toMillis() < user.plans[0].pauseEnd
-      : false
-    setPausedNow(paused)
+    const pauseEnd = user.plans[0]?.pauseEnd ? DateTime.fromMillis(user.plans[0]?.pauseEnd).plus({ days: 1 }) : null
+    setPauseEnd(pauseEnd)
+
+    const pausedNow = pauseStart && pauseEnd && (pauseStart.minus({days: 1}).toMillis() <= now.toMillis() && pauseEnd.minus({days: 1}).toMillis() >= now.toMillis())
+    setPausedNow(pausedNow)
   }, [user]);
 
   return (
-    <div className='grid gap-6 pt-2 col-span-3'>
+    <>
       {
         (pauseStart && pauseEnd && !pausedNow) &&
-        <TextBlock>
-          You have a pause scheduled from {pauseStart.toLocaleString(DateTime.DATE_HUGE)}.<br />
-          Your subscription will resume on {pauseEnd.toLocaleString(DateTime.DATE_HUGE)}.
-        </TextBlock>
+        <div className='grid gap-6 pt-2 col-span-3'>
+          <TextBlock>
+            You have a pause scheduled from {pauseStart.toLocaleString(DateTime.DATE_HUGE)}.<br />
+            Your subscription will resume on {pauseEnd.toLocaleString(DateTime.DATE_HUGE)}.
+          </TextBlock>
+        </div>
       }
       {
         pausedNow &&
-        <TextBlock>
-          Your subscription is currently paused.<br />
-          It will resume on {pauseEnd?.toLocaleString(DateTime.DATE_HUGE)}.
-        </TextBlock>      
+        <div className='grid gap-6 pt-2 col-span-3'>
+          <TextBlock>
+            Your subscription is currently paused.<br />
+            It will resume on {pauseEnd?.toLocaleString(DateTime.DATE_HUGE)}.
+          </TextBlock>
+        </div>
       }
       {
         !pauseStart &&
-        <MainButton onClick={handleOpenPausePanel}>
-          Pause your subscription
-        </MainButton>
+        <div className='grid gap-6 pt-2'>
+          <MainButton onClick={handleOpenPausePanel}>
+            Pause your subscription
+          </MainButton>
+        </div>
       }
-    </div>
+    </>
   )
 };
 
