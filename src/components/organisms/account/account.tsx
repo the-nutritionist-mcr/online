@@ -11,6 +11,7 @@ import { Header, Section, TextBlock } from './account-elements';
 import PauseSelector from './pause-selector';
 import { DateTime } from 'luxon';
 import MainButton from '@/components/ui/main-button';
+import PauseStatus from './pause-status';
 
 export interface User {
   username: string;
@@ -128,15 +129,13 @@ export const Account: FC<AccountProps> = ({
             }
             {
               !showPausePanel &&
-              <MainButton onClick={() => setShowPausePanel(true)}>
-                Pause your plan
-              </MainButton>
+              <PauseStatus handleOpenPausePanel={() => setShowPausePanel(true)} />
             }
           </FormSection>
           {
             showPausePanel &&
             <Section>
-              <Header>Pause your plan</Header>
+              <Header>Pause your subscription</Header>
               <TextBlock>
                 You can pause your plan whenever you like. Just remember to provide us with a minimum of one week's notice, as we order our fresh ingredients a week in advance. If we've already taken your subscription payment for the month, we'll credit your pause duration amount in the following month.
               </TextBlock>

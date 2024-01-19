@@ -10,9 +10,6 @@ interface PauseButtonProps {
 }
 
 const PauseButton: FC<PauseButtonProps> = ({ pauseDate }) => {
-  const user = useMe();
-  console.log({ user })
-
   const handleClick = async () => {
     console.log(pauseDate?.toLocaleString(DateTime.DATE_HUGE));
 
