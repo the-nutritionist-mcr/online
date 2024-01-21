@@ -46,8 +46,6 @@ export const Account: FC<AccountProps> = ({
 }) => {
   const plans = userDetails?.plans?.filter((plan) => plan.totalMeals > 0);
   const showPlans = useMemo(() => (plans?.length ?? 0) > 0, [plans]);
-  const [showPausePanel, setShowPausePanel] = useState(false);
-
   const { prefetch } = useContext(NavigationContext);
 
   useEffect(() => {
@@ -127,21 +125,8 @@ export const Account: FC<AccountProps> = ({
                 </Fragment>
               ))
             }
-            {
-              !showPausePanel &&
-              <PauseStatus handleOpenPausePanel={() => setShowPausePanel(true)} />
-            }
           </FormSection>
-          {
-            showPausePanel &&
-            <Section>
-              <Header>Schedule a pause</Header>
-              <TextBlock>
-                You can pause your plan whenever you like. Just remember to provide us with a minimum of one week's notice, as we order our fresh ingredients a week in advance. If we've already taken your subscription payment for the month, we'll credit your pause duration amount in the following month.
-              </TextBlock>
-              <PauseSelector handlePauseSelection={() => setShowPausePanel(false)} />
-            </Section>
-          }
+          <PauseStatus handleOpenPausePanel={() => setShowPausePanel(true)} />
         </>
       }
 
