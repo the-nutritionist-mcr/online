@@ -126,7 +126,7 @@ export const Account: FC<AccountProps> = ({
               ))
             }
           </FormSection>
-          <PauseStatus handleOpenPausePanel={() => setShowPausePanel(true)} />
+          <PauseStatus />
         </>
       }
 
