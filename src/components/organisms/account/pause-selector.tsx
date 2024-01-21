@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import {
   Select,
   SelectContent,
@@ -9,10 +9,14 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { DateTime } from 'luxon';
-import PauseButton from './pauseButton';
+import SchedulePauseButton from './schedulePauseButton';
 import { humanReadableDate } from './pause-utils';
 
-const PauseSelector = () => {
+interface PauseSelectorProps {
+  handlePauseSelection: () => void;
+}
+
+const PauseSelector: FC<PauseSelectorProps> = ({ handlePauseSelection }) => {
   const [startDates, setStartDates] = useState<DateTime[]>([]);
   const [chosenDate, setChosenDate] = useState<DateTime | null>(null);
   const [showScheduleButton, setShowScheduleButton] = useState<boolean>(false);
@@ -72,7 +76,10 @@ const PauseSelector = () => {
       {
         showScheduleButton &&
         <div>
-          <PauseButton pauseDate={chosenDate ?? null} />
+          <SchedulePauseButton 
+            pauseDate={chosenDate ?? null} 
+            handlePauseSelection={handlePauseSelection}
+          />
         </div>
       }
     </>

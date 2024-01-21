@@ -14,7 +14,7 @@ const PauseStatus: FC<PauseStatusProps> = ({ handleOpenPausePanel }) => {
   const [pauseStart, setPauseStart] = useState<DateTime | null>(null);
   const [pauseEnd, setPauseEnd] = useState<DateTime | null>(null);
   const [pausedNow, setPausedNow] = useState<boolean | null>(false);
-  const [currentYear, setCurrentYear] = useState<number>(false);
+  const [currentYear] = useState<number>(DateTime.now().year);
 
   useEffect(() => {
     if (!user) return;
@@ -22,7 +22,6 @@ const PauseStatus: FC<PauseStatusProps> = ({ handleOpenPausePanel }) => {
     setPauseStart(pause.start)
     setPauseEnd(pause.end)
     setPausedNow(pause.pausedNow)
-    setCurrentYear(DateTime.now().year)
   }, [user]);
 
   return (

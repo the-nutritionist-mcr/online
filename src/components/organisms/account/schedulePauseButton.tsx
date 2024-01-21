@@ -4,19 +4,17 @@ import { BackendCustomer } from '@tnmo/types';
 import MainButton from '@/components/ui/main-button';
 import { DateTime } from 'luxon';
 import { useMe } from '@/hooks/use-me';
-import { Pause, getPause, humanReadableDate } from './pause-utils';
 
 interface PauseButtonProps {
   pauseDate: DateTime | null;
+  handlePauseSelection: () => void;
 }
 
-const PauseButton: FC<PauseButtonProps> = ({ pauseDate }) => {
+const SchedulePauseButton: FC<PauseButtonProps> = ({ pauseDate, handlePauseSelection }) => {
   const user = useMe();
   const [loading, setLoading] = useState<boolean>(false); 
 
   const handleClick = async () => {
-    // console.log('pause date:', humanReadableDate(pauseDate), 'plan:', user?.plans[0].id);
-
     if (!pauseDate || !user) return;
     setLoading(true);
     const data = await apiRequest<BackendCustomer>("chargebee-pause-plan", {
@@ -28,6 +26,7 @@ const PauseButton: FC<PauseButtonProps> = ({ pauseDate }) => {
       })
     })
     setLoading(false);
+    handlePauseSelection();
     console.log({ data })
   }
 
@@ -43,4 +42,4 @@ const PauseButton: FC<PauseButtonProps> = ({ pauseDate }) => {
   )
 };
 
-export default PauseButton;
+export default SchedulePauseButton;
