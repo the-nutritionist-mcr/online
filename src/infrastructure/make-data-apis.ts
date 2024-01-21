@@ -459,6 +459,24 @@ export const makeDataApis = (
   );
 
   chargebeeAccessToken.grantRead(chargebeePausePlanFunction);
+  
+
+  // Un-Pause plan
+  const chargebeeRemovePausePlanFunction = makeFunction(`chargebee-remove-pause`, {
+    entry: entryName("handlers", "chargebee-remove-pause-plan.ts"),
+    environment: defaultEnvironmentVars,
+  });
+
+  const chargebeeRemovePausePlan = api.root.addResource(
+    "chargebee-remove-pause-plan"
+  );
+
+  chargebeeRemovePausePlan.addMethod(
+    "POST",
+    new LambdaIntegration(chargebeeRemovePausePlanFunction)
+  );
+
+  chargebeeAccessToken.grantRead(chargebeeRemovePausePlanFunction);
 
 
 

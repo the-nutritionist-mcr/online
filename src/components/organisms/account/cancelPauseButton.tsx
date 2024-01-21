@@ -5,43 +5,40 @@ import MainButton from '@/components/ui/main-button';
 import { DateTime } from 'luxon';
 import { useMe } from '@/hooks/use-me';
 
-interface SchedulePauseButtonProps {
-  pauseDate: DateTime | null;
-  handlePauseSelection: () => void;
+interface CancelPauseButtonProps {
+  handlePauseCancelled: () => void;
 }
 
-const SchedulePauseButton: FC<SchedulePauseButtonProps> = ({ pauseDate, handlePauseSelection }) => {
+const CancelPauseButton: FC<CancelPauseButtonProps> = ({ handlePauseCancelled }) => {
   const user = useMe();
   const [loading, setLoading] = useState<boolean>(false); 
 
   const handleClick = async () => {
-    if (!pauseDate || !user) return;
+    if (!user) return;
     setLoading(true);
-    const data = await apiRequest<BackendCustomer>("chargebee-pause-plan", {
+    const data = await apiRequest<BackendCustomer>("chargebee-remove-pause-plan", {
       method: "POST",
       body: JSON.stringify({
-        "plan_id": user.plans[0].id,
-        "pause_date": pauseDate.toUnixInteger(),
-        "resume_date": pauseDate.plus({ weeks: 1 }).toUnixInteger()
+        "plan_id": user.plans[0].id
       })
     })
     // setLoading(false);
-    // handlePauseSelection();
+    handlePauseCancelled();
     console.log({ data })
   }
 
   return (
     <>
       <MainButton
-        disabled={!!(!pauseDate && !user) || loading}
+        disabled={!user || loading}
         loading={loading}
         onClick={() => handleClick()}>
         {
-          loading ? 'Scheduling...' : 'Schedule this pause'
+          loading ? 'Cancelling...' : 'Cancel this pause'
         }
       </MainButton>
     </>
   )
 };
 
-export default SchedulePauseButton;
+export default CancelPauseButton;

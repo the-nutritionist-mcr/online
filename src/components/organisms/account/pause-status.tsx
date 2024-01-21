@@ -5,12 +5,10 @@ import { useMe } from '@/hooks/use-me';
 import { Header, Section, TextBlock } from './account-elements';
 import { getPause, humanReadableDate } from './pause-utils';
 import PauseSelector from './pause-selector';
+import CancelPauseButton from './cancelPauseButton';
 
-interface PauseStatusProps {
-  handleOpenPausePanel: () => void
-}
 
-const PauseStatus: FC<PauseStatusProps> = ({ handleOpenPausePanel }) => {
+const PauseStatus: FC<{}> = () => {
   const user = useMe();
   const [pauseStart, setPauseStart] = useState<DateTime | null>(null);
   const [pauseEnd, setPauseEnd] = useState<DateTime | null>(null);
@@ -35,11 +33,9 @@ const PauseStatus: FC<PauseStatusProps> = ({ handleOpenPausePanel }) => {
             You have a pause scheduled from {humanReadableDate(pauseStart.plus({ days: 1 }), currentYear !== pauseStart.year)}, resuming on {humanReadableDate(pauseEnd.plus({ days: 1 }), currentYear !== pauseEnd.year)}.
           </TextBlock>
           {
-            pauseStart.plus({ days: 1 }).toMillis() > DateTime.now().plus({weeks: 1}).toMillis() &&
+            pauseStart.plus({ days: 1 }).toMillis() > DateTime.now().plus({ weeks: 1 }).toMillis() &&
             <div className='grid grid-cols-3'>
-              <MainButton onClick={() => setShowPausePanel(true)}>
-                Cancel this pause
-              </MainButton>
+              <CancelPauseButton handlePauseCancelled={() => setShowPausePanel(false)} />
             </div>
           }
         </div>
