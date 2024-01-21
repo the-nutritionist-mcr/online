@@ -34,6 +34,14 @@ const PauseStatus: FC<PauseStatusProps> = ({ handleOpenPausePanel }) => {
           <TextBlock>
             You have a pause scheduled from {humanReadableDate(pauseStart.plus({ days: 1 }), currentYear !== pauseStart.year)}, resuming on {humanReadableDate(pauseEnd.plus({ days: 1 }), currentYear !== pauseEnd.year)}.
           </TextBlock>
+          {
+            pauseStart.plus({ days: 1 }).toMillis() > DateTime.now().plus({weeks: 1}).toMillis() &&
+            <div className='grid grid-cols-3'>
+              <MainButton onClick={() => setShowPausePanel(true)}>
+                Cancel this pause
+              </MainButton>
+            </div>
+          }
         </div>
       }
       {
@@ -43,7 +51,7 @@ const PauseStatus: FC<PauseStatusProps> = ({ handleOpenPausePanel }) => {
             Your subscription is currently paused.<br />
             It will resume on {pauseEnd ? humanReadableDate(pauseEnd.plus({ days: 1 }), currentYear !== pauseEnd.year) : '...'}.
           </TextBlock>
-        </div>
+        </div >
       }
       {
         !pauseStart &&
