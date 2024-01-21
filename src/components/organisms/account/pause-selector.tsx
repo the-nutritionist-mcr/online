@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Select,
   SelectContent,
@@ -9,8 +9,8 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { DateTime } from 'luxon';
-import MainButton from '@/components/ui/main-button';
 import PauseButton from './pauseButton';
+import { humanReadableDate } from './pause-utils';
 
 const PauseSelector = () => {
   const [startDates, setStartDates] = useState<DateTime[]>([]);
@@ -26,7 +26,7 @@ const PauseSelector = () => {
     const dates: DateTime[] = [];
     for (let i: number = 0; i < 4; i++) {
       const date = nextMondayInAtLeast1Week.plus({ weeks: i });
-      dates.push(date);
+      dates.push(date.minus({ days: 1 }));
     }
     setStartDates(dates);
   }, []);
@@ -37,7 +37,7 @@ const PauseSelector = () => {
   }
 
   useEffect(() => {
-    if (chosenDate) console.log(chosenDate.toLocaleString(DateTime.DATE_HUGE));
+    if (chosenDate) console.log('date chosen:', humanReadableDate(chosenDate));
   }, [chosenDate]);
 
   return (
@@ -58,7 +58,7 @@ const PauseSelector = () => {
                     startDates.map((date: DateTime) => {
                       return (
                         <SelectItem className='text-[16px] leading-6' value={date.toISODate() ?? ''} key={date.toISODate()}>
-                          {date.toLocaleString(DateTime.DATE_HUGE)}
+                          {humanReadableDate(date.plus({ days: 1 }))}
                         </SelectItem>
                       )
                     })

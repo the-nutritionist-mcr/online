@@ -3,6 +3,7 @@ import MainButton from '@/components/ui/main-button';
 import { DateTime } from 'luxon';
 import { useMe } from '@/hooks/use-me';
 import { TextBlock } from './account-elements';
+import { getPause, humanReadableDate } from './pause-utils';
 
 interface PauseStatusProps {
   handleOpenPausePanel: () => void
@@ -13,19 +14,15 @@ const PauseStatus: FC<PauseStatusProps> = ({ handleOpenPausePanel }) => {
   const [pauseStart, setPauseStart] = useState<DateTime | null>(null);
   const [pauseEnd, setPauseEnd] = useState<DateTime | null>(null);
   const [pausedNow, setPausedNow] = useState<boolean | null>(false);
-  const now = DateTime.now();
+  const [currentYear, setCurrentYear] = useState<number>(false);
 
   useEffect(() => {
-    if (!user) return
-    console.log({user})
-    const pauseStart = user.plans[0]?.pauseStart ? DateTime.fromMillis(user.plans[0]?.pauseStart).plus({ days: 1 }) : null
-    setPauseStart(pauseStart)
-
-    const pauseEnd = user.plans[0]?.pauseEnd ? DateTime.fromMillis(user.plans[0]?.pauseEnd).plus({ days: 1 }) : null
-    setPauseEnd(pauseEnd)
-
-    const pausedNow = pauseStart && pauseEnd && (pauseStart.minus({days: 1}).toMillis() <= now.toMillis() && pauseEnd.minus({days: 1}).toMillis() >= now.toMillis())
-    setPausedNow(pausedNow)
+    if (!user) return;
+    const pause = getPause(user);
+    setPauseStart(pause.start)
+    setPauseEnd(pause.end)
+    setPausedNow(pause.pausedNow)
+    setCurrentYear(DateTime.now().year)
   }, [user]);
 
   return (
@@ -34,8 +31,7 @@ const PauseStatus: FC<PauseStatusProps> = ({ handleOpenPausePanel }) => {
         (pauseStart && pauseEnd && !pausedNow) &&
         <div className='grid gap-6 pt-2 col-span-3'>
           <TextBlock>
-            You have a pause scheduled from {pauseStart.toLocaleString(DateTime.DATE_HUGE)}.<br />
-            Your subscription will resume on {pauseEnd.toLocaleString(DateTime.DATE_HUGE)}.
+            You have a pause scheduled from {humanReadableDate(pauseStart.plus({days: 1}), currentYear !== pauseStart.year)}, resuming on {humanReadableDate(pauseEnd.plus({days: 1}), currentYear !== pauseEnd.year)}.
           </TextBlock>
         </div>
       }
@@ -44,7 +40,7 @@ const PauseStatus: FC<PauseStatusProps> = ({ handleOpenPausePanel }) => {
         <div className='grid gap-6 pt-2 col-span-3'>
           <TextBlock>
             Your subscription is currently paused.<br />
-            It will resume on {pauseEnd?.toLocaleString(DateTime.DATE_HUGE)}.
+            It will resume on {pauseEnd ? humanReadableDate(pauseEnd.plus({days: 1}), currentYear !== pauseEnd.year) : '...'}.
           </TextBlock>
         </div>
       }

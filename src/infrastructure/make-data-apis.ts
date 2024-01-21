@@ -423,8 +423,9 @@ export const makeDataApis = (
   );
 
 
-
-
+  // ***************
+  // CHARGEBEE
+  // ***************  
 
   // Get chargebee customer
   const chargebeeGetCustomerFunction = makeFunction(`chargebee-get-customer`, {
@@ -440,8 +441,24 @@ export const makeDataApis = (
     "POST",
     new LambdaIntegration(chargebeeGetCustomerFunction)
   );
+  
+  
+  // Pause plan
+  const chargebeePausePlanFunction = makeFunction(`chargebee-pause-plan`, {
+    entry: entryName("handlers", "chargebee-pause-plan.ts"),
+    environment: defaultEnvironmentVars,
+  });
 
-  chargebeeAccessToken.grantRead(chargeBeeWebhookFunction);
+  const chargebeePausePlan = api.root.addResource(
+    "chargebee-pause-plan"
+  );
+
+  chargebeePausePlan.addMethod(
+    "POST",
+    new LambdaIntegration(chargebeePausePlanFunction)
+  );
+
+  chargebeeAccessToken.grantRead(chargebeePausePlanFunction);
 
 
 
