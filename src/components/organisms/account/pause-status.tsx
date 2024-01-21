@@ -52,7 +52,7 @@ const PauseStatus: FC<PauseStatusProps> = ({ handleOpenPausePanel }) => {
         !pauseStart &&
         <div className='grid gap-6 pt-2'>
           <MainButton onClick={handleOpenPausePanel}>
-            Pause your subscription
+            Schedule a pause
           </MainButton>
         </div>
       }

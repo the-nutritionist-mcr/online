@@ -135,7 +135,7 @@ export const Account: FC<AccountProps> = ({
           {
             showPausePanel &&
             <Section>
-              <Header>Pause your subscription</Header>
+              <Header>Schedule a pause</Header>
               <TextBlock>
                 You can pause your plan whenever you like. Just remember to provide us with a minimum of one week's notice, as we order our fresh ingredients a week in advance. If we've already taken your subscription payment for the month, we'll credit your pause duration amount in the following month.
               </TextBlock>
