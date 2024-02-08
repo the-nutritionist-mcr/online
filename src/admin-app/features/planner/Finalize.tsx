@@ -18,6 +18,7 @@ import {
   plannerWarningLi,
 } from './finalise.css';
 import { getCookStatus } from '@tnmo/meal-planning';
+import { cn } from '../../../../@/lib/utils';
 
 interface FinalizeProps {
   customerMeals: MealPlanGeneratedForIndividualCustomer[];
@@ -43,6 +44,7 @@ const Finalize: React.FC<FinalizeProps> = ({
   const customerUsernames = new Set(
     customerMeals.map((meal) => meal.customer.username)
   );
+
   const missingCustomers = customers
     .filter((customer) => !customerUsernames.has(customer.username))
     .filter((customer) =>
@@ -52,6 +54,15 @@ const Finalize: React.FC<FinalizeProps> = ({
         )
       )
     );
+
+  const allEqual = (arr: any[]) => arr.every(v => v === arr[0]);
+  const customersWithInconsistentPauses = customers
+    .filter(customer => {
+      const pauseStarts = customer.plans.map(plan => plan.pauseStart);
+      const pauseEnds = customer.plans.map(plan => plan.pauseEnd);
+      const passes = allEqual(pauseStarts) && allEqual(pauseEnds);
+      return passes ? false : customer;
+    });
 
   if (!customerMeals) {
     return (
@@ -84,9 +95,10 @@ const Finalize: React.FC<FinalizeProps> = ({
             </span>
           </li>
 
-          {missingCustomers.length > 0 && (
+          {
+            missingCustomers.length > 0 &&
             <li className={plannerWarningLi}>
-              The planner is missing an entry for the following customer(s):{' '}
+              The planner is missing an entry for the following customer(s):
               <ul className={plannerIndentedUl}>
                 {missingCustomers.map((customer) => (
                   <li className={plannerIndentedLi}>
@@ -98,7 +110,24 @@ const Finalize: React.FC<FinalizeProps> = ({
               was generated, this is normal behaviour and you can ignore this
               message. If not, please get in touch with Ben.
             </li>
-          )}
+          }
+
+          {
+            customersWithInconsistentPauses.length > 0 &&
+            <li className={cn(plannerWarningLi, 'pt-6')}>
+              <div className='font-bold'>The following customer(s) have non-matching pause dates on their plans:</div>
+              <ul className={plannerIndentedUl}>
+                {customersWithInconsistentPauses.map((customer) => (
+                  <li className={plannerIndentedLi}>
+                    <a className='cursor-pointer underline underline-offset-2 hover:text-black' onClick={() => {
+                      const customerTable = document.getElementById(`customer-${customer.username}`);
+                      if (customerTable) customerTable.scrollIntoView({ behavior: "smooth", block: 'center' });
+                    }}>{customer.firstName} {customer.surname}</a>
+                  </li>
+                ))}
+              </ul>
+            </li>
+          }
         </ul>
       </Card>
       {
@@ -126,6 +155,9 @@ const Finalize: React.FC<FinalizeProps> = ({
             <FinalizeCustomerTable
               key={`${customerPlan.customer.username}-finalize-table`}
               customerSelection={customerPlan}
+              inconsistentPauses={customersWithInconsistentPauses.some(customer => {
+                return customer.username === customerPlan.customer.username;
+              })}
               deliveryMeals={cooks}
               allRecipes={recipes}
               columns={5}

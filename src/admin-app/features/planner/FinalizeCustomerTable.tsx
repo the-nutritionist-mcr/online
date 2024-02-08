@@ -40,6 +40,7 @@ import { itemFamilies } from '@tnmo/config';
 
 interface FinalizeRowProps {
   customerSelection: MealPlanGeneratedForIndividualCustomer;
+  inconsistentPauses: boolean;
   deliveryMeals: PlannedCook[];
   allRecipes: Recipe[];
   columns: number;
@@ -159,6 +160,7 @@ const FinalizeCustomerTableUnMemoized: React.FC<FinalizeRowProps> = (props) => {
       alignSelf="start"
       style={{ marginTop: '2rem', tableLayout: 'fixed' }}
     >
+      <span id={`customer-${props.customerSelection.customer.username}`} />
       {showAddPlanRowDialog && (
         <UpdatePlanRowDialog
           options={itemFamilies.map((family) => family.name)}
@@ -193,7 +195,7 @@ const FinalizeCustomerTableUnMemoized: React.FC<FinalizeRowProps> = (props) => {
                       }
                       path={`/admin/edit-customer?userId=${props.customerSelection.customer.username}`}
                     >
-                      {name}
+                      <span className={props.inconsistentPauses ? 'bg-red-600 text-white px-4 py-2' : ''}>{name}</span>
                     </Link>
                   </strong>
                 </Text>
