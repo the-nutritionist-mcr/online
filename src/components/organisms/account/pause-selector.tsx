@@ -10,7 +10,9 @@ import {
 } from "@/components/ui/select"
 import { DateTime } from 'luxon';
 import SchedulePauseButton from './schedulePauseButton';
-import { humanReadableDate } from './pause-utils';
+import { PauseWeeks, humanReadableDate } from './pause-utils';
+import { Input } from '@/components/ui/input';
+import { clamp } from 'lodash';
 
 interface PauseSelectorProps {
   handlePauseSelection: () => void;
@@ -44,20 +46,26 @@ const PauseSelector: FC<PauseSelectorProps> = ({ handlePauseSelection }) => {
     if (chosenDate) console.log('date chosen:', humanReadableDate(chosenDate));
   }, [chosenDate]);
 
+  const [pauseWeeks, setPauseWeeks] = useState<PauseWeeks>(1);
+
   return (
     <>
       <div className='grid grid-cols-[auto_1fr] gap-4 items-center'>
-        <div>Pause for the week beginning</div>
+        <div>Pause for <Input
+          type='number'
+          value={pauseWeeks}
+          onChange={e => setPauseWeeks(clamp(parseInt(e.target.value), 1, 4) as PauseWeeks)}
+          className='inline-block relative max-w-[60px] rounded-[3px] shadow-none text-[16px] leading-6 py-5 mx-1 border-black'
+        /> week{pauseWeeks > 1 ? 's' : ''} from</div>
         <div>
           <Select onValueChange={handleChooseDate}>
-            <SelectTrigger className="max-w-[300px] rounded-[2px] shadow-none text-[16px] leading-6 py-5 border-black">
+            <SelectTrigger className="max-w-[300px] rounded-[3px] shadow-none text-[16px] leading-6 py-5 border-black">
               <SelectValue placeholder="Select a start date" />
             </SelectTrigger>
             {
               startDates.length > 0 &&
               <SelectContent>
                 <SelectGroup>
-                  {/* <SelectLabel>Available pause dates</SelectLabel> */}
                   {
                     startDates.map((date: DateTime) => {
                       return (
@@ -76,8 +84,9 @@ const PauseSelector: FC<PauseSelectorProps> = ({ handlePauseSelection }) => {
       {
         showScheduleButton &&
         <div>
-          <SchedulePauseButton 
-            pauseDate={chosenDate ?? null} 
+          <SchedulePauseButton
+            pauseDate={chosenDate ?? null}
+            pauseWeeks={pauseWeeks ?? 1}
             handlePauseSelection={handlePauseSelection}
           />
         </div>
