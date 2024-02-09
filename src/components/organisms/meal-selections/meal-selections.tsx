@@ -94,12 +94,15 @@ const MealSelections: FC<MealSelectionsProps> = (props) => {
   const [submittingOrder, setSubmittingOrder] = useState(false);
   const [complete, setComplete] = useState(false);
 
-  const customerPlans = props.cooks.flatMap((cook) =>
-    props.customer.plans.filter(
-      (plan) =>
-        getCookStatus(cook.date, plan).status === 'active' && !plan.isExtra
-    )
-  );
+  const customerPlans = props.customer.plans.filter((plan, index) => {
+    const activeOnAllCooks = props.cooks.every((cook) => {
+      return (
+        getCookStatus(cook.date, plan).status === "active" && !plan.isExtra
+      );
+    });
+
+    return activeOnAllCooks;
+  });
 
   const remainingWithoutExtras = countRemainingMeals(
     selectedMeals,
