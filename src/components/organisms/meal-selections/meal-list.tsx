@@ -10,6 +10,7 @@ import {
 } from '@tnmo/types';
 import { countsFromPlans } from './count-from-plans';
 import { planFromCounts } from './plan-from-counts';
+import { useMe } from '@/hooks/use-me';
 
 interface MealListProps {
   menu: Recipe[];
@@ -26,16 +27,26 @@ const MealList = (props: MealListProps) => {
   const counts = countsFromPlans(props.selected);
   const max = props.max - props.selected.meals.length;
   const allowedMenu = props.menu.filter(recipe => props.recipesMinusUserExclusions.has(recipe.id));
+  const user = useMe();
 
   return (
     <div className={mealListGrid}>
       {
         allowedMenu.map(menuItem => {
           const realRecipe = getRealRecipe(menuItem, props.customer, props.recipes);
+          console.log('realRecipe:', realRecipe);
 
           const countOfThisRecipe = props.selected.meals.filter(
             (meal) => !meal.isExtra && meal.recipe.id === menuItem.id
           ).length;
+
+          let userExclusions: string[] = [];
+          user?.customisations?.forEach(customisation => {
+            if (realRecipe.invalidExclusions === undefined) return;
+            if (realRecipe.invalidExclusions.includes(customisation.id)) {
+              userExclusions.push(customisation.name);
+            }
+          });
 
           return (
             <MealCounter
@@ -43,6 +54,7 @@ const MealList = (props: MealListProps) => {
               title={realRecipe.name ?? ''}
               description={realRecipe.description ?? ''}
               contains={menuItem.allergens}
+              userExclusions={userExclusions}
               value={counts[menuItem.id]}
               min={0}
               max={max + countOfThisRecipe}

@@ -60,7 +60,7 @@ const MealSelections: FC<MealSelectionsProps> = (props) => {
       let allowRecipe = true;
       user?.customisations?.forEach(customisation => {
         if (recipe.invalidExclusions === undefined) return;
-        if (recipe.invalidExclusions.includes(customisation.id)) allowRecipe = false;
+        // if (recipe.invalidExclusions.includes(customisation.id)) allowRecipe = false;
       });      
       if (allowRecipe) recipesMinusUserExclusions.add(recipe.id);
     });

@@ -19,7 +19,21 @@ export const nutritionAndAllergyLink = style({
 export const container = style({
   display: 'grid',
   textAlign: 'center',
-  gridTemplateRows: '1fr 1fr 10px 0.8fr 3.25rem',
+  gridTemplateRows: 'auto 3.25rem',
+  height: '100%',
+  maxWidth: '20rem',
+  '@media': {
+    'screen and (max-width: 899px)': {
+      maxWidth: '100%',
+    },
+  },
+});
+
+export const details = style({
+  display: 'grid',
+  textAlign: 'center',
+  gridTemplateRows: '1fr 1fr 10px 0.8fr',
+  gap: '0.5rem',
   height: '100%',
   maxWidth: '20rem',
   '@media': {
