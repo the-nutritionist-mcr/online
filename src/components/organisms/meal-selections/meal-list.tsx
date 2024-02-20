@@ -16,7 +16,6 @@ interface MealListProps {
   menu: Recipe[];
   customer: BackendCustomer;
   recipes: Recipe[];
-  recipesMinusUserExclusions: Set<string>;
   plan: StandardPlan;
   selected: ActivePlanWithMeals;
   setSelected: (things: ActivePlanWithMeals) => void;
@@ -26,13 +25,12 @@ interface MealListProps {
 const MealList = (props: MealListProps) => {
   const counts = countsFromPlans(props.selected);
   const max = props.max - props.selected.meals.length;
-  const allowedMenu = props.menu.filter(recipe => props.recipesMinusUserExclusions.has(recipe.id));
   const user = useMe();
 
   return (
     <div className={mealListGrid}>
       {
-        allowedMenu.map(menuItem => {
+        props.menu.map(menuItem => {
           const realRecipe = getRealRecipe(menuItem, props.customer, props.recipes);
           console.log('realRecipe:', realRecipe);
 

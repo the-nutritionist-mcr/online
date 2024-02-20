@@ -52,44 +52,7 @@ const DivContainer = styled.div`
 const MealSelections: FC<MealSelectionsProps> = (props) => {
   const { navigate } = useContext(NavigationContext);
   const [showConfirm, setShowConfirm] = useState(false);
-  const user = useMe();
-
-  const recipesMinusUserExclusions: Set<string> = new Set();
-  props.cooks.forEach(cook => {
-    cook.menu.forEach(recipe => {
-      let allowRecipe = true;
-      user?.customisations?.forEach(customisation => {
-        if (recipe.invalidExclusions === undefined) return;
-        // if (recipe.invalidExclusions.includes(customisation.id)) allowRecipe = false;
-      });      
-      if (allowRecipe) recipesMinusUserExclusions.add(recipe.id);
-    });
-  });
-
-  const deliveriesFiltered = props.currentSelection.deliveries.map(delivery => {
-    if (delivery.paused === true) return delivery;
-    const plansFiltered = delivery.plans.map(plan => {
-      if (plan.status !== 'active') return plan;
-      return {
-        ...plan,
-        meals: plan.meals.filter(meal => {
-          if (meal.isExtra) return false;
-          if (recipesMinusUserExclusions.has(meal.recipe.id)) return true;
-        })
-      }
-    });
-    return {
-      ...delivery,
-      plans: plansFiltered
-    }
-  });
-
-  const currentSelectionFiltered = {
-    ...props.currentSelection,
-    deliveries: deliveriesFiltered
-  };
-
-  const [selectedMeals, setSelectedMeals] = useState<MealPlanGeneratedForIndividualCustomer>(currentSelectionFiltered);
+  const [selectedMeals, setSelectedMeals] = useState<MealPlanGeneratedForIndividualCustomer>(props.currentSelection);
 
   const [submittingOrder, setSubmittingOrder] = useState(false);
   const [complete, setComplete] = useState(false);
@@ -182,7 +145,6 @@ const MealSelections: FC<MealSelectionsProps> = (props) => {
             customer={props.customer}
             setSelectedMeals={setSelectedMeals}
             recipes={props.recipes}
-            recipesMinusUserExclusions={recipesMinusUserExclusions}
             currentTabIndex={tabIndex}
             onChangeIndex={(index) => {
               setTabIndex(index);
