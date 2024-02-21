@@ -11,20 +11,21 @@ interface CancelPauseButtonProps {
 
 const CancelPauseButton: FC<CancelPauseButtonProps> = ({ handlePauseCancelled }) => {
   const user = useMe();
-  const [loading, setLoading] = useState<boolean>(false); 
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleClick = async () => {
     if (!user) return;
     setLoading(true);
-    const data = await apiRequest<BackendCustomer>("chargebee-remove-pause-plan", {
-      method: "POST",
-      body: JSON.stringify({
-        "plan_id": user.plans[0].id
+
+    user.plans.forEach(async plan => {
+      const data = await apiRequest<BackendCustomer>("chargebee-remove-pause-plan", {
+        method: "POST",
+        body: JSON.stringify({
+          "plan_id": plan.id
+        })
       })
-    })
-    // setLoading(false);
-    handlePauseCancelled();
-    console.log({ data })
+      handlePauseCancelled();
+    });
   }
 
   return (

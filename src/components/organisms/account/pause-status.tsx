@@ -7,8 +7,7 @@ import { getPause, humanReadableDate } from './pause-utils';
 import PauseSelector from './pause-selector';
 import CancelPauseButton from './cancelPauseButton';
 
-
-const PauseStatus: FC<{}> = () => {
+const PauseStatus: FC = () => {
   const user = useMe();
   const [pauseStart, setPauseStart] = useState<DateTime | null>(null);
   const [pauseEnd, setPauseEnd] = useState<DateTime | null>(null);

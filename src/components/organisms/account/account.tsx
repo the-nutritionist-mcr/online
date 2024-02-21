@@ -1,16 +1,11 @@
-import { FC, Fragment, useEffect, useMemo, useState } from 'react';
+import { FC, Fragment, useEffect, useMemo } from 'react';
 
 import { StandardPlan } from '@tnmo/types';
+import { NavigationContext } from '@tnmo/utils';
+import { useContext } from 'react';
 import { Button, Input, Link } from '../../atoms';
 import { FormSection } from '../../containers';
-import { useContext } from 'react';
-import { NavigationContext } from '@tnmo/utils';
 import { text } from './account.css';
-import SchedulePauseButton from './schedulePauseButton';
-import { Header, Section, TextBlock } from './account-elements';
-import PauseSelector from './pause-selector';
-import { DateTime } from 'luxon';
-import MainButton from '@/components/ui/main-button';
 import PauseStatus from './pause-status';
 
 export interface User {
