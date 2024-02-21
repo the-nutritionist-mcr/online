@@ -32,8 +32,6 @@ const MealList = (props: MealListProps) => {
       {
         props.menu.map(menuItem => {
           const realRecipe = getRealRecipe(menuItem, props.customer, props.recipes);
-          console.log('realRecipe:', realRecipe);
-
           const countOfThisRecipe = props.selected.meals.filter(
             (meal) => !meal.isExtra && meal.recipe.id === menuItem.id
           ).length;
