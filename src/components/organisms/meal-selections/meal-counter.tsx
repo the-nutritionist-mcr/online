@@ -41,7 +41,7 @@ const MealCounter: FC<MealCounterProps> = (props) => {
         props.userExclusions?.length
           ? props.userExclusions.map(exclusion => (
             <div className='grid w-full h-full place-content-center'>
-              <div className='inline-grid h-auto py-2 leading-0 px-4 rounded-l-full rounded-r-full bg-[#3b7d7a] text-white font-acumin-pro-semi-condensed font-semibold'>
+              <div className='inline-grid h-auto py-2 leading-0 px-4 border-2 rounded-sm border-solid border-[#3b7d7a] font-acumin-pro-semi-condensed font-semibold'>
                 {exclusion}
               </div>
             </div>
