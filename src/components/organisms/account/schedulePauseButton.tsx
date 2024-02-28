@@ -20,16 +20,20 @@ const SchedulePauseButton: FC<SchedulePauseButtonProps> = ({ pauseDate, pauseWee
     if (!pauseDate || !user) return;
     setLoading(true);
 
-    user.plans.forEach(async plan => {
-      const data = await apiRequest<BackendCustomer>("chargebee-pause-plan", {
-        method: "POST",
-        body: JSON.stringify({
-          "plan_id": plan.id,
-          "pause_date": pauseDate.toUnixInteger(),
-          "resume_date": pauseDate.plus({ weeks: pauseWeeks }).toUnixInteger()
-        })
+    user.plans.forEach(async plan => pausePlan(plan.id, pauseDate, pauseWeeks));
+    // pausePlan(user.plans[0].id, pauseDate, pauseWeeks);
+  }
+
+  const pausePlan = async (planId: string, pauseDate: DateTime, pauseWeeks: PauseWeeks) => {
+    const data = await apiRequest<BackendCustomer>("chargebee-pause-plan", {
+      method: "POST",
+      body: JSON.stringify({
+        "plan_id": planId,
+        "pause_date": pauseDate.toUnixInteger(),
+        "resume_date": pauseDate.plus({ weeks: pauseWeeks }).toUnixInteger()
       })
-    });
+    })
+    console.log({ data });
   }
 
   return (

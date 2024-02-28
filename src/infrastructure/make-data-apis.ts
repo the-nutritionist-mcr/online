@@ -441,6 +441,8 @@ export const makeDataApis = (
     "POST",
     new LambdaIntegration(chargebeeGetCustomerFunction)
   );
+
+  chargebeeAccessToken.grantRead(chargebeeGetCustomerFunction);
   
   
   // Pause plan
@@ -460,6 +462,7 @@ export const makeDataApis = (
 
   chargebeeAccessToken.grantRead(chargebeePausePlanFunction);
   
+  
 
   // Un-Pause plan
   const chargebeeRemovePausePlanFunction = makeFunction(`chargebee-remove-pause`, {
@@ -477,6 +480,25 @@ export const makeDataApis = (
   );
 
   chargebeeAccessToken.grantRead(chargebeeRemovePausePlanFunction);
+  
+
+
+  // Get latest invoice for customer
+  const chargebeeGetLatestCustomerInvoiceFunction = makeFunction(`chargebee-get-latest-customer-invoice`, {
+    entry: entryName("handlers", "chargebee-get-latest-customer-invoice.ts"),
+    environment: defaultEnvironmentVars,
+  });
+
+  const chargebeeGetLatestCustomerInvoice = api.root.addResource(
+    "chargebee-get-latest-customer-invoice"
+  );
+
+  chargebeeGetLatestCustomerInvoice.addMethod(
+    "POST",
+    new LambdaIntegration(chargebeeGetLatestCustomerInvoiceFunction)
+  );
+
+  chargebeeAccessToken.grantRead(chargebeeGetLatestCustomerInvoiceFunction);
 
 
 

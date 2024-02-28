@@ -12,13 +12,13 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   try {
     await protectRoute(event, ["admin"]);
 
-    const id = '77ECsTyblGXbD2P'; 
-    // const id = event.pathParameters?.id || '';
+    // const id = '77ECsTyblGXbD2P'; 
+    const payload = JSON.parse(event.body ?? '');
   
     const result = await new Promise<typeof chargebee.customer>(
       (accept, reject) => {
         chargebee.customer
-          .retrieve(id)
+          .retrieve(payload.id)
           .request(function (
             error: unknown,
             result: { customer: typeof chargebee.customer }

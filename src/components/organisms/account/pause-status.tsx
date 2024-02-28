@@ -6,6 +6,8 @@ import { Header, Section, TextBlock } from './account-elements';
 import { getPause, humanReadableDate } from './pause-utils';
 import PauseSelector from './pause-selector';
 import CancelPauseButton from './cancelPauseButton';
+import { apiRequest } from '@tnmo/core';
+import { BackendCustomer } from '@tnmo/types';
 
 const PauseStatus: FC = () => {
   const user = useMe();
@@ -55,6 +57,12 @@ const PauseStatus: FC = () => {
             {
               !showPausePanel &&
               <div className='grid grid-cols-3'>
+                {/* <div onClick={async () => {
+                  const data = await apiRequest<BackendCustomer>("chargebee-get-customer", { method: "GET" });
+                  console.log('customer:', { data })
+                }}>
+                  Get customer
+                </div> */}
                 <MainButton onClick={() => setShowPausePanel(true)}>
                   Schedule a pause
                 </MainButton>
