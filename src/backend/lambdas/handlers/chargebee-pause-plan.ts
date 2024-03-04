@@ -80,7 +80,7 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
             reference_invoice_id: invoice.id,
             total: currencyProRatedAmount,
             type: "REFUNDABLE",
-            reason_code: "OTHER",
+            create_reason_code: "OTHER",
             customer_notes: `Subscription paused from ${humanReadableDate(DateTime.fromSeconds(payload.pause_date), true)} to ${humanReadableDate(DateTime.fromSeconds(payload.resume_date), true)}.`
           })
           .request(function (
@@ -100,8 +100,29 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
     console.log('pausedSubscription:', pausedSubscription);
     console.log('creditNote:', creditNote);
 
+    const pausedSubscriptionWithCreditNoteId = await new Promise<typeof chargebee.subscription>(
+      (accept, reject) => {
+        chargebee.subscription
+          .update_for_items(payload.plan_id, {
+            cf_Pause_credit_note_ID: creditNote.id,
+          })
+          .request(function (
+            error: unknown,
+            result: { subscription: typeof chargebee.subscription }
+          ) {
+            if (error) {
+              reject(error);
+            } else {
+              const subscription: typeof chargebee.subscription = result.subscription;
+              console.log(`subscription: ${result}`);
+              accept(subscription);
+            }
+          });
+      }
+    );
+
     const responseData = {
-      subscription: pausedSubscription,
+      subscription: pausedSubscriptionWithCreditNoteId,
       invoice: invoice,
       creditNote: creditNote
     }
