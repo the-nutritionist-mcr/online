@@ -29,7 +29,7 @@ const MealCounter: FC<MealCounterProps> = (props) => {
   return (
     <section className={container} aria-labelledby={headerId}>
       <div className={cn(details, props.userExclusions?.length ? 'opacity-40' : '')}>
-        <h3 className={cn(header, props.userExclusions?.length ? 'line-through' : '')} id={headerId}>
+        <h3 className={cn(header)} id={headerId}>
           {props.title.toLocaleLowerCase()}
         </h3>
 
