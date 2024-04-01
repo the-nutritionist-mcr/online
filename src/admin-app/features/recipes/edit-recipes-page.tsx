@@ -174,6 +174,10 @@ export const EditRecipesPage = (props: EditRecipesPageProps) => {
                 valueKey="name"
               />
             </FormField>
+
+            <FormField name="ingredients" label="Ingredients">
+              <TextInput name="ingredients" />
+            </FormField>
           </div>
         </div>
         <Heading level={3} margin={{ bottom: "1rem" }}>
