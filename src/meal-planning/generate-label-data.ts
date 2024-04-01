@@ -96,6 +96,7 @@ const makeLabelObject = (
       itemPlan:
         item.chosenVariant === 'Equilibrium' ? 'EQ' : item.chosenVariant,
       customisations: variant.customisations,
+      ingredients: item.recipe.ingredients ?? "",
       hotOrCold: `Enjoy ${hotOrCold}`,
       useBy: `Use by ${formatDate(useByDate)}`,
     };
