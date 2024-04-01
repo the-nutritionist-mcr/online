@@ -45,9 +45,7 @@ export const generateIndividualCsv = (
   inputObjectArray: ReadonlyArray<ArbitraryObjectType>
 ) => {
   if (inputObjectArray.length === 0) {
-    throw new Error(
-      'inputObjectArray.length must have a length greater than zero'
-    );
+    return "";
   }
 
   const columnHeaders = Object.keys(inputObjectArray[0]);
