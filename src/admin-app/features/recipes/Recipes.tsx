@@ -130,6 +130,7 @@ const Recipes: React.FC<RecipesProps> = (props) => {
             recipes={props.recipes}
             recipe={{
               id: "0",
+              ingredients: "",
               shortName: "",
               hotOrCold: HotOrCold.Hot,
               name: "",

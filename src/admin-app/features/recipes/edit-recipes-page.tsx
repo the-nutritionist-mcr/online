@@ -44,6 +44,7 @@ export const EditRecipesPage = (props: EditRecipesPageProps) => {
     description: "",
     allergens: "",
     potentialExclusions: [],
+    ingredients: "",
     invalidExclusions: [],
     alternates: [],
   };
