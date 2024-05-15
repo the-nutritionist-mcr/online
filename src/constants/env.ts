@@ -16,4 +16,7 @@ export const ENV = {
     ChargeBeeWebhookUsername: 'CHARGEBEE_WEBHOOK_USERNAME',
     ChargeBeeWebhookPasssword: 'CHARGEBEE_WEBHOOK_PASSWORD',
   },
+  features: {
+    userPauseSelection: true,
+  }
 } as const;

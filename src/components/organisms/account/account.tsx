@@ -7,6 +7,7 @@ import { Button, Input, Link } from '../../atoms';
 import { FormSection } from '../../containers';
 import { text } from './account.css';
 import PauseStatus from './pause-status';
+import { ENV } from '@tnmo/constants';
 
 export interface User {
   username: string;
@@ -121,7 +122,9 @@ export const Account: FC<AccountProps> = ({
               ))
             }
           </FormSection>
-          <PauseStatus />
+          {
+            ENV.features.userPauseSelection && <PauseStatus />
+          }
         </>
       }
 
