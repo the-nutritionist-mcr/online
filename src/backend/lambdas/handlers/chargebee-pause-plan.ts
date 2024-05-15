@@ -44,7 +44,7 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
         chargebee.subscription
           .update_for_items(payload.plan_id, {
             cf_Pause_date_ISO: DateTime.fromSeconds(payload.pause_date).toISO(),
-          })
+          } as any)
           .request(function (
             error: unknown,
             result: { subscription: typeof chargebee.subscription }
