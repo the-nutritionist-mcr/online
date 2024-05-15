@@ -13,7 +13,8 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
     await protectRoute(event, ["admin"]);
     const payload = JSON.parse(event.body ?? '');
 
-    const result = await new Promise<typeof chargebee.subscription>(
+    // cancel pause
+    await new Promise<typeof chargebee.subscription>(
       (accept, reject) => {
         chargebee.subscription
           .remove_scheduled_pause(payload.plan_id)
@@ -32,8 +33,30 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
       }
     );
 
+    // clear pause date in custom field
+    const subscription = await new Promise<typeof chargebee.subscription>(
+      (accept, reject) => {
+        chargebee.subscription
+          .update_for_items(payload.plan_id, {
+            cf_Pause_date_ISO: '',
+          })
+          .request(function (
+            error: unknown,
+            result: { subscription: typeof chargebee.subscription }
+          ) {
+            if (error) {
+              reject(error);
+            } else {
+              const subscription: typeof chargebee.subscription = result.subscription;
+              console.log(`subscription: ${result}`);
+              accept(subscription);
+            }
+          });
+      }
+    );
+
     const responseData = {
-      subscription: result
+      subscription: subscription
     }
 
     return returnOkResponse(responseData)
@@ -41,8 +64,3 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
     return returnErrorResponse(error)
   }
 }
-
-
-
-// chargebee customer id: "77ECsTyblGXbD2P"
-// my plan id: "BTUNdaTybyFUOEi2"
