@@ -58,6 +58,8 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
       };
     }
 
+    console.log('CHARGEBEE EVENT RECEIVED:', chargebeeEvent.event_type);
+
     switch (chargebeeEvent.event_type) {
       case "customer_created":
       case "customer_changed":
@@ -66,6 +68,16 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
 
       case "customer_deleted":
         await handleDeleteCustomer(chargebeeEvent.content.customer.id);
+        break;
+
+      case "subscription_resumed":
+        await handleSubscriptionResumed(
+          chargebee,
+          chargebeeEvent.content.customer.id,
+          chargebeeEvent.content.subscription.id,
+          chargebeeEvent.content.subscription.mrr ?? 0,
+          (chargebeeEvent.content.subscription as any).cf_Pause_date_ISO
+        );
         break;
 
       case "subscription_created":
@@ -80,15 +92,6 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
       case "subscription_paused":
       case "subscription_pause_scheduled":
       case "subscription_scheduled_pause_removed":
-      case "subscription_resumed":
-        await handleSubscriptionResumed(
-          chargebee,
-          chargebeeEvent.content.customer.id,
-          chargebeeEvent.content.subscription.id,
-          chargebeeEvent.content.subscription.mrr ?? 0,
-          (chargebeeEvent.content.subscription as any).cf_Pause_date_ISO
-        );
-        break;
       case "subscription_resumption_scheduled":
       case "subscription_scheduled_resumption_removed":
         await handleSubscriptionEvent(

@@ -19,8 +19,6 @@ const SchedulePauseButton: FC<SchedulePauseButtonProps> = ({ pauseDate, pauseWee
   const handleClick = async () => {
     if (!pauseDate || !user) return;
     setLoading(true);
-
-    console.log(pauseDate.toISO());
     user.plans.forEach(async plan => pausePlan(plan.id, pauseDate, pauseWeeks));
     // pausePlan(user.plans[0].id, pauseDate, pauseWeeks);
   }
