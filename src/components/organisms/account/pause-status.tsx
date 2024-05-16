@@ -45,7 +45,7 @@ const PauseStatus: FC = () => {
         pausedNow &&
         <div className='grid gap-6 pt-2 col-span-3'>
           <TextBlock>
-            Your subscription is currently paused.<br />
+            Your plan is currently paused.<br />
             It will resume on {pauseEnd ? humanReadableDate(pauseEnd.plus({ days: 1 }), currentYear !== pauseEnd.year) : '...'}.
           </TextBlock>
         </div >

@@ -443,8 +443,8 @@ export const makeDataApis = (
   );
 
   chargebeeAccessToken.grantRead(chargebeeGetCustomerFunction);
-  
-  
+
+
   // Pause plan
   const chargebeePausePlanFunction = makeFunction(`chargebee-pause-plan`, {
     entry: entryName("handlers", "chargebee-pause-plan.ts"),
@@ -461,8 +461,8 @@ export const makeDataApis = (
   );
 
   chargebeeAccessToken.grantRead(chargebeePausePlanFunction);
-  
-  
+
+
 
   // Un-Pause plan
   const chargebeeRemovePausePlanFunction = makeFunction(`chargebee-remove-pause`, {
@@ -480,7 +480,26 @@ export const makeDataApis = (
   );
 
   chargebeeAccessToken.grantRead(chargebeeRemovePausePlanFunction);
-  
+
+
+
+  // Issue pause credit (when subscription is resumed)
+  const chargebeeIssuePauseCreditFunction = makeFunction(`chargebee-issue-pause-credit`, {
+    entry: entryName("handlers", "chargebee-issue-pause-credit.ts"),
+    environment: defaultEnvironmentVars,
+  });
+
+  const chargebeeIssuePauseCredit = api.root.addResource(
+    "chargebee-issue-pause-credit"
+  );
+
+  chargebeeIssuePauseCredit.addMethod(
+    "POST",
+    new LambdaIntegration(chargebeeIssuePauseCreditFunction)
+  );
+
+  chargebeeAccessToken.grantRead(chargebeeIssuePauseCreditFunction);
+
 
 
   // Get latest invoice for customer

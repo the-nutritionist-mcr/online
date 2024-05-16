@@ -13,6 +13,7 @@ import {
 } from "@tnmo/core-backend";
 
 import { handleDeleteCustomer } from "../../event-handlers/handle-delete-customer";
+import { handleSubscriptionResumed } from '@/backend/event-handlers/handle-subscription-resumed';
 
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   const chargebee = new ChargeBee();
@@ -80,6 +81,14 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
       case "subscription_pause_scheduled":
       case "subscription_scheduled_pause_removed":
       case "subscription_resumed":
+        await handleSubscriptionResumed(
+          chargebee,
+          chargebeeEvent.content.customer.id,
+          chargebeeEvent.content.subscription.id,
+          chargebeeEvent.content.subscription.mrr ?? 0,
+          (chargebeeEvent.content.subscription as any).cf_Pause_date_ISO
+        );
+        break;
       case "subscription_resumption_scheduled":
       case "subscription_scheduled_resumption_removed":
         await handleSubscriptionEvent(
