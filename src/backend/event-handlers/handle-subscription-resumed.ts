@@ -61,22 +61,25 @@ export const handleSubscriptionResumed = async (
   )
 
   // calculate credit for paused period already billed (up to 1st of this month)
-  const daysInAMonth = 31; // 365 / 12
   const startDate = DateTime.fromISO(pauseStartDate).startOf('day');
-  // const resumeDate = DateTime.now().startOf('day');
-  const resumeDate = DateTime.fromISO("2024-04-10T00:00:00.000+00:00");
+  const daysInMonth = startDate.daysInMonth ?? 31;
+
+  const resumeDate = DateTime.now().startOf('day');
+  // const resumeDate = DateTime.fromISO("2023-07-05T00:00:00.000+00:00");
+  // ^^^ use when testing in chargebee's time machine (when today is no longer DateTime.now())
+
   const daysPaused = resumeDate.diff(startDate, "days").days;
   const passesFirstOfTheMonth = resumeDate.month !== startDate.month;
   const daysToReimburse = passesFirstOfTheMonth
     ? daysPaused - resumeDate.day - 1
     : daysPaused;
-  const dayRate = subscriptionMrr / daysInAMonth;
+  const dayRate = subscriptionMrr / daysInMonth;
   const proRataAmount = dayRate * daysToReimburse;
   const currencyProRatedAmount = Math.ceil(proRataAmount);
 
   console.log({
     passesFirstOfTheMonth,
-    daysInAMonth,
+    daysInMonth,
     startDate: humanReadableDate(startDate, true),
     resumeDate: humanReadableDate(resumeDate, true),
     dayRate,
