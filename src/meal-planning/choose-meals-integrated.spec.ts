@@ -4,6 +4,7 @@ import { chooseMealSelections } from "./choose-meals";
 const recipeOne: Recipe = {
   id: "0",
   hotOrCold: HotOrCold.Hot,
+  ingredients: "",
   shortName: "foo",
   name: "foo-recipe",
   potentialExclusions: [],
@@ -12,6 +13,7 @@ const recipeOne: Recipe = {
 const recipeTwo: Recipe = {
   id: "1",
   hotOrCold: HotOrCold.Hot,
+  ingredients: "",
   shortName: "bar",
   name: "bar-recipe",
   potentialExclusions: [],
@@ -22,6 +24,7 @@ const recipeThree: Recipe = {
   hotOrCold: HotOrCold.Hot,
   shortName: "baz",
   name: "baz-recipe",
+  ingredients: "",
   potentialExclusions: [],
 };
 
@@ -29,6 +32,7 @@ const recipeFour: Recipe = {
   id: "5",
   hotOrCold: HotOrCold.Hot,
   shortName: "bap",
+  ingredients: "",
   name: "bap-recipe",
   potentialExclusions: [],
 };
@@ -36,6 +40,7 @@ const recipeFour: Recipe = {
 const recipeFive: Recipe = {
   id: "8",
   hotOrCold: HotOrCold.Hot,
+  ingredients: "",
   shortName: "balls",
   name: "balls-recipe",
   potentialExclusions: [],
@@ -44,6 +49,7 @@ const recipeFive: Recipe = {
 const recipeSix: Recipe = {
   id: "8",
   hotOrCold: HotOrCold.Hot,
+  ingredients: "",
   shortName: "balls",
   name: "balls-recipe",
   potentialExclusions: [],
@@ -52,6 +58,7 @@ const recipeSix: Recipe = {
 const recipeSeven: Recipe = {
   id: "11",
   hotOrCold: HotOrCold.Hot,
+  ingredients: "",
   shortName: "foo-two",
   name: "foo-two-recipe",
   potentialExclusions: [],
@@ -60,6 +67,7 @@ const recipeSeven: Recipe = {
 const recipeEight: Recipe = {
   id: "15",
   hotOrCold: HotOrCold.Hot,
+  ingredients: "",
   shortName: "bar-two",
   name: "bar-recipe-two",
   potentialExclusions: [],
@@ -68,6 +76,7 @@ const recipeEight: Recipe = {
 const recipeNine: Recipe = {
   id: "2",
   hotOrCold: HotOrCold.Hot,
+  ingredients: "",
   shortName: "baz-two",
   name: "baz-recipe-two",
   potentialExclusions: [],
@@ -75,6 +84,7 @@ const recipeNine: Recipe = {
 
 const recipeTen: Recipe = {
   id: "5",
+  ingredients: "",
   hotOrCold: HotOrCold.Hot,
   shortName: "bap-two",
   name: "bap-recipe-two",
@@ -83,6 +93,7 @@ const recipeTen: Recipe = {
 
 const recipeEleven: Recipe = {
   id: "8",
+  ingredients: "",
   hotOrCold: HotOrCold.Hot,
   shortName: "balls-two",
   name: "balls-recipe-two",
@@ -93,6 +104,7 @@ const recipeTwelve: Recipe = {
   id: "8",
   hotOrCold: HotOrCold.Hot,
   shortName: "balls-two",
+  ingredients: "",
   name: "balls-recipe-two",
   potentialExclusions: [],
 };

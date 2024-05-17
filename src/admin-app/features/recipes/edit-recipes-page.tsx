@@ -44,6 +44,7 @@ export const EditRecipesPage = (props: EditRecipesPageProps) => {
     description: "",
     allergens: "",
     potentialExclusions: [],
+    ingredients: "",
     invalidExclusions: [],
     alternates: [],
   };
@@ -173,6 +174,10 @@ export const EditRecipesPage = (props: EditRecipesPageProps) => {
                 labelKey="name"
                 valueKey="name"
               />
+            </FormField>
+
+            <FormField name="ingredients" label="Ingredients">
+              <TextInput name="ingredients" />
             </FormField>
           </div>
         </div>

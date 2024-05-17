@@ -19,6 +19,7 @@ export default interface Recipe {
   description?: string;
   allergens?: string;
   potentialExclusions: Exclusion[];
+  ingredients: string | undefined;
   invalidExclusions?: string[];
   alternates?: Alternate[];
   createdAt?: string;

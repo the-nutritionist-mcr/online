@@ -27,6 +27,7 @@ const riceExclusion = {
 const recipes: Recipe[] = [
   {
     id: '0',
+    ingredients: "",
     name: 'Stew',
     shortName: '',
     hotOrCold: HotOrCold.Hot,
@@ -35,6 +36,7 @@ const recipes: Recipe[] = [
   {
     id: '1',
     hotOrCold: HotOrCold.Hot,
+    ingredients: "",
     shortName: '',
     name: 'Fish',
     potentialExclusions: [fishExclusion],
@@ -42,6 +44,7 @@ const recipes: Recipe[] = [
   {
     id: '2',
     hotOrCold: HotOrCold.Hot,
+    ingredients: "",
     shortName: '',
     name: 'Beef Stroganof',
     potentialExclusions: [],
@@ -50,12 +53,14 @@ const recipes: Recipe[] = [
     id: '3',
     hotOrCold: HotOrCold.Hot,
     shortName: '',
+    ingredients: "",
     name: 'Salad',
     potentialExclusions: [nutsExclusion, mustardExclusion],
   },
   {
     id: '4',
     hotOrCold: HotOrCold.Hot,
+    ingredients: "",
     shortName: '',
     name: 'Sandwich',
     potentialExclusions: [],
@@ -63,6 +68,7 @@ const recipes: Recipe[] = [
   {
     id: '5',
     shortName: '',
+    ingredients: "",
     name: 'Casserole',
     hotOrCold: HotOrCold.Hot,
     potentialExclusions: [mustardExclusion],
@@ -70,6 +76,7 @@ const recipes: Recipe[] = [
   {
     id: '6',
     shortName: '',
+    ingredients: "",
     name: 'Risotto',
     hotOrCold: HotOrCold.Hot,
     potentialExclusions: [riceExclusion],

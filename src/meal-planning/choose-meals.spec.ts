@@ -26,6 +26,7 @@ const date = (day: number, month: number, year: number) => {
 
 const recipeOne: Recipe = {
   id: "0",
+  ingredients: "",
   hotOrCold: HotOrCold.Hot,
   shortName: "foo",
   name: "foo-recipe",
@@ -33,6 +34,7 @@ const recipeOne: Recipe = {
 };
 
 const recipeTwo: Recipe = {
+  ingredients: "",
   id: "1",
   hotOrCold: HotOrCold.Hot,
   shortName: "bar",
@@ -42,6 +44,7 @@ const recipeTwo: Recipe = {
 
 const recipeThree: Recipe = {
   id: "2",
+  ingredients: "",
   hotOrCold: HotOrCold.Hot,
   shortName: "baz",
   name: "baz-recipe",
@@ -50,6 +53,7 @@ const recipeThree: Recipe = {
 
 const recipeFour: Recipe = {
   id: "5",
+  ingredients: "",
   hotOrCold: HotOrCold.Hot,
   shortName: "bap",
   name: "bap-recipe",
@@ -58,6 +62,7 @@ const recipeFour: Recipe = {
 
 const recipeFive: Recipe = {
   id: "8",
+  ingredients: "",
   hotOrCold: HotOrCold.Hot,
   shortName: "balls",
   name: "balls-recipe",
@@ -66,6 +71,7 @@ const recipeFive: Recipe = {
 
 const recipeSix: Recipe = {
   id: "8",
+  ingredients: "",
   hotOrCold: HotOrCold.Hot,
   shortName: "balls",
   name: "balls-recipe",
@@ -74,6 +80,7 @@ const recipeSix: Recipe = {
 
 const recipeSeven: Recipe = {
   id: "11",
+  ingredients: "",
   hotOrCold: HotOrCold.Hot,
   shortName: "foo-two",
   name: "foo-two-recipe",
@@ -82,6 +89,7 @@ const recipeSeven: Recipe = {
 
 const recipeEight: Recipe = {
   id: "15",
+  ingredients: "",
   hotOrCold: HotOrCold.Hot,
   shortName: "bar-two",
   name: "bar-recipe-two",
@@ -90,6 +98,7 @@ const recipeEight: Recipe = {
 
 const recipeNine: Recipe = {
   id: "2",
+  ingredients: "",
   hotOrCold: HotOrCold.Hot,
   shortName: "baz-two",
   name: "baz-recipe-two",
@@ -98,6 +107,7 @@ const recipeNine: Recipe = {
 
 const recipeTen: Recipe = {
   id: "5",
+  ingredients: "",
   hotOrCold: HotOrCold.Hot,
   shortName: "bap-two",
   name: "bap-recipe-two",
@@ -106,6 +116,7 @@ const recipeTen: Recipe = {
 
 const recipeEleven: Recipe = {
   id: "8",
+  ingredients: "",
   hotOrCold: HotOrCold.Hot,
   shortName: "balls-two",
   name: "balls-recipe-two",
@@ -114,6 +125,7 @@ const recipeEleven: Recipe = {
 
 const recipeTwelve: Recipe = {
   id: "8",
+  ingredients: "",
   hotOrCold: HotOrCold.Hot,
   shortName: "balls-two",
   name: "balls-recipe-two",
