@@ -58,7 +58,7 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
       };
     }
 
-    console.log('CHARGEBEE EVENT RECEIVED:', chargebeeEvent.event_type);
+    // console.log('CHARGEBEE EVENT RECEIVED:', chargebeeEvent.event_type);
 
     switch (chargebeeEvent.event_type) {
       case "customer_created":
