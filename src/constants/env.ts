@@ -15,8 +15,13 @@ export const ENV = {
     ChargeBeeSite: 'CHARGEBEE_SITE',
     ChargeBeeWebhookUsername: 'CHARGEBEE_WEBHOOK_USERNAME',
     ChargeBeeWebhookPasssword: 'CHARGEBEE_WEBHOOK_PASSWORD',
-  },
-  features: {
-    userPauseSelection: true,
   }
 } as const;
+
+export const FEATURES = {
+  userPauseSelection: true,
+} as const;
+
+export const isFeatureEnabled = (feature: keyof typeof FEATURES) => {
+  return FEATURES[feature];
+}
