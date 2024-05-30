@@ -1,11 +1,7 @@
-import { ChargeBee } from "chargebee-typescript";
-import { Customer } from 'chargebee-typescript/lib/resources';
-import { handleSubscriptionEvent } from './handle-subscription-event';
-import { apiRequest } from '@tnmo/core';
-import { BackendCustomer } from '@tnmo/types';
-import { chargebee } from '../lambdas/chargebee/initialise';
-import { DateTime } from 'luxon';
 import { humanReadableDate } from '@/components/organisms/account/pause-utils';
+import { ChargeBee } from "chargebee-typescript";
+import { DateTime } from 'luxon';
+import { handleSubscriptionEvent } from './handle-subscription-event';
 
 export const handleSubscriptionResumed = async (
   client: ChargeBee,
@@ -16,31 +12,10 @@ export const handleSubscriptionResumed = async (
 ) => {
   await handleSubscriptionEvent(client, customerId);
 
-  console.log({
-    customerId,
-    subscriptionId,
-    subscriptionMrr,
-    pauseStartDate
-  })
-
-  if (!pauseStartDate || !subscriptionMrr) {
-    console.log("*** stopping there.")
-    return;
-  }
-
-  // await apiRequest<BackendCustomer>("chargebee-issue-pause-credit", {
-  //   method: "POST",
-  //   body: JSON.stringify({
-  //     "subscription_id": subscriptionId,
-  //     "subscription_mrr": subscriptionMrr,
-  //     "pause_start_date": pauseStartDate
-  //   })
-  // })
-
   // get latest invoice so we can create a credit note
-  const invoice = await new Promise<typeof chargebee.invoice>(
+  const invoice = await new Promise<typeof client.invoice>(
     (accept, reject) => {
-      chargebee.invoice
+      client.invoice
         .list({
           limit: 1,
           subscription_id: { is: subscriptionId },
@@ -49,7 +24,7 @@ export const handleSubscriptionResumed = async (
         })
         .request(function (
           error: unknown,
-          result: { list: typeof chargebee.invoice[] }
+          result: { list: typeof client.invoice[] }
         ) {
           if (error) {
             reject(error);
@@ -77,24 +52,24 @@ export const handleSubscriptionResumed = async (
   const proRataAmount = dayRate * daysToReimburse;
   const currencyProRatedAmount = Math.ceil(proRataAmount);
 
-  console.log({
-    passesFirstOfTheMonth,
-    daysInMonth,
-    startDate: humanReadableDate(startDate, true),
-    resumeDate: humanReadableDate(resumeDate, true),
-    dayRate,
-    daysPaused,
-    daysToReimburse,
-    proRataAmount,
-    currencyProRatedAmount,
-  });
+  // console.log({
+  //   passesFirstOfTheMonth,
+  //   daysInMonth,
+  //   startDate: humanReadableDate(startDate, true),
+  //   resumeDate: humanReadableDate(resumeDate, true),
+  //   dayRate,
+  //   daysPaused,
+  //   daysToReimburse,
+  //   proRataAmount,
+  //   currencyProRatedAmount,
+  // });
 
-  console.log("crediting amount", `£${currencyProRatedAmount / 100}`);
+  // console.log("crediting amount", `£${currencyProRatedAmount / 100}`);
 
   // issue credit note
-  await new Promise<typeof chargebee.credit_note>(
+  await new Promise<typeof client.credit_note>(
     (accept, reject) => {
-      chargebee.credit_note
+      client.credit_note
         .create({
           reference_invoice_id: (invoice as any).id,
           total: currencyProRatedAmount,
@@ -104,12 +79,12 @@ export const handleSubscriptionResumed = async (
         })
         .request(function (
           error: unknown,
-          result: { credit_note: typeof chargebee.credit_note }
+          result: { credit_note: typeof client.credit_note }
         ) {
           if (error) {
             reject(error);
           } else {
-            const credit_note: typeof chargebee.credit_note = result.credit_note;
+            const credit_note: typeof client.credit_note = result.credit_note;
             accept(credit_note);
           }
         });
@@ -117,20 +92,20 @@ export const handleSubscriptionResumed = async (
   );
 
   // clear pause date in custom field
-  await new Promise<typeof chargebee.subscription>(
+  await new Promise<typeof client.subscription>(
     (accept, reject) => {
-      chargebee.subscription
+      client.subscription
         .update_for_items(subscriptionId, {
           cf_Pause_date_ISO: '',
         } as any)
         .request(function (
           error: unknown,
-          result: { subscription: typeof chargebee.subscription }
+          result: { subscription: typeof client.subscription }
         ) {
           if (error) {
             reject(error);
           } else {
-            const subscription: typeof chargebee.subscription = result.subscription;
+            const subscription: typeof client.subscription = result.subscription;
             accept(subscription);
           }
         });

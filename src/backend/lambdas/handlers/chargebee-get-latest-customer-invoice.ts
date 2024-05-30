@@ -1,15 +1,16 @@
-import "dotenv/config";
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
-import { chargebee } from "../chargebee/initialise";
-import { DateTime } from "luxon";
+import "dotenv/config";
 
 import {
   protectRoute,
-  returnOkResponse,
   returnErrorResponse,
+  returnOkResponse,
 } from "@tnmo/core-backend";
+import { getChargebeeClient } from '../chargebee/initialise';
 
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {
+  const chargebee = await getChargebeeClient();
+
   try {
     await protectRoute(event, ["admin"]);
     const payload = JSON.parse(event.body ?? '');
@@ -31,8 +32,8 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
             if (error) {
               reject(error);
             } else {
-              console.log(`result.list[0].invoice: ${result.list[0].invoice}`);
-              accept(result.list[0].invoice);
+              // console.log(`(result.list[0] as any).invoice: ${(result.list[0] as any).invoice}`);
+              accept((result.list[0] as any).invoice);
             }
           });
       });
@@ -46,8 +47,3 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
     return returnErrorResponse(error)
   }
 }
-
-
-
-// chargebee customer id: "77ECsTyblGXbD2P"
-// my plan id: "BTUNdaTybyFUOEi2"

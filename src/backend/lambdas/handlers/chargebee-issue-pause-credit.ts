@@ -1,6 +1,6 @@
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 import "dotenv/config";
-import { chargebee } from "../chargebee/initialise";
+import { getChargebeeClient } from "../chargebee/initialise";
 import {
   protectRoute,
   returnErrorResponse,
@@ -10,6 +10,8 @@ import { DateTime } from 'luxon';
 import { humanReadableDate } from '@/components/organisms/account/pause-utils';
 
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {
+  const chargebee = await getChargebeeClient();
+
   try {
     await protectRoute(event, ["admin"]);
     const payload = JSON.parse(event.body ?? '');
@@ -50,14 +52,14 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
     const proRataAmount = dayRate * daysToReimburse;
     const currencyProRatedAmount = Math.ceil(proRataAmount);
 
-    console.log("passesFirstOfTheMonth", passesFirstOfTheMonth);
-    console.log("daysInAMonth", daysInAMonth);
-    console.log("dayRate", dayRate);
-    console.log("daysPaused", daysPaused);
-    console.log("daysToReimburse", daysToReimburse);
-    console.log("proRataAmount (from mrr)", proRataAmount);
-    console.log("currencyProRatedAmount", currencyProRatedAmount);
-    console.log("crediting amount", `£${currencyProRatedAmount / 100}`);
+    // console.log("passesFirstOfTheMonth", passesFirstOfTheMonth);
+    // console.log("daysInAMonth", daysInAMonth);
+    // console.log("dayRate", dayRate);
+    // console.log("daysPaused", daysPaused);
+    // console.log("daysToReimburse", daysToReimburse);
+    // console.log("proRataAmount (from mrr)", proRataAmount);
+    // console.log("currencyProRatedAmount", currencyProRatedAmount);
+    // console.log("crediting amount", `£${currencyProRatedAmount / 100}`);
 
     const creditNote = await new Promise<typeof chargebee.credit_note>(
       (accept, reject) => {
@@ -100,7 +102,6 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
               reject(error);
             } else {
               const subscription: typeof chargebee.subscription = result.subscription;
-              console.log(`subscription: ${result}`);
               accept(subscription);
             }
           });

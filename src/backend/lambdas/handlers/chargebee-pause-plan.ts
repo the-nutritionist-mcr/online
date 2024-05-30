@@ -1,15 +1,16 @@
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 import "dotenv/config";
-import { chargebee } from "../chargebee/initialise";
-
 import {
   protectRoute,
   returnErrorResponse,
   returnOkResponse,
 } from "@tnmo/core-backend";
 import { DateTime } from 'luxon';
+import { getChargebeeClient } from '../chargebee/initialise';
 
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {
+  const chargebee = await getChargebeeClient();
+
   try {
     await protectRoute(event, ["admin"]);
     const payload = JSON.parse(event.body ?? '');

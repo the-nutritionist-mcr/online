@@ -1,15 +1,23 @@
 import "dotenv/config";
 
-import { CHARGEBEE, ENV } from "@tnmo/constants";
+import { ENV } from "@tnmo/constants";
 import { ChargeBee } from "chargebee-typescript";
+import { getEnv, getSecrets } from '@tnmo/core-backend';
 
-// hard-coded 😬
-const apiKey = 'test_CS08g7ecuXZ9jWecuEnilZiPEwyADjDZfi'; 
-// process.env[ENV.varNames.ChargeBeeToken];
+export const getChargebeeClient = async (): Promise<ChargeBee> => {
+  const chargebee = new ChargeBee();
 
-export const chargebee: ChargeBee = new ChargeBee();
+  const [chargebeeToken] =
+    getSecrets(
+      getEnv(ENV.varNames.ChargeBeeToken),
+    );
 
-chargebee.configure({
-  site: CHARGEBEE.sites.test,
-  api_key: apiKey,
-});
+  const apiKey = await chargebeeToken;
+
+  chargebee.configure({
+    site: process.env[ENV.varNames.ChargeBeeSite],
+    api_key: apiKey,
+  });
+
+  return chargebee;
+}
