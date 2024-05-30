@@ -32,7 +32,7 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
               reject(error);
             } else {
               const subscription: typeof chargebee.subscription = result.subscription;
-              console.log(`subscription: ${result}`);
+              // console.log(`subscription: ${result}`);
               accept(subscription);
             }
           });
@@ -54,7 +54,7 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
               reject(error);
             } else {
               const subscription: typeof chargebee.subscription = result.subscription;
-              console.log(`subscription: ${result}`);
+              // console.log(`subscription: ${result}`);
               accept(subscription);
             }
           });

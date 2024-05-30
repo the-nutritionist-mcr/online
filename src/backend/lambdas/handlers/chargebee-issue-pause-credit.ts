@@ -33,7 +33,7 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
             if (error) {
               reject(error);
             } else {
-              console.log(`result.list[0].invoice: ${(result.list[0] as any).invoice}`);
+              // console.log(`result.list[0].invoice: ${(result.list[0] as any).invoice}`);
               accept((result.list[0] as any).invoice);
             }
           });
