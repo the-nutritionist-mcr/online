@@ -4,33 +4,33 @@ import { RecipesPage } from "../pages/recipes";
 import { EditRecipePage } from "../pages/edit-recipe";
 
 test.beforeEach(async ({ page }) => {
+  test.setTimeout(120000);
   await login(page, "cypress-test-user", "password");
   await page.reload();
   await page.getByRole("link", { name: "Recipes" }).click();
   await expect(page.getByRole("main")).toContainText("Recipes");
 });
 
-// test("When the user clicks on the recipes page link, a page appears containing loaded recipe data", async ({
-//   page,
-// }) => {
-//   test.setTimeout(120000);
-//   const recipesPage = new RecipesPage(page);
+test("When the user clicks on the recipes page link, a page appears containing loaded recipe data", async ({
+  page,
+}) => {
+  const recipesPage = new RecipesPage(page);
 
-//   await expect(recipesPage.tableBody).toContainText("CHIX ORZO");
-//   await expect(recipesPage.tableBody).toContainText(
-//     "LEMON + HERB ROAST CHICKEN ORZO"
-//   );
-//   await expect(recipesPage.tableBody).toContainText(
-//     "Basil pesto cream sauce, roasted cherry vine tomatoes, summer vegetables, aged parmesan"
-//   );
-//   await expect(recipesPage.tableBody).toContainText("ASPARA RISSO");
-//   await expect(recipesPage.tableBody).toContainText(
-//     "ASPARAGUS, PEA + BROAD BEAN RISOTTO"
-//   );
-//   await expect(recipesPage.tableBody).toContainText(
-//     "Seared cypriot halloumi, parmesan, tarragon, semi dried tomatoes, lemon zest"
-//   );
-// });
+  await expect(recipesPage.tableBody).toContainText("CHIX ORZO");
+  await expect(recipesPage.tableBody).toContainText(
+    "LEMON + HERB ROAST CHICKEN ORZO"
+  );
+  await expect(recipesPage.tableBody).toContainText(
+    "Basil pesto cream sauce, roasted cherry vine tomatoes, summer vegetables, aged parmesan"
+  );
+  await expect(recipesPage.tableBody).toContainText("ASPARA RISSO");
+  await expect(recipesPage.tableBody).toContainText(
+    "ASPARAGUS, PEA + BROAD BEAN RISOTTO"
+  );
+  await expect(recipesPage.tableBody).toContainText(
+    "Seared cypriot halloumi, parmesan, tarragon, semi dried tomatoes, lemon zest"
+  );
+});
 
 test("When a user creates a new recipe, the recipe appears on the recipes page", async ({
   page,
