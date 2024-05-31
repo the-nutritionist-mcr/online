@@ -48,7 +48,12 @@ describe('getCookStatus', () => {
         termEnd: termEnd?.getTime(),
       });
 
+      console.log('mockPlan:', mockPlan);
+      console.log('cookDay:', cookDay);
+
       const outcome = getCookStatus(cookDay, mockPlan);
+
+      console.log('outcome:', outcome);
 
       expect(outcome.status).toEqual(result.status);
 
