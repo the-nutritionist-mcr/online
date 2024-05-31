@@ -6,8 +6,8 @@ export default defineConfig({
   forbidOnly: Boolean(process.env.CI),
   retries: process.env.CI ? 4 : 0,
   workers: process.env.CI ? 1 : undefined,
-
   reporter: process.env.CI ? [["github"], ["html"]] : "list",
+  timeout: 30000,
   use: {
     baseURL: "https://cypress.app.thenutritionistmcr.com",
     trace: "on-first-retry",
