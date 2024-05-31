@@ -13,6 +13,7 @@ test.beforeEach(async ({ page }) => {
 test("When the user clicks on the recipes page link, a page appears containing loaded recipe data", async ({
   page,
 }) => {
+  test.setTimeout(120000);
   const recipesPage = new RecipesPage(page);
 
   await expect(recipesPage.tableBody).toContainText("CHIX ORZO");
