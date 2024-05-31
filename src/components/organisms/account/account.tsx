@@ -1,11 +1,13 @@
-import { FC, useEffect } from 'react';
+import { FC, Fragment, useEffect, useMemo } from 'react';
 
 import { StandardPlan } from '@tnmo/types';
+import { NavigationContext } from '@tnmo/utils';
+import { useContext } from 'react';
 import { Button, Input, Link } from '../../atoms';
 import { FormSection } from '../../containers';
-import { useContext } from 'react';
-import { NavigationContext } from '@tnmo/utils';
 import { text } from './account.css';
+import PauseStatus from './pause-status';
+import { ENV, FEATURES, isFeatureEnabled } from '@tnmo/constants';
 
 export interface User {
   username: string;
@@ -39,7 +41,7 @@ export const Account: FC<AccountProps> = ({
   logout,
 }) => {
   const plans = userDetails?.plans?.filter((plan) => plan.totalMeals > 0);
-
+  const showPlans = useMemo(() => (plans?.length ?? 0) > 0, [plans]);
   const { prefetch } = useContext(NavigationContext);
 
   useEffect(() => {
@@ -98,20 +100,34 @@ export const Account: FC<AccountProps> = ({
         />
         <Input name="city" label="City" value={userDetails.city} disabled />
       </FormSection>
-      {(plans?.length ?? 0) > 0 && (
-        <FormSection heading="Your Plan" showQuestionMarkIcon>
-          {plans?.map((plan) => (
-            <>
-              <Input label="Meal Size" value={plan.name} disabled />
-              <Input
-                label="Weekly Meals"
-                value={String(plan.totalMeals)}
-                disabled
-              />
-            </>
-          ))}
-        </FormSection>
-      )}
+
+      {
+        showPlans &&
+        <>
+          <FormSection heading="Your Plan" showQuestionMarkIcon>
+            {
+              plans?.map(plan => (
+                <Fragment key={plan.id}>
+                  <Input
+                    label="Meal Size"
+                    value={plan.name}
+                    disabled
+                  />
+                  <Input
+                    label="Weekly Meals"
+                    value={String(plan.totalMeals)}
+                    disabled
+                  />
+                </Fragment>
+              ))
+            }
+          </FormSection>
+          {
+            isFeatureEnabled('userPauseSelection') && <PauseStatus />
+          }
+        </>
+      }
+
       {(plans?.filter((plan) => !plan.isExtra).length ?? 0) > 0 && (
         <FormSection heading="Choose Meals">
           {chooseIsOpen ? (

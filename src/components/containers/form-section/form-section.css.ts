@@ -16,7 +16,14 @@ export const gridContainer = style({
 });
 
 export const withIcon = style({
-  paddingTop: '2.2rem',
+  paddingTop: '1.2rem',
+});
+
+export const sectionContainer = style({
+  display: 'block',
+  position: 'relative',
+  width: '100%',
+  marginTop: '2rem'
 });
 
 export const sectionContents = style({
@@ -34,7 +41,7 @@ export const sectionContents = style({
 export const iconContainer = style({
   display: 'flex',
   gap: '1rem',
-  paddingTop: '3.9rem',
+  paddingTop: '2.8rem',
   paddingLeft: '10rem',
   '@media': {
     'screen and (max-width: 899px)': {
@@ -48,5 +55,6 @@ export const iconContainer = style({
 export const header = style({
   fontSize: '2rem',
   marginBottom: '1rem',
-  fontFamily: "'Accumin Pro', Arial, sans-serif",
+  fontFamily: "'acumin-pro', Arial, sans-serif",
+  fontWeight: 700,
 });

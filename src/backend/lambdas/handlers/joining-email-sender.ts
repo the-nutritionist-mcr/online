@@ -28,7 +28,7 @@ export const handler: Handler<
     };
   }
 
-  console.log(event.response);
+  // console.log(event.response);
 
   return event;
 };

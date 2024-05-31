@@ -10,6 +10,8 @@ import {
   BackendCustomer,
   PlannedCook,
   WeeklyCookPlanWithoutCustomerPlans,
+  Exclusion,
+  DeliveryItem
 } from '@tnmo/types';
 import {
   container,
@@ -22,6 +24,7 @@ import { MealPlanGeneratedForIndividualCustomer } from '@tnmo/types';
 import { countRemainingMeals } from './count-remaining-meals';
 import { getCookStatus } from '@tnmo/meal-planning';
 import { NavigationContext } from '@tnmo/utils';
+import { useMe } from '../../../hooks/use-me';
 
 export interface ChooseMealsCustomer {
   customisations?: BackendCustomer['customisations'];
@@ -49,8 +52,7 @@ const DivContainer = styled.div`
 const MealSelections: FC<MealSelectionsProps> = (props) => {
   const { navigate } = useContext(NavigationContext);
   const [showConfirm, setShowConfirm] = useState(false);
-  const [selectedMeals, setSelectedMeals] =
-    useState<MealPlanGeneratedForIndividualCustomer>(props.currentSelection);
+  const [selectedMeals, setSelectedMeals] = useState<MealPlanGeneratedForIndividualCustomer>(props.currentSelection);
 
   const [submittingOrder, setSubmittingOrder] = useState(false);
   const [complete, setComplete] = useState(false);

@@ -29,7 +29,7 @@ export interface ResetPassswordPayload {
   forceChange?: boolean;
 }
 
-export const handler = warmer<APIGatewayProxyHandlerV2>(async (event) => {
+export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   try {
     const { authenticated } = await protectRoute(event, ["admin"], {
       allowUnauthenticated: true,
@@ -125,4 +125,4 @@ export const handler = warmer<APIGatewayProxyHandlerV2>(async (event) => {
     }
     return returnErrorResponse();
   }
-});
+};

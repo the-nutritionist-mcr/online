@@ -55,6 +55,7 @@ const ButtonElement = styled.button((props: ButtonProps) => {
     background: backgroundColor,
     color: props.primary ? 'white' : color,
     lineHeight: sizes[size].lineHeight,
+    fontFamily: 'acumin-pro, Arial, sans-serif',
     fontSize: sizes[size].fontSize,
     fontWeight: 700,
     padding: sizes[size].padding,

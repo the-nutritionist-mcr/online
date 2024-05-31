@@ -4,6 +4,7 @@ import {
   gridContainer,
   header,
   iconContainer,
+  sectionContainer,
   sectionContents,
   withIcon,
 } from "./form-section.css";
@@ -22,7 +23,7 @@ const FormSection = (props: FormSectionProps) => {
   ).join(" ");
 
   return (
-    <div>
+    <div className={sectionContainer}>
       {props.heading ? <h2 className={header}>{props.heading}</h2> : null}
       <div className={sectionContents}>
         <div className={gridContainerClasses}>{props.children}</div>

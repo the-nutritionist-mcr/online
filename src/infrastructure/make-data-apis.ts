@@ -34,7 +34,7 @@ export const makeDataApis = (
   const chargebeeAccessToken = new Secret(context, "ChargeeAccessToken", {
     secretName: getResourceName(`chargebee-access-token`, envName),
   });
-  
+
   chargebeeAccessToken.secretName
 
   const chargeBeeWebhookUsername = new Secret(
@@ -421,6 +421,107 @@ export const makeDataApis = (
       resources: [pool.userPoolArn],
     })
   );
+
+
+  // ***************
+  // CHARGEBEE
+  // ***************  
+
+  // Get chargebee customer
+  const chargebeeGetCustomerFunction = makeFunction(`chargebee-get-customer`, {
+    entry: entryName("handlers", "chargebee-get-customer.ts"),
+    environment: defaultEnvironmentVars,
+  });
+
+  const chargebeeGetCustomer = api.root.addResource(
+    "chargebee-get-customer"
+  );
+
+  chargebeeGetCustomer.addMethod(
+    "POST",
+    new LambdaIntegration(chargebeeGetCustomerFunction)
+  );
+
+  chargebeeAccessToken.grantRead(chargebeeGetCustomerFunction);
+
+
+  // Pause plan
+  const chargebeePausePlanFunction = makeFunction(`chargebee-pause-plan`, {
+    entry: entryName("handlers", "chargebee-pause-plan.ts"),
+    environment: defaultEnvironmentVars,
+  });
+
+  const chargebeePausePlan = api.root.addResource(
+    "chargebee-pause-plan"
+  );
+
+  chargebeePausePlan.addMethod(
+    "POST",
+    new LambdaIntegration(chargebeePausePlanFunction)
+  );
+
+  chargebeeAccessToken.grantRead(chargebeePausePlanFunction);
+
+
+
+  // Un-Pause plan
+  const chargebeeRemovePausePlanFunction = makeFunction(`chargebee-remove-pause`, {
+    entry: entryName("handlers", "chargebee-remove-pause-plan.ts"),
+    environment: defaultEnvironmentVars,
+  });
+
+  const chargebeeRemovePausePlan = api.root.addResource(
+    "chargebee-remove-pause-plan"
+  );
+
+  chargebeeRemovePausePlan.addMethod(
+    "POST",
+    new LambdaIntegration(chargebeeRemovePausePlanFunction)
+  );
+
+  chargebeeAccessToken.grantRead(chargebeeRemovePausePlanFunction);
+
+
+
+  // Issue pause credit (when subscription is resumed)
+  const chargebeeIssuePauseCreditFunction = makeFunction(`chargebee-issue-pause-credit`, {
+    entry: entryName("handlers", "chargebee-issue-pause-credit.ts"),
+    environment: defaultEnvironmentVars,
+  });
+
+  const chargebeeIssuePauseCredit = api.root.addResource(
+    "chargebee-issue-pause-credit"
+  );
+
+  chargebeeIssuePauseCredit.addMethod(
+    "POST",
+    new LambdaIntegration(chargebeeIssuePauseCreditFunction)
+  );
+
+  chargebeeAccessToken.grantRead(chargebeeIssuePauseCreditFunction);
+
+
+
+  // Get latest invoice for customer
+  const chargebeeGetLatestCustomerInvoiceFunction = makeFunction(`chargebee-get-latest-customer-invoice`, {
+    entry: entryName("handlers", "chargebee-get-latest-customer-invoice.ts"),
+    environment: defaultEnvironmentVars,
+  });
+
+  const chargebeeGetLatestCustomerInvoice = api.root.addResource(
+    "chargebee-get-latest-customer-invoice"
+  );
+
+  chargebeeGetLatestCustomerInvoice.addMethod(
+    "POST",
+    new LambdaIntegration(chargebeeGetLatestCustomerInvoiceFunction)
+  );
+
+  chargebeeAccessToken.grantRead(chargebeeGetLatestCustomerInvoiceFunction);
+
+
+
+
 
   const apiCert = new DnsValidatedCertificate(context, "apiCertificate", {
     domainName,
