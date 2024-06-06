@@ -42,3 +42,7 @@
 @import 'layouts/basket';
 @import 'layouts/checkout';
 @import 'layouts/tinymce';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
