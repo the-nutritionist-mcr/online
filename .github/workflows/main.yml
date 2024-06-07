@@ -51,6 +51,7 @@ jobs:
       - run: npm run build
         env:
           APP_VERSION: ${{ env.APP_VERSION }}
+          NEXT_PUBLIC_ENVIRONMENT: "cypress"
 
       - run: npm run cdk -- deploy tnm-web-cypress-frontend-stack --require-approval never
         env:
@@ -76,6 +77,7 @@ jobs:
         run: npx playwright test
         env:
           CHARGEBEE_TOKEN: ${{ secrets.CHARGEBEE_TOKEN }}
+          NEXT_PUBLIC_ENVIRONMENT: "endtoend"
 
       # - name: Upload test report
       #   if: always()
@@ -104,6 +106,7 @@ jobs:
       - run: npm run build
         env:
           APP_VERSION: ${{ env.APP_VERSION }}
+          NEXT_PUBLIC_ENVIRONMENT: "test"
 
       - run: npm run cdk -- deploy tnm-web-test-frontend-stack --require-approval never
         env:
@@ -131,6 +134,7 @@ jobs:
       - run: npm run build
         env:
           APP_VERSION: ${{ env.APP_VERSION }}
+          NEXT_PUBLIC_ENVIRONMENT: "production"
 
       - run: npm run cdk -- deploy tnm-web-prod-frontend-stack --require-approval never
         env:
