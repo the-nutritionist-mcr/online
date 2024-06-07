@@ -48,6 +48,10 @@ export const Account: FC<AccountProps> = ({
     prefetch?.('/choose-meals/');
   }, [prefetch]);
 
+  useEffect(() => { 
+    console.log('environment:', process.env[ENV.varNames.EnvironmentName]);
+  }, []);
+
   return (
     <div>
       <FormSection heading="Your Details" showQuestionMarkIcon>
