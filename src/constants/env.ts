@@ -19,7 +19,7 @@ export const ENV = {
 } as const;
 
 export const FEATURES = {
-  userPauseSelection: true,
+  userPauseSelection: false,
 } as const;
 
 export const isFeatureEnabled = (feature: keyof typeof FEATURES) => {
