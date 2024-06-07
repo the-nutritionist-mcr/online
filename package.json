@@ -142,6 +142,7 @@
     "pdf-table-extractor": "^1.0.3",
     "pdf2html": "^2.6.7",
     "pdfmake": "0.2.7",
+    "postcss": "^8.4.38",
     "ramda": "0.29.0",
     "randomstring": "^1.2.2",
     "react": "18.2.0",
