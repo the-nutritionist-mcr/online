@@ -12,6 +12,8 @@ export const handleSubscriptionResumed = async (
 ) => {
   await handleSubscriptionEvent(client, customerId);
 
+  if (!pauseStartDate?.length) return 'No pause start date set on subscription. This pause may have been set in ChargeBee, not via the TNM account page.';
+
   // get latest invoice so we can create a credit note
   const invoice = await new Promise<typeof client.invoice>(
     (accept, reject) => {
