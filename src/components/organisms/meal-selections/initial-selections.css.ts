@@ -118,8 +118,9 @@ export const tabGrid = style({
   maxWidth: '1460px',
   '@media': {
     'screen and (max-width: 899px)': {
-      display: 'block',
-      padding: '1rem',
+      display: 'grid',
+      gridTemplateColumns: '100%',
+      padding: '1rem'
     },
   },
 });
