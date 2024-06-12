@@ -18,6 +18,7 @@ import {
   listBox,
 } from './combined-basket.css';
 import { getDeliveryLabel } from './get-delivery-label';
+import { Fragment } from 'react';
 
 interface BasketProps {
   cooks: PlannedCook[];
@@ -53,7 +54,7 @@ const CombinedBasket = ({
       <Divider />
       {defaultDeliveryDays.flatMap((_, dayIndex) => {
         return (
-          <>
+          <Fragment key={dayIndex}>
             <h3 className={deliveryNameHeader}>
               {getDeliveryLabel(currentSelection.customer, dayIndex)}
             </h3>
@@ -106,7 +107,7 @@ const CombinedBasket = ({
                 );
               })}
             </div>
-          </>
+          </Fragment>
         );
       })}
     </div>
