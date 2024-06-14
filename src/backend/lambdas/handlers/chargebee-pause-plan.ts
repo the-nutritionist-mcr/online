@@ -12,7 +12,7 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   const chargebee = await getChargebeeClient();
 
   try {
-    await protectRoute(event, ["admin"]);
+    await protectRoute(event);
     const payload = JSON.parse(event.body ?? '');
 
     // do pause
