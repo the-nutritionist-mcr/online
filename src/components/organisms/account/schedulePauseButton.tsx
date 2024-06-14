@@ -20,7 +20,6 @@ const SchedulePauseButton: FC<SchedulePauseButtonProps> = ({ pauseDate, pauseWee
     if (!pauseDate || !user) return;
     setLoading(true);
     user.plans.forEach(async plan => pausePlan(plan.id, pauseDate, pauseWeeks));
-    // pausePlan(user.plans[0].id, pauseDate, pauseWeeks);
   }
 
   const pausePlan = async (planId: string, pauseDate: DateTime, pauseWeeks: PauseWeeks) => {
@@ -32,7 +31,6 @@ const SchedulePauseButton: FC<SchedulePauseButtonProps> = ({ pauseDate, pauseWee
         "resume_date": pauseDate.plus({ weeks: pauseWeeks }).toUnixInteger()
       })
     })
-    console.log({ data });
   }
 
   return (
