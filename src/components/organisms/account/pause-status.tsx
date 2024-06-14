@@ -57,12 +57,6 @@ const PauseStatus: FC = () => {
             {
               !showPausePanel &&
               <div className='grid grid-cols-3'>
-                {/* <div onClick={async () => {
-                  const data = await apiRequest<BackendCustomer>("chargebee-get-customer", { method: "GET" });
-                  console.log('customer:', { data })
-                }}>
-                  Get customer
-                </div> */}
                 <MainButton onClick={() => setShowPausePanel(true)}>
                   Schedule a pause
                 </MainButton>
@@ -73,7 +67,8 @@ const PauseStatus: FC = () => {
               <>
                 <Header>Schedule a pause</Header>
                 <TextBlock>
-                  You can pause your plan whenever you like. Just remember to provide us with a minimum of one week's notice, as we order our fresh ingredients a week in advance. If we've already taken your subscription payment for the month, we'll credit your pause duration amount in the following month.
+                  <p>You can pause your plan whenever you like. Just remember to provide us with a minimum of one week's notice, as we order our fresh ingredients a week in advance.</p>
+                  <p className='mt-3'>If we've already taken your subscription payment for the month, we'll credit your pause duration amount in the following month.</p>
                 </TextBlock>
                 <PauseSelector handlePauseSelection={() => setShowPausePanel(false)} />
               </>
