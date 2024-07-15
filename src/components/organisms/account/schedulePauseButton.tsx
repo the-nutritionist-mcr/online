@@ -8,27 +8,27 @@ import { PauseWeeks } from './pause-utils';
 
 interface SchedulePauseButtonProps {
   pauseDate: DateTime | null;
-  pauseWeeks: PauseWeeks;
+  resumeDate: DateTime | null;
   handlePauseSelection: () => void;
 }
 
-const SchedulePauseButton: FC<SchedulePauseButtonProps> = ({ pauseDate, pauseWeeks, handlePauseSelection }) => {
+const SchedulePauseButton: FC<SchedulePauseButtonProps> = ({ pauseDate, resumeDate }) => {
   const user = useMe();
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleClick = async () => {
-    if (!pauseDate || !user) return;
+    if (!pauseDate || !resumeDate || !user) return;
     setLoading(true);
-    user.plans.forEach(async plan => pausePlan(plan.id, pauseDate, pauseWeeks));
+    user.plans.forEach(async plan => pausePlan(plan.id, pauseDate, resumeDate));
   }
 
-  const pausePlan = async (planId: string, pauseDate: DateTime, pauseWeeks: PauseWeeks) => {
+  const pausePlan = async (planId: string, pauseDate: DateTime, resumeDate: DateTime) => {
     const data = await apiRequest<BackendCustomer>("chargebee-pause-plan", {
       method: "POST",
       body: JSON.stringify({
         "plan_id": planId,
         "pause_date": pauseDate.toUnixInteger(),
-        "resume_date": pauseDate.plus({ weeks: pauseWeeks }).toUnixInteger()
+        "resume_date": resumeDate.toUnixInteger()
       })
     })
   }
