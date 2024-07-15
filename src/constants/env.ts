@@ -19,7 +19,7 @@ export const ENV = {
 } as const;
 
 export const FEATURES = {
-  userPauseSelection: process.env.NEXT_PUBLIC_ENVIRONMENT === 'cypress',
+  userPauseSelection: true // process.env.NEXT_PUBLIC_ENVIRONMENT === 'cypress',
 } as const;
 
 export const isFeatureEnabled = (feature: keyof typeof FEATURES) => {
