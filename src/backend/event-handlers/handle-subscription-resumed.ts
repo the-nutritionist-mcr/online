@@ -24,7 +24,7 @@ export const handleSubscriptionResumed = async (
           status: { in: ["paid", "payment_due"] },
           "sort_by[desc]": "date"
         })
-        .request(function (
+        .request(function(
           error: unknown,
           result: { list: typeof client.invoice[] }
         ) {
@@ -41,7 +41,7 @@ export const handleSubscriptionResumed = async (
   const startDate = DateTime.fromISO(pauseStartDate).startOf('day');
   const daysInMonth = startDate.daysInMonth ?? 31;
 
-  const resumeDate = DateTime.now().startOf('day');
+  const resumeDate = DateTime.now().startOf('day').plus({ days: 2 });
   // const resumeDate = DateTime.fromISO("2023-07-05T00:00:00.000+00:00");
   // ^^^ use when testing in chargebee's time machine (when today is no longer DateTime.now())
 
@@ -79,7 +79,7 @@ export const handleSubscriptionResumed = async (
           create_reason_code: "OTHER",
           customer_notes: `Subscription ${subscriptionId} paused from ${humanReadableDate(startDate, true)}, resumed on ${humanReadableDate(resumeDate, true)}.`
         })
-        .request(function (
+        .request(function(
           error: unknown,
           result: { credit_note: typeof client.credit_note }
         ) {
@@ -100,7 +100,7 @@ export const handleSubscriptionResumed = async (
         .update_for_items(subscriptionId, {
           cf_Pause_date_ISO: '',
         } as any)
-        .request(function (
+        .request(function(
           error: unknown,
           result: { subscription: typeof client.subscription }
         ) {
