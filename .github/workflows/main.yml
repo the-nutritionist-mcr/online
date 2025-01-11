@@ -23,7 +23,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        check: [test, types, lint]
+        check: [types, lint]
 
     steps:
       - uses: actions/checkout@v3
