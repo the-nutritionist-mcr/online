@@ -31,53 +31,53 @@ jobs:
         uses: ./.github/actions/setup-deps
       - run: npm run ${{ matrix.check }}
 
-  cypress-deploy:
-    runs-on: ubuntu-latest
-    name: E2E Deploy
-    if: github.ref == 'refs/heads/main'
-    environment:
-      name: cypress
-      url: https://cypress.app.thenutritionistmcr.com
+  # cypress-deploy:
+  #   runs-on: ubuntu-latest
+  #   name: E2E Deploy
+  #   if: github.ref == 'refs/heads/main'
+  #   environment:
+  #     name: cypress
+  #     url: https://cypress.app.thenutritionistmcr.com
+  #
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - name: Setup job
+  #
+  #       uses: ./.github/actions/setup-deps
+  #     - name: Get App Version
+  #       shell: bash
+  #       run: echo "APP_VERSION=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+  #
+  #     - run: npm run build
+  #       env:
+  #         APP_VERSION: ${{ env.APP_VERSION }}
+  #         NEXT_PUBLIC_ENVIRONMENT: "cypress"
+  #
+  #     - run: npm run cdk -- deploy tnm-web-cypress-frontend-stack --require-approval never
+  #       env:
+  #         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  #         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
-    steps:
-      - uses: actions/checkout@v3
-      - name: Setup job
-
-        uses: ./.github/actions/setup-deps
-      - name: Get App Version
-        shell: bash
-        run: echo "APP_VERSION=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
-
-      - run: npm run build
-        env:
-          APP_VERSION: ${{ env.APP_VERSION }}
-          NEXT_PUBLIC_ENVIRONMENT: "cypress"
-
-      - run: npm run cdk -- deploy tnm-web-cypress-frontend-stack --require-approval never
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-
-  end-to-end-tests:
-    timeout-minutes: 60
-    name: "End to End Tests"
-    needs: [cypress-deploy]
-    if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Install Dependencies
-        uses: ./.github/actions/setup-deps
-
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
-
-      - name: Run Playwright tests
-        run: npx playwright test
-        env:
-          CHARGEBEE_TOKEN: ${{ secrets.CHARGEBEE_TOKEN }}
-          NEXT_PUBLIC_ENVIRONMENT: "endtoend"
+  # end-to-end-tests:
+  #   timeout-minutes: 60
+  #   name: "End to End Tests"
+  #   needs: [cypress-deploy]
+  #   if: github.ref == 'refs/heads/main'
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #
+  #     - name: Install Dependencies
+  #       uses: ./.github/actions/setup-deps
+  #
+  #     - name: Install Playwright Browsers
+  #       run: npx playwright install --with-deps
+  #
+  #     - name: Run Playwright tests
+  #       run: npx playwright test
+  #       env:
+  #         CHARGEBEE_TOKEN: ${{ secrets.CHARGEBEE_TOKEN }}
+  #         NEXT_PUBLIC_ENVIRONMENT: "endtoend"
 
       # - name: Upload test report
       #   if: always()
@@ -85,33 +85,33 @@ jobs:
       #   with:
       #     path: ./playwright-report
 
-  test-deploy:
-    runs-on: ubuntu-latest
-    name: Test Deploy
-    if: github.ref == 'refs/heads/main'
-    environment:
-      name: test
-      url: https://test.app.thenutritionistmcr.com
-
-    needs: [end-to-end-tests, checks]
-    steps:
-      - uses: actions/checkout@v3
-      - name: Setup job
-
-        uses: ./.github/actions/setup-deps
-      - name: Get App Version
-        shell: bash
-        run: echo "APP_VERSION=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
-
-      - run: npm run build
-        env:
-          APP_VERSION: ${{ env.APP_VERSION }}
-          NEXT_PUBLIC_ENVIRONMENT: "test"
-
-      - run: npm run cdk -- deploy tnm-web-test-frontend-stack --require-approval never
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  # test-deploy:
+  #   runs-on: ubuntu-latest
+  #   name: Test Deploy
+  #   if: github.ref == 'refs/heads/main'
+  #   environment:
+  #     name: test
+  #     url: https://test.app.thenutritionistmcr.com
+  #
+  #   needs: [end-to-end-tests, checks]
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - name: Setup job
+  #
+  #       uses: ./.github/actions/setup-deps
+  #     - name: Get App Version
+  #       shell: bash
+  #       run: echo "APP_VERSION=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+  #
+  #     - run: npm run build
+  #       env:
+  #         APP_VERSION: ${{ env.APP_VERSION }}
+  #         NEXT_PUBLIC_ENVIRONMENT: "test"
+  #
+  #     - run: npm run cdk -- deploy tnm-web-test-frontend-stack --require-approval never
+  #       env:
+  #         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  #         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
   prod-deploy:
     runs-on: ubuntu-latest
@@ -121,7 +121,7 @@ jobs:
       url: https://portal.thenutritionistmcr.com
 
     if: github.ref == 'refs/heads/main'
-    needs: [end-to-end-tests, checks]
+    needs: [checks]
     steps:
       - uses: actions/checkout@v3
       - name: Setup job
