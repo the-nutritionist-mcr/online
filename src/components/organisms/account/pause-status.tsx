@@ -6,8 +6,6 @@ import { Header, Section, TextBlock } from './account-elements';
 import { getPause, humanReadableDate } from './pause-utils';
 import PauseSelector from './pause-selector';
 import CancelPauseButton from './cancelPauseButton';
-import { apiRequest } from '@tnmo/core';
-import { BackendCustomer } from '@tnmo/types';
 
 const PauseStatus: FC = () => {
   const user = useMe();
@@ -45,8 +43,8 @@ const PauseStatus: FC = () => {
         pausedNow &&
         <div className='grid gap-6 pt-2 col-span-3'>
           <TextBlock>
-            Your plan is currently paused.<br />
-            It will resume on {pauseEnd ? humanReadableDate(pauseEnd.plus({ days: 1 }), currentYear !== pauseEnd.year) : '...'}.
+            <strong>Your plan is currently paused.<br />
+              It will resume on {pauseEnd ? humanReadableDate(pauseEnd.plus({ days: 1 }), currentYear !== pauseEnd.year) : '...'}</strong>
           </TextBlock>
         </div >
       }
