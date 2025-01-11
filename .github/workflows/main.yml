@@ -146,7 +146,7 @@ jobs:
     name: Deploy Credentials
 
     if: github.ref == 'refs/heads/main'
-    needs: [prod-deploy, test-deploy]
+    needs: [prod-deploy]
     steps:
       - uses: actions/checkout@v3
       - name: Setup job
