@@ -3,7 +3,7 @@ import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 import { ChargeBee } from "chargebee-typescript";
 import { DateTime } from "luxon";
 
-import { ENV, HTTP, isFeatureEnabled } from "@tnmo/constants";
+import { ENV, HTTP } from "@tnmo/constants";
 import { handleCustomerEvent } from "../../event-handlers/handle-customer-event";
 import { handleSubscriptionEvent } from "../../event-handlers/handle-subscription-event";
 import {
@@ -101,7 +101,7 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
           chargebeeEvent.content.subscription.id,
           chargebeeEvent.content.subscription.mrr ?? 0,
           (chargebeeEvent.content.subscription as any).cf_Pause_date_ISO,
-          DateTime.fromSeconds(chargebeeEvent.occurred_at).toISO() ?? ""
+          DateTime.fromSeconds(chargebeeEvent.occurred_at).toISO() ?? ''
         );
         break;
 
@@ -124,16 +124,11 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
         break;
 
       case "subscription_pause_scheduled":
-        if (
-          isFeatureEnabled("updatedPauseLogic") &&
-          chargebeeEvent.content.subscription.pause_date
-        ) {
+        if (chargebeeEvent.content.subscription.pause_date) {
           await updatePauseStartDate(
             chargebee,
             chargebeeEvent.content.subscription.id,
-            DateTime.fromSeconds(
-              chargebeeEvent.content.subscription.pause_date
-            ).toISO() ?? ""
+            DateTime.fromSeconds(chargebeeEvent.content.subscription.pause_date).toISO() ?? ''
           );
         }
 
@@ -144,13 +139,11 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
         break;
 
       case "subscription_scheduled_pause_removed":
-        if (isFeatureEnabled("updatedPauseLogic")) {
-          await updatePauseStartDate(
-            chargebee,
-            chargebeeEvent.content.subscription.id,
-            ""
-          );
-        }
+        await updatePauseStartDate(
+          chargebee,
+          chargebeeEvent.content.subscription.id,
+          ''
+        );
 
         await handleSubscriptionEvent(
           chargebee,

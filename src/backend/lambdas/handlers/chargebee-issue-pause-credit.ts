@@ -6,7 +6,6 @@ import {
   returnErrorResponse,
   returnOkResponse,
 } from "@tnmo/core-backend";
-import { isFeatureEnabled } from "@/constants/env";
 import { DateTime } from 'luxon';
 import { humanReadableDate } from '@/components/organisms/account/pause-utils';
 import { calculatePauseCredit } from '@/backend/utils/calculate-pause-credit';
@@ -24,96 +23,7 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
     const payload = JSON.parse(event.body ?? '');
 
     const startDate = DateTime.fromISO(payload.pause_start_date).startOf('day');
-    const resumeDate = isFeatureEnabled("updatedPauseLogic")
-      ? DateTime.fromSeconds(payload.resume_date).startOf('day')
-      : DateTime.now().startOf('day');
-
-    if (!isFeatureEnabled("updatedPauseLogic")) {
-      const invoice = await new Promise<typeof chargebee.invoice>(
-        (accept, reject) => {
-          chargebee.invoice
-            .list({
-              limit: 1,
-              subscription_id: { is: payload.subscription_id },
-              status: { in: ["paid", "payment_due"] },
-              "sort_by[desc]": "date"
-            })
-            .request(function (
-              error: unknown,
-              result: { list: typeof chargebee.invoice[] }
-            ) {
-              if (error) {
-                reject(error);
-              } else {
-                accept((result.list[0] as any).invoice);
-              }
-            });
-        });
-
-      const { totalInCents: currencyProRatedAmount } = calculatePauseCredit({
-        pauseStart: startDate,
-        resumeDate,
-        subscriptionMrr: payload.subscription_mrr,
-      });
-
-      if (currencyProRatedAmount <= 0) {
-        return returnOkResponse({
-          skipped: true,
-          reason: "No reimbursable billed days in the pause window.",
-        });
-      }
-
-      const creditNote = await new Promise<typeof chargebee.credit_note>(
-        (accept, reject) => {
-          chargebee.credit_note
-            .create({
-              reference_invoice_id: (invoice as any).id,
-              total: currencyProRatedAmount,
-              type: "REFUNDABLE",
-              create_reason_code: "OTHER",
-              customer_notes: `Subscription paused from ${humanReadableDate(DateTime.fromSeconds(payload.pause_date), true)} to ${humanReadableDate(DateTime.fromSeconds(payload.resume_date), true)}.`
-            })
-            .request(function (
-              error: unknown,
-              result: { credit_note: typeof chargebee.credit_note }
-            ) {
-              if (error) {
-                reject(error);
-              } else {
-                const credit_note: typeof chargebee.credit_note = result.credit_note;
-                accept(credit_note);
-              }
-            });
-        }
-      );
-
-      console.log('creditNote:', creditNote);
-
-      const subscription = await new Promise<typeof chargebee.subscription>(
-        (accept, reject) => {
-          chargebee.subscription
-            .update_for_items(payload.subscription_id, {
-              cf_Pause_date_ISO: '',
-            } as any)
-            .request(function (
-              error: unknown,
-              result: { subscription: typeof chargebee.subscription }
-            ) {
-              if (error) {
-                reject(error);
-              } else {
-                const subscription: typeof chargebee.subscription = result.subscription;
-                accept(subscription);
-              }
-            });
-        }
-      );
-
-      return returnOkResponse({
-        subscription,
-        creditNote,
-      });
-    }
+    const resumeDate = DateTime.fromSeconds(payload.resume_date).startOf('day');
 
     // get recent eligible invoices so we can select the billed term to credit
     const invoices = await new Promise<any[]>(
