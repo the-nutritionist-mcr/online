@@ -8,6 +8,7 @@ import {
 } from "@tnmo/core-backend";
 import { DateTime } from 'luxon';
 import { humanReadableDate } from '@/components/organisms/account/pause-utils';
+import { calculatePauseCredit } from '@/backend/utils/calculate-pause-credit';
 
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   const chargebee = await getChargebeeClient();
@@ -39,25 +40,14 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
           });
       });
 
-    // calculate credit for paused period already billed (up to 1st of this month)
-    const daysInAMonth = 31; // 365 / 12
     const startDate = DateTime.fromISO(payload.pause_start_date).startOf('day');
-    const resumeDate = DateTime.now().startOf('day');
-    const daysPaused = resumeDate.diff(startDate, "days").days;
-    const passesFirstOfTheMonth = resumeDate.month !== startDate.month;
-    const daysToReimburse = passesFirstOfTheMonth
-      ? daysPaused - resumeDate.day - 1
-      : daysPaused;
-    const dayRate = payload.subscription_mrr / daysInAMonth;
-    const proRataAmount = dayRate * daysToReimburse;
-    const currencyProRatedAmount = Math.ceil(proRataAmount);
+    const resumeDate = DateTime.fromSeconds(payload.resume_date).startOf('day');
+    const { totalInCents: currencyProRatedAmount } = calculatePauseCredit({
+      pauseStart: startDate,
+      resumeDate,
+      subscriptionMrr: payload.subscription_mrr,
+    });
 
-    // console.log("passesFirstOfTheMonth", passesFirstOfTheMonth);
-    // console.log("daysInAMonth", daysInAMonth);
-    // console.log("dayRate", dayRate);
-    // console.log("daysPaused", daysPaused);
-    // console.log("daysToReimburse", daysToReimburse);
-    // console.log("proRataAmount (from mrr)", proRataAmount);
     // console.log("currencyProRatedAmount", currencyProRatedAmount);
     // console.log("crediting amount", `£${currencyProRatedAmount / 100}`);
 
