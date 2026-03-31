@@ -1,7 +1,6 @@
 import "../../utils/init-dd-trace";
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 import { ChargeBee } from "chargebee-typescript";
-import { DateTime } from "luxon";
 
 import { ENV, HTTP } from "@tnmo/constants";
 import { handleCustomerEvent } from "../../event-handlers/handle-customer-event";
@@ -15,29 +14,6 @@ import {
 
 import { handleDeleteCustomer } from "../../event-handlers/handle-delete-customer";
 import { handleSubscriptionResumed } from '@/backend/event-handlers/handle-subscription-resumed';
-
-const updatePauseStartDate = async (
-  chargebee: ChargeBee,
-  subscriptionId: string,
-  pauseDateIso: string
-) => {
-  await new Promise<typeof chargebee.subscription>((accept, reject) => {
-    chargebee.subscription
-      .update_for_items(subscriptionId, {
-        cf_Pause_date_ISO: pauseDateIso,
-      } as any)
-      .request(function(
-        error: unknown,
-        result: { subscription: typeof chargebee.subscription }
-      ) {
-        if (error) {
-          reject(error);
-        } else {
-          accept(result.subscription);
-        }
-      });
-  });
-};
 
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   const chargebee = new ChargeBee();
@@ -100,8 +76,7 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
           chargebeeEvent.content.customer.id,
           chargebeeEvent.content.subscription.id,
           chargebeeEvent.content.subscription.mrr ?? 0,
-          (chargebeeEvent.content.subscription as any).cf_Pause_date_ISO,
-          DateTime.fromSeconds(chargebeeEvent.occurred_at).toISO() ?? ''
+          (chargebeeEvent.content.subscription as any).cf_Pause_date_ISO
         );
         break;
 
@@ -115,36 +90,10 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
       case "subscription_renewed":
       case "subscription_deleted":
       case "subscription_paused":
+      case "subscription_pause_scheduled":
+      case "subscription_scheduled_pause_removed":
       case "subscription_resumption_scheduled":
       case "subscription_scheduled_resumption_removed":
-        await handleSubscriptionEvent(
-          chargebee,
-          chargebeeEvent.content.customer.id
-        );
-        break;
-
-      case "subscription_pause_scheduled":
-        if (chargebeeEvent.content.subscription.pause_date) {
-          await updatePauseStartDate(
-            chargebee,
-            chargebeeEvent.content.subscription.id,
-            DateTime.fromSeconds(chargebeeEvent.content.subscription.pause_date).toISO() ?? ''
-          );
-        }
-
-        await handleSubscriptionEvent(
-          chargebee,
-          chargebeeEvent.content.customer.id
-        );
-        break;
-
-      case "subscription_scheduled_pause_removed":
-        await updatePauseStartDate(
-          chargebee,
-          chargebeeEvent.content.subscription.id,
-          ''
-        );
-
         await handleSubscriptionEvent(
           chargebee,
           chargebeeEvent.content.customer.id
