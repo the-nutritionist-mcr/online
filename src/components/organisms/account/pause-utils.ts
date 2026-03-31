@@ -12,7 +12,7 @@ export type Pause = {
   planId: string
 }
 
-export type PauseWeeks = 1 | 2 | 3 | 4;
+export type PauseWeeks = 1 | 2;
 
 export const getPause = (user: BackendCustomer): Pause => {
   const now = DateTime.now();
