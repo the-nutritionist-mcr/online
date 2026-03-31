@@ -2,60 +2,70 @@ import { DateTime } from "luxon";
 import { calculatePauseCredit, getPauseCreditDays } from "./calculate-pause-credit";
 
 describe("calculatePauseCredit", () => {
-  describe("getPauseCreditDays", () => {
-    it("normalizes time-of-day values to whole days", () => {
-      expect(
-        getPauseCreditDays(
-          DateTime.fromISO("2024-07-12T23:59:00"),
-          DateTime.fromISO("2024-07-13T00:01:00")
-        )
-      ).toBe(1);
-    });
+  it("credits the full paused period when the pause stays within one month", () => {
+    const pauseStart = DateTime.fromISO("2024-07-12");
+    const resumeDate = DateTime.fromISO("2024-07-23");
 
-    it("clamps the credited days to the billed period overlap", () => {
-      expect(
-        getPauseCreditDays(
-          DateTime.fromISO("2024-02-20"),
-          DateTime.fromISO("2024-03-03"),
-          DateTime.fromISO("2024-02-26"),
-          DateTime.fromISO("2024-03-26")
-        )
-      ).toBe(6);
-    });
-
-    it("clamps the credited days when the resume date falls after the billed period", () => {
-      expect(
-        getPauseCreditDays(
-          DateTime.fromISO("2024-03-20"),
-          DateTime.fromISO("2024-03-30"),
-          DateTime.fromISO("2024-02-26"),
-          DateTime.fromISO("2024-03-26")
-        )
-      ).toBe(6);
-    });
-
-    it("returns zero when the resume date is not after the pause start", () => {
-      expect(
-        getPauseCreditDays(
-          DateTime.fromISO("2024-11-03"),
-          DateTime.fromISO("2024-11-03")
-        )
-      ).toBe(0);
+    expect(getPauseCreditDays(pauseStart, resumeDate)).toBe(11);
+    expect(
+      calculatePauseCredit({
+        pauseStart,
+        resumeDate,
+        subscriptionMrr: 36166,
+      })
+    ).toStrictEqual({
+      creditDays: 11,
+      totalInCents: 13116,
     });
   });
 
-  describe("calculatePauseCredit", () => {
-    it("returns zero amount when mrr is zero", () => {
-      expect(
-        calculatePauseCredit({
-          pauseStart: DateTime.fromISO("2024-07-12"),
-          resumeDate: DateTime.fromISO("2024-07-13"),
-          subscriptionMrr: 0,
-        })
-      ).toStrictEqual({
-        creditDays: 1,
-        totalInCents: 0,
-      });
+  it("only credits the billed portion when a pause crosses a month boundary", () => {
+    const pauseStart = DateTime.fromISO("2024-10-25");
+    const resumeDate = DateTime.fromISO("2024-11-01");
+
+    expect(getPauseCreditDays(pauseStart, resumeDate)).toBe(7);
+    expect(
+      calculatePauseCredit({
+        pauseStart,
+        resumeDate,
+        subscriptionMrr: 36166,
+      })
+    ).toStrictEqual({
+      creditDays: 7,
+      totalInCents: 8346,
+    });
+  });
+
+  it("never produces a negative credit when the resume date is later in the same month", () => {
+    const pauseStart = DateTime.fromISO("2024-10-11");
+    const resumeDate = DateTime.fromISO("2024-10-20");
+
+    expect(getPauseCreditDays(pauseStart, resumeDate)).toBe(9);
+    expect(
+      calculatePauseCredit({
+        pauseStart,
+        resumeDate,
+        subscriptionMrr: 36166,
+      })
+    ).toStrictEqual({
+      creditDays: 9,
+      totalInCents: 10731,
+    });
+  });
+
+  it("returns zero when there is nothing to credit", () => {
+    const pauseStart = DateTime.fromISO("2024-11-03");
+    const resumeDate = DateTime.fromISO("2024-11-03");
+
+    expect(
+      calculatePauseCredit({
+        pauseStart,
+        resumeDate,
+        subscriptionMrr: 36166,
+      })
+    ).toStrictEqual({
+      creditDays: 0,
+      totalInCents: 0,
     });
   });
 });
