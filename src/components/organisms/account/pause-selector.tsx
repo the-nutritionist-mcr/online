@@ -8,6 +8,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { DateTime } from 'luxon';
+import { isFeatureEnabled } from '@/constants/env';
 import SchedulePauseButton from './schedulePauseButton';
 import { humanReadableDate } from './pause-utils';
 
@@ -16,6 +17,7 @@ interface PauseSelectorProps {
 }
 
 const PauseSelector: FC<PauseSelectorProps> = ({ handlePauseSelection }) => {
+  const maxPauseOptions = isFeatureEnabled('updatedPauseLogic') ? 2 : 4;
   const [startDates, setStartDates] = useState<DateTime[]>([]);
   const [resumeDates, setResumeDates] = useState<DateTime[]>([]);
   const [chosenPauseDate, setChosenPauseDate] = useState<DateTime | null>(null);
@@ -30,12 +32,12 @@ const PauseSelector: FC<PauseSelectorProps> = ({ handlePauseSelection }) => {
       : now.plus({ days: 7 - (now.weekday - 1), weeks: 1 });
 
     const dates: DateTime[] = [];
-    for (let i: number = 0; i < 2; i++) {
+    for (let i: number = 0; i < maxPauseOptions; i++) {
       let date: DateTime = nextMondayInAtLeast1Week.plus({ weeks: i });
       dates.push(date.minus({ days: 1 }));
     }
     setStartDates(dates);
-  }, []);
+  }, [maxPauseOptions]);
 
   useEffect(() => {
     if (!chosenPauseDate) return;
@@ -46,12 +48,12 @@ const PauseSelector: FC<PauseSelectorProps> = ({ handlePauseSelection }) => {
 
 
     const dates: DateTime[] = [];
-    for (let i: number = 0; i < 2; i++) {
+    for (let i: number = 0; i < maxPauseOptions; i++) {
       let date: DateTime = nextMondayInAtLeast1Week.plus({ weeks: i });
       dates.push(date.minus({ days: 2 }));
     }
     setResumeDates(dates);
-  }, [chosenPauseDate]);
+  }, [chosenPauseDate, maxPauseOptions]);
 
   const handleChoosePauseDate = (date: string) => {
     setShowScheduleButton(false);

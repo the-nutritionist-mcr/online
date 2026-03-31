@@ -18,9 +18,12 @@ export const ENV = {
   },
 } as const;
 
+const isProductionEnvironment =
+  process.env[ENV.varNames.EnvironmentName] === "prod";
+
 export const FEATURES = {
   userPauseSelection: true, // process.env.NEXT_PUBLIC_ENVIRONMENT === 'cypress',
-  updatedPauseLogic: true,
+  updatedPauseLogic: !isProductionEnvironment,
 } as const;
 
 export const isFeatureEnabled = (feature: keyof typeof FEATURES) => {
