@@ -1,0 +1,4 @@
+
+[mcp_servers.chargebee]
+url = "https://thenutritionist.mcp.eu.chargebee.com/data_lookup_agent"
+enabled = true
