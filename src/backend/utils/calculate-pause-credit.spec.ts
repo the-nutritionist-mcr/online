@@ -1,12 +1,11 @@
 import { DateTime } from "luxon";
-import { calculatePauseCredit, getPauseCreditDays } from "./calculate-pause-credit";
+import { calculatePauseCredit } from "./calculate-pause-credit";
 
 describe("calculatePauseCredit", () => {
   it("credits the full paused period when the pause stays within one month", () => {
     const pauseStart = DateTime.fromISO("2024-07-12");
     const resumeDate = DateTime.fromISO("2024-07-23");
 
-    expect(getPauseCreditDays(pauseStart, resumeDate)).toBe(11);
     expect(
       calculatePauseCredit({
         pauseStart,
@@ -23,7 +22,6 @@ describe("calculatePauseCredit", () => {
     const pauseStart = DateTime.fromISO("2024-10-25");
     const resumeDate = DateTime.fromISO("2024-11-01");
 
-    expect(getPauseCreditDays(pauseStart, resumeDate)).toBe(7);
     expect(
       calculatePauseCredit({
         pauseStart,

@@ -1,6 +1,6 @@
 import { DateTime } from "luxon";
 
-type PauseCreditParams = {
+export type PauseCreditParams = {
   pauseStart: DateTime;
   resumeDate: DateTime;
   subscriptionMrr: number;

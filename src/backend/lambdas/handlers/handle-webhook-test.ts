@@ -12,7 +12,8 @@ import {
 } from "@tnmo/core-backend";
 
 import { handleDeleteCustomer } from "../../event-handlers/handle-delete-customer";
-import { handleSubscriptionResumed } from '@/backend/event-handlers/handle-subscription-resumed';
+import { updatedHandledSubscriptionResumed } from "@/backend/event-handlers/updated-handled-subscription-resumed";
+import { handleSubscriptionPaused } from "@/backend/event-handlers/handle-subscription-paused";
 
 export const handleWebhookTest = async (event: APIGatewayProxyEventV2) => {
   const chargebee = new ChargeBee();
@@ -68,12 +69,18 @@ export const handleWebhookTest = async (event: APIGatewayProxyEventV2) => {
         break;
 
       case "subscription_resumed":
-        await handleSubscriptionResumed(
+        await handleSubscriptionEvent(
           chargebee,
-          chargebeeEvent.content.customer.id,
-          chargebeeEvent.content.subscription.id,
-          chargebeeEvent.content.subscription.mrr ?? 0,
-          (chargebeeEvent.content.subscription as any).cf_Pause_date_ISO
+          chargebeeEvent.content.customer.id
+        );
+        await updatedHandledSubscriptionResumed(chargebee, chargebeeEvent);
+        break;
+
+      case "subscription_paused":
+        await handleSubscriptionPaused(chargebee, chargebeeEvent);
+        await handleSubscriptionEvent(
+          chargebee,
+          chargebeeEvent.content.customer.id
         );
         break;
 
@@ -86,7 +93,6 @@ export const handleWebhookTest = async (event: APIGatewayProxyEventV2) => {
       case "subscription_reactivated":
       case "subscription_renewed":
       case "subscription_deleted":
-      case "subscription_paused":
       case "subscription_pause_scheduled":
       case "subscription_scheduled_pause_removed":
       case "subscription_resumption_scheduled":

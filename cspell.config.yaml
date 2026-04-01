@@ -1,0 +1,12 @@
+version: "0.2"
+dictionaryDefinitions: []
+dictionaries: ["en-gb"]
+language: en
+locale: en-GB
+words:
+  - chargebee
+  - luxon
+  - tnm
+  - tnmo
+ignoreWords: []
+import: []
