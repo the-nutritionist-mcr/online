@@ -12,7 +12,7 @@ import {
 } from "@tnmo/core-backend";
 
 import { handleDeleteCustomer } from "../../event-handlers/handle-delete-customer";
-import { handleSubscriptionResumedProd } from '@/backend/event-handlers/handle-subscription-resumed-prod';
+import { handleSubscriptionResumed } from '@/backend/event-handlers/handle-subscription-resumed';
 
 export const handleWebhookProd = async (event: APIGatewayProxyEventV2) => {
   const chargebee = new ChargeBee();
@@ -68,7 +68,7 @@ export const handleWebhookProd = async (event: APIGatewayProxyEventV2) => {
         break;
 
       case "subscription_resumed":
-        await handleSubscriptionResumedProd(
+        await handleSubscriptionResumed(
           chargebee,
           chargebeeEvent.content.customer.id,
           chargebeeEvent.content.subscription.id,

@@ -10,7 +10,6 @@ In practice what this means is
 - On the first of each month, a new invoice is generated on the Chargebee system. That invoice represents payment for all of the food the customer will receive in *that* month. So for example, if an invoice is generated and paid for on the 1st of April, the customer has paid for food on all the cook days between the 1st of April and the last day of April inclusive
 - When an invoice is generated, Chargebee will automatically request payment for that invoice. If that payment fails, Chargebee will continue to request payment through its [dunning](https://www.chargebee.com/docs/payments/2.0/dunning/dunning-v2) process.
 
-
 # Subscription Pausing
 
 - Chargebee provides the facility to 'pause' a customers subscription.
