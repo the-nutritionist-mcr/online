@@ -22,6 +22,7 @@ export const getPlans = async (
 
   const { list } = response;
 
+  console.log("");
   console.log(JSON.stringify(list, null, 2));
 
   const subscriptionPlans = await Promise.all(

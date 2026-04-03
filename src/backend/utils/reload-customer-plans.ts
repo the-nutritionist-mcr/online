@@ -11,6 +11,7 @@ export const reloadCustomerPlans = async (
   client: ChargeBee,
   customerId: string
 ) => {
+  console.log("Reloading customer plans");
   const poolId = process.env[ENV.varNames.CognitoPoolId];
 
   const plans = await getPlans(client, customerId);
