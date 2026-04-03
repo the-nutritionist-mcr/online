@@ -11,34 +11,35 @@ import {
   CardHeader,
   CardBody,
   Tag,
-} from 'grommet';
-import React, { FC } from 'react';
-import moment from 'moment';
-import { ResetPasswordDialog } from './reset-password-dialog';
+} from "grommet";
+import React, { FC } from "react";
+import moment from "moment";
+import { ResetPasswordDialog } from "./reset-password-dialog";
 import {
   planLabels,
   extrasLabels,
   defaultDeliveryDays,
   itemFamilies,
-} from '@tnmo/config';
-import { debounce } from 'lodash';
-import PlanPanel from './PlanPanel';
+} from "@tnmo/config";
+import { debounce } from "lodash";
+import PlanPanel from "./PlanPanel";
 
-import { OkCancelDialog, TagInput } from '../../components';
+import { OkCancelDialog, TagInput } from "../../components";
 import {
   BackendCustomer,
   Exclusion,
   SubscriptionStatus,
   UpdateCustomerBody,
-} from '@tnmo/types';
+} from "@tnmo/types";
 import {
   planGrid,
   planTagActive,
   planTagCancelled,
   planTagFuture,
   planTagPaused,
-} from './edit-customer-page.css';
-import { convertPlanFormat, validateCustomPlan } from '@tnmo/meal-planning';
+} from "./edit-customer-page.css";
+import { convertPlanFormat, validateCustomPlan } from "@tnmo/meal-planning";
+import { apiRequest } from "@tnmo/core";
 
 const SUBMIT_DEBOUNCE = 500;
 
@@ -56,19 +57,19 @@ export interface EditCustomerPathParams {
 }
 
 const calendarFormat = {
-  sameDay: '[Today]',
-  nextDay: '[Tomorrow]',
-  nextWeek: '[this] dddd',
-  lastDay: '[Yesterday]',
-  lastWeek: 'dddd',
-  sameElse: 'MMM Do',
+  sameDay: "[Today]",
+  nextDay: "[Tomorrow]",
+  nextWeek: "[this] dddd",
+  lastDay: "[Yesterday]",
+  lastWeek: "dddd",
+  sameElse: "MMM Do",
 };
 
 const makePauseString = (start?: number, end?: number) => {
   const startWord = start && moment(start).calendar(null, calendarFormat);
   const endWord = end && moment(end).calendar(null, calendarFormat);
   if (!startWord && !endWord) {
-    return 'No pause';
+    return "No pause";
   }
 
   if (!startWord) {
@@ -96,7 +97,7 @@ const EditCustomerPage: FC<EditCustomerPathParams> = ({
   const statusClasses: StatusClasses = {
     active: planTagActive,
     future: planTagFuture,
-    in_trial: '',
+    in_trial: "",
     non_renewing: planTagActive,
     paused: planTagPaused,
     cancelled: planTagCancelled,
@@ -153,7 +154,7 @@ const EditCustomerPage: FC<EditCustomerPathParams> = ({
       <Header
         justify="start"
         gap="small"
-        style={{ marginTop: '2rem', marginBottom: '2rem' }}
+        style={{ marginTop: "2rem", marginBottom: "2rem" }}
       >
         <Heading level={2}>Update Customer</Heading>
         <Button
@@ -168,9 +169,21 @@ const EditCustomerPage: FC<EditCustomerPathParams> = ({
           name="submit"
           onClick={() => setShowPlanChangedDialog(true)}
         />
+        <Button
+          label="Refresh"
+          name="refresh"
+          onClick={async () => {
+            await apiRequest<BackendCustomer>("customer/refresh", {
+              method: "POST",
+              body: JSON.stringify({
+                customerId: customer.username,
+              }),
+            });
+          }}
+        />
       </Header>
       <Box align="flex-start" gap="large">
-        <Table style={{ maxWidth: '40rem', tableLayout: 'fixed' }}>
+        <Table style={{ maxWidth: "40rem", tableLayout: "fixed" }}>
           <TableBody>
             <TableRow>
               <TableCell scope="row">
@@ -190,13 +203,13 @@ const EditCustomerPage: FC<EditCustomerPathParams> = ({
               <TableCell scope="row">
                 <strong>Delivery Day 1</strong>
               </TableCell>
-              <TableCell>{customer.deliveryDay1 || 'Not Set'}</TableCell>
+              <TableCell>{customer.deliveryDay1 || "Not Set"}</TableCell>
             </TableRow>
             <TableRow>
               <TableCell scope="row">
                 <strong>Delivery Day 2</strong>
               </TableCell>
-              <TableCell>{customer.deliveryDay2 || 'Not Set'}</TableCell>
+              <TableCell>{customer.deliveryDay2 || "Not Set"}</TableCell>
             </TableRow>
             {/*
             <TableRow>
@@ -279,7 +292,7 @@ const EditCustomerPage: FC<EditCustomerPathParams> = ({
                     </span>
                   </CardHeader>
                   <CardBody pad="small">
-                    <Table style={{ tableLayout: 'fixed', width: '100%' }}>
+                    <Table style={{ tableLayout: "fixed", width: "100%" }}>
                       <TableBody>
                         <TableRow>
                           <TableCell scope="row">
