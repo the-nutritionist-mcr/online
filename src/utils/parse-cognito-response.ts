@@ -100,6 +100,10 @@ export const parseCognitoResponse = (
       attributes,
       `custom:${COGNITO.customAttributes.AddressLine3}`
     ),
+    chargebeeId: getAttributeValue(
+      attributes,
+      `custom:${COGNITO.customAttributes.ChargebeeId}`
+    ),
     phoneNumber: getAttributeValue(
       attributes,
       COGNITO.standardAttributes.phone

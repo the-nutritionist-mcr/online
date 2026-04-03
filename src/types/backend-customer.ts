@@ -1,6 +1,6 @@
-import { Delivery } from './customer-plan';
-import Exclusion from './Exclusion';
-import type { StandardPlan } from './standard-plan';
+import { Delivery } from "./customer-plan";
+import Exclusion from "./Exclusion";
+import type { StandardPlan } from "./standard-plan";
 
 export interface BackendCustomer {
   groups: string[];
@@ -25,5 +25,6 @@ export interface BackendCustomer {
   postcode: string;
   plans: StandardPlan[];
   customisations: Exclusion[];
+  chargebeeId: string;
   customPlan?: Delivery[];
 }
