@@ -139,6 +139,7 @@ describe("choose meals v2", () => {
     const pausedCustomer: BackendCustomer = {
       salutation: "mr",
       addressLine1: "somewhere",
+      chargebeeId: "person",
       numberOfBags: 1,
       addressLine2: "somehow",
       addressLine3: "someplace",

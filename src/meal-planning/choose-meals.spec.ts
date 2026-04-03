@@ -142,6 +142,7 @@ const customerOne: BackendCustomer = {
   addressLine3: "someplace",
   firstName: "Ben",
   surname: "Wainwright",
+  chargebeeId: "username",
   email: "foo-email",
 
   country: "GB",
@@ -170,6 +171,7 @@ const customerOne: BackendCustomer = {
 
 const customerTwo: BackendCustomer = {
   numberOfBags: 1,
+  chargebeeId: "username",
   salutation: "mr",
   addressLine1: "somewhere",
   addressLine2: "somehow",
@@ -236,6 +238,7 @@ const customerThree: BackendCustomer = {
   groups: [],
   surname: "bash",
   email: "baz-email",
+  chargebeeId: "username",
   plans: [
     {
       id: "0",

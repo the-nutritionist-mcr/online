@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Box,
   Button,
@@ -12,16 +12,16 @@ import {
   Layer,
   Select,
   TextInput,
-} from 'grommet';
+} from "grommet";
 
 import {
   BackendCustomer,
   Exclusion,
   MealPlanGeneratedForIndividualCustomer,
-} from '@tnmo/types';
-import { v4 } from 'uuid';
-import { TagInput } from '../../components';
-import { editGrid } from './add-ad-hoc-row-dialog.css';
+} from "@tnmo/types";
+import { v4 } from "uuid";
+import { TagInput } from "../../components";
+import { editGrid } from "./add-ad-hoc-row-dialog.css";
 
 interface AddAdHocRowDialogProps {
   onOk: (customer: MealPlanGeneratedForIndividualCustomer) => void;
@@ -33,29 +33,30 @@ export const defaultCustomer = (): BackendCustomer => ({
   groups: [],
   username: v4(),
   numberOfBags: 1,
-  country: '',
-  deliveryDay1: '',
-  deliveryDay2: '',
-  deliveryDay3: '',
-  customerUpdateTime: '',
-  deliveryNotes: '',
-  addressLine1: '',
-  addressLine2: '',
-  phoneNumber: '',
-  addressLine3: '',
-  subscriptionUpdateTime: '',
-  firstName: '',
-  surname: '',
-  salutation: '',
-  email: '',
-  city: '',
-  postcode: '',
+  country: "",
+  deliveryDay1: "",
+  deliveryDay2: "",
+  deliveryDay3: "",
+  customerUpdateTime: "",
+  deliveryNotes: "",
+  addressLine1: "",
+  addressLine2: "",
+  phoneNumber: "",
+  chargebeeId: "",
+  addressLine3: "",
+  subscriptionUpdateTime: "",
+  firstName: "",
+  surname: "",
+  salutation: "",
+  email: "",
+  city: "",
+  postcode: "",
   plans: [
     {
       termEnd: 0,
-      subscriptionStatus: 'active',
-      id: '1',
-      name: 'Adhoc',
+      subscriptionStatus: "active",
+      id: "1",
+      name: "Adhoc",
       daysPerWeek: 0,
       itemsPerDay: 0,
       isExtra: false,
