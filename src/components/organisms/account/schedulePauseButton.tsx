@@ -1,4 +1,5 @@
 import { FC, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { apiRequest } from "../../../core/api-request";
 import { BackendCustomer } from "@tnmo/types";
 import MainButton from "@/components/ui/main-button";
@@ -41,6 +42,12 @@ const SchedulePauseButton: FC<SchedulePauseButtonProps> = ({
           resume_date: resumeDate.toUnixInteger(),
         }),
       });
+      toast.success("Your pause was successfully submitted");
+    } catch (error) {
+      toast.error(
+        "There was an error submitting your pause. Please get in touch with us at hello@thenutritionistmcr.com"
+      );
+      console.log(error);
     } finally {
       setLoading(false);
     }

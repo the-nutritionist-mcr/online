@@ -1,6 +1,6 @@
-import { CHARGEBEE } from '@tnmo/constants';
-import { StandardPlan, SubscriptionStatus } from '@tnmo/types';
-import { ChargeBee } from 'chargebee-typescript';
+import { CHARGEBEE } from "@tnmo/constants";
+import { StandardPlan, SubscriptionStatus } from "@tnmo/types";
+import { ChargeBee } from "chargebee-typescript";
 
 export const getPlans = async (
   client: ChargeBee,
@@ -45,7 +45,7 @@ export const getPlans = async (
                 const itemPrice = itemPriceResult.item_price;
 
                 const itemResult = await client.item
-                  .retrieve(itemPrice.item_id ?? '')
+                  .retrieve(itemPrice.item_id ?? "")
                   .request();
 
                 const plan = itemResult.item;
@@ -62,7 +62,7 @@ export const getPlans = async (
                 );
 
                 const itemFamilyResult = await client.item_family
-                  .retrieve(itemPrice.item_family_id ?? '')
+                  .retrieve(itemPrice.item_family_id ?? "")
                   .request();
 
                 const itemFamily = itemFamilyResult.item_family;
@@ -90,7 +90,7 @@ export const getPlans = async (
                     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                     // @ts-ignore
                     itemFamily[CHARGEBEE.customFields.itemFamily.isExtra] ===
-                    'Yes',
+                    "Yes",
                   totalMeals,
                 };
               })
