@@ -277,6 +277,26 @@ export const makeDataApis = (
     }
   );
 
+  const refreshCustomerFunction = makeFunction(`refresh-customer-function`, {
+    entry: entryName("handlers", "reload-customer-plans.ts"),
+    environment: defaultEnvironmentVars,
+  });
+
+  chargebeeAccessToken.grantRead(refreshCustomerFunction);
+  refreshCustomerFunction.addToRolePolicy(
+    new PolicyStatement({
+      effect: Effect.ALLOW,
+      actions: [IAM.actions.cognito.adminUpdateUserAttributes],
+      resources: [pool.userPoolArn],
+    })
+  );
+
+  const refreshCustomerResource = customer.addResource("refresh");
+  refreshCustomerResource.addMethod(
+    "POST",
+    new LambdaIntegration(refreshCustomerFunction)
+  );
+
   const resetPasswordFunction = makeFunction(`reset-password-function`, {
     entry: entryName("handlers", "reset-password.ts"),
     environment: defaultEnvironmentVars,
