@@ -13,7 +13,8 @@ import {
 
 import { handleDeleteCustomer } from "../../event-handlers/handle-delete-customer";
 import { updatedHandledSubscriptionResumed } from "@/backend/event-handlers/updated-handled-subscription-resumed";
-import { handleSubscriptionPaused } from "@/backend/event-handlers/handle-subscription-paused";
+import { handleSubscriptionPauseScheduled } from "@/backend/event-handlers/handle-subscription-pause-scheduled";
+import { handleSubscriptionScheduledPauseRemoved } from "@/backend/event-handlers/handle-subscription-scheduled-pause-removed";
 
 export const handleWebhookTest = async (event: APIGatewayProxyEventV2) => {
   const chargebee = new ChargeBee();
@@ -77,7 +78,22 @@ export const handleWebhookTest = async (event: APIGatewayProxyEventV2) => {
         break;
 
       case "subscription_paused":
-        await handleSubscriptionPaused(chargebee, chargebeeEvent);
+        await handleSubscriptionEvent(
+          chargebee,
+          chargebeeEvent.content.customer.id
+        );
+        break;
+
+      case "subscription_pause_scheduled":
+        await handleSubscriptionPauseScheduled(chargebee, chargebeeEvent);
+        await handleSubscriptionEvent(
+          chargebee,
+          chargebeeEvent.content.customer.id
+        );
+        break;
+
+      case "subscription_scheduled_pause_removed":
+        await handleSubscriptionScheduledPauseRemoved(chargebee, chargebeeEvent);
         await handleSubscriptionEvent(
           chargebee,
           chargebeeEvent.content.customer.id
@@ -93,8 +109,6 @@ export const handleWebhookTest = async (event: APIGatewayProxyEventV2) => {
       case "subscription_reactivated":
       case "subscription_renewed":
       case "subscription_deleted":
-      case "subscription_pause_scheduled":
-      case "subscription_scheduled_pause_removed":
       case "subscription_resumption_scheduled":
       case "subscription_scheduled_resumption_removed":
         await handleSubscriptionEvent(

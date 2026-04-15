@@ -12,7 +12,7 @@ import {
 } from "@tnmo/core-backend";
 
 import { handleDeleteCustomer } from "../../event-handlers/handle-delete-customer";
-import { handleSubscriptionResumed } from '@/backend/event-handlers/handle-subscription-resumed';
+import { handleSubscriptionResumed } from "@/backend/event-handlers/handle-subscription-resumed";
 
 export const handleWebhookProd = async (event: APIGatewayProxyEventV2) => {
   const chargebee = new ChargeBee();
