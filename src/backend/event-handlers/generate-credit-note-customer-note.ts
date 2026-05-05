@@ -25,6 +25,6 @@ export const generateCreditNoteCustomerNote = ({
   return `Paused from ${start.toLocaleString(
     DateTime.DATE_SHORT
   )} to ${resume.toLocaleString(
-    DateTime.DATETIME_SHORT
+    DateTime.DATE_SHORT
   )}. Crediting for ${creditDays} ${daysString} = ((${mrrPounds} x Months in year) / Days in year) x ${creditDays}`;
 };
