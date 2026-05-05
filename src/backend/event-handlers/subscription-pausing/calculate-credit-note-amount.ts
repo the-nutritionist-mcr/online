@@ -17,10 +17,25 @@ const getPauseCreditDays = (
   const start = pauseStart.startOf("day");
   const resume = resumeDate.startOf("day");
 
-  if (resume <= start) return 0;
+  console.log(
+    `Pause start: ${start.toLocaleString(
+      DateTime.DATE_SHORT
+    )}, end: ${resume.toLocaleString(DateTime.DATE_SHORT)}`
+  );
+
+  if (resume <= start) {
+    console.log(
+      `Resume and start are on the same date or reversed. Credit is zero`
+    );
+    return 0;
+  }
 
   const creditPeriodEnd =
     start.month === resume.month ? resume : resume.startOf("month");
+
+  console.log(
+    `Credit period end: ${creditPeriodEnd.toLocaleString(DateTime.DATE_SHORT)}`
+  );
 
   return Math.max(0, Math.floor(creditPeriodEnd.diff(start, "days").days));
 };
@@ -32,6 +47,8 @@ export const calculatePauseCredit = ({
 }: PauseCreditParams) => {
   const creditDays = getPauseCreditDays(pauseStart, resumeDate);
 
+  console.log(`Crediting for ${creditDays} days`);
+
   if (creditDays === 0 || subscriptionMrr <= 0) {
     return {
       creditDays,
@@ -39,11 +56,21 @@ export const calculatePauseCredit = ({
     };
   }
 
-  const weeklyRate = (subscriptionMrr * MONTHS_PER_YEAR) / WEEKS_PER_YEAR;
-  const dailyRate = weeklyRate / DAYS_PER_WEEK;
+  const dailyRate =
+    (subscriptionMrr * MONTHS_PER_YEAR) / WEEKS_PER_YEAR / DAYS_PER_WEEK;
+
+  console.log(
+    `Daily rate = ((${subscriptionMrr} * ${MONTHS_PER_YEAR}) ${WEEKS_PER_YEAR}) / ${DAYS_PER_WEEK}`
+  );
+
+  const totalInCents = Math.ceil(dailyRate * creditDays);
+
+  console.log(
+    `Total credit = Math.ceil(${totalInCents} * ${creditDays}) = ${totalInCents}`
+  );
 
   return {
     creditDays,
-    totalInCents: Math.ceil(dailyRate * creditDays),
+    totalInCents,
   };
 };
