@@ -1,11 +1,10 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import toast from "react-hot-toast";
 import { apiRequest } from "../../../core/api-request";
 import { BackendCustomer } from "@tnmo/types";
 import MainButton from "@/components/ui/main-button";
 import { DateTime } from "luxon";
 import { useMe } from "@/hooks/use-me";
-import { PauseWeeks } from "./pause-utils";
 
 interface SchedulePauseButtonProps {
   pauseDate: DateTime | null;
