@@ -47,14 +47,14 @@ export const calculatePauseCredit = ({
 }: PauseCreditParams) => {
   const creditDays = getPauseCreditDays(pauseStart, resumeDate);
 
-  console.log(`Crediting for ${creditDays} days`);
-
   if (creditDays === 0 || subscriptionMrr <= 0) {
     return {
       creditDays,
       totalInCents: 0,
     };
   }
+
+  console.log(`Crediting for ${creditDays} days`);
 
   const dailyRate =
     (subscriptionMrr * MONTHS_PER_YEAR) / WEEKS_PER_YEAR / DAYS_PER_WEEK;

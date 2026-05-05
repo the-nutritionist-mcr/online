@@ -16,7 +16,15 @@ export const updatedHandledSubscriptionResumed = async (
   const subscriptionId = event.content.subscription.id;
   const subscriptionMrr = event.content.subscription.mrr;
   const pauseStart = getPauseDate(event);
-  const resumeDate = DateTime.fromSeconds(event.occurred_at);
+
+  /*
+   * The UI manually sets a pause resume date thats two days short in order to ensure
+   * they are included in the cook plan on the day they resume.
+   *
+   * This results in the final week being 4 days rather than six
+   * so we add the extra two days on here for billing purposes.
+   */
+  const resumeDate = DateTime.fromSeconds(event.occurred_at).plus({ days: 2 });
 
   if (!subscriptionMrr) {
     return;
