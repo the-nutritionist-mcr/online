@@ -7,7 +7,10 @@ import { HttpError } from "@tnmo/core";
  *
  * @param error - The thrown error
  */
-export const returnErrorResponse = (error?: Error | unknown) => {
+export const returnErrorResponse = (
+  error?: Error | unknown,
+  context?: Record<string, unknown>
+) => {
   const stack =
     !(error instanceof Error) ||
     process.env["ENVIRONMENT_NAME"] === "prod" ||
@@ -24,13 +27,17 @@ export const returnErrorResponse = (error?: Error | unknown) => {
     setErrorOnServiceEntrySpan(error);
   }
 
-  console.log(error);
+  const contextObj = context ? {} : context;
 
   const errorObj =
     error && error instanceof Error ? { error: error.message } : {};
 
+  const bodyObject = { ...errorObj, ...stack, ...contextObj };
+
+  console.log(bodyObject);
+
   return {
-    body: JSON.stringify({ ...errorObj, ...stack }),
+    body: JSON.stringify(bodyObject),
     statusCode,
     headers: {
       [HTTP.headerNames.AccessControlAllowOrigin]: "*",

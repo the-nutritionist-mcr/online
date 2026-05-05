@@ -31,14 +31,14 @@ export const handleWebhookTest = async (event: APIGatewayProxyEventV2) => {
     api_key: await chargebeeToken,
   });
 
+  const chargebeeEvent = chargebee.event.deserialize(event.body || "");
+
   try {
     authoriseBasic(
       event,
       (await chargebeeWebhookUsername) || "",
       (await chargebeeWebhookPassword) || ""
     );
-
-    const chargebeeEvent = chargebee.event.deserialize(event.body || "");
 
     const { email } = chargebeeEvent.content["customer"];
 
@@ -93,7 +93,10 @@ export const handleWebhookTest = async (event: APIGatewayProxyEventV2) => {
         break;
 
       case "subscription_scheduled_pause_removed":
-        await handleSubscriptionScheduledPauseRemoved(chargebee, chargebeeEvent);
+        await handleSubscriptionScheduledPauseRemoved(
+          chargebee,
+          chargebeeEvent
+        );
         await handleSubscriptionEvent(
           chargebee,
           chargebeeEvent.content.customer.id
@@ -122,6 +125,6 @@ export const handleWebhookTest = async (event: APIGatewayProxyEventV2) => {
       statusCode: HTTP.statusCodes.Ok,
     };
   } catch (error) {
-    return returnErrorResponse(error);
+    return returnErrorResponse(error, { eventId: chargebeeEvent.id });
   }
 };
