@@ -44,6 +44,8 @@ export const updatedHandledSubscriptionResumed = async (
   });
 
   const notes = generateCreditNoteCustomerNote({
+    start: pauseStart,
+    resume: resumeDate,
     creditDays: pauseCredit.creditDays,
     mrr: subscriptionMrr,
   });
