@@ -23,8 +23,10 @@ const SchedulePauseButton: FC<SchedulePauseButtonProps> = ({
   const handleClick = async () => {
     if (!pauseDate || !resumeDate || !user) return;
     setLoading(true);
-    user.plans.forEach(async (plan) =>
-      pausePlan(plan.id, pauseDate, resumeDate)
+    await Promise.all(
+      user.plans.map(
+        async (plan) => await pausePlan(plan.id, pauseDate, resumeDate)
+      )
     );
   };
 

@@ -463,7 +463,7 @@ export const makeDataApis = (
 
   // Pause plan
   const chargebeePausePlanFunction = makeFunction(`chargebee-pause-plan`, {
-    entry: entryName("handlers", "chargebee-pause-plan.ts"),
+    entry: entryName("handlers/pause-plan", "handler.ts"),
     environment: defaultEnvironmentVars,
   });
 

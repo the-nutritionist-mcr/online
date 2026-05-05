@@ -29,18 +29,11 @@ const PauseStatus: FC = () => {
         <div className="grid gap-6 pt-2 col-span-3">
           <TextBlock>
             You have a pause scheduled from{" "}
-            {humanReadableDate(
-              pauseStart.plus({ days: 1 }),
-              currentYear !== pauseStart.year
-            )}
-            , resuming on{" "}
-            {humanReadableDate(
-              pauseEnd.plus({ days: 1 }),
-              currentYear !== pauseEnd.year
-            )}
-            .
+            {humanReadableDate(pauseStart, currentYear !== pauseStart.year)},
+            resuming on{" "}
+            {humanReadableDate(pauseEnd, currentYear !== pauseEnd.year)}.
           </TextBlock>
-          {pauseStart.plus({ days: 1 }).toMillis() >
+          {pauseStart.toMillis() >
             DateTime.now().plus({ weeks: 1 }).toMillis() && (
             <div className="grid grid-cols-3">
               <CancelPauseButton
@@ -58,10 +51,7 @@ const PauseStatus: FC = () => {
               <br />
               It will resume on{" "}
               {pauseEnd
-                ? humanReadableDate(
-                    pauseEnd.plus({ days: 3 }),
-                    currentYear !== pauseEnd.year
-                  )
+                ? humanReadableDate(pauseEnd, currentYear !== pauseEnd.year)
                 : "..."}
             </strong>
           </TextBlock>

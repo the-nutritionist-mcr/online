@@ -1,60 +1,56 @@
 import { ChargeBee } from "chargebee-typescript";
 import { Event } from "chargebee-typescript/lib/resources";
-import { getInvoiceContainingDate } from "./subscription-pausing/get-invoice-containing-date";
+import { getRelevantInvoices } from "./subscription-pausing/get-invoice-containing-date";
 import { DateTime } from "luxon";
-import { calculatePauseCredit } from "./subscription-pausing/calculate-credit-note-amount";
-import { applyCreditNoteToInvoice } from "./subscription-pausing/apply-credit-note-to-invoice";
 import { getPauseDate } from "./subscription-pausing/get-pause-date";
 import { setPauseDate } from "./subscription-pausing/set-pause-date";
-import { generateCreditNoteCustomerNote } from "./generate-credit-note-customer-note";
-
-const SUBSCRIPTION_PAUSED_REASON_CODE = "Subscription Paused";
+import { calculateSubscriptionTotal } from "./subscription-pausing/calculate-subscription-total";
+import { calculateCreditAmountsFromCookDays } from "./subscription-pausing/calculate-credit-amounts-from-cook-days";
+import { creditInvoice } from "./subscription-pausing/credit-invoices";
 
 export const updatedHandledSubscriptionResumed = async (
   client: ChargeBee,
   event: Event
 ) => {
   const subscriptionId = event.content.subscription.id;
-  const subscriptionMrr = event.content.subscription.mrr;
+
+  const subscriptionMrr = calculateSubscriptionTotal(
+    event.content.subscription
+  );
+
   const pauseStart = getPauseDate(event);
 
-  /*
-   * The UI manually sets a pause resume date thats two days short in order to ensure
-   * they are included in the cook plan on the day they resume.
-   *
-   * This results in the final week being 4 days rather than six
-   * so we add the extra two days on here for billing purposes.
-   */
-  const resumeDate = DateTime.fromSeconds(event.occurred_at).plus({ days: 2 });
+  const resumeDate = DateTime.fromSeconds(event.occurred_at);
 
   if (!subscriptionMrr) {
     return;
   }
 
-  const invoice = await getInvoiceContainingDate(
+  const invoices = await getRelevantInvoices(
     client,
     subscriptionId,
-    pauseStart
+    pauseStart,
+    resumeDate
   );
 
-  const pauseCredit = calculatePauseCredit({
+  const amounts = calculateCreditAmountsFromCookDays({
     pauseStart,
     resumeDate,
+    invoices,
     subscriptionMrr,
   });
 
-  const notes = generateCreditNoteCustomerNote({
-    start: pauseStart,
-    resume: resumeDate,
-    creditDays: pauseCredit.creditDays,
-    mrr: subscriptionMrr,
-  });
+  for (const [invoiceId, invoiceAmounts] of amounts) {
+    const theInvoice = invoices.find((invoice) => invoice.id === invoiceId);
+    if (theInvoice) {
+      await creditInvoice(client, {
+        pauseStart,
+        resumeDate,
+        invoice: theInvoice,
+        missedCookDays: invoiceAmounts,
+      });
+    }
+  }
 
-  await applyCreditNoteToInvoice(client, {
-    credit: pauseCredit,
-    invoice,
-    reason: SUBSCRIPTION_PAUSED_REASON_CODE,
-    notes,
-  });
   await setPauseDate(client, subscriptionId, null);
 };

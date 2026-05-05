@@ -16,7 +16,7 @@ import { updatedHandledSubscriptionResumed } from "@/backend/event-handlers/upda
 import { handleSubscriptionPauseScheduled } from "@/backend/event-handlers/handle-subscription-pause-scheduled";
 import { handleSubscriptionScheduledPauseRemoved } from "@/backend/event-handlers/handle-subscription-scheduled-pause-removed";
 
-export const handleWebhookTest = async (event: APIGatewayProxyEventV2) => {
+export const handleWebhookUpdated = async (event: APIGatewayProxyEventV2) => {
   const chargebee = new ChargeBee();
 
   const [chargebeeToken, chargebeeWebhookUsername, chargebeeWebhookPassword] =

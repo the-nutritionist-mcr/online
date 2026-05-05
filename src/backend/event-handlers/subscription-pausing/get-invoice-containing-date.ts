@@ -1,14 +1,10 @@
 import { ChargeBee } from "chargebee-typescript";
 import { Invoice } from "chargebee-typescript/lib/resources";
-import { DateTime } from "luxon";
+import { DateTime, Interval } from "luxon";
 
-export const getInvoiceContainingDate = async (
-  client: ChargeBee,
-  subscriptionId: string,
-  date: DateTime
-): Promise<Invoice> => {
+const getInvoices = async (client: ChargeBee, subscriptionId: string) => {
+  const invoices: Invoice[] = [];
   let offset: string | undefined;
-
   do {
     const result = await new Promise<{
       list: Array<{ invoice: Invoice }>;
@@ -16,9 +12,10 @@ export const getInvoiceContainingDate = async (
     }>((resolve, reject) => {
       client.invoice
         .list({
-          limit: 2,
+          limit: 3,
           offset,
           subscription_id: { is: subscriptionId },
+          status: { in: ["posted", "not_paid", "payment_due", "paid"] },
           "sort_by[desc]": "date",
         })
         .request(
@@ -39,22 +36,39 @@ export const getInvoiceContainingDate = async (
         );
     });
 
-    const invoice = result.list
-      .map(({ invoice }) => invoice)
-      .find(
-        (candidate) =>
-          candidate.date &&
-          DateTime.fromSeconds(candidate.date).hasSame(date, "month")
-      );
+    offset = result.next_offset;
+    invoices.push(...result.list.map((item) => item.invoice));
+  } while (offset);
+  return invoices;
+};
 
-    if (invoice) {
-      return invoice;
+export const getRelevantInvoices = async (
+  client: ChargeBee,
+  subscriptionId: string,
+  startDate: DateTime,
+  endDate: DateTime
+): Promise<Invoice[]> => {
+  const invoices = await getInvoices(client, subscriptionId);
+
+  return invoices.filter((invoice) => {
+    if (!invoice.date) {
+      return false;
     }
 
-    offset = result.next_offset;
-  } while (offset);
+    if (DateTime.fromSeconds(invoice.date).hasSame(startDate, "month")) {
+      return true;
+    }
 
-  throw new Error(
-    `No invoice found for subscription ${subscriptionId} containing ${date.toISO()}.`
-  );
+    if (DateTime.fromSeconds(invoice.date).hasSame(endDate, "month")) {
+      return true;
+    }
+
+    const range = Interval.fromDateTimes(startDate, endDate);
+
+    if (range.contains(DateTime.fromSeconds(invoice.date))) {
+      return true;
+    }
+
+    return false;
+  });
 };

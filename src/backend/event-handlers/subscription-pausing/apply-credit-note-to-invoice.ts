@@ -2,7 +2,7 @@ import { ChargeBee } from "chargebee-typescript";
 import { CreditNote, Invoice } from "chargebee-typescript/lib/resources";
 
 interface CreditNoteDetails {
-  credit: { creditDays: number; totalInCents: number };
+  amount: number;
   invoice: Invoice;
   notes: string;
   reason: string;
@@ -10,9 +10,9 @@ interface CreditNoteDetails {
 
 export const applyCreditNoteToInvoice = async (
   client: ChargeBee,
-  { credit, invoice, notes, reason }: CreditNoteDetails
+  { amount, invoice, notes, reason }: CreditNoteDetails
 ) => {
-  if (credit.totalInCents <= 0) {
+  if (amount <= 0) {
     return;
   }
 
@@ -35,7 +35,7 @@ export const applyCreditNoteToInvoice = async (
     client.credit_note
       .create({
         reference_invoice_id: invoice.id,
-        total: credit.totalInCents,
+        total: amount,
         type: creditNoteType,
         create_reason_code: reason,
         customer_notes: notes,
