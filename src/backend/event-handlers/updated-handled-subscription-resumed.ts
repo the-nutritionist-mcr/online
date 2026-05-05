@@ -6,6 +6,7 @@ import { calculatePauseCredit } from "./subscription-pausing/calculate-credit-no
 import { applyCreditNoteToInvoice } from "./subscription-pausing/apply-credit-note-to-invoice";
 import { getPauseDate } from "./subscription-pausing/get-pause-date";
 import { setPauseDate } from "./subscription-pausing/set-pause-date";
+import { generateCreditNoteCustomerNote } from "./generate-credit-note-customer-note";
 
 const SUBSCRIPTION_PAUSED_REASON_CODE = "Subscription Paused";
 
@@ -42,13 +43,16 @@ export const updatedHandledSubscriptionResumed = async (
     subscriptionMrr,
   });
 
+  const notes = generateCreditNoteCustomerNote({
+    creditDays: pauseCredit.creditDays,
+    mrr: subscriptionMrr,
+  });
+
   await applyCreditNoteToInvoice(client, {
     credit: pauseCredit,
     invoice,
     reason: SUBSCRIPTION_PAUSED_REASON_CODE,
-    notes: `Pause credit for ${pauseCredit.creditDays} day${
-      pauseCredit.creditDays === 1 ? "" : "s"
-    }.`,
+    notes,
   });
   await setPauseDate(client, subscriptionId, null);
 };
