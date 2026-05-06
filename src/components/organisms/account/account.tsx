@@ -1,13 +1,13 @@
-import { FC, Fragment, useEffect, useMemo } from 'react';
+import { FC, Fragment, useEffect, useMemo } from "react";
 
-import { StandardPlan } from '@tnmo/types';
-import { NavigationContext } from '@tnmo/utils';
-import { useContext } from 'react';
-import { Button, Input, Link } from '../../atoms';
-import { FormSection } from '../../containers';
-import { text } from './account.css';
-import PauseStatus from './pause-status';
-import { ENV, FEATURES, isFeatureEnabled } from '@tnmo/constants';
+import { StandardPlan } from "@tnmo/types";
+import { NavigationContext } from "@tnmo/utils";
+import { useContext } from "react";
+import { Button, Input, Link } from "../../atoms";
+import { FormSection } from "../../containers";
+import { text } from "./account.css";
+import PauseStatus from "./pause-status";
+import { ENV, FEATURES, isFeatureEnabled } from "@tnmo/constants";
 
 export interface User {
   username: string;
@@ -45,11 +45,11 @@ export const Account: FC<AccountProps> = ({
   const { prefetch } = useContext(NavigationContext);
 
   useEffect(() => {
-    prefetch?.('/choose-meals/');
+    prefetch?.("/choose-meals/");
   }, [prefetch]);
 
-  useEffect(() => { 
-    console.log('environment:', process.env[ENV.varNames.EnvironmentName]);
+  useEffect(() => {
+    console.log("environment:", process.env[ENV.varNames.EnvironmentName]);
   }, []);
 
   return (
@@ -105,32 +105,33 @@ export const Account: FC<AccountProps> = ({
         <Input name="city" label="City" value={userDetails.city} disabled />
       </FormSection>
 
-      {
-        showPlans &&
+      {showPlans && (
         <>
           <FormSection heading="Your Plan" showQuestionMarkIcon>
-            {
-              plans?.map(plan => (
-                <Fragment key={plan.id}>
-                  <Input
-                    label="Meal Size"
-                    value={plan.name}
-                    disabled
-                  />
-                  <Input
-                    label="Weekly Meals"
-                    value={String(plan.totalMeals)}
-                    disabled
-                  />
-                </Fragment>
-              ))
-            }
+            {plans?.map((plan) => (
+              <Fragment key={plan.id}>
+                <Input label="Meal Size" value={plan.name} disabled />
+                <Input
+                  label="Weekly Meals"
+                  value={String(plan.totalMeals)}
+                  disabled
+                />
+              </Fragment>
+            ))}
           </FormSection>
-          {
-            isFeatureEnabled('userPauseSelection') && <PauseStatus />
-          }
+          <p className={text}>
+            Meal selections are now open. Click on the button below to view the
+            meals you will be receiving for the week or to make alternative
+            choices.
+          </p>
+          <p className={text}>
+            Pause functionality has been temporarily disabled for maintenance
+            purposes. If you'd like to pause delivery, please get in touch at
+            hello@thenutritionistmcr.com
+          </p>
+          {/* isFeatureEnabled('userPauseSelection') && <PauseStatus /> */}
         </>
-      }
+      )}
 
       {(plans?.filter((plan) => !plan.isExtra).length ?? 0) > 0 && (
         <FormSection heading="Choose Meals">
