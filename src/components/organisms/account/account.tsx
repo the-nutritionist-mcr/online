@@ -124,12 +124,15 @@ export const Account: FC<AccountProps> = ({
             meals you will be receiving for the week or to make alternative
             choices.
           </p>
-          <p className={text}>
-            Pause functionality has been temporarily disabled for maintenance
-            purposes. If you'd like to pause delivery, please get in touch at
-            hello@thenutritionistmcr.com
-          </p>
-          {/* isFeatureEnabled('userPauseSelection') && <PauseStatus /> */}
+          {userDetails.email !== "bwainwright@28@gmail.com" ? (
+            <p className={text}>
+              Pause functionality has been temporarily disabled for maintenance
+              purposes. If you'd like to pause delivery, please get in touch at
+              hello@thenutritionistmcr.com
+            </p>
+          ) : (
+            isFeatureEnabled("userPauseSelection") && <PauseStatus />
+          )}
         </>
       )}
 

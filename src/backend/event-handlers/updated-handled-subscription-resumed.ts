@@ -12,6 +12,9 @@ export const updatedHandledSubscriptionResumed = async (
   client: ChargeBee,
   event: Event
 ) => {
+  if (event.content.customer.email !== "bwainwright28@gmail.com") {
+    return;
+  }
   const subscriptionId = event.content.subscription.id;
 
   const subscriptionMrr = calculateSubscriptionTotal(
