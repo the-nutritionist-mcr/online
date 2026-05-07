@@ -125,11 +125,16 @@ export const Account: FC<AccountProps> = ({
             choices.
           </p>
           {userDetails.email !== "bwainwright@28@gmail.com" ? (
-            <p className={text}>
-              Pause functionality has been temporarily disabled for maintenance
-              purposes. If you'd like to pause delivery, please get in touch at
-              hello@thenutritionistmcr.com
-            </p>
+            <>
+              <br />
+              <p className={text}>
+                <strong>
+                  Pause functionality has been temporarily disabled for
+                  maintenance purposes. If you'd like to pause delivery, please
+                  get in touch at hello@thenutritionistmcr.com
+                </strong>
+              </p>
+            </>
           ) : (
             isFeatureEnabled("userPauseSelection") && <PauseStatus />
           )}
