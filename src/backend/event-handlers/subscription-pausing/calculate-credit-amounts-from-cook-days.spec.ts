@@ -51,29 +51,54 @@ describe("calculateCreditAmountsFromCookDays", () => {
       subscriptionMrr: 50000,
       invoices: [
         invoice(
-          "may-invoice",
-          "2026-05-01T00:00:00.000+01:00",
-          "2026-06-01T00:00:00.000+01:00"
-        ),
-        invoice(
           "june-invoice",
           "2026-06-01T00:00:00.000+01:00",
           "2026-07-01T00:00:00.000+01:00"
+        ),
+        invoice(
+          "may-invoice",
+          "2026-05-01T00:00:00.000+01:00",
+          "2026-06-01T00:00:00.000+01:00"
         ),
       ],
     });
 
     expect(credits.get("may-invoice")?.credit).toBe(34616);
-    expect(credits.get("may-invoice")?.dates.map((date) => date.toISODate())).toEqual([
-      "2026-05-24",
-      "2026-05-27",
-      "2026-05-31",
-    ]);
+    expect(
+      credits.get("may-invoice")?.dates.map((date) => date.toISODate())
+    ).toEqual(["2026-05-24", "2026-05-27", "2026-05-31"]);
     expect(credits.get("june-invoice")?.credit).toBe(11539);
     expect(
       credits.get("june-invoice")?.dates.map((date) => date.toISODate())
-    ).toEqual([
-      "2026-06-03",
-    ]);
+    ).toEqual(["2026-06-03"]);
+  });
+
+  it("credits unmatched cook days to the latest invoice", () => {
+    const credits = calculateCreditAmountsFromCookDays({
+      pauseStart: DateTime.fromISO("2026-05-23T23:00:00.000+00:00"),
+      resumeDate: DateTime.fromISO("2026-06-06T23:02:36.000+00:00"),
+      subscriptionMrr: 50000,
+      invoices: [
+        invoice(
+          "june-invoice",
+          "2026-06-07T00:00:00.000+01:00",
+          "2026-07-01T00:00:00.000+01:00"
+        ),
+        invoice(
+          "may-invoice",
+          "2026-05-01T00:00:00.000+01:00",
+          "2026-06-01T00:00:00.000+01:00"
+        ),
+      ],
+    });
+
+    expect(credits.get("may-invoice")?.credit).toBe(34616);
+    expect(
+      credits.get("may-invoice")?.dates.map((date) => date.toISODate())
+    ).toEqual(["2026-05-24", "2026-05-27", "2026-05-31"]);
+    expect(credits.get("june-invoice")?.credit).toBe(11539);
+    expect(
+      credits.get("june-invoice")?.dates.map((date) => date.toISODate())
+    ).toEqual(["2026-06-03"]);
   });
 });

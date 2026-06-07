@@ -58,11 +58,12 @@ export const calculateCreditAmountsFromCookDays = ({
   const missedDays = collectMissedCookDays({ pauseStart, resumeDate });
 
   const daysByInvoice = new Map<string, DateTime[]>();
+  const fallbackInvoice = invoices[0];
 
   for (const day of missedDays) {
-    const matchingInvoice = invoices.find((invoice) =>
-      invoiceContainsCookDay(invoice, day)
-    );
+    const matchingInvoice =
+      invoices.find((invoice) => invoiceContainsCookDay(invoice, day)) ??
+      fallbackInvoice;
 
     if (!matchingInvoice) {
       continue;
