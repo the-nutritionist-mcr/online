@@ -1,4 +1,3 @@
-import { Invoice } from "chargebee-typescript/lib/resources";
 import { DateTime } from "luxon";
 
 const SUNDAY = 7;
@@ -11,7 +10,6 @@ export type PauseCreditParams = {
   pauseStart: DateTime;
   resumeDate: DateTime;
   subscriptionMrr: number;
-  invoices: Invoice[];
 };
 
 const collectMissedCookDays = ({
@@ -40,42 +38,14 @@ const collectMissedCookDays = ({
 export const calculateCreditAmountsFromCookDays = ({
   pauseStart,
   resumeDate,
-  invoices,
   subscriptionMrr,
 }: PauseCreditParams) => {
   const missedDays = collectMissedCookDays({ pauseStart, resumeDate });
 
-  const subscriptions = new Map<string, DateTime[]>();
-
-  for (const day of missedDays) {
-    const matchingInvoice = invoices.find(
-      (invoice) =>
-        invoice.date && DateTime.fromSeconds(invoice.date).hasSame(day, "month")
-    );
-
-    if (!matchingInvoice) {
-      continue;
-    }
-
-    subscriptions.set(matchingInvoice.id, [
-      ...(subscriptions.get(matchingInvoice.id) ?? []),
-      day,
-    ]);
-  }
-
-  const finalReturnValue = new Map<
-    string,
-    { dates: DateTime[]; credit: number }
-  >();
-
   const weeklyRate = (subscriptionMrr * MONTHS_PER_YEAR) / WEEKS_PER_YEAR;
 
-  for (const [id, dates] of subscriptions) {
-    finalReturnValue.set(id, {
-      dates,
-      credit: Math.ceil(dates.length * weeklyRate),
-    });
-  }
-
-  return finalReturnValue;
+  return {
+    dates: missedDays,
+    credit: Math.ceil(missedDays.length * weeklyRate),
+  };
 };

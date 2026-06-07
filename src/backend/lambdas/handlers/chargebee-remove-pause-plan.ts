@@ -15,7 +15,7 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
     const payload = JSON.parse(event.body ?? '');
 
     // cancel pause
-    await new Promise<typeof chargebee.subscription>(
+    const subscription = await new Promise<typeof chargebee.subscription>(
       (accept, reject) => {
         chargebee.subscription
           .remove_scheduled_pause(payload.plan_id)
@@ -35,7 +35,7 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
     );
 
     // clear pause date in custom field
-    const subscription = await new Promise<typeof chargebee.subscription>(
+    await new Promise<typeof chargebee.subscription>(
       (accept, reject) => {
         chargebee.subscription
           .update_for_items(payload.plan_id, {

@@ -1,6 +1,6 @@
 import { ChargeBee } from "chargebee-typescript";
 import { Event } from "chargebee-typescript/lib/resources";
-import { getRelevantInvoices } from "./subscription-pausing/get-invoice-containing-date";
+import { getLatestInvoice } from "./subscription-pausing/get-invoice-containing-date";
 import { DateTime } from "luxon";
 import { getPauseDate } from "./subscription-pausing/get-pause-date";
 import { setPauseDate } from "./subscription-pausing/set-pause-date";
@@ -45,7 +45,7 @@ export const updatedHandledSubscriptionResumed = async (
     console.log("Resolved resumed subscription pause dates", {
       eventId: event.id,
       subscriptionId,
-      // Chargebee custom fields are present at runtime but not modelled in the SDK type.
+      // Chargebee clears pause_date before subscription_resumed is delivered.
       rawPauseDate: (event.content.subscription as any).cf_Pause_date_ISO,
       pauseStart: serialiseDate(pauseStart),
       resumeDate: serialiseDate(resumeDate),
@@ -71,75 +71,73 @@ export const updatedHandledSubscriptionResumed = async (
       return;
     }
 
-    console.log("Fetching invoices relevant to resumed subscription pause", {
+    console.log("Fetching latest invoice for resumed subscription pause", {
       eventId: event.id,
       subscriptionId,
       pauseStart: pauseStart.toISO(),
       resumeDate: resumeDate.toISO(),
     });
 
-    const invoices = await getRelevantInvoices(
-      client,
-      subscriptionId,
-      pauseStart,
-      resumeDate
-    );
+    const invoice = await getLatestInvoice(client, subscriptionId);
 
-    console.log("Fetched invoices relevant to resumed subscription pause", {
+    console.log("Fetched latest invoice for resumed subscription pause", {
       eventId: event.id,
       subscriptionId,
-      invoiceCount: invoices.length,
-      invoices: invoices.map((invoice) => ({
+      invoice: invoice
+        ? {
+            id: invoice.id,
+            date: invoice.date,
+            status: invoice.status,
+            total: invoice.total,
+          }
+        : null,
+    });
+
+    if (!invoice) {
+      throw new Error(
+        `Could not find an invoice to credit for subscription ${subscriptionId}.`
+      );
+    }
+
+    const creditAmount = calculateCreditAmountsFromCookDays({
+      pauseStart,
+      resumeDate,
+      subscriptionMrr,
+    });
+
+    console.log("Calculated resumed subscription credit amount", {
+      eventId: event.id,
+      subscriptionId,
+      invoice: {
         id: invoice.id,
         date: invoice.date,
         status: invoice.status,
         total: invoice.total,
-      })),
+      },
+      credit: creditAmount.credit,
+      dates: creditAmount.dates.map((date) => date.toISODate()),
     });
 
-    const amounts = calculateCreditAmountsFromCookDays({
-      pauseStart,
-      resumeDate,
-      invoices,
-      subscriptionMrr,
-    });
-
-    console.log("Calculated resumed subscription credit amounts", {
+    console.log("Creating pause credit note for resumed subscription", {
       eventId: event.id,
       subscriptionId,
-      creditCount: amounts.size,
-      credits: [...amounts.entries()].map(([invoiceId, invoiceAmounts]) => ({
-        invoiceId,
-        credit: invoiceAmounts.credit,
-        dates: invoiceAmounts.dates.map((date) => date.toISODate()),
-      })),
+      invoiceId: invoice.id,
+      credit: creditAmount.credit,
+      missedCookDays: creditAmount.dates.map((date) => date.toISODate()),
     });
 
-    for (const [invoiceId, invoiceAmounts] of amounts) {
-      const theInvoice = invoices.find((invoice) => invoice.id === invoiceId);
-      if (theInvoice) {
-        console.log("Creating pause credit note for resumed subscription", {
-          eventId: event.id,
-          subscriptionId,
-          invoiceId,
-          credit: invoiceAmounts.credit,
-          missedCookDays: invoiceAmounts.dates.map((date) => date.toISODate()),
-        });
+    await creditInvoice(client, {
+      pauseStart,
+      resumeDate,
+      invoice,
+      missedCookDays: creditAmount,
+    });
 
-        await creditInvoice(client, {
-          pauseStart,
-          resumeDate,
-          invoice: theInvoice,
-          missedCookDays: invoiceAmounts,
-        });
-
-        console.log("Created pause credit note for resumed subscription", {
-          eventId: event.id,
-          subscriptionId,
-          invoiceId,
-        });
-      }
-    }
+    console.log("Created pause credit note for resumed subscription", {
+      eventId: event.id,
+      subscriptionId,
+      invoiceId: invoice.id,
+    });
 
     console.log("Clearing stored subscription pause date", {
       eventId: event.id,

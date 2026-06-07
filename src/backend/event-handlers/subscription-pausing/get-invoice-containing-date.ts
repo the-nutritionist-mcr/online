@@ -57,6 +57,14 @@ const getInvoices = async (client: ChargeBee, subscriptionId: string) => {
   return invoices;
 };
 
+export const getLatestInvoice = async (
+  client: ChargeBee,
+  subscriptionId: string
+): Promise<Invoice | null> => {
+  const invoices = await getInvoices(client, subscriptionId);
+  return invoices[0] ?? null;
+};
+
 export const getRelevantInvoices = async (
   client: ChargeBee,
   subscriptionId: string,
