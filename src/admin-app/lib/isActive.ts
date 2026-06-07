@@ -3,7 +3,7 @@ import { Customer } from '@tnmo/types';
 const isActive = (customer: Customer, date?: Date): boolean => {
   const now = date ?? new Date(Date.now());
 
-  if (customer.pauseEnd && now > new Date(customer.pauseEnd)) {
+  if (customer.pauseEnd && now >= new Date(customer.pauseEnd)) {
     return true;
   }
 
@@ -13,7 +13,7 @@ const isActive = (customer: Customer, date?: Date): boolean => {
 
   if (
     customer.pauseStart &&
-    now > new Date(customer.pauseStart) &&
+    now >= new Date(customer.pauseStart) &&
     customer.pauseEnd &&
     now < new Date(customer.pauseEnd)
   ) {
@@ -30,7 +30,7 @@ const isActive = (customer: Customer, date?: Date): boolean => {
 
   if (
     customer.pauseStart &&
-    now > new Date(customer.pauseStart) &&
+    now >= new Date(customer.pauseStart) &&
     !customer.pauseEnd
   ) {
     return false;

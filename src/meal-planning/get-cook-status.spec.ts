@@ -12,6 +12,32 @@ const date = (day: number, month: number, year: number) => {
 };
 
 describe('getCookStatus', () => {
+  it('treats the pause end as an exclusive boundary', () => {
+    const resumeDate = new Date('2026-06-06T23:00:00.000Z');
+    const mockPlan = mock<StandardPlan>({
+      pauseStart: new Date('2026-05-23T23:00:00.000Z').getTime(),
+      pauseEnd: resumeDate.getTime(),
+      subscriptionStatus: 'paused',
+    });
+
+    expect(getCookStatus(resumeDate, mockPlan)).toEqual({ status: 'active' });
+  });
+
+  it('treats the pause start as an inclusive boundary', () => {
+    const pauseStart = new Date('2026-05-23T23:00:00.000Z');
+    const mockPlan = mock<StandardPlan>({
+      pauseStart: pauseStart.getTime(),
+      pauseEnd: new Date('2026-06-06T23:00:00.000Z').getTime(),
+      subscriptionStatus: 'active',
+    });
+
+    expect(getCookStatus(pauseStart, mockPlan)).toEqual({
+      status: 'paused',
+      pausedFrom: pauseStart,
+      pausedUntil: new Date('2026-06-06T23:00:00.000Z'),
+    });
+  });
+
   it.each`
     cookDay              | pauseStart           | pauseEnd             | subscriptionStart   | subscriptionStatus | cancelledAt  | result                                                                                | termEnd
     ${date(11, 6, 2022)} | ${undefined}         | ${undefined}         | ${undefined}        | ${'active'}        | ${undefined} | ${{ status: 'active' }}                                                               | ${date(12, 7, 2022)}

@@ -32,7 +32,7 @@ const individualPlanIsActive = (cookDate: Date, plan: StandardPlan) => {
     return false;
   }
 
-  if (pauseEnd && cookDate > pauseEnd) {
+  if (pauseEnd && cookDate >= pauseEnd) {
     return true;
   }
 
@@ -40,7 +40,7 @@ const individualPlanIsActive = (cookDate: Date, plan: StandardPlan) => {
     return true;
   }
 
-  if (pauseStart && cookDate > pauseStart && pauseEnd && cookDate < pauseEnd) {
+  if (pauseStart && cookDate >= pauseStart && pauseEnd && cookDate < pauseEnd) {
     return false;
   }
 
@@ -48,7 +48,7 @@ const individualPlanIsActive = (cookDate: Date, plan: StandardPlan) => {
     return false;
   }
 
-  if (pauseStart && cookDate > pauseStart && !pauseEnd) {
+  if (pauseStart && cookDate >= pauseStart && !pauseEnd) {
     return false;
   }
 

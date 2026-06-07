@@ -78,7 +78,7 @@ export const getCookStatus = (cookDate: Date, plan: StandardPlan): Status => {
           return { status: plan.subscriptionStatus };
         }
 
-        if (pauseEnd && cookDate > pauseEnd) {
+        if (pauseEnd && cookDate >= pauseEnd) {
           return { status: 'active' };
         }
 
@@ -88,7 +88,7 @@ export const getCookStatus = (cookDate: Date, plan: StandardPlan): Status => {
 
         if (
           pauseStart &&
-          cookDate > pauseStart &&
+          cookDate >= pauseStart &&
           pauseEnd &&
           cookDate < pauseEnd
         ) {
@@ -106,7 +106,7 @@ export const getCookStatus = (cookDate: Date, plan: StandardPlan): Status => {
           };
         }
 
-        if (pauseStart && cookDate > pauseStart && !pauseEnd) {
+        if (pauseStart && cookDate >= pauseStart && !pauseEnd) {
           return {
             status: 'paused',
             pausedFrom: pauseStart,
