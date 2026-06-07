@@ -32,8 +32,18 @@ export const handleWebhookUpdated = async (event: APIGatewayProxyEventV2) => {
   });
 
   const chargebeeEvent = chargebee.event.deserialize(event.body || "");
+  const customer = chargebeeEvent.content.customer;
+  const customerId = customer?.id;
+  const customerEmail = customer?.email;
 
   try {
+    console.log("Received Chargebee webhook", {
+      eventId: chargebeeEvent.id,
+      eventType: chargebeeEvent.event_type,
+      customerId,
+      customerEmail,
+    });
+
     authoriseBasic(
       event,
       (await chargebeeWebhookUsername) || "",
@@ -70,11 +80,26 @@ export const handleWebhookUpdated = async (event: APIGatewayProxyEventV2) => {
         break;
 
       case "subscription_resumed":
+        console.log("Handling subscription resumed event", {
+          eventId: chargebeeEvent.id,
+          customerId,
+          subscriptionId: chargebeeEvent.content.subscription?.id,
+        });
         await handleSubscriptionEvent(
           chargebee,
           chargebeeEvent.content.customer.id
         );
+        console.log("Finished plan reload for resumed subscription", {
+          eventId: chargebeeEvent.id,
+          customerId,
+          subscriptionId: chargebeeEvent.content.subscription?.id,
+        });
         await updatedHandledSubscriptionResumed(chargebee, chargebeeEvent);
+        console.log("Finished resumed subscription post-processing", {
+          eventId: chargebeeEvent.id,
+          customerId,
+          subscriptionId: chargebeeEvent.content.subscription?.id,
+        });
         break;
 
       case "subscription_paused":
@@ -125,6 +150,15 @@ export const handleWebhookUpdated = async (event: APIGatewayProxyEventV2) => {
       statusCode: HTTP.statusCodes.Ok,
     };
   } catch (error) {
+    console.error("Chargebee webhook handler failed", {
+      eventId: chargebeeEvent.id,
+      eventType: chargebeeEvent.event_type,
+      customerId,
+      customerEmail,
+      subscriptionId: chargebeeEvent.content.subscription?.id,
+      errorMessage: error instanceof Error ? error.message : String(error),
+      errorStack: error instanceof Error ? error.stack : undefined,
+    });
     return returnErrorResponse(error, { eventId: chargebeeEvent.id });
   }
 };

@@ -27,7 +27,7 @@ export const returnErrorResponse = (
     setErrorOnServiceEntrySpan(error);
   }
 
-  const contextObj = context ? {} : context;
+  const contextObj = context ?? {};
 
   const errorObj =
     error && error instanceof Error ? { error: error.message } : {};
