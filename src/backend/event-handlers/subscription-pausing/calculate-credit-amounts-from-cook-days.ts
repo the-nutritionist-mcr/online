@@ -71,7 +71,10 @@ export const calculateCreditAmountsFromCookDays = ({
   const weeklyRate = (subscriptionMrr * MONTHS_PER_YEAR) / WEEKS_PER_YEAR;
 
   for (const [id, dates] of subscriptions) {
-    finalReturnValue.set(id, { dates, credit: dates.length * weeklyRate });
+    finalReturnValue.set(id, {
+      dates,
+      credit: Math.ceil(dates.length * weeklyRate),
+    });
   }
 
   return finalReturnValue;
