@@ -417,6 +417,7 @@ export const makeDataApis = (
 
   const chargeBeeWebhookFunction = makeFunction(`chargebee-webhook-function`, {
     entry: entryName("handlers", "webhook.ts"),
+    timeout: Duration.seconds(30),
     environment: { ...defaultEnvironmentVars, FORCE_DEPLOY: "true" },
   });
 

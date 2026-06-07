@@ -16,6 +16,7 @@
     "test:watch": "NODE_ENV=test vitest --watch",
     "test:ui": "NODE_ENV=test vitest --ui --watch",
     "test:e2e": "playwright test",
+    "manual:get-plans": "vite-node --config scripts/manual/vite.config.ts scripts/manual/get-plans.ts",
     "types": "tsc --noEmit",
     "knip": "knip",
     "types:watch": "tsc --noEmit --watch"

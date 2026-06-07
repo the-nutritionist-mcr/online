@@ -5,14 +5,21 @@ import { DateTime, Interval } from "luxon";
 const getInvoices = async (client: ChargeBee, subscriptionId: string) => {
   const invoices: Invoice[] = [];
   let offset: string | undefined;
+  let page = 1;
   do {
+    console.log("Fetching Chargebee invoice page", {
+      subscriptionId,
+      page,
+      offset,
+    });
+
     const result = await new Promise<{
       list: Array<{ invoice: Invoice }>;
       next_offset?: string;
     }>((resolve, reject) => {
       client.invoice
         .list({
-          limit: 3,
+          limit: 100,
           offset,
           subscription_id: { is: subscriptionId },
           status: { in: ["posted", "not_paid", "payment_due", "paid"] },
@@ -38,6 +45,14 @@ const getInvoices = async (client: ChargeBee, subscriptionId: string) => {
 
     offset = result.next_offset;
     invoices.push(...result.list.map((item) => item.invoice));
+    console.log("Fetched Chargebee invoice page", {
+      subscriptionId,
+      page,
+      invoiceCount: result.list.length,
+      totalInvoiceCount: invoices.length,
+      hasNextPage: Boolean(offset),
+    });
+    page += 1;
   } while (offset);
   return invoices;
 };
