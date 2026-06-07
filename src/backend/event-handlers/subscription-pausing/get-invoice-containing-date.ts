@@ -74,24 +74,19 @@ export const getRelevantInvoices = async (
   const invoices = await getInvoices(client, subscriptionId);
 
   return invoices.filter((invoice) => {
-    if (!invoice.date) {
-      return false;
-    }
+    const pauseRange = Interval.fromDateTimes(startDate, endDate);
 
-    if (DateTime.fromSeconds(invoice.date).hasSame(startDate, "month")) {
-      return true;
-    }
+    return invoice.line_items?.some((lineItem) => {
+      if (!lineItem.date_from || !lineItem.date_to) {
+        return false;
+      }
 
-    if (DateTime.fromSeconds(invoice.date).hasSame(endDate, "month")) {
-      return true;
-    }
-
-    const range = Interval.fromDateTimes(startDate, endDate);
-
-    if (range.contains(DateTime.fromSeconds(invoice.date))) {
-      return true;
-    }
-
-    return false;
+      return pauseRange.overlaps(
+        Interval.fromDateTimes(
+          DateTime.fromSeconds(lineItem.date_from),
+          DateTime.fromSeconds(lineItem.date_to)
+        )
+      );
+    });
   });
 };

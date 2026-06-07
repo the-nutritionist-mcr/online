@@ -1,3 +1,4 @@
+import { Invoice } from "chargebee-typescript/lib/resources";
 import { DateTime } from "luxon";
 
 const SUNDAY = 7;
@@ -10,6 +11,7 @@ export type PauseCreditParams = {
   pauseStart: DateTime;
   resumeDate: DateTime;
   subscriptionMrr: number;
+  invoices: Invoice[];
 };
 
 const collectMissedCookDays = ({
@@ -35,17 +37,53 @@ const collectMissedCookDays = ({
   return dates;
 };
 
+const invoiceContainsCookDay = (invoice: Invoice, day: DateTime) =>
+  invoice.line_items?.some((lineItem) => {
+    if (!lineItem.date_from || !lineItem.date_to) {
+      return false;
+    }
+
+    const periodStart = DateTime.fromSeconds(lineItem.date_from);
+    const periodEnd = DateTime.fromSeconds(lineItem.date_to);
+
+    return day >= periodStart && day < periodEnd;
+  });
+
 export const calculateCreditAmountsFromCookDays = ({
   pauseStart,
   resumeDate,
   subscriptionMrr,
+  invoices,
 }: PauseCreditParams) => {
   const missedDays = collectMissedCookDays({ pauseStart, resumeDate });
 
+  const daysByInvoice = new Map<string, DateTime[]>();
+
+  for (const day of missedDays) {
+    const matchingInvoice = invoices.find((invoice) =>
+      invoiceContainsCookDay(invoice, day)
+    );
+
+    if (!matchingInvoice) {
+      continue;
+    }
+
+    daysByInvoice.set(matchingInvoice.id, [
+      ...(daysByInvoice.get(matchingInvoice.id) ?? []),
+      day,
+    ]);
+  }
+
   const weeklyRate = (subscriptionMrr * MONTHS_PER_YEAR) / WEEKS_PER_YEAR;
 
-  return {
-    dates: missedDays,
-    credit: Math.ceil(missedDays.length * weeklyRate),
-  };
+  const credits = new Map<string, { dates: DateTime[]; credit: number }>();
+
+  for (const [invoiceId, dates] of daysByInvoice) {
+    credits.set(invoiceId, {
+      dates,
+      credit: Math.ceil(dates.length * weeklyRate),
+    });
+  }
+
+  return credits;
 };
