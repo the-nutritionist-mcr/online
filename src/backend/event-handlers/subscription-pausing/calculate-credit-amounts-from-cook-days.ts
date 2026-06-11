@@ -6,6 +6,7 @@ const WEDNESDAY = 3;
 
 const WEEKS_PER_YEAR = 52;
 const MONTHS_PER_YEAR = 12;
+const COOKS_PER_WEEK = 2;
 
 export type PauseCreditParams = {
   pauseStart: DateTime;
@@ -82,7 +83,7 @@ export const calculateCreditAmountsFromCookDays = ({
   for (const [invoiceId, dates] of daysByInvoice) {
     credits.set(invoiceId, {
       dates,
-      credit: Math.ceil(dates.length * weeklyRate),
+      credit: Math.ceil((dates.length * weeklyRate) / COOKS_PER_WEEK),
     });
   }
 

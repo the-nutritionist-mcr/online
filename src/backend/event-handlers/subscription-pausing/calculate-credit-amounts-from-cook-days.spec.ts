@@ -38,7 +38,7 @@ describe("calculateCreditAmountsFromCookDays", () => {
       throw new Error("Expected invoice-id to have a credit");
     }
 
-    expect(credit.credit).toBe(11539);
+    expect(credit.credit).toBe(5770);
     expect(credit.dates.map((date) => date.toISO())).toEqual([
       DateTime.fromISO("2026-06-03").plus({ hours: 4 }).toISO(),
     ]);
@@ -63,11 +63,11 @@ describe("calculateCreditAmountsFromCookDays", () => {
       ],
     });
 
-    expect(credits.get("may-invoice")?.credit).toBe(34616);
+    expect(credits.get("may-invoice")?.credit).toBe(17308);
     expect(
       credits.get("may-invoice")?.dates.map((date) => date.toISODate())
     ).toEqual(["2026-05-24", "2026-05-27", "2026-05-31"]);
-    expect(credits.get("june-invoice")?.credit).toBe(11539);
+    expect(credits.get("june-invoice")?.credit).toBe(5770);
     expect(
       credits.get("june-invoice")?.dates.map((date) => date.toISODate())
     ).toEqual(["2026-06-03"]);
@@ -92,11 +92,11 @@ describe("calculateCreditAmountsFromCookDays", () => {
       ],
     });
 
-    expect(credits.get("may-invoice")?.credit).toBe(34616);
+    expect(credits.get("may-invoice")?.credit).toBe(17308);
     expect(
       credits.get("may-invoice")?.dates.map((date) => date.toISODate())
     ).toEqual(["2026-05-24", "2026-05-27", "2026-05-31"]);
-    expect(credits.get("june-invoice")?.credit).toBe(11539);
+    expect(credits.get("june-invoice")?.credit).toBe(5770);
     expect(
       credits.get("june-invoice")?.dates.map((date) => date.toISODate())
     ).toEqual(["2026-06-03"]);
