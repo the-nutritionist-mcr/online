@@ -8,6 +8,7 @@ import { FormSection } from "../../containers";
 import { text } from "./account.css";
 import PauseStatus from "./pause-status";
 import { ENV, FEATURES, isFeatureEnabled } from "@tnmo/constants";
+import { Paragraph } from "grommet/components/Paragraph";
 
 export interface User {
   username: string;
@@ -119,18 +120,18 @@ export const Account: FC<AccountProps> = ({
               </Fragment>
             ))}
           </FormSection>
-          <p className={text}>
+          <Paragraph>
             Meal selections are now open. Click on the button below to view the
             meals you will be receiving for the week or to make alternative
             choices.
-          </p>
+          </Paragraph>
           {userDetails.email === "bwainwright28@gmail.com" ? (
             isFeatureEnabled("userPauseSelection") && <PauseStatus />
           ) : (
-            <p className={text}>
+            <Paragraph>
               To pause your deliveries, please contact us at
               hello@thenutritionistmcr.com.
-            </p>
+            </Paragraph>
           )}
         </>
       )}
@@ -139,21 +140,21 @@ export const Account: FC<AccountProps> = ({
         <FormSection heading="Choose Meals">
           {chooseIsOpen ? (
             <>
-              <p className={text}>
+              <Paragraph>
                 Meal selections are now open. Click on the button below to view
                 the meals you will be receiving for the week or to make
                 alternative choices.
-              </p>
+              </Paragraph>
               <Link path="/choose-meals/">
                 <Button primary>Make Choices</Button>
               </Link>
             </>
           ) : (
             <>
-              <p className={text}>
+              <Paragraph>
                 Meal selections for this week's cook have now closed. Check back
                 here from 6am on Tuesday for next week's meal choices.
-              </p>
+              </Paragraph>
 
               <Button primary disabled>
                 Make Choices
