@@ -1,4 +1,5 @@
 import { FC, useEffect, useState } from "react";
+import Link from "next/link";
 import MainButton from "@/components/ui/main-button";
 import { DateTime } from "luxon";
 import { useMe } from "@/hooks/use-me";
@@ -77,9 +78,11 @@ const PauseStatus: FC = () => {
                     our fresh ingredients a week in advance.
                   </p>
                   <p className="mt-3">
-                    If we've already taken your subscription payment for the
-                    month, we'll credit your pause duration amount in the
-                    following month.
+                    When you resume, we’ll work out any credit for missed cooks.{" "}
+                    <Link href="/pause-billing/" className="underline">
+                      Find out how pause billing works
+                    </Link>
+                    .
                   </p>
                 </TextBlock>
                 <PauseSelector

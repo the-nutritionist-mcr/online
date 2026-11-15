@@ -51,10 +51,10 @@ describe("calculateCreditAmountsFromCookDays", () => {
   const juneResumeDate = "2026-06-06T23:02:36.000+00:00";
 
   it.each`
-    name                                                               | pauseStart       | resumeDate        | invoices                                              | includeTime | expected
-    ${"rounds credit amounts up to whole pence"}                       | ${"2026-06-01"}  | ${"2026-06-04"}   | ${[invoice("invoice-id", juneStart, juneInvoiceEnd)]} | ${true}     | ${expectedRoundedCredit}
-    ${"credits missed cook days to the invoices covering those dates"} | ${mayPauseStart} | ${juneResumeDate} | ${[juneInvoice, mayInvoice]}                          | ${false}    | ${expectedAcrossInvoices}
-    ${"credits unmatched cook days to the latest invoice"}             | ${mayPauseStart} | ${juneResumeDate} | ${[laterJuneInvoice, mayInvoice]}                     | ${false}    | ${expectedAcrossInvoices}
+    name                                                                   | pauseStart       | resumeDate        | invoices                                              | includeTime | expected
+    ${"rounds credit amounts up to whole pence"}                           | ${"2026-06-01"}  | ${"2026-06-04"}   | ${[invoice("invoice-id", juneStart, juneInvoiceEnd)]} | ${true}     | ${expectedRoundedCredit}
+    ${"credits missed cook days to the invoices covering those dates"}     | ${mayPauseStart} | ${juneResumeDate} | ${[juneInvoice, mayInvoice]}                          | ${false}    | ${expectedAcrossInvoices}
+    ${"offsets unbilled June cook credit when billing restarts on resume"} | ${mayPauseStart} | ${juneResumeDate} | ${[laterJuneInvoice, mayInvoice]}                     | ${false}    | ${expectedAcrossInvoices.slice(0, 1)}
   `("$name", ({ pauseStart, resumeDate, invoices, includeTime, expected }) => {
     const credits = calculateCreditAmountsFromCookDays({
       pauseStart: DateTime.fromISO(pauseStart),
@@ -63,6 +63,7 @@ describe("calculateCreditAmountsFromCookDays", () => {
       invoices,
     });
 
+    expect(credits.size).toBe(expected.length);
     for (const { invoiceId, credit, dates } of expected) {
       const actual = credits.get(invoiceId);
       expect(actual?.credit).toBe(credit);
@@ -72,6 +73,36 @@ describe("calculateCreditAmountsFromCookDays", () => {
         )
       ).toEqual(dates);
     }
+  });
+
+  const decemberInvoice = invoice(
+    "december",
+    "2025-12-01T00:00:00Z",
+    "2026-01-01T00:00:00Z"
+  );
+  const januaryInvoice = invoice(
+    "january",
+    "2026-01-12T00:00:00Z",
+    "2026-02-01T00:00:00Z"
+  );
+
+  it.each`
+    scenario                                      | invoices
+    ${"the resumed invoice is available"}         | ${[januaryInvoice, decemberInvoice]}
+    ${"the resumed invoice has not appeared yet"} | ${[decemberInvoice]}
+  `("keeps December credit when $scenario", ({ invoices }) => {
+    const credits = calculateCreditAmountsFromCookDays({
+      pauseStart: DateTime.fromISO("2025-12-15T00:00:00Z"),
+      resumeDate: DateTime.fromISO("2026-01-12T00:03:00Z"),
+      subscriptionMrr: 36166,
+      invoices,
+    });
+
+    // January's 11 excluded days are worth £128.33, offsetting its £125.19
+    // of missed-cook credit. December's five billed cooks still get credited.
+    expect(
+      [...credits].map(([id, { credit, dates }]) => [id, credit, dates.length])
+    ).toEqual([["december", 20865, 5]]);
   });
 
   it.each`
