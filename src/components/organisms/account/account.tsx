@@ -5,10 +5,9 @@ import { NavigationContext } from "@tnmo/utils";
 import { useContext } from "react";
 import { Button, Input, Link } from "../../atoms";
 import { FormSection } from "../../containers";
-import { text } from "./account.css";
+import { TextBlock } from "./account-elements";
 import PauseStatus from "./pause-status";
 import { ENV, FEATURES, isFeatureEnabled } from "@tnmo/constants";
-import { Paragraph } from "grommet/components/Paragraph";
 
 export interface User {
   username: string;
@@ -120,19 +119,21 @@ export const Account: FC<AccountProps> = ({
               </Fragment>
             ))}
           </FormSection>
-          <Paragraph>
-            Meal selections are now open. Click on the button below to view the
-            meals you will be receiving for the week or to make alternative
-            choices.
-          </Paragraph>
-          {userDetails.email === "bwainwright28@gmail.com" ? (
-            isFeatureEnabled("userPauseSelection") && <PauseStatus />
-          ) : (
-            <Paragraph>
-              To pause your deliveries, please contact us at
-              hello@thenutritionistmcr.com.
-            </Paragraph>
-          )}
+          <div className="flex flex-col gap-4">
+            <TextBlock>
+              Meal selections are now open. Click on the button below to view
+              the meals you will be receiving for the week or to make
+              alternative choices.
+            </TextBlock>
+            {userDetails.email === "bwainwright28@gmail.com" ? (
+              isFeatureEnabled("userPauseSelection") && <PauseStatus />
+            ) : (
+              <TextBlock>
+                To pause your deliveries, please contact us at
+                hello@thenutritionistmcr.com.
+              </TextBlock>
+            )}
+          </div>
         </>
       )}
 
@@ -140,21 +141,21 @@ export const Account: FC<AccountProps> = ({
         <FormSection heading="Choose Meals">
           {chooseIsOpen ? (
             <>
-              <Paragraph>
+              <TextBlock>
                 Meal selections are now open. Click on the button below to view
                 the meals you will be receiving for the week or to make
                 alternative choices.
-              </Paragraph>
+              </TextBlock>
               <Link path="/choose-meals/">
                 <Button primary>Make Choices</Button>
               </Link>
             </>
           ) : (
             <>
-              <Paragraph>
+              <TextBlock>
                 Meal selections for this week's cook have now closed. Check back
                 here from 6am on Tuesday for next week's meal choices.
-              </Paragraph>
+              </TextBlock>
 
               <Button primary disabled>
                 Make Choices

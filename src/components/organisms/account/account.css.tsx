@@ -16,7 +16,11 @@ export const header = style({
 });
 
 export const text = style({
-  // fontFamily: 'acumin-pro-semi-condensed, Arial, sans-serif',
+  fontFamily: "ibm-plex-serif, 'Times New Roman', serif",
+  fontSize: '1rem',
+  margin: 0,
+  maxWidth: '31rem',
+  width: '100%',
   gridColumnStart: '1',
   gridColumnEnd: '3',
   lineHeight: '1.5rem',

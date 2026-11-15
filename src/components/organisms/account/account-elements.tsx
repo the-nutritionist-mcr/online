@@ -1,27 +1,23 @@
-import { FC } from 'react';
+import { FC } from "react";
+import { header } from "../../containers/form-section/form-section.css";
+import { text } from "./account.css";
 
-interface HeaderProps {
+interface ContentProps {
   children: React.ReactNode;
 }
 
-export const Section: FC<{ children: React.ReactNode }> = ({ children }) => (
-  <div className='grid relative grid-flow-row gap-6 mb-12'>
+export const Section: FC<ContentProps> = ({ children }) => (
+  <section className="mt-8 grid gap-4">{children}</section>
+);
+
+export const Header: FC<ContentProps> = ({ children }) => (
+  <h2
+    className={`${header} !mb-0 border-b border-dashed border-[#b8b8b8] pb-4`}
+  >
     {children}
-  </div>
-)
+  </h2>
+);
 
-export const Header: FC<HeaderProps> = ({ children }) => {
-  return (
-    <div className='block relative w-full mt-2'>
-      <h2 className='text-[2rem] font-acumin-pro font-bold border-b border-dashed border-[#b8b8b8] pb-4'>
-        {children}
-      </h2>
-    </div>
-  )
-}
-
-export const TextBlock: FC<{ children: React.ReactNode }> = ({ children }) => {
-  return (
-    <p className='black w-full max-w-[500px] leading-6'>{children}</p>
-  )
-}
+export const TextBlock: FC<ContentProps> = ({ children }) => (
+  <p className={text}>{children}</p>
+);

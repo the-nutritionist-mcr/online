@@ -20,12 +20,10 @@ export const notSupportedMessage = style({
 });
 
 export const accountContainer = style({
-  '@media': {
-    'screen and (max-width: 900px)': {
-      width: '100%',
-      padding: '1rem',
-    },
-  },
+  boxSizing: 'border-box',
+  width: '100%',
+  maxWidth: '48rem',
+  paddingInline: '1rem',
 });
 
 export const notSupportedTitle = style({

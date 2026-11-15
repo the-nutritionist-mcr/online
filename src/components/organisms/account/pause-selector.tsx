@@ -49,14 +49,19 @@ const PauseSelector: FC<PauseSelectorProps> = ({ handlePauseSelection }) => {
 
   return (
     <>
-      <div className="grid grid-cols-[auto_1fr] gap-4 items-center">
-        <label htmlFor={pauseStartId}>Pause start</label>
+      <div className="grid w-full max-w-[31rem] gap-x-4 gap-y-2 sm:grid-cols-[9rem_minmax(0,1fr)] sm:gap-y-4">
+        <label
+          className="text-base font-semibold leading-6 sm:pt-2"
+          htmlFor={pauseStartId}
+        >
+          Pause start
+        </label>
         <div>
           <Select onValueChange={handleChoosePauseDate}>
             <SelectTrigger
               id={pauseStartId}
               aria-describedby={`${pauseStartId}-description`}
-              className="max-w-[300px] rounded-[3px] shadow-none text-[16px] leading-6 py-5 border-black"
+              className="w-full rounded-[3px] shadow-none text-base leading-6 py-5 border-black"
             >
               <SelectValue placeholder="Select a start date" />
             </SelectTrigger>
@@ -78,19 +83,27 @@ const PauseSelector: FC<PauseSelectorProps> = ({ handlePauseSelection }) => {
               </SelectContent>
             )}
           </Select>
-          <p id={`${pauseStartId}-description`} className="mt-1 text-sm">
+          <p
+            id={`${pauseStartId}-description`}
+            className="m-0 mt-1 text-sm leading-5"
+          >
             You’ll receive no meals on this date.
           </p>
         </div>
         {chosenPauseDate && (
           <>
-            <label htmlFor={resumeDateId}>Meals resume</label>
+            <label
+              className="text-base font-semibold leading-6 sm:pt-2"
+              htmlFor={resumeDateId}
+            >
+              Meals resume
+            </label>
             <div>
               <Select onValueChange={handleChooseResumeDate}>
                 <SelectTrigger
                   id={resumeDateId}
                   aria-describedby={`${resumeDateId}-description`}
-                  className="max-w-[300px] rounded-[3px] shadow-none text-[16px] leading-6 py-5 border-black"
+                  className="w-full rounded-[3px] shadow-none text-base leading-6 py-5 border-black"
                 >
                   <SelectValue placeholder="Select a resume date" />
                 </SelectTrigger>
@@ -112,7 +125,10 @@ const PauseSelector: FC<PauseSelectorProps> = ({ handlePauseSelection }) => {
                   </SelectContent>
                 )}
               </Select>
-              <p id={`${resumeDateId}-description`} className="mt-1 text-sm">
+              <p
+                id={`${resumeDateId}-description`}
+                className="m-0 mt-1 text-sm leading-5"
+              >
                 You’ll receive meals on this date.
               </p>
             </div>

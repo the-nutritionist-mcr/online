@@ -7,7 +7,6 @@ import { Header, Section, TextBlock } from "./account-elements";
 import { getPause, humanReadableDate } from "./pause-utils";
 import PauseSelector from "./pause-selector";
 import CancelPauseButton from "./cancelPauseButton";
-import { Paragraph } from "grommet";
 
 const PauseStatus: FC = () => {
   const user = useMe();
@@ -28,7 +27,7 @@ const PauseStatus: FC = () => {
   return (
     <>
       {pauseStart && pauseEnd && !pausedNow && (
-        <div className="grid gap-6 pt-2 col-span-3">
+        <div className="flex flex-col gap-4">
           <TextBlock>
             You have a pause scheduled from{" "}
             {humanReadableDate(pauseStart, currentYear !== pauseStart.year)},
@@ -37,7 +36,7 @@ const PauseStatus: FC = () => {
           </TextBlock>
           {pauseStart.toMillis() >
             DateTime.now().plus({ weeks: 1 }).toMillis() && (
-            <div className="grid grid-cols-3">
+            <div className="flex">
               <CancelPauseButton
                 handlePauseCancelled={() => setShowPausePanel(false)}
               />
@@ -46,7 +45,7 @@ const PauseStatus: FC = () => {
         </div>
       )}
       {pausedNow && (
-        <div className="grid gap-6 pt-2 col-span-3">
+        <div className="flex flex-col gap-4">
           <TextBlock>
             <strong>
               Your plan is currently paused.
@@ -60,39 +59,37 @@ const PauseStatus: FC = () => {
         </div>
       )}
       {!pauseStart && (
-        <div className="grid gap-6">
-          <Section>
-            {!showPausePanel && (
-              <div className="grid grid-cols-3">
-                <MainButton onClick={() => setShowPausePanel(true)}>
-                  Schedule a pause
-                </MainButton>
-              </div>
-            )}
-            {showPausePanel && (
-              <>
-                <Header>Schedule a pause</Header>
+        <Section>
+          {!showPausePanel && (
+            <div className="flex">
+              <MainButton onClick={() => setShowPausePanel(true)}>
+                Schedule a pause
+              </MainButton>
+            </div>
+          )}
+          {showPausePanel && (
+            <>
+              <Header>Schedule a pause</Header>
+              <div className="flex flex-col gap-3">
                 <TextBlock>
-                  <Paragraph>
-                    You can pause your plan whenever you like. Just remember to
-                    provide us with a minimum of one week's notice, as we order
-                    our fresh ingredients a week in advance.
-                  </Paragraph>
-                  <Paragraph>
-                    When you resume, we’ll work out any credit for missed cooks.{" "}
-                    <Link href="/pause-billing/" className="underline">
-                      Find out how pause billing works
-                    </Link>
-                    .
-                  </Paragraph>
+                  You can pause your plan whenever you like. Just remember to
+                  provide us with a minimum of one week's notice, as we order
+                  our fresh ingredients a week in advance.
                 </TextBlock>
-                <PauseSelector
-                  handlePauseSelection={() => setShowPausePanel(false)}
-                />
-              </>
-            )}
-          </Section>
-        </div>
+                <TextBlock>
+                  When you resume, we’ll work out any credit for missed cooks.{" "}
+                  <Link href="/pause-billing/" className="underline">
+                    Find out how pause billing works
+                  </Link>
+                  .
+                </TextBlock>
+              </div>
+              <PauseSelector
+                handlePauseSelection={() => setShowPausePanel(false)}
+              />
+            </>
+          )}
+        </Section>
       )}
     </>
   );
