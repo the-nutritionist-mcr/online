@@ -2,6 +2,7 @@ import { ChargeBee } from "chargebee-typescript";
 import { Event } from "chargebee-typescript/lib/resources";
 import { getRelevantInvoices } from "./subscription-pausing/get-invoice-containing-date";
 import { DateTime } from "luxon";
+import { UK_COOK_ZONE } from "@/meal-planning/uk-cook-date";
 import { getPauseDate } from "./subscription-pausing/get-pause-date";
 import { setPauseDate } from "./subscription-pausing/set-pause-date";
 import { calculateSubscriptionTotal } from "./subscription-pausing/calculate-subscription-total";
@@ -15,9 +16,6 @@ export const updatedHandledSubscriptionResumed = async (
   client: ChargeBee,
   event: Event
 ) => {
-  if (event.content.customer.email !== "bwainwright28@gmail.com") {
-    return;
-  }
   const subscriptionId = event.content.subscription.id;
 
   try {
@@ -40,7 +38,10 @@ export const updatedHandledSubscriptionResumed = async (
     });
 
     const pauseStart = getPauseDate(event);
-    const resumeDate = DateTime.fromSeconds(event.occurred_at);
+    const resumeDate = DateTime.fromSeconds(
+      event.content.subscription.resume_date ?? event.occurred_at,
+      { zone: UK_COOK_ZONE }
+    );
 
     console.log("Resolved resumed subscription pause dates", {
       eventId: event.id,

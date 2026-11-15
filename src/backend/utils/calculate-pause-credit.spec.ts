@@ -2,69 +2,20 @@ import { DateTime } from "luxon";
 import { calculatePauseCredit } from "./calculate-pause-credit";
 
 describe("calculatePauseCredit", () => {
-  it("credits the full paused period when the pause stays within one month", () => {
-    const pauseStart = DateTime.fromISO("2024-07-12");
-    const resumeDate = DateTime.fromISO("2024-07-23");
-
+  it.each`
+    name                                                                       | pauseStart      | resumeDate      | creditDays | totalInCents
+    ${"credits the full paused period when the pause stays within one month"}  | ${"2024-07-12"} | ${"2024-07-23"} | ${11}      | ${13116}
+    ${"only credits the billed portion when a pause crosses a month boundary"} | ${"2024-10-25"} | ${"2024-11-01"} | ${7}       | ${8346}
+    ${"uses the weekly-derived daily rate in February"}                        | ${"2024-02-01"} | ${"2024-02-08"} | ${7}       | ${8346}
+    ${"uses the same weekly-derived daily rate in March"}                      | ${"2024-03-01"} | ${"2024-03-08"} | ${7}       | ${8346}
+    ${"returns zero when there is nothing to credit"}                          | ${"2024-11-03"} | ${"2024-11-03"} | ${0}       | ${0}
+  `("$name", ({ pauseStart, resumeDate, creditDays, totalInCents }) => {
     expect(
       calculatePauseCredit({
-        pauseStart,
-        resumeDate,
+        pauseStart: DateTime.fromISO(pauseStart),
+        resumeDate: DateTime.fromISO(resumeDate),
         subscriptionMrr: 36166,
       })
-    ).toStrictEqual({
-      creditDays: 11,
-      totalInCents: 13116,
-    });
-  });
-
-  it("only credits the billed portion when a pause crosses a month boundary", () => {
-    const pauseStart = DateTime.fromISO("2024-10-25");
-    const resumeDate = DateTime.fromISO("2024-11-01");
-
-    expect(
-      calculatePauseCredit({
-        pauseStart,
-        resumeDate,
-        subscriptionMrr: 36166,
-      })
-    ).toStrictEqual({
-      creditDays: 7,
-      totalInCents: 8346,
-    });
-  });
-
-  it("uses the same weekly-derived daily rate regardless of month length", () => {
-    expect(
-      calculatePauseCredit({
-        pauseStart: DateTime.fromISO("2024-02-01"),
-        resumeDate: DateTime.fromISO("2024-02-08"),
-        subscriptionMrr: 36166,
-      }).totalInCents
-    ).toBe(8346);
-
-    expect(
-      calculatePauseCredit({
-        pauseStart: DateTime.fromISO("2024-03-01"),
-        resumeDate: DateTime.fromISO("2024-03-08"),
-        subscriptionMrr: 36166,
-      }).totalInCents
-    ).toBe(8346);
-  });
-
-  it("returns zero when there is nothing to credit", () => {
-    const pauseStart = DateTime.fromISO("2024-11-03");
-    const resumeDate = DateTime.fromISO("2024-11-03");
-
-    expect(
-      calculatePauseCredit({
-        pauseStart,
-        resumeDate,
-        subscriptionMrr: 36166,
-      })
-    ).toStrictEqual({
-      creditDays: 0,
-      totalInCents: 0,
-    });
+    ).toStrictEqual({ creditDays, totalInCents });
   });
 });

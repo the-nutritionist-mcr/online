@@ -1,0 +1,2995 @@
+{
+  "events": [
+    {
+      "id": "resume-001",
+      "event_type": "SUBSCRIPTION_RESUMED",
+      "occurred_at": 1750374110,
+      "content": {
+        "customer": {
+          "id": "customer-001",
+          "email": "customer-001@example.test",
+          "first_name": "Customer",
+          "last_name": "001"
+        },
+        "subscription": {
+          "id": "subscription-001",
+          "cf_Pause_date_ISO": "2025-05-31T23:00:00.000+00:00",
+          "subscription_items": [
+            {
+              "unit_price": 34667,
+              "quantity": 1
+            },
+            {
+              "unit_price": 1499,
+              "quantity": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "resume-002",
+      "event_type": "SUBSCRIPTION_RESUMED",
+      "occurred_at": 1752793340,
+      "content": {
+        "customer": {
+          "id": "customer-001",
+          "email": "customer-001@example.test",
+          "first_name": "Customer",
+          "last_name": "001"
+        },
+        "subscription": {
+          "id": "subscription-001",
+          "cf_Pause_date_ISO": "2025-07-12T23:00:00.000+00:00",
+          "subscription_items": [
+            {
+              "unit_price": 34667,
+              "quantity": 1
+            },
+            {
+              "unit_price": 1499,
+              "quantity": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "resume-003",
+      "event_type": "SUBSCRIPTION_RESUMED",
+      "occurred_at": 1754607732,
+      "content": {
+        "customer": {
+          "id": "customer-001",
+          "email": "customer-001@example.test",
+          "first_name": "Customer",
+          "last_name": "001"
+        },
+        "subscription": {
+          "id": "subscription-001",
+          "cf_Pause_date_ISO": "2025-07-26T23:00:00.000+00:00",
+          "subscription_items": [
+            {
+              "unit_price": 34667,
+              "quantity": 1
+            },
+            {
+              "unit_price": 1499,
+              "quantity": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "resume-004",
+      "event_type": "SUBSCRIPTION_RESUMED",
+      "occurred_at": 1760655783,
+      "content": {
+        "customer": {
+          "id": "customer-001",
+          "email": "customer-001@example.test",
+          "first_name": "Customer",
+          "last_name": "001"
+        },
+        "subscription": {
+          "id": "subscription-001",
+          "cf_Pause_date_ISO": "2025-10-11T23:00:00.000+00:00",
+          "subscription_items": [
+            {
+              "unit_price": 34667,
+              "quantity": 1
+            },
+            {
+              "unit_price": 1499,
+              "quantity": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "resume-005",
+      "event_type": "SUBSCRIPTION_RESUMED",
+      "occurred_at": 1762473851,
+      "content": {
+        "customer": {
+          "id": "customer-001",
+          "email": "customer-001@example.test",
+          "first_name": "Customer",
+          "last_name": "001"
+        },
+        "subscription": {
+          "id": "subscription-001",
+          "cf_Pause_date_ISO": "2025-10-25T23:00:00.000+00:00",
+          "subscription_items": [
+            {
+              "unit_price": 34667,
+              "quantity": 1
+            },
+            {
+              "unit_price": 1499,
+              "quantity": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "resume-006",
+      "event_type": "SUBSCRIPTION_RESUMED",
+      "occurred_at": 1767312330,
+      "content": {
+        "customer": {
+          "id": "customer-001",
+          "email": "customer-001@example.test",
+          "first_name": "Customer",
+          "last_name": "001"
+        },
+        "subscription": {
+          "id": "subscription-001",
+          "cf_Pause_date_ISO": "2025-12-21T00:00:00.000+00:00",
+          "subscription_items": [
+            {
+              "unit_price": 34667,
+              "quantity": 1
+            },
+            {
+              "unit_price": 1499,
+              "quantity": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "resume-007",
+      "event_type": "SUBSCRIPTION_RESUMED",
+      "occurred_at": 1770336213,
+      "content": {
+        "customer": {
+          "id": "customer-001",
+          "email": "customer-001@example.test",
+          "first_name": "Customer",
+          "last_name": "001"
+        },
+        "subscription": {
+          "id": "subscription-001",
+          "cf_Pause_date_ISO": "2026-01-25T00:00:00.000+00:00",
+          "subscription_items": [
+            {
+              "unit_price": 34667,
+              "quantity": 1
+            },
+            {
+              "unit_price": 1499,
+              "quantity": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "resume-008",
+      "event_type": "SUBSCRIPTION_RESUMED",
+      "occurred_at": 1775775757,
+      "content": {
+        "customer": {
+          "id": "customer-001",
+          "email": "customer-001@example.test",
+          "first_name": "Customer",
+          "last_name": "001"
+        },
+        "subscription": {
+          "id": "subscription-001",
+          "cf_Pause_date_ISO": "2026-03-29T00:00:00.000+00:00",
+          "subscription_items": [
+            {
+              "unit_price": 34667,
+              "quantity": 1
+            },
+            {
+              "unit_price": 1499,
+              "quantity": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "resume-009",
+      "event_type": "SUBSCRIPTION_RESUMED",
+      "occurred_at": 1779404592,
+      "content": {
+        "customer": {
+          "id": "customer-001",
+          "email": "customer-001@example.test",
+          "first_name": "Customer",
+          "last_name": "001"
+        },
+        "subscription": {
+          "id": "subscription-001",
+          "cf_Pause_date_ISO": "2026-05-09T23:00:00.000+00:00",
+          "subscription_items": [
+            {
+              "unit_price": 34667,
+              "quantity": 1
+            },
+            {
+              "unit_price": 1499,
+              "quantity": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "resume-010",
+      "event_type": "SUBSCRIPTION_RESUMED",
+      "occurred_at": 1780091311,
+      "content": {
+        "customer": {
+          "id": "customer-002",
+          "email": "customer-002@example.test",
+          "first_name": "Customer",
+          "last_name": "002"
+        },
+        "subscription": {
+          "id": "subscription-002",
+          "cf_Pause_date_ISO": "2026-05-24T23:00:00.000+00:00",
+          "subscription_items": [
+            {
+              "unit_price": 0,
+              "quantity": 1
+            },
+            {
+              "unit_price": 0,
+              "quantity": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "resume-011",
+      "event_type": "SUBSCRIPTION_RESUMED",
+      "occurred_at": 1777597010,
+      "content": {
+        "customer": {
+          "id": "customer-002",
+          "email": "customer-002@example.test",
+          "first_name": "Customer",
+          "last_name": "002"
+        },
+        "subscription": {
+          "id": "subscription-003",
+          "cf_Pause_date_ISO": "2026-04-18T23:00:00.000+00:00",
+          "subscription_items": [
+            {
+              "unit_price": 24267,
+              "quantity": 1
+            },
+            {
+              "unit_price": 1499,
+              "quantity": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "resume-012",
+      "event_type": "SUBSCRIPTION_RESUMED",
+      "occurred_at": 1763078642,
+      "content": {
+        "customer": {
+          "id": "customer-002",
+          "email": "customer-002@example.test",
+          "first_name": "Customer",
+          "last_name": "002"
+        },
+        "subscription": {
+          "id": "subscription-003",
+          "cf_Pause_date_ISO": "2025-11-09T00:00:00.000+00:00",
+          "subscription_items": [
+            {
+              "unit_price": 24267,
+              "quantity": 1
+            },
+            {
+              "unit_price": 1499,
+              "quantity": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "resume-013",
+      "event_type": "SUBSCRIPTION_RESUMED",
+      "occurred_at": 1758755022,
+      "content": {
+        "customer": {
+          "id": "customer-002",
+          "email": "customer-002@example.test",
+          "first_name": "Customer",
+          "last_name": "002"
+        },
+        "subscription": {
+          "id": "subscription-003",
+          "cf_Pause_date_ISO": "2025-09-20T22:00:00.000+00:00",
+          "subscription_items": [
+            {
+              "unit_price": 24267,
+              "quantity": 1
+            },
+            {
+              "unit_price": 1499,
+              "quantity": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "resume-014",
+      "event_type": "SUBSCRIPTION_RESUMED",
+      "occurred_at": 1754007134,
+      "content": {
+        "customer": {
+          "id": "customer-002",
+          "email": "customer-002@example.test",
+          "first_name": "Customer",
+          "last_name": "002"
+        },
+        "subscription": {
+          "id": "subscription-003",
+          "cf_Pause_date_ISO": "2025-07-26T23:00:00.000+00:00",
+          "subscription_items": [
+            {
+              "unit_price": 24267,
+              "quantity": 1
+            },
+            {
+              "unit_price": 1499,
+              "quantity": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "resume-015",
+      "event_type": "SUBSCRIPTION_RESUMED",
+      "occurred_at": 1749164532,
+      "content": {
+        "customer": {
+          "id": "customer-002",
+          "email": "customer-002@example.test",
+          "first_name": "Customer",
+          "last_name": "002"
+        },
+        "subscription": {
+          "id": "subscription-004",
+          "cf_Pause_date_ISO": "2025-05-31T23:00:00.000+00:00",
+          "subscription_items": [
+            {
+              "unit_price": 22750,
+              "quantity": 1
+            },
+            {
+              "unit_price": 1499,
+              "quantity": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "resume-016",
+      "event_type": "SUBSCRIPTION_RESUMED",
+      "occurred_at": 1746745325,
+      "content": {
+        "customer": {
+          "id": "customer-002",
+          "email": "customer-002@example.test",
+          "first_name": "Customer",
+          "last_name": "002"
+        },
+        "subscription": {
+          "id": "subscription-004",
+          "cf_Pause_date_ISO": "2025-05-03T23:00:00.000+00:00",
+          "subscription_items": [
+            {
+              "unit_price": 22750,
+              "quantity": 1
+            },
+            {
+              "unit_price": 1499,
+              "quantity": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "resume-017",
+      "event_type": "SUBSCRIPTION_RESUMED",
+      "occurred_at": 1777597011,
+      "content": {
+        "customer": {
+          "id": "customer-003",
+          "email": "customer-003@example.test",
+          "first_name": "Customer",
+          "last_name": "003"
+        },
+        "subscription": {
+          "id": "subscription-005",
+          "cf_Pause_date_ISO": "2026-04-18T23:00:00.000+00:00",
+          "subscription_items": [
+            {
+              "unit_price": 22750,
+              "quantity": 1
+            },
+            {
+              "unit_price": 1499,
+              "quantity": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "resume-018",
+      "event_type": "SUBSCRIPTION_RESUMED",
+      "occurred_at": 1763078638,
+      "content": {
+        "customer": {
+          "id": "customer-003",
+          "email": "customer-003@example.test",
+          "first_name": "Customer",
+          "last_name": "003"
+        },
+        "subscription": {
+          "id": "subscription-005",
+          "cf_Pause_date_ISO": "2025-11-02T00:00:00.000+00:00",
+          "subscription_items": [
+            {
+              "unit_price": 22750,
+              "quantity": 1
+            },
+            {
+              "unit_price": 1499,
+              "quantity": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "resume-019",
+      "event_type": "SUBSCRIPTION_RESUMED",
+      "occurred_at": 1757631806,
+      "content": {
+        "customer": {
+          "id": "customer-003",
+          "email": "customer-003@example.test",
+          "first_name": "Customer",
+          "last_name": "003"
+        },
+        "subscription": {
+          "id": "subscription-005",
+          "cf_Pause_date_ISO": "2025-09-06T23:00:00.000+00:00",
+          "subscription_items": [
+            {
+              "unit_price": 22750,
+              "quantity": 1
+            },
+            {
+              "unit_price": 1499,
+              "quantity": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "resume-020",
+      "event_type": "SUBSCRIPTION_RESUMED",
+      "occurred_at": 1748559744,
+      "content": {
+        "customer": {
+          "id": "customer-003",
+          "email": "customer-003@example.test",
+          "first_name": "Customer",
+          "last_name": "003"
+        },
+        "subscription": {
+          "id": "subscription-005",
+          "cf_Pause_date_ISO": "2025-05-24T23:00:00.000+00:00",
+          "subscription_items": [
+            {
+              "unit_price": 22750,
+              "quantity": 1
+            },
+            {
+              "unit_price": 1499,
+              "quantity": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "resume-021",
+      "event_type": "SUBSCRIPTION_RESUMED",
+      "occurred_at": 1780009649,
+      "content": {
+        "customer": {
+          "id": "customer-004",
+          "email": "customer-004@example.test",
+          "first_name": "Customer",
+          "last_name": "004"
+        },
+        "subscription": {
+          "id": "subscription-006",
+          "cf_Pause_date_ISO": "2026-05-23t23:00:00.000+00:00",
+          "subscription_items": [
+            {
+              "unit_price": 35533,
+              "quantity": 1
+            },
+            {
+              "unit_price": 3000,
+              "quantity": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "resume-022",
+      "event_type": "SUBSCRIPTION_RESUMED",
+      "occurred_at": 1776380554,
+      "content": {
+        "customer": {
+          "id": "customer-004",
+          "email": "customer-004@example.test",
+          "first_name": "Customer",
+          "last_name": "004"
+        },
+        "subscription": {
+          "id": "subscription-006",
+          "cf_Pause_date_ISO": "2026-04-04T23:00:00.000+00:00",
+          "subscription_items": [
+            {
+              "unit_price": 35533,
+              "quantity": 1
+            },
+            {
+              "unit_price": 3000,
+              "quantity": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "resume-023",
+      "event_type": "SUBSCRIPTION_RESUMED",
+      "occurred_at": 1772755417,
+      "content": {
+        "customer": {
+          "id": "customer-004",
+          "email": "customer-004@example.test",
+          "first_name": "Customer",
+          "last_name": "004"
+        },
+        "subscription": {
+          "id": "subscription-006",
+          "cf_Pause_date_ISO": "2026-03-01T00:00:00.000+00:00",
+          "subscription_items": [
+            {
+              "unit_price": 35533,
+              "quantity": 1
+            },
+            {
+              "unit_price": 3000,
+              "quantity": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "resume-024",
+      "event_type": "SUBSCRIPTION_RESUMED",
+      "occurred_at": 1770336213,
+      "content": {
+        "customer": {
+          "id": "customer-004",
+          "email": "customer-004@example.test",
+          "first_name": "Customer",
+          "last_name": "004"
+        },
+        "subscription": {
+          "id": "subscription-006",
+          "cf_Pause_date_ISO": "2026-01-25T00:00:00.000+00:00",
+          "subscription_items": [
+            {
+              "unit_price": 35533,
+              "quantity": 1
+            },
+            {
+              "unit_price": 3000,
+              "quantity": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "resume-025",
+      "event_type": "SUBSCRIPTION_RESUMED",
+      "occurred_at": 1767917011,
+      "content": {
+        "customer": {
+          "id": "customer-004",
+          "email": "customer-004@example.test",
+          "first_name": "Customer",
+          "last_name": "004"
+        },
+        "subscription": {
+          "id": "subscription-006",
+          "cf_Pause_date_ISO": "2025-12-21T00:00:00.000+00:00",
+          "subscription_items": [
+            {
+              "unit_price": 35533,
+              "quantity": 1
+            },
+            {
+              "unit_price": 3000,
+              "quantity": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "resume-026",
+      "event_type": "SUBSCRIPTION_RESUMED",
+      "occurred_at": 1761868993,
+      "content": {
+        "customer": {
+          "id": "customer-004",
+          "email": "customer-004@example.test",
+          "first_name": "Customer",
+          "last_name": "004"
+        },
+        "subscription": {
+          "id": "subscription-006",
+          "cf_Pause_date_ISO": "2025-10-25T23:00:00.000+00:00",
+          "subscription_items": [
+            {
+              "unit_price": 35533,
+              "quantity": 1
+            },
+            {
+              "unit_price": 3000,
+              "quantity": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "resume-027",
+      "event_type": "SUBSCRIPTION_RESUMED",
+      "occurred_at": 1756422481,
+      "content": {
+        "customer": {
+          "id": "customer-004",
+          "email": "customer-004@example.test",
+          "first_name": "Customer",
+          "last_name": "004"
+        },
+        "subscription": {
+          "id": "subscription-006",
+          "cf_Pause_date_ISO": "2025-08-02T23:00:00.000+00:00",
+          "subscription_items": [
+            {
+              "unit_price": 35533,
+              "quantity": 1
+            },
+            {
+              "unit_price": 3000,
+              "quantity": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "resume-028",
+      "event_type": "SUBSCRIPTION_RESUMED",
+      "occurred_at": 1749769322,
+      "content": {
+        "customer": {
+          "id": "customer-004",
+          "email": "customer-004@example.test",
+          "first_name": "Customer",
+          "last_name": "004"
+        },
+        "subscription": {
+          "id": "subscription-006",
+          "cf_Pause_date_ISO": "2025-06-07T23:00:00.000+00:00",
+          "subscription_items": [
+            {
+              "unit_price": 35533,
+              "quantity": 1
+            },
+            {
+              "unit_price": 3000,
+              "quantity": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "resume-029",
+      "event_type": "SUBSCRIPTION_RESUMED",
+      "occurred_at": 1748559743,
+      "content": {
+        "customer": {
+          "id": "customer-004",
+          "email": "customer-004@example.test",
+          "first_name": "Customer",
+          "last_name": "004"
+        },
+        "subscription": {
+          "id": "subscription-006",
+          "cf_Pause_date_ISO": "2025-05-24T23:00:00.000+00:00",
+          "subscription_items": [
+            {
+              "unit_price": 35533,
+              "quantity": 1
+            },
+            {
+              "unit_price": 3000,
+              "quantity": 1
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "invoices": [
+    {
+      "id": "invoice-001",
+      "date": 1793495208,
+      "generated_at": 1793495208,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1793491200,
+          "date_to": 1796083199
+        },
+        {
+          "date_from": 1793491200,
+          "date_to": 1796083199
+        }
+      ],
+      "subscription_id": "subscription-001"
+    },
+    {
+      "id": "invoice-002",
+      "date": 1790815145,
+      "generated_at": 1790815145,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1790809200,
+          "date_to": 1793491199
+        },
+        {
+          "date_from": 1790809200,
+          "date_to": 1793491199
+        }
+      ],
+      "subscription_id": "subscription-001"
+    },
+    {
+      "id": "invoice-003",
+      "date": 1788221021,
+      "generated_at": 1788221021,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1788217200,
+          "date_to": 1790809199
+        },
+        {
+          "date_from": 1788217200,
+          "date_to": 1790809199
+        }
+      ],
+      "subscription_id": "subscription-001"
+    },
+    {
+      "id": "invoice-004",
+      "date": 1785543171,
+      "generated_at": 1785543171,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1785538800,
+          "date_to": 1788217199
+        },
+        {
+          "date_from": 1785538800,
+          "date_to": 1788217199
+        }
+      ],
+      "subscription_id": "subscription-001"
+    },
+    {
+      "id": "invoice-005",
+      "date": 1782866294,
+      "generated_at": 1782866294,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1782860400,
+          "date_to": 1785538799
+        },
+        {
+          "date_from": 1782860400,
+          "date_to": 1785538799
+        }
+      ],
+      "subscription_id": "subscription-001"
+    },
+    {
+      "id": "invoice-006",
+      "date": 1780274507,
+      "generated_at": 1780274507,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1780268400,
+          "date_to": 1782860399
+        },
+        {
+          "date_from": 1780268400,
+          "date_to": 1782860399
+        }
+      ],
+      "subscription_id": "subscription-001"
+    },
+    {
+      "id": "invoice-007",
+      "date": 1777597234,
+      "generated_at": 1777597234,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1777590000,
+          "date_to": 1780268399
+        },
+        {
+          "date_from": 1777590000,
+          "date_to": 1780268399
+        }
+      ],
+      "subscription_id": "subscription-001"
+    },
+    {
+      "id": "invoice-008",
+      "date": 1775775600,
+      "generated_at": 1775775600,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1775775600,
+          "date_to": 1777589999
+        },
+        {
+          "date_from": 1775775600,
+          "date_to": 1777589999
+        }
+      ],
+      "subscription_id": "subscription-001"
+    },
+    {
+      "id": "invoice-009",
+      "date": 1772330235,
+      "generated_at": 1772330235,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1772323200,
+          "date_to": 1774997999
+        },
+        {
+          "date_from": 1772323200,
+          "date_to": 1774997999
+        }
+      ],
+      "subscription_id": "subscription-001"
+    },
+    {
+      "id": "invoice-010",
+      "date": 1770336000,
+      "generated_at": 1770336000,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1770336000,
+          "date_to": 1772323199
+        },
+        {
+          "date_from": 1770336000,
+          "date_to": 1772323199
+        }
+      ],
+      "subscription_id": "subscription-001"
+    },
+    {
+      "id": "invoice-011",
+      "date": 1767312000,
+      "generated_at": 1767312000,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1767312000,
+          "date_to": 1769903999
+        },
+        {
+          "date_from": 1767312000,
+          "date_to": 1769903999
+        }
+      ],
+      "subscription_id": "subscription-001"
+    },
+    {
+      "id": "invoice-012",
+      "date": 1764552208,
+      "generated_at": 1764552208,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1764547200,
+          "date_to": 1767225599
+        },
+        {
+          "date_from": 1764547200,
+          "date_to": 1767225599
+        }
+      ],
+      "subscription_id": "subscription-001"
+    },
+    {
+      "id": "invoice-013",
+      "date": 1762473600,
+      "generated_at": 1762473600,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1762473600,
+          "date_to": 1764547199
+        },
+        {
+          "date_from": 1762473600,
+          "date_to": 1764547199
+        }
+      ],
+      "subscription_id": "subscription-001"
+    },
+    {
+      "id": "invoice-014",
+      "date": 1759279755,
+      "generated_at": 1759279755,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1759273200,
+          "date_to": 1761955199
+        },
+        {
+          "date_from": 1759273200,
+          "date_to": 1761955199
+        }
+      ],
+      "subscription_id": "subscription-001"
+    },
+    {
+      "id": "invoice-015",
+      "date": 1756687758,
+      "generated_at": 1756687758,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1756681200,
+          "date_to": 1759273199
+        },
+        {
+          "date_from": 1756681200,
+          "date_to": 1759273199
+        }
+      ],
+      "subscription_id": "subscription-001"
+    },
+    {
+      "id": "invoice-016",
+      "date": 1754607600,
+      "generated_at": 1754607600,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1754607600,
+          "date_to": 1756681199
+        },
+        {
+          "date_from": 1754607600,
+          "date_to": 1756681199
+        }
+      ],
+      "subscription_id": "subscription-001"
+    },
+    {
+      "id": "invoice-017",
+      "date": 1751328954,
+      "generated_at": 1751328954,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1751324400,
+          "date_to": 1754002799
+        },
+        {
+          "date_from": 1751324400,
+          "date_to": 1754002799
+        }
+      ],
+      "subscription_id": "subscription-001"
+    },
+    {
+      "id": "invoice-018",
+      "date": 1750374000,
+      "generated_at": 1750374000,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1750374000,
+          "date_to": 1751324399
+        },
+        {
+          "date_from": 1750374000,
+          "date_to": 1751324399
+        }
+      ],
+      "subscription_id": "subscription-001"
+    },
+    {
+      "id": "invoice-019",
+      "date": 1746065348,
+      "generated_at": 1746065348,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1746054000,
+          "date_to": 1748732399
+        },
+        {
+          "date_from": 1746054000,
+          "date_to": 1748732399
+        }
+      ],
+      "subscription_id": "subscription-001"
+    },
+    {
+      "id": "invoice-020",
+      "date": 1743721200,
+      "generated_at": 1743721200,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1743721200,
+          "date_to": 1746053999
+        },
+        {
+          "date_from": 1743721200,
+          "date_to": 1746053999
+        }
+      ],
+      "subscription_id": "subscription-001"
+    },
+    {
+      "id": "invoice-021",
+      "date": 1740790303,
+      "generated_at": 1740790303,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1740787200,
+          "date_to": 1743461999
+        },
+        {
+          "date_from": 1740787200,
+          "date_to": 1743461999
+        }
+      ],
+      "subscription_id": "subscription-001"
+    },
+    {
+      "id": "invoice-022",
+      "date": 1738370606,
+      "generated_at": 1738370606,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1738368000,
+          "date_to": 1740787199
+        },
+        {
+          "date_from": 1738368000,
+          "date_to": 1740787199
+        }
+      ],
+      "subscription_id": "subscription-001"
+    },
+    {
+      "id": "invoice-023",
+      "date": 1735705064,
+      "generated_at": 1735705064,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1735689600,
+          "date_to": 1738367999
+        },
+        {
+          "date_from": 1735689600,
+          "date_to": 1738367999
+        }
+      ],
+      "subscription_id": "subscription-001"
+    },
+    {
+      "id": "invoice-024",
+      "date": 1733013318,
+      "generated_at": 1733013318,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1733011200,
+          "date_to": 1735689599
+        },
+        {
+          "date_from": 1733011200,
+          "date_to": 1735689599
+        }
+      ],
+      "subscription_id": "subscription-001"
+    },
+    {
+      "id": "invoice-025",
+      "date": 1730678400,
+      "generated_at": 1730678400,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1730678400,
+          "date_to": 1733011199
+        },
+        {
+          "date_from": 1730678400,
+          "date_to": 1733011199
+        }
+      ],
+      "subscription_id": "subscription-001"
+    },
+    {
+      "id": "invoice-026",
+      "date": 1730422906,
+      "generated_at": 1730422906,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1730419200,
+          "date_to": 1733011199
+        },
+        {
+          "date_from": 1730419200,
+          "date_to": 1733011199
+        },
+        {
+          "date_from": 1730419200,
+          "date_to": 1733011199
+        }
+      ]
+    },
+    {
+      "id": "invoice-027",
+      "date": 1727739662,
+      "generated_at": 1727739662,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1727737200,
+          "date_to": 1730419199
+        },
+        {
+          "date_from": 1727737200,
+          "date_to": 1730419199
+        },
+        {
+          "date_from": 1727737200,
+          "date_to": 1730419199
+        }
+      ]
+    },
+    {
+      "id": "invoice-028",
+      "date": 1725148071,
+      "generated_at": 1725148071,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1725145200,
+          "date_to": 1727737199
+        },
+        {
+          "date_from": 1725145200,
+          "date_to": 1727737199
+        },
+        {
+          "date_from": 1725145200,
+          "date_to": 1727737199
+        }
+      ]
+    },
+    {
+      "id": "invoice-029",
+      "date": 1722469653,
+      "generated_at": 1722469653,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1722466800,
+          "date_to": 1725145199
+        },
+        {
+          "date_from": 1722466800,
+          "date_to": 1725145199
+        },
+        {
+          "date_from": 1722466800,
+          "date_to": 1725145199
+        }
+      ]
+    },
+    {
+      "id": "invoice-030",
+      "date": 1719792756,
+      "generated_at": 1719792756,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1719788400,
+          "date_to": 1722466799
+        },
+        {
+          "date_from": 1719788400,
+          "date_to": 1722466799
+        },
+        {
+          "date_from": 1719788400,
+          "date_to": 1722466799
+        }
+      ]
+    },
+    {
+      "id": "invoice-031",
+      "date": 1719010800,
+      "generated_at": 1719010800,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1719010800,
+          "date_to": 1719788399
+        }
+      ],
+      "subscription_id": "subscription-007"
+    },
+    {
+      "id": "invoice-032",
+      "date": 1719010800,
+      "generated_at": 1719010800,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1719010800,
+          "date_to": 1719788399
+        },
+        {
+          "date_from": 1719010800,
+          "date_to": 1719788399
+        }
+      ],
+      "subscription_id": "subscription-008"
+    },
+    {
+      "id": "invoice-033",
+      "date": 1714518371,
+      "generated_at": 1714518371,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1714518000,
+          "date_to": 1717196399
+        },
+        {
+          "date_from": 1714518000,
+          "date_to": 1717196399
+        },
+        {
+          "date_from": 1714518000,
+          "date_to": 1717196399
+        }
+      ]
+    },
+    {
+      "id": "invoice-034",
+      "date": 1711756800,
+      "generated_at": 1711756800,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1711756800,
+          "date_to": 1714517999
+        }
+      ],
+      "subscription_id": "subscription-007"
+    },
+    {
+      "id": "invoice-035",
+      "date": 1711756800,
+      "generated_at": 1711756800,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1711756800,
+          "date_to": 1714517999
+        },
+        {
+          "date_from": 1711756800,
+          "date_to": 1714517999
+        }
+      ],
+      "subscription_id": "subscription-008"
+    },
+    {
+      "id": "invoice-036",
+      "date": 1710201600,
+      "generated_at": 1710201600,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1710201600,
+          "date_to": 1711925999
+        }
+      ],
+      "subscription_id": "subscription-009"
+    },
+    {
+      "id": "invoice-037",
+      "date": 1710201600,
+      "generated_at": 1710201600,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1710201600,
+          "date_to": 1711925999
+        },
+        {
+          "date_from": 1710201600,
+          "date_to": 1711925999
+        }
+      ],
+      "subscription_id": "subscription-010"
+    },
+    {
+      "id": "invoice-038",
+      "date": 1710097666,
+      "generated_at": 1710097666,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1710028800,
+          "date_to": 1710115199
+        }
+      ]
+    },
+    {
+      "id": "invoice-039",
+      "date": 1793495214,
+      "generated_at": 1793495214,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1793491200,
+          "date_to": 1796083199
+        },
+        {
+          "date_from": 1793491200,
+          "date_to": 1796083199
+        }
+      ],
+      "subscription_id": "subscription-002"
+    },
+    {
+      "id": "invoice-040",
+      "date": 1790815153,
+      "generated_at": 1790815153,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1790809200,
+          "date_to": 1793491199
+        },
+        {
+          "date_from": 1790809200,
+          "date_to": 1793491199
+        }
+      ],
+      "subscription_id": "subscription-002"
+    },
+    {
+      "id": "invoice-041",
+      "date": 1788221025,
+      "generated_at": 1788221025,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1788217200,
+          "date_to": 1790809199
+        },
+        {
+          "date_from": 1788217200,
+          "date_to": 1790809199
+        }
+      ],
+      "subscription_id": "subscription-002"
+    },
+    {
+      "id": "invoice-042",
+      "date": 1785543408,
+      "generated_at": 1785543408,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1785538800,
+          "date_to": 1788217199
+        },
+        {
+          "date_from": 1785538800,
+          "date_to": 1788217199
+        }
+      ],
+      "subscription_id": "subscription-002"
+    },
+    {
+      "id": "invoice-043",
+      "date": 1782866302,
+      "generated_at": 1782866302,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1782860400,
+          "date_to": 1785538799
+        },
+        {
+          "date_from": 1782860400,
+          "date_to": 1785538799
+        }
+      ],
+      "subscription_id": "subscription-002"
+    },
+    {
+      "id": "invoice-044",
+      "date": 1780274535,
+      "generated_at": 1780274535,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1780268400,
+          "date_to": 1782860399
+        },
+        {
+          "date_from": 1780268400,
+          "date_to": 1782860399
+        }
+      ],
+      "subscription_id": "subscription-002"
+    },
+    {
+      "id": "invoice-045",
+      "date": 1778713200,
+      "generated_at": 1778713200,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1778713200,
+          "date_to": 1780268399
+        },
+        {
+          "date_from": 1778713200,
+          "date_to": 1780268399
+        }
+      ],
+      "subscription_id": "subscription-002"
+    },
+    {
+      "id": "invoice-046",
+      "date": 1777590000,
+      "generated_at": 1777590000,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1777590000,
+          "date_to": 1780268399
+        },
+        {
+          "date_from": 1777590000,
+          "date_to": 1780268399
+        }
+      ],
+      "subscription_id": "subscription-003"
+    },
+    {
+      "id": "invoice-047",
+      "date": 1775004863,
+      "generated_at": 1775004863,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1774998000,
+          "date_to": 1777589999
+        },
+        {
+          "date_from": 1774998000,
+          "date_to": 1777589999
+        }
+      ],
+      "subscription_id": "subscription-003"
+    },
+    {
+      "id": "invoice-048",
+      "date": 1772329904,
+      "generated_at": 1772329904,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1772323200,
+          "date_to": 1774997999
+        },
+        {
+          "date_from": 1772323200,
+          "date_to": 1774997999
+        }
+      ],
+      "subscription_id": "subscription-003"
+    },
+    {
+      "id": "invoice-049",
+      "date": 1769909244,
+      "generated_at": 1769909244,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1769904000,
+          "date_to": 1772323199
+        },
+        {
+          "date_from": 1769904000,
+          "date_to": 1772323199
+        }
+      ],
+      "subscription_id": "subscription-003"
+    },
+    {
+      "id": "invoice-050",
+      "date": 1767243545,
+      "generated_at": 1767243545,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1767225600,
+          "date_to": 1769903999
+        },
+        {
+          "date_from": 1767225600,
+          "date_to": 1769903999
+        }
+      ],
+      "subscription_id": "subscription-003"
+    },
+    {
+      "id": "invoice-051",
+      "date": 1764552250,
+      "generated_at": 1764552250,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1764547200,
+          "date_to": 1767225599
+        },
+        {
+          "date_from": 1764547200,
+          "date_to": 1767225599
+        }
+      ],
+      "subscription_id": "subscription-003"
+    },
+    {
+      "id": "invoice-052",
+      "date": 1761960645,
+      "generated_at": 1761960645,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1761955200,
+          "date_to": 1764547199
+        },
+        {
+          "date_from": 1761955200,
+          "date_to": 1764547199
+        }
+      ],
+      "subscription_id": "subscription-003"
+    },
+    {
+      "id": "invoice-053",
+      "date": 1759279865,
+      "generated_at": 1759279865,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1759273200,
+          "date_to": 1761955199
+        },
+        {
+          "date_from": 1759273200,
+          "date_to": 1761955199
+        }
+      ],
+      "subscription_id": "subscription-003"
+    },
+    {
+      "id": "invoice-054",
+      "date": 1756687688,
+      "generated_at": 1756687688,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1756681200,
+          "date_to": 1759273199
+        },
+        {
+          "date_from": 1756681200,
+          "date_to": 1759273199
+        }
+      ],
+      "subscription_id": "subscription-003"
+    },
+    {
+      "id": "invoice-055",
+      "date": 1754002800,
+      "generated_at": 1754002800,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1754002800,
+          "date_to": 1756681199
+        },
+        {
+          "date_from": 1754002800,
+          "date_to": 1756681199
+        }
+      ],
+      "subscription_id": "subscription-003"
+    },
+    {
+      "id": "invoice-056",
+      "date": 1751328824,
+      "generated_at": 1751328824,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1751324400,
+          "date_to": 1754002799
+        },
+        {
+          "date_from": 1751324400,
+          "date_to": 1754002799
+        }
+      ],
+      "subscription_id": "subscription-003"
+    },
+    {
+      "id": "invoice-057",
+      "date": 1749423600,
+      "generated_at": 1749423600,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1749423600,
+          "date_to": 1751324399
+        },
+        {
+          "date_from": 1749423600,
+          "date_to": 1751324399
+        }
+      ],
+      "subscription_id": "subscription-003"
+    },
+    {
+      "id": "invoice-058",
+      "date": 1749164400,
+      "generated_at": 1749164400,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1749164400,
+          "date_to": 1751324399
+        },
+        {
+          "date_from": 1749164400,
+          "date_to": 1751324399
+        }
+      ],
+      "subscription_id": "subscription-004"
+    },
+    {
+      "id": "invoice-059",
+      "date": 1746065370,
+      "generated_at": 1746065370,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1746054000,
+          "date_to": 1748732399
+        },
+        {
+          "date_from": 1746054000,
+          "date_to": 1748732399
+        }
+      ],
+      "subscription_id": "subscription-004"
+    },
+    {
+      "id": "invoice-060",
+      "date": 1743473439,
+      "generated_at": 1743473439,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1743462000,
+          "date_to": 1746053999
+        },
+        {
+          "date_from": 1743462000,
+          "date_to": 1746053999
+        }
+      ],
+      "subscription_id": "subscription-004"
+    },
+    {
+      "id": "invoice-061",
+      "date": 1740790027,
+      "generated_at": 1740790027,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1740787200,
+          "date_to": 1743461999
+        },
+        {
+          "date_from": 1740787200,
+          "date_to": 1743461999
+        }
+      ],
+      "subscription_id": "subscription-004"
+    },
+    {
+      "id": "invoice-062",
+      "date": 1738886400,
+      "generated_at": 1738886400,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1738886400,
+          "date_to": 1740787199
+        },
+        {
+          "date_from": 1738886400,
+          "date_to": 1740787199
+        }
+      ],
+      "subscription_id": "subscription-004"
+    },
+    {
+      "id": "invoice-063",
+      "date": 1735705197,
+      "generated_at": 1735705197,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1735689600,
+          "date_to": 1738367999
+        },
+        {
+          "date_from": 1735689600,
+          "date_to": 1738367999
+        }
+      ],
+      "subscription_id": "subscription-004"
+    },
+    {
+      "id": "invoice-064",
+      "date": 1734370636,
+      "generated_at": 1734370636,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1734307200,
+          "date_to": 1734393599
+        }
+      ]
+    },
+    {
+      "id": "invoice-065",
+      "date": 1733013917,
+      "generated_at": 1733013917,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1733011200,
+          "date_to": 1735689599
+        },
+        {
+          "date_from": 1733011200,
+          "date_to": 1735689599
+        }
+      ],
+      "subscription_id": "subscription-004"
+    },
+    {
+      "id": "invoice-066",
+      "date": 1730422783,
+      "generated_at": 1730422783,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1730419200,
+          "date_to": 1733011199
+        },
+        {
+          "date_from": 1730419200,
+          "date_to": 1733011199
+        }
+      ],
+      "subscription_id": "subscription-004"
+    },
+    {
+      "id": "invoice-067",
+      "date": 1727823600,
+      "generated_at": 1727823600,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1727823600,
+          "date_to": 1730419199
+        },
+        {
+          "date_from": 1727823600,
+          "date_to": 1730419199
+        }
+      ],
+      "subscription_id": "subscription-004"
+    },
+    {
+      "id": "invoice-068",
+      "date": 1727726095,
+      "generated_at": 1727726095,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1727650800,
+          "date_to": 1727737199
+        }
+      ]
+    },
+    {
+      "id": "invoice-069",
+      "date": 1725836400,
+      "generated_at": 1725836400,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1725836400,
+          "date_to": 1727737199
+        },
+        {
+          "date_from": 1725836400,
+          "date_to": 1727737199
+        }
+      ],
+      "subscription_id": "subscription-004"
+    },
+    {
+      "id": "invoice-070",
+      "date": 1793495204,
+      "generated_at": 1793495204,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1793491200,
+          "date_to": 1796083199
+        },
+        {
+          "date_from": 1793491200,
+          "date_to": 1796083199
+        }
+      ],
+      "subscription_id": "subscription-011"
+    },
+    {
+      "id": "invoice-071",
+      "date": 1790815138,
+      "generated_at": 1790815138,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1790809200,
+          "date_to": 1793491199
+        },
+        {
+          "date_from": 1790809200,
+          "date_to": 1793491199
+        }
+      ],
+      "subscription_id": "subscription-011"
+    },
+    {
+      "id": "invoice-072",
+      "date": 1788221013,
+      "generated_at": 1788221013,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1788217200,
+          "date_to": 1790809199
+        },
+        {
+          "date_from": 1788217200,
+          "date_to": 1790809199
+        }
+      ],
+      "subscription_id": "subscription-011"
+    },
+    {
+      "id": "invoice-073",
+      "date": 1785543379,
+      "generated_at": 1785543379,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1785538800,
+          "date_to": 1788217199
+        },
+        {
+          "date_from": 1785538800,
+          "date_to": 1788217199
+        }
+      ],
+      "subscription_id": "subscription-011"
+    },
+    {
+      "id": "invoice-074",
+      "date": 1782866281,
+      "generated_at": 1782866281,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1782860400,
+          "date_to": 1785538799
+        },
+        {
+          "date_from": 1782860400,
+          "date_to": 1785538799
+        }
+      ],
+      "subscription_id": "subscription-011"
+    },
+    {
+      "id": "invoice-075",
+      "date": 1780274922,
+      "generated_at": 1780274922,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1780268400,
+          "date_to": 1782860399
+        },
+        {
+          "date_from": 1780268400,
+          "date_to": 1782860399
+        }
+      ],
+      "subscription_id": "subscription-011"
+    },
+    {
+      "id": "invoice-076",
+      "date": 1778713200,
+      "generated_at": 1778713200,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1778713200,
+          "date_to": 1780268399
+        },
+        {
+          "date_from": 1778713200,
+          "date_to": 1780268399
+        }
+      ],
+      "subscription_id": "subscription-011"
+    },
+    {
+      "id": "invoice-077",
+      "date": 1777590000,
+      "generated_at": 1777590000,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1777590000,
+          "date_to": 1780268399
+        },
+        {
+          "date_from": 1777590000,
+          "date_to": 1780268399
+        }
+      ],
+      "subscription_id": "subscription-005"
+    },
+    {
+      "id": "invoice-078",
+      "date": 1775004859,
+      "generated_at": 1775004859,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1774998000,
+          "date_to": 1777589999
+        },
+        {
+          "date_from": 1774998000,
+          "date_to": 1777589999
+        }
+      ],
+      "subscription_id": "subscription-005"
+    },
+    {
+      "id": "invoice-079",
+      "date": 1772329901,
+      "generated_at": 1772329901,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1772323200,
+          "date_to": 1774997999
+        },
+        {
+          "date_from": 1772323200,
+          "date_to": 1774997999
+        }
+      ],
+      "subscription_id": "subscription-005"
+    },
+    {
+      "id": "invoice-080",
+      "date": 1769909244,
+      "generated_at": 1769909244,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1769904000,
+          "date_to": 1772323199
+        },
+        {
+          "date_from": 1769904000,
+          "date_to": 1772323199
+        }
+      ],
+      "subscription_id": "subscription-005"
+    },
+    {
+      "id": "invoice-081",
+      "date": 1767243545,
+      "generated_at": 1767243545,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1767225600,
+          "date_to": 1769903999
+        },
+        {
+          "date_from": 1767225600,
+          "date_to": 1769903999
+        }
+      ],
+      "subscription_id": "subscription-005"
+    },
+    {
+      "id": "invoice-082",
+      "date": 1764552245,
+      "generated_at": 1764552245,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1764547200,
+          "date_to": 1767225599
+        },
+        {
+          "date_from": 1764547200,
+          "date_to": 1767225599
+        }
+      ],
+      "subscription_id": "subscription-005"
+    },
+    {
+      "id": "invoice-083",
+      "date": 1761960624,
+      "generated_at": 1761960624,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1761955200,
+          "date_to": 1764547199
+        },
+        {
+          "date_from": 1761955200,
+          "date_to": 1764547199
+        }
+      ],
+      "subscription_id": "subscription-005"
+    },
+    {
+      "id": "invoice-084",
+      "date": 1759279838,
+      "generated_at": 1759279838,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1759273200,
+          "date_to": 1761955199
+        },
+        {
+          "date_from": 1759273200,
+          "date_to": 1761955199
+        }
+      ],
+      "subscription_id": "subscription-005"
+    },
+    {
+      "id": "invoice-085",
+      "date": 1756687461,
+      "generated_at": 1756687461,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1756681200,
+          "date_to": 1759273199
+        },
+        {
+          "date_from": 1756681200,
+          "date_to": 1759273199
+        }
+      ],
+      "subscription_id": "subscription-005"
+    },
+    {
+      "id": "invoice-086",
+      "date": 1754007112,
+      "generated_at": 1754007112,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1754002800,
+          "date_to": 1756681199
+        },
+        {
+          "date_from": 1754002800,
+          "date_to": 1756681199
+        }
+      ],
+      "subscription_id": "subscription-005"
+    },
+    {
+      "id": "invoice-087",
+      "date": 1751328937,
+      "generated_at": 1751328937,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1751324400,
+          "date_to": 1754002799
+        },
+        {
+          "date_from": 1751324400,
+          "date_to": 1754002799
+        }
+      ],
+      "subscription_id": "subscription-005"
+    },
+    {
+      "id": "invoice-088",
+      "date": 1750868376,
+      "generated_at": 1750868376,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1750806000,
+          "date_to": 1750892399
+        }
+      ]
+    },
+    {
+      "id": "invoice-089",
+      "date": 1748737380,
+      "generated_at": 1748737380,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1748732400,
+          "date_to": 1751324399
+        },
+        {
+          "date_from": 1748732400,
+          "date_to": 1751324399
+        }
+      ],
+      "subscription_id": "subscription-005"
+    },
+    {
+      "id": "invoice-090",
+      "date": 1746065082,
+      "generated_at": 1746065082,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1746054000,
+          "date_to": 1748732399
+        },
+        {
+          "date_from": 1746054000,
+          "date_to": 1748732399
+        }
+      ],
+      "subscription_id": "subscription-005"
+    },
+    {
+      "id": "invoice-091",
+      "date": 1743473581,
+      "generated_at": 1743473581,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1743462000,
+          "date_to": 1746053999
+        },
+        {
+          "date_from": 1743462000,
+          "date_to": 1746053999
+        }
+      ],
+      "subscription_id": "subscription-005"
+    },
+    {
+      "id": "invoice-092",
+      "date": 1740790467,
+      "generated_at": 1740790467,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1740787200,
+          "date_to": 1743461999
+        },
+        {
+          "date_from": 1740787200,
+          "date_to": 1743461999
+        }
+      ],
+      "subscription_id": "subscription-005"
+    },
+    {
+      "id": "invoice-093",
+      "date": 1739905023,
+      "generated_at": 1739905023,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1739836800,
+          "date_to": 1739923199
+        }
+      ]
+    },
+    {
+      "id": "invoice-094",
+      "date": 1739059200,
+      "generated_at": 1739059200,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1739059200,
+          "date_to": 1740787199
+        },
+        {
+          "date_from": 1739059200,
+          "date_to": 1740787199
+        }
+      ],
+      "subscription_id": "subscription-005"
+    },
+    {
+      "id": "invoice-095",
+      "date": 1738265031,
+      "generated_at": 1738265031,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1738195200,
+          "date_to": 1738281599
+        }
+      ]
+    },
+    {
+      "id": "invoice-096",
+      "date": 1735705102,
+      "generated_at": 1735705102,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1735689600,
+          "date_to": 1738367999
+        },
+        {
+          "date_from": 1735689600,
+          "date_to": 1738367999
+        }
+      ],
+      "subscription_id": "subscription-005"
+    },
+    {
+      "id": "invoice-097",
+      "date": 1734110003,
+      "generated_at": 1734110003,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1734048000,
+          "date_to": 1734134399
+        }
+      ]
+    },
+    {
+      "id": "invoice-098",
+      "date": 1733013913,
+      "generated_at": 1733013913,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1733011200,
+          "date_to": 1735689599
+        },
+        {
+          "date_from": 1733011200,
+          "date_to": 1735689599
+        }
+      ],
+      "subscription_id": "subscription-005"
+    },
+    {
+      "id": "invoice-099",
+      "date": 1730422784,
+      "generated_at": 1730422784,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1730419200,
+          "date_to": 1733011199
+        },
+        {
+          "date_from": 1730419200,
+          "date_to": 1733011199
+        }
+      ],
+      "subscription_id": "subscription-005"
+    },
+    {
+      "id": "invoice-100",
+      "date": 1727823600,
+      "generated_at": 1727823600,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1727823600,
+          "date_to": 1730419199
+        },
+        {
+          "date_from": 1727823600,
+          "date_to": 1730419199
+        }
+      ],
+      "subscription_id": "subscription-005"
+    },
+    {
+      "id": "invoice-101",
+      "date": 1727726230,
+      "generated_at": 1727726230,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1727650800,
+          "date_to": 1727737199
+        }
+      ]
+    },
+    {
+      "id": "invoice-102",
+      "date": 1725836400,
+      "generated_at": 1725836400,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1725836400,
+          "date_to": 1727737199
+        },
+        {
+          "date_from": 1725836400,
+          "date_to": 1727737199
+        }
+      ],
+      "subscription_id": "subscription-005"
+    },
+    {
+      "id": "invoice-103",
+      "date": 1794577539,
+      "generated_at": 1794577539,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1794528000,
+          "date_to": 1794614399
+        }
+      ],
+      "subscription_id": "subscription-012"
+    },
+    {
+      "id": "invoice-104",
+      "date": 1794528000,
+      "generated_at": 1794528000,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1794528000,
+          "date_to": 1796083199
+        },
+        {
+          "date_from": 1794528000,
+          "date_to": 1796083199
+        }
+      ],
+      "subscription_id": "subscription-012"
+    },
+    {
+      "id": "invoice-105",
+      "date": 1782866300,
+      "generated_at": 1782866300,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1782860400,
+          "date_to": 1785538799
+        },
+        {
+          "date_from": 1782860400,
+          "date_to": 1785538799
+        }
+      ],
+      "subscription_id": "subscription-006"
+    },
+    {
+      "id": "invoice-106",
+      "date": 1780274950,
+      "generated_at": 1780274950,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1780268400,
+          "date_to": 1782860399
+        },
+        {
+          "date_from": 1780268400,
+          "date_to": 1782860399
+        }
+      ],
+      "subscription_id": "subscription-006"
+    },
+    {
+      "id": "invoice-107",
+      "date": 1777597248,
+      "generated_at": 1777597248,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1777590000,
+          "date_to": 1780268399
+        },
+        {
+          "date_from": 1777590000,
+          "date_to": 1780268399
+        }
+      ],
+      "subscription_id": "subscription-006"
+    },
+    {
+      "id": "invoice-108",
+      "date": 1775005059,
+      "generated_at": 1775005059,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1774998000,
+          "date_to": 1777589999
+        },
+        {
+          "date_from": 1774998000,
+          "date_to": 1777589999
+        }
+      ],
+      "subscription_id": "subscription-006"
+    },
+    {
+      "id": "invoice-109",
+      "date": 1772755200,
+      "generated_at": 1772755200,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1772755200,
+          "date_to": 1774997999
+        },
+        {
+          "date_from": 1772755200,
+          "date_to": 1774997999
+        }
+      ],
+      "subscription_id": "subscription-006"
+    },
+    {
+      "id": "invoice-110",
+      "date": 1770336000,
+      "generated_at": 1770336000,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1770336000,
+          "date_to": 1772323199
+        },
+        {
+          "date_from": 1770336000,
+          "date_to": 1772323199
+        }
+      ],
+      "subscription_id": "subscription-006"
+    },
+    {
+      "id": "invoice-111",
+      "date": 1767916800,
+      "generated_at": 1767916800,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1767916800,
+          "date_to": 1769903999
+        },
+        {
+          "date_from": 1767916800,
+          "date_to": 1769903999
+        }
+      ],
+      "subscription_id": "subscription-006"
+    },
+    {
+      "id": "invoice-112",
+      "date": 1764552117,
+      "generated_at": 1764552117,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1764547200,
+          "date_to": 1767225599
+        },
+        {
+          "date_from": 1764547200,
+          "date_to": 1767225599
+        }
+      ],
+      "subscription_id": "subscription-006"
+    },
+    {
+      "id": "invoice-113",
+      "date": 1761961453,
+      "generated_at": 1761961453,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1761955200,
+          "date_to": 1764547199
+        },
+        {
+          "date_from": 1761955200,
+          "date_to": 1764547199
+        }
+      ],
+      "subscription_id": "subscription-006"
+    },
+    {
+      "id": "invoice-114",
+      "date": 1759279783,
+      "generated_at": 1759279783,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1759273200,
+          "date_to": 1761955199
+        },
+        {
+          "date_from": 1759273200,
+          "date_to": 1761955199
+        }
+      ],
+      "subscription_id": "subscription-006"
+    },
+    {
+      "id": "invoice-115",
+      "date": 1756687871,
+      "generated_at": 1756687871,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1756681200,
+          "date_to": 1759273199
+        },
+        {
+          "date_from": 1756681200,
+          "date_to": 1759273199
+        }
+      ],
+      "subscription_id": "subscription-006"
+    },
+    {
+      "id": "invoice-116",
+      "date": 1754007138,
+      "generated_at": 1754007138,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1754002800,
+          "date_to": 1756681199
+        },
+        {
+          "date_from": 1754002800,
+          "date_to": 1756681199
+        }
+      ],
+      "subscription_id": "subscription-006"
+    },
+    {
+      "id": "invoice-117",
+      "date": 1751328944,
+      "generated_at": 1751328944,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1751324400,
+          "date_to": 1754002799
+        },
+        {
+          "date_from": 1751324400,
+          "date_to": 1754002799
+        }
+      ],
+      "subscription_id": "subscription-006"
+    },
+    {
+      "id": "invoice-118",
+      "date": 1748737380,
+      "generated_at": 1748737380,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1748732400,
+          "date_to": 1751324399
+        },
+        {
+          "date_from": 1748732400,
+          "date_to": 1751324399
+        }
+      ],
+      "subscription_id": "subscription-006"
+    },
+    {
+      "id": "invoice-119",
+      "date": 1746065402,
+      "generated_at": 1746065402,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1746054000,
+          "date_to": 1748732399
+        },
+        {
+          "date_from": 1746054000,
+          "date_to": 1748732399
+        }
+      ],
+      "subscription_id": "subscription-006"
+    },
+    {
+      "id": "invoice-120",
+      "date": 1743473672,
+      "generated_at": 1743473672,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1743462000,
+          "date_to": 1746053999
+        },
+        {
+          "date_from": 1743462000,
+          "date_to": 1746053999
+        }
+      ],
+      "subscription_id": "subscription-006"
+    },
+    {
+      "id": "invoice-121",
+      "date": 1740790491,
+      "generated_at": 1740790491,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1740787200,
+          "date_to": 1743461999
+        },
+        {
+          "date_from": 1740787200,
+          "date_to": 1743461999
+        }
+      ],
+      "subscription_id": "subscription-006"
+    },
+    {
+      "id": "invoice-122",
+      "date": 1739059200,
+      "generated_at": 1739059200,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1739059200,
+          "date_to": 1740787199
+        },
+        {
+          "date_from": 1739059200,
+          "date_to": 1740787199
+        }
+      ],
+      "subscription_id": "subscription-006"
+    },
+    {
+      "id": "invoice-123",
+      "date": 1736035200,
+      "generated_at": 1736035200,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1736035200,
+          "date_to": 1738367999
+        },
+        {
+          "date_from": 1736035200,
+          "date_to": 1738367999
+        }
+      ],
+      "subscription_id": "subscription-006"
+    },
+    {
+      "id": "invoice-124",
+      "date": 1733013955,
+      "generated_at": 1733013955,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1733011200,
+          "date_to": 1735689599
+        },
+        {
+          "date_from": 1733011200,
+          "date_to": 1735689599
+        }
+      ],
+      "subscription_id": "subscription-006"
+    },
+    {
+      "id": "invoice-125",
+      "date": 1730422127,
+      "generated_at": 1730422127,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1730419200,
+          "date_to": 1733011199
+        },
+        {
+          "date_from": 1730419200,
+          "date_to": 1733011199
+        }
+      ],
+      "subscription_id": "subscription-006"
+    },
+    {
+      "id": "invoice-126",
+      "date": 1727739600,
+      "generated_at": 1727739600,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1727737200,
+          "date_to": 1730419199
+        },
+        {
+          "date_from": 1727737200,
+          "date_to": 1730419199
+        }
+      ],
+      "subscription_id": "subscription-006"
+    },
+    {
+      "id": "invoice-127",
+      "date": 1725148007,
+      "generated_at": 1725148007,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1725145200,
+          "date_to": 1727737199
+        },
+        {
+          "date_from": 1725145200,
+          "date_to": 1727737199
+        }
+      ],
+      "subscription_id": "subscription-006"
+    },
+    {
+      "id": "invoice-128",
+      "date": 1722469582,
+      "generated_at": 1722469582,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1722466800,
+          "date_to": 1725145199
+        },
+        {
+          "date_from": 1722466800,
+          "date_to": 1725145199
+        }
+      ],
+      "subscription_id": "subscription-006"
+    },
+    {
+      "id": "invoice-129",
+      "date": 1719792170,
+      "generated_at": 1719792170,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1719788400,
+          "date_to": 1722466799
+        },
+        {
+          "date_from": 1719788400,
+          "date_to": 1722466799
+        }
+      ],
+      "subscription_id": "subscription-006"
+    },
+    {
+      "id": "invoice-130",
+      "date": 1717196400,
+      "generated_at": 1717196400,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1717196400,
+          "date_to": 1719788399
+        },
+        {
+          "date_from": 1717196400,
+          "date_to": 1719788399
+        }
+      ],
+      "subscription_id": "subscription-006"
+    },
+    {
+      "id": "invoice-131",
+      "date": 1714520717,
+      "generated_at": 1714520717,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1714518000,
+          "date_to": 1717196399
+        },
+        {
+          "date_from": 1714518000,
+          "date_to": 1717196399
+        }
+      ],
+      "subscription_id": "subscription-006"
+    },
+    {
+      "id": "invoice-132",
+      "date": 1713740400,
+      "generated_at": 1713740400,
+      "status": "paid",
+      "line_items": [
+        {
+          "date_from": 1713740400,
+          "date_to": 1714517999
+        },
+        {
+          "date_from": 1713740400,
+          "date_to": 1714517999
+        }
+      ],
+      "subscription_id": "subscription-006"
+    }
+  ]
+}

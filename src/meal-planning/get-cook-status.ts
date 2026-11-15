@@ -1,4 +1,6 @@
 import { StandardPlan } from '@tnmo/types';
+import { DateTime } from 'luxon';
+import { startOfUkCookDate } from './uk-cook-date';
 
 interface InTrialStatus {
   status: 'in_trial';
@@ -71,26 +73,38 @@ export const getCookStatus = (cookDate: Date, plan: StandardPlan): Status => {
     case 'paused':
     case 'active':
       {
-        const pauseEnd = plan.pauseEnd && new Date(plan.pauseEnd);
-        const pauseStart = plan.pauseStart && new Date(plan.pauseStart);
+        const pauseEnd = plan.pauseEnd ? new Date(plan.pauseEnd) : undefined;
+        const pauseStart = plan.pauseStart
+          ? new Date(plan.pauseStart)
+          : undefined;
 
         if (!pauseStart && !pauseEnd) {
           return { status: plan.subscriptionStatus };
         }
 
-        if (pauseEnd && cookDate >= pauseEnd) {
+        const cookDay = startOfUkCookDate(
+          DateTime.fromJSDate(cookDate)
+        ).toMillis();
+        const firstPausedDay = pauseStart
+          ? startOfUkCookDate(DateTime.fromJSDate(pauseStart)).toMillis()
+          : undefined;
+        const firstDayBack = pauseEnd
+          ? startOfUkCookDate(DateTime.fromJSDate(pauseEnd)).toMillis()
+          : undefined;
+
+        if (firstDayBack !== undefined && cookDay >= firstDayBack) {
           return { status: 'active' };
         }
 
-        if (pauseStart && cookDate < pauseStart) {
+        if (firstPausedDay !== undefined && cookDay < firstPausedDay) {
           return { status: 'active', pausingOn: pauseStart };
         }
 
         if (
-          pauseStart &&
-          cookDate >= pauseStart &&
-          pauseEnd &&
-          cookDate < pauseEnd
+          firstPausedDay !== undefined &&
+          cookDay >= firstPausedDay &&
+          firstDayBack !== undefined &&
+          cookDay < firstDayBack
         ) {
           return {
             status: 'paused',
@@ -99,14 +113,22 @@ export const getCookStatus = (cookDate: Date, plan: StandardPlan): Status => {
           };
         }
 
-        if (!pauseStart && pauseEnd && cookDate < pauseEnd) {
+        if (
+          !pauseStart &&
+          firstDayBack !== undefined &&
+          cookDay < firstDayBack
+        ) {
           return {
             status: 'paused',
             pausedUntil: pauseEnd,
           };
         }
 
-        if (pauseStart && cookDate >= pauseStart && !pauseEnd) {
+        if (
+          firstPausedDay !== undefined &&
+          cookDay >= firstPausedDay &&
+          !pauseEnd
+        ) {
           return {
             status: 'paused',
             pausedFrom: pauseStart,

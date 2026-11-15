@@ -13,7 +13,10 @@ import {
 
 import { handleDeleteCustomer } from "../../event-handlers/handle-delete-customer";
 import { updatedHandledSubscriptionResumed } from "@/backend/event-handlers/updated-handled-subscription-resumed";
-import { handleSubscriptionPauseScheduled } from "@/backend/event-handlers/handle-subscription-pause-scheduled";
+import {
+  handleSubscriptionPaused,
+  handleSubscriptionPauseScheduled,
+} from "@/backend/event-handlers/handle-subscription-pause-scheduled";
 import { handleSubscriptionScheduledPauseRemoved } from "@/backend/event-handlers/handle-subscription-scheduled-pause-removed";
 
 export const handleWebhookUpdated = async (event: APIGatewayProxyEventV2) => {
@@ -103,6 +106,7 @@ export const handleWebhookUpdated = async (event: APIGatewayProxyEventV2) => {
         break;
 
       case "subscription_paused":
+        await handleSubscriptionPaused(chargebee, chargebeeEvent);
         await handleSubscriptionEvent(
           chargebee,
           chargebeeEvent.content.customer.id

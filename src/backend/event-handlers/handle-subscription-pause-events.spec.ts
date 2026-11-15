@@ -2,7 +2,10 @@ import { DateTime } from "luxon";
 import { mock } from "vitest-mock-extended";
 import { ChargeBee } from "chargebee-typescript";
 import { Event } from "chargebee-typescript/lib/resources";
-import { handleSubscriptionPauseScheduled } from "./handle-subscription-pause-scheduled";
+import {
+  handleSubscriptionPaused,
+  handleSubscriptionPauseScheduled,
+} from "./handle-subscription-pause-scheduled";
 import { handleSubscriptionScheduledPauseRemoved } from "./handle-subscription-scheduled-pause-removed";
 import { setPauseDate } from "./subscription-pausing/set-pause-date";
 
@@ -15,53 +18,29 @@ describe("pause subscription event handlers", () => {
     vi.resetAllMocks();
   });
 
-  it("stores the scheduled pause start date from the subscription payload", async () => {
+  const subscriptionId = "sub_test";
+  const pauseDate = 1_715_372_800;
+
+  const occurredAt = pauseDate + 60;
+
+  it.each`
+    name                                                                     | handler                                    | subscription                                     | expectedCalls
+    ${"stores the scheduled pause start date from the subscription payload"} | ${handleSubscriptionPauseScheduled}        | ${{ id: subscriptionId, pause_date: pauseDate }} | ${[[subscriptionId, DateTime.fromSeconds(pauseDate)]]}
+    ${"does nothing when the scheduled pause start is missing"}              | ${handleSubscriptionPauseScheduled}        | ${{ id: subscriptionId }}                        | ${[]}
+    ${"clears the stored pause date when a scheduled pause is removed"}      | ${handleSubscriptionScheduledPauseRemoved} | ${{ id: subscriptionId }}                        | ${[[subscriptionId, null]]}
+    ${"stores when an immediate pause occurred"}                             | ${handleSubscriptionPaused}                | ${{ id: subscriptionId }}                        | ${[[subscriptionId, DateTime.fromSeconds(occurredAt)]]}
+    ${"uses the actual pause date when Chargebee supplies it"}               | ${handleSubscriptionPaused}                | ${{ id: subscriptionId, pause_date: pauseDate }} | ${[[subscriptionId, DateTime.fromSeconds(pauseDate)]]}
+  `("$name", async ({ handler, subscription, expectedCalls }) => {
     const client = mock<ChargeBee>();
     const event = mock<Event>({
-      content: {
-        subscription: {
-          id: "sub_test",
-          pause_date: 1_715_372_800,
-        },
-      },
+      occurred_at: occurredAt,
+      content: { subscription },
     });
 
-    await handleSubscriptionPauseScheduled(client, event);
+    await handler(client, event);
 
-    expect(setPauseDate).toHaveBeenCalledWith(
-      client,
-      "sub_test",
-      DateTime.fromSeconds(1_715_372_800)
+    expect(vi.mocked(setPauseDate).mock.calls).toEqual(
+      expectedCalls.map((args: [string, DateTime | null]) => [client, ...args])
     );
-  });
-
-  it("does nothing when the scheduled pause start is missing", async () => {
-    const client = mock<ChargeBee>();
-    const event = mock<Event>({
-      content: {
-        subscription: {
-          id: "sub_test",
-        },
-      },
-    });
-
-    await handleSubscriptionPauseScheduled(client, event);
-
-    expect(setPauseDate).not.toHaveBeenCalled();
-  });
-
-  it("clears the stored pause date when a scheduled pause is removed", async () => {
-    const client = mock<ChargeBee>();
-    const event = mock<Event>({
-      content: {
-        subscription: {
-          id: "sub_test",
-        },
-      },
-    });
-
-    await handleSubscriptionScheduledPauseRemoved(client, event);
-
-    expect(setPauseDate).toHaveBeenCalledWith(client, "sub_test", null);
   });
 });

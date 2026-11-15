@@ -41,3 +41,4 @@ cdk.out
 /blob-report/
 /playwright/.cache/
 .env
+/key

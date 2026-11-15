@@ -12,30 +12,21 @@ const date = (day: number, month: number, year: number) => {
 };
 
 describe('getCookStatus', () => {
-  it('treats the pause end as an exclusive boundary', () => {
-    const resumeDate = new Date('2026-06-06T23:00:00.000Z');
-    const mockPlan = mock<StandardPlan>({
-      pauseStart: new Date('2026-05-23T23:00:00.000Z').getTime(),
-      pauseEnd: resumeDate.getTime(),
-      subscriptionStatus: 'paused',
-    });
+  const pauseStart = new Date('2026-05-23T23:00:00.000Z');
+  const resumeDate = new Date('2026-06-06T23:00:00.000Z');
 
-    expect(getCookStatus(resumeDate, mockPlan)).toEqual({ status: 'active' });
-  });
-
-  it('treats the pause start as an inclusive boundary', () => {
-    const pauseStart = new Date('2026-05-23T23:00:00.000Z');
+  it.each`
+    name                                                 | cookDay       | subscriptionStatus | expected
+    ${'treats the pause end as an exclusive boundary'}   | ${resumeDate} | ${'paused'}        | ${{ status: 'active' }}
+    ${'treats the pause start as an inclusive boundary'} | ${pauseStart} | ${'active'}        | ${{ status: 'paused', pausedFrom: pauseStart, pausedUntil: resumeDate }}
+  `('$name', ({ cookDay, subscriptionStatus, expected }) => {
     const mockPlan = mock<StandardPlan>({
       pauseStart: pauseStart.getTime(),
-      pauseEnd: new Date('2026-06-06T23:00:00.000Z').getTime(),
-      subscriptionStatus: 'active',
+      pauseEnd: resumeDate.getTime(),
+      subscriptionStatus,
     });
 
-    expect(getCookStatus(pauseStart, mockPlan)).toEqual({
-      status: 'paused',
-      pausedFrom: pauseStart,
-      pausedUntil: new Date('2026-06-06T23:00:00.000Z'),
-    });
+    expect(getCookStatus(cookDay, mockPlan)).toEqual(expected);
   });
 
   it.each`

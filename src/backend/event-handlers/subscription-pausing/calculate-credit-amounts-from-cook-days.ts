@@ -1,5 +1,6 @@
 import { Invoice } from "chargebee-typescript/lib/resources";
 import { DateTime } from "luxon";
+import { startOfUkCookDate } from "@/meal-planning/uk-cook-date";
 
 const SUNDAY = 7;
 const WEDNESDAY = 3;
@@ -24,11 +25,10 @@ const collectMissedCookDays = ({
 }) => {
   const dates: DateTime[] = [];
 
-  let newDay = DateTime.fromMillis(
-    pauseStart.startOf("day").plus({ hours: 4 }).toMillis()
-  );
+  let newDay = startOfUkCookDate(pauseStart).set({ hour: 4 });
+  const firstDayBack = startOfUkCookDate(resumeDate);
 
-  while (newDay < resumeDate.startOf("day")) {
+  while (newDay < firstDayBack) {
     if (newDay.weekday === SUNDAY || newDay.weekday === WEDNESDAY) {
       dates.push(newDay);
     }

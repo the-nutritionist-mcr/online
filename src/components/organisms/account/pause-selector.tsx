@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useId, useState } from "react";
 import {
   Select,
   SelectContent,
@@ -17,6 +17,8 @@ interface PauseSelectorProps {
 }
 
 const PauseSelector: FC<PauseSelectorProps> = ({ handlePauseSelection }) => {
+  const pauseStartId = useId();
+  const resumeDateId = useId();
   const [chosenPauseDate, setChosenPauseDate] = useState<DateTime | null>(null);
   const [chosenResumeDate, setChosenResumeDate] = useState<DateTime | null>(
     null
@@ -48,10 +50,14 @@ const PauseSelector: FC<PauseSelectorProps> = ({ handlePauseSelection }) => {
   return (
     <>
       <div className="grid grid-cols-[auto_1fr] gap-4 items-center">
-        <div>Pause start</div>
+        <label htmlFor={pauseStartId}>Pause start</label>
         <div>
           <Select onValueChange={handleChoosePauseDate}>
-            <SelectTrigger className="max-w-[300px] rounded-[3px] shadow-none text-[16px] leading-6 py-5 border-black">
+            <SelectTrigger
+              id={pauseStartId}
+              aria-describedby={`${pauseStartId}-description`}
+              className="max-w-[300px] rounded-[3px] shadow-none text-[16px] leading-6 py-5 border-black"
+            >
               <SelectValue placeholder="Select a start date" />
             </SelectTrigger>
             {startDates.length > 0 && (
@@ -72,13 +78,20 @@ const PauseSelector: FC<PauseSelectorProps> = ({ handlePauseSelection }) => {
               </SelectContent>
             )}
           </Select>
+          <p id={`${pauseStartId}-description`} className="mt-1 text-sm">
+            You’ll receive no meals on this date.
+          </p>
         </div>
         {chosenPauseDate && (
           <>
-            <div>Pause ends</div>
+            <label htmlFor={resumeDateId}>Meals resume</label>
             <div>
               <Select onValueChange={handleChooseResumeDate}>
-                <SelectTrigger className="max-w-[300px] rounded-[3px] shadow-none text-[16px] leading-6 py-5 border-black">
+                <SelectTrigger
+                  id={resumeDateId}
+                  aria-describedby={`${resumeDateId}-description`}
+                  className="max-w-[300px] rounded-[3px] shadow-none text-[16px] leading-6 py-5 border-black"
+                >
                   <SelectValue placeholder="Select a resume date" />
                 </SelectTrigger>
                 {resumeDates.length > 0 && (
@@ -99,6 +112,9 @@ const PauseSelector: FC<PauseSelectorProps> = ({ handlePauseSelection }) => {
                   </SelectContent>
                 )}
               </Select>
+              <p id={`${resumeDateId}-description`} className="mt-1 text-sm">
+                You’ll receive meals on this date.
+              </p>
             </div>
           </>
         )}

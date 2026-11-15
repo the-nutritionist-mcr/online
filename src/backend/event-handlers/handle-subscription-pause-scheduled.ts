@@ -19,3 +19,18 @@ export const handleSubscriptionPauseScheduled = async (
     DateTime.fromSeconds(pauseDate)
   );
 };
+
+export const handleSubscriptionPaused = async (
+  client: ChargeBee,
+  event: Event
+) => {
+  const { id, pause_date: pauseDate } = event.content.subscription;
+  // The event timestamp is stable across retries of an immediate pause.
+  await setPauseDate(
+    client,
+    id,
+    DateTime.fromSeconds(
+      typeof pauseDate === "number" ? pauseDate : event.occurred_at
+    )
+  );
+};
